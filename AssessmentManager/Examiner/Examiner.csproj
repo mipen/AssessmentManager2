@@ -81,7 +81,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExamManagerLib\AssessmentManagerLib.csproj">
+    <ProjectReference Include="..\AssessmentManagerLib\AssessmentManagerLib.csproj">
       <Project>{e649487f-0cd0-4724-be2a-a21e92b3fa9c}</Project>
       <Name>AssessmentManagerLib</Name>
     </ProjectReference>
