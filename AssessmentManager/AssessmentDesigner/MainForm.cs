@@ -12,9 +12,24 @@ namespace ExamManager
 {
     public partial class MainForm : Form
     {
+
+        private ColorDialog colorDialog = new ColorDialog();
+
         public MainForm()
         {
             InitializeComponent();
         }
+
+        #region Toolstrip buttons
+        private void toolStripButtonColour_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cutToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }
