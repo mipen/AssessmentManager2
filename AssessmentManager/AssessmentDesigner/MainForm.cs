@@ -18,6 +18,8 @@ namespace ExamManager
         public MainForm()
         {
             InitializeComponent();
+
+            comboBoxAnswerType.SelectedIndex = 3;
         }
 
         #region Toolstrip buttons
@@ -31,5 +33,45 @@ namespace ExamManager
 
         }
         #endregion
+
+        private void comboBoxAnswerType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //TODO:: Asign answer type to question.
+            switch (comboBoxAnswerType.Text)
+            {
+                case "None":
+                    {
+                        panelAnswerMultiChoice.Visible = false;
+                        panelAnswerOpen.Visible = false;
+                        panelAnswerSingle.Visible = false;
+
+                        break;
+                    }
+                case "Multi-choice":
+                    {
+                        panelAnswerMultiChoice.Visible = true;
+                        panelAnswerOpen.Visible = false;
+                        panelAnswerSingle.Visible = false;
+
+                        break;
+                    }
+                case "Open":
+                    {
+                        panelAnswerMultiChoice.Visible = false;
+                        panelAnswerOpen.Visible = true;
+                        panelAnswerSingle.Visible = false;
+
+                        break;
+                    }
+                case "Single":
+                    {
+                        panelAnswerMultiChoice.Visible = false;
+                        panelAnswerOpen.Visible = false;
+                        panelAnswerSingle.Visible = true;
+
+                        break;
+                    }
+            }
+        }
     }
 }
