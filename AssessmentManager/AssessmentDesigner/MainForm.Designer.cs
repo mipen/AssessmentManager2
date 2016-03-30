@@ -53,6 +53,7 @@
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageDesigner = new System.Windows.Forms.TabPage();
+            this.treeViewQuestionList = new System.Windows.Forms.TreeView();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.buttonAddSubQuestion = new System.Windows.Forms.Button();
             this.buttonAddMajorQuestion = new System.Windows.Forms.Button();
@@ -61,55 +62,63 @@
             this.buttonCollapseAll = new System.Windows.Forms.Button();
             this.buttonExpandAll = new System.Windows.Forms.Button();
             this.panelMarks = new System.Windows.Forms.Panel();
-            this.panelAnswerArea = new System.Windows.Forms.Panel();
-            this.panelQuestion = new System.Windows.Forms.Panel();
-            this.treeViewQuestionList = new System.Windows.Forms.TreeView();
-            this.toolStripQuestion = new System.Windows.Forms.ToolStrip();
-            this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
+            this.tableLayoutPanelDesignerContainer = new System.Windows.Forms.TableLayoutPanel();
+            this.panelQuestionContainer = new System.Windows.Forms.Panel();
+            this.panelAnswerAreaContainer = new System.Windows.Forms.Panel();
             this.panelQuestionNameContainer = new System.Windows.Forms.Panel();
             this.labelQuestion = new System.Windows.Forms.Label();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripComboBoxFont = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripComboBoxSize = new System.Windows.Forms.ToolStripComboBox();
+            this.panelQuestion = new System.Windows.Forms.Panel();
+            this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
+            this.toolStripQuestion = new System.Windows.Forms.ToolStrip();
             this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonBold = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonItalic = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonUnderline = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonAlignLeft = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAlignCentre = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAlignRight = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBulletList = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripComboBoxFont = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripComboBoxSize = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripButtonColour = new System.Windows.Forms.ToolStripButton();
-            this.panelAnswerTools = new System.Windows.Forms.Panel();
-            this.labelAnswerText = new System.Windows.Forms.Label();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonAddImage = new System.Windows.Forms.ToolStripButton();
-            this.comboBoxAnswerType = new System.Windows.Forms.ComboBox();
+            this.panelAnswerTools = new System.Windows.Forms.Panel();
             this.labelAnswerType = new System.Windows.Forms.Label();
+            this.comboBoxAnswerType = new System.Windows.Forms.ComboBox();
+            this.labelAnswerText = new System.Windows.Forms.Label();
             this.panelAnswersContainer = new System.Windows.Forms.Panel();
-            this.panelOpenAnswer = new System.Windows.Forms.Panel();
-            this.richTextBoxAnswerOpen = new System.Windows.Forms.RichTextBox();
-            this.panelAnswerSingle = new System.Windows.Forms.Panel();
-            this.labelAnswerSingleAcceptable = new System.Windows.Forms.Label();
+            this.panelAnswerSingleContainer = new System.Windows.Forms.TableLayoutPanel();
+            this.panelAnswerSingleAcceptableContainer = new System.Windows.Forms.Panel();
             this.richTextBoxAnswerSingleAcceptable = new System.Windows.Forms.RichTextBox();
-            this.labelAnswerSingleComments = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.labelAnswerSingleAcceptable = new System.Windows.Forms.Label();
+            this.panelAnswerSingleCommentContainer = new System.Windows.Forms.Panel();
+            this.richTextBoxAnswerSingleComment = new System.Windows.Forms.RichTextBox();
+            this.labelAnswerSingleComment = new System.Windows.Forms.Label();
+            this.panelAnswerOpen = new System.Windows.Forms.Panel();
+            this.richTextBoxAnswerOpen = new System.Windows.Forms.RichTextBox();
+            this.panelAnswerMultiChoice = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
             this.panelButtons.SuspendLayout();
-            this.panelAnswerArea.SuspendLayout();
+            this.tableLayoutPanelDesignerContainer.SuspendLayout();
+            this.panelQuestionContainer.SuspendLayout();
+            this.panelAnswerAreaContainer.SuspendLayout();
+            this.panelQuestionNameContainer.SuspendLayout();
             this.panelQuestion.SuspendLayout();
             this.toolStripQuestion.SuspendLayout();
-            this.panelQuestionNameContainer.SuspendLayout();
             this.panelAnswerTools.SuspendLayout();
             this.panelAnswersContainer.SuspendLayout();
-            this.panelOpenAnswer.SuspendLayout();
-            this.panelAnswerSingle.SuspendLayout();
+            this.panelAnswerSingleContainer.SuspendLayout();
+            this.panelAnswerSingleAcceptableContainer.SuspendLayout();
+            this.panelAnswerSingleCommentContainer.SuspendLayout();
+            this.panelAnswerOpen.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -278,24 +287,32 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1095, 778);
+            this.tabControl1.Size = new System.Drawing.Size(1095, 752);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPageDesigner
             // 
-            this.tabPageDesigner.Controls.Add(this.panelAnswerArea);
-            this.tabPageDesigner.Controls.Add(this.panelQuestionNameContainer);
+            this.tabPageDesigner.Controls.Add(this.tableLayoutPanelDesignerContainer);
             this.tabPageDesigner.Controls.Add(this.treeViewQuestionList);
             this.tabPageDesigner.Controls.Add(this.panelButtons);
             this.tabPageDesigner.Controls.Add(this.panelMarks);
-            this.tabPageDesigner.Controls.Add(this.panelQuestion);
             this.tabPageDesigner.Location = new System.Drawing.Point(4, 25);
             this.tabPageDesigner.Name = "tabPageDesigner";
             this.tabPageDesigner.Padding = new System.Windows.Forms.Padding(6);
-            this.tabPageDesigner.Size = new System.Drawing.Size(1087, 749);
+            this.tabPageDesigner.Size = new System.Drawing.Size(1087, 723);
             this.tabPageDesigner.TabIndex = 0;
             this.tabPageDesigner.Text = "Designer";
             this.tabPageDesigner.UseVisualStyleBackColor = true;
+            // 
+            // treeViewQuestionList
+            // 
+            this.treeViewQuestionList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.treeViewQuestionList.Location = new System.Drawing.Point(9, 9);
+            this.treeViewQuestionList.Margin = new System.Windows.Forms.Padding(0);
+            this.treeViewQuestionList.Name = "treeViewQuestionList";
+            this.treeViewQuestionList.Size = new System.Drawing.Size(201, 583);
+            this.treeViewQuestionList.TabIndex = 5;
             // 
             // panelButtons
             // 
@@ -307,7 +324,7 @@
             this.panelButtons.Controls.Add(this.buttonMoveDown);
             this.panelButtons.Controls.Add(this.buttonCollapseAll);
             this.panelButtons.Controls.Add(this.buttonExpandAll);
-            this.panelButtons.Location = new System.Drawing.Point(9, 624);
+            this.panelButtons.Location = new System.Drawing.Point(9, 598);
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Size = new System.Drawing.Size(201, 116);
             this.panelButtons.TabIndex = 4;
@@ -371,45 +388,89 @@
             this.panelMarks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMarks.Location = new System.Drawing.Point(216, 624);
+            this.panelMarks.Location = new System.Drawing.Point(216, 598);
             this.panelMarks.Name = "panelMarks";
             this.panelMarks.Size = new System.Drawing.Size(862, 116);
             this.panelMarks.TabIndex = 3;
             // 
-            // panelAnswerArea
+            // tableLayoutPanelDesignerContainer
             // 
-            this.panelAnswerArea.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tableLayoutPanelDesignerContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelAnswerArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelAnswerArea.Controls.Add(this.panelAnswersContainer);
-            this.panelAnswerArea.Controls.Add(this.panelAnswerTools);
-            this.panelAnswerArea.Location = new System.Drawing.Point(216, 357);
-            this.panelAnswerArea.Name = "panelAnswerArea";
-            this.panelAnswerArea.Size = new System.Drawing.Size(862, 261);
-            this.panelAnswerArea.TabIndex = 2;
+            this.tableLayoutPanelDesignerContainer.ColumnCount = 1;
+            this.tableLayoutPanelDesignerContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelDesignerContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelDesignerContainer.Controls.Add(this.panelQuestionContainer, 0, 0);
+            this.tableLayoutPanelDesignerContainer.Controls.Add(this.panelAnswerAreaContainer, 0, 1);
+            this.tableLayoutPanelDesignerContainer.Location = new System.Drawing.Point(216, 9);
+            this.tableLayoutPanelDesignerContainer.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanelDesignerContainer.Name = "tableLayoutPanelDesignerContainer";
+            this.tableLayoutPanelDesignerContainer.RowCount = 2;
+            this.tableLayoutPanelDesignerContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelDesignerContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelDesignerContainer.Size = new System.Drawing.Size(862, 583);
+            this.tableLayoutPanelDesignerContainer.TabIndex = 6;
+            // 
+            // panelQuestionContainer
+            // 
+            this.panelQuestionContainer.Controls.Add(this.panelQuestion);
+            this.panelQuestionContainer.Controls.Add(this.panelQuestionNameContainer);
+            this.panelQuestionContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelQuestionContainer.Location = new System.Drawing.Point(3, 3);
+            this.panelQuestionContainer.Name = "panelQuestionContainer";
+            this.panelQuestionContainer.Size = new System.Drawing.Size(856, 285);
+            this.panelQuestionContainer.TabIndex = 0;
+            // 
+            // panelAnswerAreaContainer
+            // 
+            this.panelAnswerAreaContainer.Controls.Add(this.panelAnswersContainer);
+            this.panelAnswerAreaContainer.Controls.Add(this.panelAnswerTools);
+            this.panelAnswerAreaContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnswerAreaContainer.Location = new System.Drawing.Point(3, 294);
+            this.panelAnswerAreaContainer.Name = "panelAnswerAreaContainer";
+            this.panelAnswerAreaContainer.Size = new System.Drawing.Size(856, 286);
+            this.panelAnswerAreaContainer.TabIndex = 1;
+            // 
+            // panelQuestionNameContainer
+            // 
+            this.panelQuestionNameContainer.Controls.Add(this.labelQuestion);
+            this.panelQuestionNameContainer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelQuestionNameContainer.Location = new System.Drawing.Point(0, 0);
+            this.panelQuestionNameContainer.Name = "panelQuestionNameContainer";
+            this.panelQuestionNameContainer.Size = new System.Drawing.Size(856, 24);
+            this.panelQuestionNameContainer.TabIndex = 8;
+            // 
+            // labelQuestion
+            // 
+            this.labelQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelQuestion.Location = new System.Drawing.Point(0, 0);
+            this.labelQuestion.Name = "labelQuestion";
+            this.labelQuestion.Size = new System.Drawing.Size(856, 24);
+            this.labelQuestion.TabIndex = 0;
+            this.labelQuestion.Text = "Question";
+            this.labelQuestion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panelQuestion
             // 
-            this.panelQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelQuestion.Controls.Add(this.richTextBoxQuestion);
             this.panelQuestion.Controls.Add(this.toolStripQuestion);
-            this.panelQuestion.Location = new System.Drawing.Point(216, 39);
+            this.panelQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelQuestion.Location = new System.Drawing.Point(0, 24);
             this.panelQuestion.Name = "panelQuestion";
             this.panelQuestion.Padding = new System.Windows.Forms.Padding(3);
-            this.panelQuestion.Size = new System.Drawing.Size(862, 312);
-            this.panelQuestion.TabIndex = 1;
+            this.panelQuestion.Size = new System.Drawing.Size(856, 261);
+            this.panelQuestion.TabIndex = 9;
             // 
-            // treeViewQuestionList
+            // richTextBoxQuestion
             // 
-            this.treeViewQuestionList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.treeViewQuestionList.Location = new System.Drawing.Point(9, 9);
-            this.treeViewQuestionList.Margin = new System.Windows.Forms.Padding(0);
-            this.treeViewQuestionList.Name = "treeViewQuestionList";
-            this.treeViewQuestionList.Size = new System.Drawing.Size(201, 609);
-            this.treeViewQuestionList.TabIndex = 5;
+            this.richTextBoxQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxQuestion.Location = new System.Drawing.Point(3, 31);
+            this.richTextBoxQuestion.Name = "richTextBoxQuestion";
+            this.richTextBoxQuestion.Size = new System.Drawing.Size(850, 227);
+            this.richTextBoxQuestion.TabIndex = 1;
+            this.richTextBoxQuestion.Text = "";
             // 
             // toolStripQuestion
             // 
@@ -437,62 +498,9 @@
             this.toolStripQuestion.Location = new System.Drawing.Point(3, 3);
             this.toolStripQuestion.Name = "toolStripQuestion";
             this.toolStripQuestion.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStripQuestion.Size = new System.Drawing.Size(856, 28);
+            this.toolStripQuestion.Size = new System.Drawing.Size(850, 28);
             this.toolStripQuestion.TabIndex = 0;
             this.toolStripQuestion.Text = "toolStrip1";
-            // 
-            // richTextBoxQuestion
-            // 
-            this.richTextBoxQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxQuestion.Location = new System.Drawing.Point(3, 31);
-            this.richTextBoxQuestion.Name = "richTextBoxQuestion";
-            this.richTextBoxQuestion.Size = new System.Drawing.Size(856, 278);
-            this.richTextBoxQuestion.TabIndex = 1;
-            this.richTextBoxQuestion.Text = "";
-            // 
-            // panelQuestionNameContainer
-            // 
-            this.panelQuestionNameContainer.Controls.Add(this.labelQuestion);
-            this.panelQuestionNameContainer.Location = new System.Drawing.Point(216, 9);
-            this.panelQuestionNameContainer.Name = "panelQuestionNameContainer";
-            this.panelQuestionNameContainer.Size = new System.Drawing.Size(862, 24);
-            this.panelQuestionNameContainer.TabIndex = 6;
-            // 
-            // labelQuestion
-            // 
-            this.labelQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelQuestion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelQuestion.Location = new System.Drawing.Point(0, 0);
-            this.labelQuestion.Name = "labelQuestion";
-            this.labelQuestion.Size = new System.Drawing.Size(862, 24);
-            this.labelQuestion.TabIndex = 0;
-            this.labelQuestion.Text = "Question";
-            this.labelQuestion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 28);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 28);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 28);
-            // 
-            // toolStripComboBoxFont
-            // 
-            this.toolStripComboBoxFont.Name = "toolStripComboBoxFont";
-            this.toolStripComboBoxFont.Size = new System.Drawing.Size(121, 28);
-            // 
-            // toolStripComboBoxSize
-            // 
-            this.toolStripComboBoxSize.Name = "toolStripComboBoxSize";
-            this.toolStripComboBoxSize.Size = new System.Drawing.Size(121, 28);
             // 
             // cutToolStripButton
             // 
@@ -502,7 +510,6 @@
             this.cutToolStripButton.Name = "cutToolStripButton";
             this.cutToolStripButton.Size = new System.Drawing.Size(24, 25);
             this.cutToolStripButton.Text = "C&ut";
-            this.cutToolStripButton.Click += new System.EventHandler(this.cutToolStripButton_Click);
             // 
             // copyToolStripButton
             // 
@@ -521,6 +528,11 @@
             this.pasteToolStripButton.Name = "pasteToolStripButton";
             this.pasteToolStripButton.Size = new System.Drawing.Size(24, 25);
             this.pasteToolStripButton.Text = "&Paste";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 28);
             // 
             // toolStripButtonBold
             // 
@@ -548,6 +560,11 @@
             this.toolStripButtonUnderline.Name = "toolStripButtonUnderline";
             this.toolStripButtonUnderline.Size = new System.Drawing.Size(24, 25);
             this.toolStripButtonUnderline.Text = "Underline";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 28);
             // 
             // toolStripButtonAlignLeft
             // 
@@ -585,6 +602,21 @@
             this.toolStripButtonBulletList.Size = new System.Drawing.Size(24, 25);
             this.toolStripButtonBulletList.Text = "Bullet List";
             // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 28);
+            // 
+            // toolStripComboBoxFont
+            // 
+            this.toolStripComboBoxFont.Name = "toolStripComboBoxFont";
+            this.toolStripComboBoxFont.Size = new System.Drawing.Size(121, 28);
+            // 
+            // toolStripComboBoxSize
+            // 
+            this.toolStripComboBoxSize.Name = "toolStripComboBoxSize";
+            this.toolStripComboBoxSize.Size = new System.Drawing.Size(121, 28);
+            // 
             // toolStripButtonColour
             // 
             this.toolStripButtonColour.BackColor = System.Drawing.Color.Black;
@@ -594,30 +626,6 @@
             this.toolStripButtonColour.Name = "toolStripButtonColour";
             this.toolStripButtonColour.Size = new System.Drawing.Size(23, 25);
             this.toolStripButtonColour.Text = "Font Colour";
-            this.toolStripButtonColour.Click += new System.EventHandler(this.toolStripButtonColour_Click);
-            // 
-            // panelAnswerTools
-            // 
-            this.panelAnswerTools.Controls.Add(this.labelAnswerType);
-            this.panelAnswerTools.Controls.Add(this.comboBoxAnswerType);
-            this.panelAnswerTools.Controls.Add(this.labelAnswerText);
-            this.panelAnswerTools.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelAnswerTools.Location = new System.Drawing.Point(0, 0);
-            this.panelAnswerTools.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
-            this.panelAnswerTools.Name = "panelAnswerTools";
-            this.panelAnswerTools.Size = new System.Drawing.Size(860, 29);
-            this.panelAnswerTools.TabIndex = 0;
-            // 
-            // labelAnswerText
-            // 
-            this.labelAnswerText.Dock = System.Windows.Forms.DockStyle.Left;
-            this.labelAnswerText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAnswerText.Location = new System.Drawing.Point(0, 0);
-            this.labelAnswerText.Name = "labelAnswerText";
-            this.labelAnswerText.Size = new System.Drawing.Size(100, 29);
-            this.labelAnswerText.TabIndex = 0;
-            this.labelAnswerText.Text = "Answer:";
-            this.labelAnswerText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // toolStripSeparator7
             // 
@@ -633,6 +641,28 @@
             this.toolStripButtonAddImage.Size = new System.Drawing.Size(24, 25);
             this.toolStripButtonAddImage.Text = "Add Image";
             // 
+            // panelAnswerTools
+            // 
+            this.panelAnswerTools.Controls.Add(this.labelAnswerType);
+            this.panelAnswerTools.Controls.Add(this.comboBoxAnswerType);
+            this.panelAnswerTools.Controls.Add(this.labelAnswerText);
+            this.panelAnswerTools.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelAnswerTools.Location = new System.Drawing.Point(0, 0);
+            this.panelAnswerTools.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
+            this.panelAnswerTools.Name = "panelAnswerTools";
+            this.panelAnswerTools.Size = new System.Drawing.Size(856, 29);
+            this.panelAnswerTools.TabIndex = 1;
+            // 
+            // labelAnswerType
+            // 
+            this.labelAnswerType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelAnswerType.Location = new System.Drawing.Point(624, 2);
+            this.labelAnswerType.Name = "labelAnswerType";
+            this.labelAnswerType.Size = new System.Drawing.Size(100, 23);
+            this.labelAnswerType.TabIndex = 2;
+            this.labelAnswerType.Text = "Answer type:";
+            this.labelAnswerType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // comboBoxAnswerType
             // 
             this.comboBoxAnswerType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -643,100 +673,145 @@
             "Multi-choice",
             "Open",
             "Single"});
-            this.comboBoxAnswerType.Location = new System.Drawing.Point(734, 3);
+            this.comboBoxAnswerType.Location = new System.Drawing.Point(730, 3);
             this.comboBoxAnswerType.Name = "comboBoxAnswerType";
             this.comboBoxAnswerType.Size = new System.Drawing.Size(121, 24);
             this.comboBoxAnswerType.TabIndex = 1;
             // 
-            // labelAnswerType
+            // labelAnswerText
             // 
-            this.labelAnswerType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelAnswerType.Location = new System.Drawing.Point(628, 2);
-            this.labelAnswerType.Name = "labelAnswerType";
-            this.labelAnswerType.Size = new System.Drawing.Size(100, 23);
-            this.labelAnswerType.TabIndex = 2;
-            this.labelAnswerType.Text = "Answer type:";
-            this.labelAnswerType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelAnswerText.Dock = System.Windows.Forms.DockStyle.Left;
+            this.labelAnswerText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAnswerText.Location = new System.Drawing.Point(0, 0);
+            this.labelAnswerText.Name = "labelAnswerText";
+            this.labelAnswerText.Size = new System.Drawing.Size(100, 29);
+            this.labelAnswerText.TabIndex = 0;
+            this.labelAnswerText.Text = "Answer:";
+            this.labelAnswerText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panelAnswersContainer
             // 
-            this.panelAnswersContainer.Controls.Add(this.panelAnswerSingle);
-            this.panelAnswersContainer.Controls.Add(this.panelOpenAnswer);
-            this.panelAnswersContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelAnswersContainer.Location = new System.Drawing.Point(0, 38);
+            this.panelAnswersContainer.Controls.Add(this.panelAnswerMultiChoice);
+            this.panelAnswersContainer.Controls.Add(this.panelAnswerOpen);
+            this.panelAnswersContainer.Controls.Add(this.panelAnswerSingleContainer);
+            this.panelAnswersContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnswersContainer.Location = new System.Drawing.Point(0, 29);
             this.panelAnswersContainer.Name = "panelAnswersContainer";
-            this.panelAnswersContainer.Size = new System.Drawing.Size(860, 221);
-            this.panelAnswersContainer.TabIndex = 1;
+            this.panelAnswersContainer.Size = new System.Drawing.Size(856, 257);
+            this.panelAnswersContainer.TabIndex = 2;
             // 
-            // panelOpenAnswer
+            // panelAnswerSingleContainer
             // 
-            this.panelOpenAnswer.Controls.Add(this.richTextBoxAnswerOpen);
-            this.panelOpenAnswer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelOpenAnswer.Location = new System.Drawing.Point(0, 0);
-            this.panelOpenAnswer.Name = "panelOpenAnswer";
-            this.panelOpenAnswer.Size = new System.Drawing.Size(860, 221);
-            this.panelOpenAnswer.TabIndex = 0;
+            this.panelAnswerSingleContainer.ColumnCount = 2;
+            this.panelAnswerSingleContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.panelAnswerSingleContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.panelAnswerSingleContainer.Controls.Add(this.panelAnswerSingleAcceptableContainer, 0, 0);
+            this.panelAnswerSingleContainer.Controls.Add(this.panelAnswerSingleCommentContainer, 1, 0);
+            this.panelAnswerSingleContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnswerSingleContainer.Location = new System.Drawing.Point(0, 0);
+            this.panelAnswerSingleContainer.Name = "panelAnswerSingleContainer";
+            this.panelAnswerSingleContainer.RowCount = 1;
+            this.panelAnswerSingleContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.panelAnswerSingleContainer.Size = new System.Drawing.Size(856, 257);
+            this.panelAnswerSingleContainer.TabIndex = 1;
+            // 
+            // panelAnswerSingleAcceptableContainer
+            // 
+            this.panelAnswerSingleAcceptableContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelAnswerSingleAcceptableContainer.Controls.Add(this.richTextBoxAnswerSingleAcceptable);
+            this.panelAnswerSingleAcceptableContainer.Controls.Add(this.labelAnswerSingleAcceptable);
+            this.panelAnswerSingleAcceptableContainer.Location = new System.Drawing.Point(3, 3);
+            this.panelAnswerSingleAcceptableContainer.Name = "panelAnswerSingleAcceptableContainer";
+            this.panelAnswerSingleAcceptableContainer.Size = new System.Drawing.Size(464, 251);
+            this.panelAnswerSingleAcceptableContainer.TabIndex = 0;
+            // 
+            // richTextBoxAnswerSingleAcceptable
+            // 
+            this.richTextBoxAnswerSingleAcceptable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxAnswerSingleAcceptable.Location = new System.Drawing.Point(148, 0);
+            this.richTextBoxAnswerSingleAcceptable.Margin = new System.Windows.Forms.Padding(0);
+            this.richTextBoxAnswerSingleAcceptable.Name = "richTextBoxAnswerSingleAcceptable";
+            this.richTextBoxAnswerSingleAcceptable.Size = new System.Drawing.Size(316, 251);
+            this.richTextBoxAnswerSingleAcceptable.TabIndex = 1;
+            this.richTextBoxAnswerSingleAcceptable.Text = "";
+            // 
+            // labelAnswerSingleAcceptable
+            // 
+            this.labelAnswerSingleAcceptable.AutoSize = true;
+            this.labelAnswerSingleAcceptable.Location = new System.Drawing.Point(3, 0);
+            this.labelAnswerSingleAcceptable.Name = "labelAnswerSingleAcceptable";
+            this.labelAnswerSingleAcceptable.Size = new System.Drawing.Size(139, 17);
+            this.labelAnswerSingleAcceptable.TabIndex = 0;
+            this.labelAnswerSingleAcceptable.Text = "Acceptable Answers:";
+            // 
+            // panelAnswerSingleCommentContainer
+            // 
+            this.panelAnswerSingleCommentContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelAnswerSingleCommentContainer.Controls.Add(this.richTextBoxAnswerSingleComment);
+            this.panelAnswerSingleCommentContainer.Controls.Add(this.labelAnswerSingleComment);
+            this.panelAnswerSingleCommentContainer.Location = new System.Drawing.Point(473, 3);
+            this.panelAnswerSingleCommentContainer.Name = "panelAnswerSingleCommentContainer";
+            this.panelAnswerSingleCommentContainer.Size = new System.Drawing.Size(380, 251);
+            this.panelAnswerSingleCommentContainer.TabIndex = 1;
+            // 
+            // richTextBoxAnswerSingleComment
+            // 
+            this.richTextBoxAnswerSingleComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxAnswerSingleComment.Location = new System.Drawing.Point(87, 0);
+            this.richTextBoxAnswerSingleComment.Margin = new System.Windows.Forms.Padding(0);
+            this.richTextBoxAnswerSingleComment.Name = "richTextBoxAnswerSingleComment";
+            this.richTextBoxAnswerSingleComment.Size = new System.Drawing.Size(295, 248);
+            this.richTextBoxAnswerSingleComment.TabIndex = 1;
+            this.richTextBoxAnswerSingleComment.Text = "";
+            // 
+            // labelAnswerSingleComment
+            // 
+            this.labelAnswerSingleComment.AutoSize = true;
+            this.labelAnswerSingleComment.Location = new System.Drawing.Point(3, 0);
+            this.labelAnswerSingleComment.Name = "labelAnswerSingleComment";
+            this.labelAnswerSingleComment.Size = new System.Drawing.Size(78, 17);
+            this.labelAnswerSingleComment.TabIndex = 0;
+            this.labelAnswerSingleComment.Text = "Comments:";
+            // 
+            // panelAnswerOpen
+            // 
+            this.panelAnswerOpen.Controls.Add(this.richTextBoxAnswerOpen);
+            this.panelAnswerOpen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnswerOpen.Location = new System.Drawing.Point(0, 0);
+            this.panelAnswerOpen.Name = "panelAnswerOpen";
+            this.panelAnswerOpen.Size = new System.Drawing.Size(856, 257);
+            this.panelAnswerOpen.TabIndex = 0;
             // 
             // richTextBoxAnswerOpen
             // 
             this.richTextBoxAnswerOpen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxAnswerOpen.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxAnswerOpen.Name = "richTextBoxAnswerOpen";
-            this.richTextBoxAnswerOpen.Size = new System.Drawing.Size(860, 221);
+            this.richTextBoxAnswerOpen.Size = new System.Drawing.Size(856, 257);
             this.richTextBoxAnswerOpen.TabIndex = 0;
             this.richTextBoxAnswerOpen.Text = "";
             // 
-            // panelAnswerSingle
+            // panelAnswerMultiChoice
             // 
-            this.panelAnswerSingle.Controls.Add(this.richTextBox1);
-            this.panelAnswerSingle.Controls.Add(this.labelAnswerSingleComments);
-            this.panelAnswerSingle.Controls.Add(this.richTextBoxAnswerSingleAcceptable);
-            this.panelAnswerSingle.Controls.Add(this.labelAnswerSingleAcceptable);
-            this.panelAnswerSingle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAnswerSingle.Location = new System.Drawing.Point(0, 0);
-            this.panelAnswerSingle.Name = "panelAnswerSingle";
-            this.panelAnswerSingle.Size = new System.Drawing.Size(860, 221);
-            this.panelAnswerSingle.TabIndex = 1;
-            // 
-            // labelAnswerSingleAcceptable
-            // 
-            this.labelAnswerSingleAcceptable.AutoSize = true;
-            this.labelAnswerSingleAcceptable.Location = new System.Drawing.Point(3, 16);
-            this.labelAnswerSingleAcceptable.Name = "labelAnswerSingleAcceptable";
-            this.labelAnswerSingleAcceptable.Size = new System.Drawing.Size(138, 17);
-            this.labelAnswerSingleAcceptable.TabIndex = 0;
-            this.labelAnswerSingleAcceptable.Text = "Acceptable answers:";
-            // 
-            // richTextBoxAnswerSingleAcceptable
-            // 
-            this.richTextBoxAnswerSingleAcceptable.Location = new System.Drawing.Point(147, 0);
-            this.richTextBoxAnswerSingleAcceptable.Name = "richTextBoxAnswerSingleAcceptable";
-            this.richTextBoxAnswerSingleAcceptable.Size = new System.Drawing.Size(310, 222);
-            this.richTextBoxAnswerSingleAcceptable.TabIndex = 1;
-            this.richTextBoxAnswerSingleAcceptable.Text = "";
-            // 
-            // labelAnswerSingleComments
-            // 
-            this.labelAnswerSingleComments.AutoSize = true;
-            this.labelAnswerSingleComments.Location = new System.Drawing.Point(429, 16);
-            this.labelAnswerSingleComments.Name = "labelAnswerSingleComments";
-            this.labelAnswerSingleComments.Size = new System.Drawing.Size(78, 17);
-            this.labelAnswerSingleComments.TabIndex = 2;
-            this.labelAnswerSingleComments.Text = "Comments:";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(550, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(310, 222);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
+            this.panelAnswerMultiChoice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnswerMultiChoice.Location = new System.Drawing.Point(0, 0);
+            this.panelAnswerMultiChoice.Name = "panelAnswerMultiChoice";
+            this.panelAnswerMultiChoice.Size = new System.Drawing.Size(856, 257);
+            this.panelAnswerMultiChoice.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1095, 806);
+            this.ClientSize = new System.Drawing.Size(1095, 780);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -748,17 +823,22 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageDesigner.ResumeLayout(false);
             this.panelButtons.ResumeLayout(false);
-            this.panelAnswerArea.ResumeLayout(false);
+            this.tableLayoutPanelDesignerContainer.ResumeLayout(false);
+            this.panelQuestionContainer.ResumeLayout(false);
+            this.panelAnswerAreaContainer.ResumeLayout(false);
+            this.panelQuestionNameContainer.ResumeLayout(false);
             this.panelQuestion.ResumeLayout(false);
             this.panelQuestion.PerformLayout();
             this.toolStripQuestion.ResumeLayout(false);
             this.toolStripQuestion.PerformLayout();
-            this.panelQuestionNameContainer.ResumeLayout(false);
             this.panelAnswerTools.ResumeLayout(false);
             this.panelAnswersContainer.ResumeLayout(false);
-            this.panelOpenAnswer.ResumeLayout(false);
-            this.panelAnswerSingle.ResumeLayout(false);
-            this.panelAnswerSingle.PerformLayout();
+            this.panelAnswerSingleContainer.ResumeLayout(false);
+            this.panelAnswerSingleAcceptableContainer.ResumeLayout(false);
+            this.panelAnswerSingleAcceptableContainer.PerformLayout();
+            this.panelAnswerSingleCommentContainer.ResumeLayout(false);
+            this.panelAnswerSingleCommentContainer.PerformLayout();
+            this.panelAnswerOpen.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -770,8 +850,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageDesigner;
-        private System.Windows.Forms.Panel panelAnswerArea;
-        private System.Windows.Forms.Panel panelQuestion;
         private System.Windows.Forms.Panel panelButtons;
         private System.Windows.Forms.Panel panelMarks;
         private System.Windows.Forms.ToolStripMenuItem checkForQuestionsWithoutMarksToolStripMenuItem;
@@ -801,10 +879,14 @@
         private System.Windows.Forms.Button buttonCollapseAll;
         private System.Windows.Forms.Button buttonExpandAll;
         private System.Windows.Forms.TreeView treeViewQuestionList;
-        private System.Windows.Forms.RichTextBox richTextBoxQuestion;
-        private System.Windows.Forms.ToolStrip toolStripQuestion;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelDesignerContainer;
+        private System.Windows.Forms.Panel panelQuestionContainer;
+        private System.Windows.Forms.Panel panelAnswerAreaContainer;
         private System.Windows.Forms.Panel panelQuestionNameContainer;
         private System.Windows.Forms.Label labelQuestion;
+        private System.Windows.Forms.Panel panelQuestion;
+        private System.Windows.Forms.RichTextBox richTextBoxQuestion;
+        private System.Windows.Forms.ToolStrip toolStripQuestion;
         private System.Windows.Forms.ToolStripButton cutToolStripButton;
         private System.Windows.Forms.ToolStripButton copyToolStripButton;
         private System.Windows.Forms.ToolStripButton pasteToolStripButton;
@@ -821,19 +903,22 @@
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxFont;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxSize;
         private System.Windows.Forms.ToolStripButton toolStripButtonColour;
-        private System.Windows.Forms.Panel panelAnswerTools;
-        private System.Windows.Forms.Label labelAnswerText;
-        private System.Windows.Forms.ComboBox comboBoxAnswerType;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton toolStripButtonAddImage;
+        private System.Windows.Forms.Panel panelAnswerTools;
         private System.Windows.Forms.Label labelAnswerType;
+        private System.Windows.Forms.ComboBox comboBoxAnswerType;
+        private System.Windows.Forms.Label labelAnswerText;
         private System.Windows.Forms.Panel panelAnswersContainer;
-        private System.Windows.Forms.Panel panelOpenAnswer;
-        private System.Windows.Forms.RichTextBox richTextBoxAnswerOpen;
-        private System.Windows.Forms.Panel panelAnswerSingle;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Label labelAnswerSingleComments;
+        private System.Windows.Forms.TableLayoutPanel panelAnswerSingleContainer;
+        private System.Windows.Forms.Panel panelAnswerSingleAcceptableContainer;
         private System.Windows.Forms.RichTextBox richTextBoxAnswerSingleAcceptable;
         private System.Windows.Forms.Label labelAnswerSingleAcceptable;
+        private System.Windows.Forms.Panel panelAnswerSingleCommentContainer;
+        private System.Windows.Forms.RichTextBox richTextBoxAnswerSingleComment;
+        private System.Windows.Forms.Label labelAnswerSingleComment;
+        private System.Windows.Forms.Panel panelAnswerOpen;
+        private System.Windows.Forms.RichTextBox richTextBoxAnswerOpen;
+        private System.Windows.Forms.Panel panelAnswerMultiChoice;
     }
 }
