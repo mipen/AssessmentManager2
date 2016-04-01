@@ -8,19 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AssessmentManager
+namespace treeviewtest
 {
-    public partial class Examiner : Form
+    public partial class Form1 : Form
     {
-        public Examiner()
+        public Form1()
         {
             InitializeComponent();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //TODO:: Implement saving on closing.
-            this.Close();
         }
     }
 }

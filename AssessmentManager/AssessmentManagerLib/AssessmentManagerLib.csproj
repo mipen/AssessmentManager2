@@ -7,7 +7,7 @@
     <ProjectGuid>{E649487F-0CD0-4724-BE2A-A21E92B3FA9C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExamManager</RootNamespace>
+    <RootNamespace>AssessmentManager</RootNamespace>
     <AssemblyName>ExamManagerLib</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -50,6 +50,8 @@
     <Compile Include="CourseInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
+    <Compile Include="QuestionNode.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

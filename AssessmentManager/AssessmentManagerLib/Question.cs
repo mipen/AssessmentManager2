@@ -4,31 +4,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExamManager
+namespace AssessmentManager
 {
     [Serializable]
     public class Question
     {
-        private int _marks;
-        private string _modelAnswer;
-        private List<Question> _subQuestions = new List<Question>();
-        private AnswerType _answerType = AnswerType.None;
+        private int marks;
+        private string modelAnswer;
+        private string name = "Question";
+        private List<Question> subQuestions = new List<Question>();
+        private AnswerType answerType = AnswerType.Single;
 
         public Question()
         {
         }
 
-        public bool HasSubQuestions => _subQuestions.Count != 0;
+        public Question(string name)
+        {
+            Name = name;
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public bool HasSubQuestions => subQuestions.Count != 0;
 
         public AnswerType AnswerType
         {
             get
             {
-                return _answerType;
+                return answerType;
             }
             set
             {
-                _answerType = value;
+                answerType = value;
             }
         }
 
@@ -36,11 +48,11 @@ namespace ExamManager
         {
             get
             {
-                return _modelAnswer;
+                return modelAnswer;
             }
             set
             {
-                _modelAnswer = value;
+                modelAnswer = value;
             }
         }
 
@@ -70,22 +82,22 @@ namespace ExamManager
         {
             get
             {
-                return _marks;
+                return marks;
             }
             set
             {
-                _marks = value;
+                marks = value;
             }         
         }
 
-        public List<Question> SubQuestions => _subQuestions;
+        public List<Question> SubQuestions => subQuestions;
 
         /// <summary>
         /// Add a new sub question at the bottom of the collection.
         /// </summary>
         public void AddSubQuestion()
         {
-            _subQuestions.Add(new Question());
+            subQuestions.Add(new Question());
         }
 
         /// <summary>
@@ -96,9 +108,9 @@ namespace ExamManager
         {
             if (index < 0) index = 0;
             if (index < SubQuestions.Count)
-                _subQuestions.Insert(index, new Question());
+                subQuestions.Insert(index, new Question());
             else
-                _subQuestions.Add(new Question());
+                subQuestions.Add(new Question());
         }
     }
 }

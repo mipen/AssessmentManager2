@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace ExamManager
+namespace AssessmentManager
 {
     /*
     Code from this article: http://www.codeproject.com/Articles/11114/Move-window-form-without-Titlebar-in-C

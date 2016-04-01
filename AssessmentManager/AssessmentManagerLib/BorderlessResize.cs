@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace ExamManager
+namespace AssessmentManager
 {
     /*
     Code from http://stackoverflow.com/questions/2575216/how-to-move-and-resize-a-form-without-a-border

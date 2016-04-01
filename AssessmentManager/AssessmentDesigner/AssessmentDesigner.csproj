@@ -7,7 +7,7 @@
     <ProjectGuid>{E213D0F1-3AEB-4F94-8418-B08374D20F8F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExamManager</RootNamespace>
+    <RootNamespace>AssessmentManager</RootNamespace>
     <AssemblyName>ExamManager</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -100,6 +100,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\List_Bullets.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AssessmentManagerLib\AssessmentManagerLib.csproj">
+      <Project>{e649487f-0cd0-4724-be2a-a21e92b3fa9c}</Project>
+      <Name>AssessmentManagerLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

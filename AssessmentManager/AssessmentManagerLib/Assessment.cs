@@ -4,24 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExamManager
+namespace AssessmentManager
 {
     [Serializable]
     public class Assessment
     {
-        private List<Question> _questions = new List<Question>();
-        private DateTime _dateCreated;
-        private DateTime _lastModified;
-        private CourseInformation _course = new CourseInformation();
+        private List<Question> questions = new List<Question>();
+        private DateTime dateCreated;
+        private DateTime lastModified;
+        private CourseInformation course = new CourseInformation();
 
-        public Assessment() { }
         /// <summary>
         /// Constructor used for creating a new assessment.
         /// </summary>
         /// <param name="createdDateTime">The current date and time the assessment was created.</param>
         public Assessment(DateTime createdDateTime)
         {
-
+            Questions.Add(new Question("Question 1"));
+            DateCreated = createdDateTime;
         }
 
         public int TotalMarks
@@ -35,9 +35,15 @@ namespace ExamManager
             }
         }
 
-        public List<Question> Questions => _questions;
+        public List<Question> Questions => questions;
 
-        public CourseInformation Course => _course;
+        public CourseInformation Course => course;
+
+        public DateTime DateCreated
+        {
+            get { return dateCreated; }
+            private set { dateCreated = value; }
+        }
 
         #region Add Questions
         /// <summary>
@@ -45,7 +51,7 @@ namespace ExamManager
         /// </summary>
         public void AddQuestion()
         {
-            _questions.Add(new Question());
+            questions.Add(new Question());
         }
 
         /// <summary>
@@ -58,10 +64,10 @@ namespace ExamManager
             if (index < 0) index = 0;
             if (index < Questions.Count)
             {
-                _questions.Insert(index, new Question());
+                questions.Insert(index, new Question());
             }
             else
-                _questions.Add(new Question());
+                questions.Add(new Question());
         }
 
         /// <summary>

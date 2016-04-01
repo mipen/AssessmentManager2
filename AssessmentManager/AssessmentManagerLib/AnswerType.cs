@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExamManager
+namespace AssessmentManager
 {
     [Serializable]
     public enum AnswerType
     {
         None,
-        MultiChoice,
-        LongText,
-        ShortText
+        Multi,
+        Open,
+        Single
     }
 }
