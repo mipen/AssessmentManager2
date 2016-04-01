@@ -54,7 +54,9 @@ namespace AssessmentManager
 
         public static void BuildQuestionListFromNodeCollection(List<Question> questionList, TreeNodeCollection nodeCollection)
         {
+            //First clear the list
             questionList.Clear();
+            //Make sure that there is something in the node collection
             if (nodeCollection.Count > 0)
             {
                 for (int i = 0; i < nodeCollection.Count; i++)

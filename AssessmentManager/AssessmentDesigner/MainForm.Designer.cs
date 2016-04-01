@@ -35,7 +35,7 @@
             this.makePdfOfExamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.withAnswersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.withoutAnswersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.assessmentInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,7 +183,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.checkForQuestionsWithoutMarksToolStripMenuItem,
             this.makePdfOfExamToolStripMenuItem,
-            this.toolStripMenuItem1,
+            this.assessmentInformationToolStripMenuItem,
             this.toolStripSeparator1,
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
@@ -226,11 +226,11 @@
             this.withoutAnswersToolStripMenuItem.Size = new System.Drawing.Size(195, 26);
             this.withoutAnswersToolStripMenuItem.Text = "Without Answers";
             // 
-            // toolStripMenuItem1
+            // assessmentInformationToolStripMenuItem
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(310, 26);
-            this.toolStripMenuItem1.Text = "Assessment &Information";
+            this.assessmentInformationToolStripMenuItem.Name = "assessmentInformationToolStripMenuItem";
+            this.assessmentInformationToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
+            this.assessmentInformationToolStripMenuItem.Text = "Assessment &Information";
             // 
             // toolStripSeparator1
             // 
@@ -266,6 +266,7 @@
             this.exportToXMLToolStripMenuItem.Name = "exportToXMLToolStripMenuItem";
             this.exportToXMLToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.exportToXMLToolStripMenuItem.Text = "Export to &XML";
+            this.exportToXMLToolStripMenuItem.Click += new System.EventHandler(this.exportToXMLToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -308,7 +309,7 @@
             // emailSettingsToolStripMenuItem
             // 
             this.emailSettingsToolStripMenuItem.Name = "emailSettingsToolStripMenuItem";
-            this.emailSettingsToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
+            this.emailSettingsToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.emailSettingsToolStripMenuItem.Text = "&Email Settings";
             // 
             // aboutToolStripMenuItem
@@ -322,7 +323,7 @@
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(125, 26);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
             this.aboutToolStripMenuItem1.Text = "&About";
             // 
             // tabControl1
@@ -1013,6 +1014,7 @@
             this.treeViewQuestionList.Name = "treeViewQuestionList";
             this.treeViewQuestionList.Size = new System.Drawing.Size(201, 583);
             this.treeViewQuestionList.TabIndex = 5;
+            this.treeViewQuestionList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.treeViewQuestionList_KeyPress);
             // 
             // panelButtons
             // 
@@ -1277,7 +1279,7 @@
         private System.Windows.Forms.ToolStripMenuItem makePdfOfExamToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem withAnswersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem withoutAnswersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem assessmentInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;

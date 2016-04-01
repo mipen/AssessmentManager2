@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace AssessmentManager
 {
@@ -54,8 +56,10 @@ namespace AssessmentManager
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //TODO:: If a file is already open, check for changes and ask if the user wants to save.
+            //TODO:: Display a dialog which asks for the course information
 
             Assessment = new Assessment(DateTime.Now);
+            Assessment.AddQuestion("Question 1");
             NotifyAssessmentOpened();
             //TODO:: Populate tree view with questions in new assessment (will only have one) then select the first one.
             Util.PopulateTreeView(treeViewQuestionList, Assessment);
@@ -65,6 +69,16 @@ namespace AssessmentManager
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CloseAssessment();
+        }
+
+        private void exportToXMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = "test.xml";
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                var xml = new XmlSerializer(typeof(Assessment));
+                xml.Serialize(stream, Assessment);
+            }
         }
         #endregion
 
@@ -105,6 +119,13 @@ namespace AssessmentManager
             groupBoxMarks.Visible = false;
             //Disable treeview
             treeViewQuestionList.Enabled = false;
+            //Disable menustrip buttons
+            checkForQuestionsWithoutMarksToolStripMenuItem.Enabled = false;
+            makePdfOfExamToolStripMenuItem.Enabled = false;
+            assessmentInformationToolStripMenuItem.Enabled = false;
+            exportToXMLToolStripMenuItem.Enabled = false;
+            saveToolStripMenuItem.Enabled = false;
+            saveasToolStripMenuItem.Enabled = false;
         }
 
         private void NotifyAssessmentOpened()
@@ -119,6 +140,13 @@ namespace AssessmentManager
             groupBoxMarks.Visible = true;
             //Enable treeview
             treeViewQuestionList.Enabled = true;
+            //Enable menustrip buttons
+            checkForQuestionsWithoutMarksToolStripMenuItem.Enabled = true;
+            makePdfOfExamToolStripMenuItem.Enabled = true;
+            assessmentInformationToolStripMenuItem.Enabled = true;
+            exportToXMLToolStripMenuItem.Enabled = true;
+            saveToolStripMenuItem.Enabled = true;
+            saveasToolStripMenuItem.Enabled = true;
         }
 
         private void CloseAssessment()
@@ -169,6 +197,11 @@ namespace AssessmentManager
                         break;
                     }
             }
+        }
+
+        private void treeViewQuestionList_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //TODO:: listen for delete key pressed, try delete selected node
         }
     }
 }
