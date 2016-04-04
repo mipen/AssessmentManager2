@@ -9,11 +9,15 @@ namespace AssessmentManager
     [Serializable]
     public class Question
     {
-        private int marks;
-        private string modelAnswer;
         private string name = "Question";
+        private int marks=0;
+        private string questionText = "";
+        private string modelAnswer;
+        private string optionA, optionB, optionC, optionD;
+        private MultiChoiceOption correctOption = MultiChoiceOption.A;
+        private string comments;
+        private AnswerType answerType = AnswerType.Open;
         private List<Question> subQuestions = new List<Question>();
-        private AnswerType answerType = AnswerType.Single;
 
         public Question()
         {
@@ -30,8 +34,24 @@ namespace AssessmentManager
             set { name = value; }
         }
 
-        public bool HasSubQuestions => subQuestions.Count != 0;
+        public string QuestionText
+        {
+            get
+            {
+                return questionText;
+            }
+            set
+            {
+                questionText = value;
+            }
+        }
 
+        #region SubQuestions
+        public List<Question> SubQuestions => subQuestions;
+        public bool HasSubQuestions => subQuestions.Count != 0;
+        #endregion
+
+        #region Answer
         public AnswerType AnswerType
         {
             get
@@ -54,8 +74,83 @@ namespace AssessmentManager
             {
                 modelAnswer = value;
             }
+        } 
+
+        public string OptionA
+        {
+            get
+            {
+                return optionA;
+            }
+            set
+            {
+                optionA = value;
+            }
         }
 
+        public string OptionB
+        {
+            get
+            {
+                return optionB;
+            }
+            set
+            {
+                optionB = value;
+            }
+        }
+
+        public string OptionC
+        {
+            get
+            {
+                return optionC;
+            }
+            set
+            {
+                optionC = value;
+            }
+        }
+
+        public string OptionD
+        {
+            get
+            {
+                return optionD;
+            }
+            set
+            {
+                optionD = value;
+            }
+        }
+
+        public MultiChoiceOption CorrectOption
+        {
+            get
+            {
+                return correctOption;
+            }
+            set
+            {
+                correctOption = value;
+            }
+        }
+
+        public string Comments
+        {
+            get
+            {
+                return comments;
+            }
+            set
+            {
+                comments = value;
+            }
+        }
+        #endregion
+
+
+        #region Marks
         /// <summary>
         /// The sum of all sub question marks, including the marks for this question.
         /// </summary>
@@ -87,30 +182,9 @@ namespace AssessmentManager
             set
             {
                 marks = value;
-            }         
-        }
+            }
+        } 
+        #endregion
 
-        public List<Question> SubQuestions => subQuestions;
-
-        /// <summary>
-        /// Add a new sub question at the bottom of the collection.
-        /// </summary>
-        public void AddSubQuestion()
-        {
-            subQuestions.Add(new Question());
-        }
-
-        /// <summary>
-        /// Insert a new sub question at the specified index
-        /// </summary>
-        /// <param name="index">Desired index for the question to be inserted</param>
-        public void AddSubQuestion(int index)
-        {
-            if (index < 0) index = 0;
-            if (index < SubQuestions.Count)
-                subQuestions.Insert(index, new Question());
-            else
-                subQuestions.Add(new Question());
-        }
     }
 }

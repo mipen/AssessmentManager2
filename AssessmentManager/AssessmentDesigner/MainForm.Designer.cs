@@ -145,6 +145,9 @@
             this.contextMenuSeparatorMove = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuMoveUp = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuMoveDown = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuSeparatorChangeLevel = new System.Windows.Forms.ToolStripSeparator();
+            this.contextMenuChangeLevelUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuChangeLevelDown = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -286,6 +289,7 @@
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
             this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveasToolStripMenuItem
             // 
@@ -417,6 +421,7 @@
             this.richTextBoxQuestion.Size = new System.Drawing.Size(685, 181);
             this.richTextBoxQuestion.TabIndex = 1;
             this.richTextBoxQuestion.Text = "";
+            this.richTextBoxQuestion.TextChanged += new System.EventHandler(this.richTextBoxQuestion_TextChanged);
             // 
             // toolStripQuestion
             // 
@@ -622,9 +627,9 @@
             // 
             // panelAnswersContainer
             // 
-            this.panelAnswersContainer.Controls.Add(this.panelAnswerOpen);
-            this.panelAnswersContainer.Controls.Add(this.panelAnswerSingle);
             this.panelAnswersContainer.Controls.Add(this.panelAnswerMultiChoice);
+            this.panelAnswersContainer.Controls.Add(this.panelAnswerSingle);
+            this.panelAnswersContainer.Controls.Add(this.panelAnswerOpen);
             this.panelAnswersContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnswersContainer.Location = new System.Drawing.Point(0, 24);
             this.panelAnswersContainer.Margin = new System.Windows.Forms.Padding(2);
@@ -652,6 +657,7 @@
             this.richTextBoxAnswerOpen.Size = new System.Drawing.Size(689, 209);
             this.richTextBoxAnswerOpen.TabIndex = 0;
             this.richTextBoxAnswerOpen.Text = "";
+            this.richTextBoxAnswerOpen.TextChanged += new System.EventHandler(this.richTextBoxAnswerOpen_TextChanged);
             // 
             // panelAnswerSingle
             // 
@@ -694,6 +700,7 @@
             this.richTextBoxAnswerSingleAcceptable.Size = new System.Drawing.Size(264, 206);
             this.richTextBoxAnswerSingleAcceptable.TabIndex = 1;
             this.richTextBoxAnswerSingleAcceptable.Text = "";
+            this.richTextBoxAnswerSingleAcceptable.TextChanged += new System.EventHandler(this.richTextBoxAnswerSingleAcceptable_TextChanged);
             // 
             // labelAnswerSingleAcceptable
             // 
@@ -730,6 +737,7 @@
             this.richTextBoxAnswerSingleComment.Size = new System.Drawing.Size(243, 203);
             this.richTextBoxAnswerSingleComment.TabIndex = 1;
             this.richTextBoxAnswerSingleComment.Text = "";
+            this.richTextBoxAnswerSingleComment.TextChanged += new System.EventHandler(this.richTextBoxAnswerSingleComment_TextChanged);
             // 
             // labelAnswerSingleComment
             // 
@@ -793,6 +801,7 @@
             // comboBoxAnswerMultiCorrect
             // 
             this.comboBoxAnswerMultiCorrect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxAnswerMultiCorrect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAnswerMultiCorrect.FormattingEnabled = true;
             this.comboBoxAnswerMultiCorrect.Items.AddRange(new object[] {
             "A",
@@ -804,6 +813,7 @@
             this.comboBoxAnswerMultiCorrect.Name = "comboBoxAnswerMultiCorrect";
             this.comboBoxAnswerMultiCorrect.Size = new System.Drawing.Size(63, 21);
             this.comboBoxAnswerMultiCorrect.TabIndex = 1;
+            this.comboBoxAnswerMultiCorrect.SelectedIndexChanged += new System.EventHandler(this.comboBoxAnswerMultiCorrect_SelectedIndexChanged);
             // 
             // tableLayoutPanelMultiChoiceOptions
             // 
@@ -860,6 +870,7 @@
             this.textBoxMultiChoiceD.Name = "textBoxMultiChoiceD";
             this.textBoxMultiChoiceD.Size = new System.Drawing.Size(175, 20);
             this.textBoxMultiChoiceD.TabIndex = 1;
+            this.textBoxMultiChoiceD.TextChanged += new System.EventHandler(this.textBoxMultiChoiceD_TextChanged);
             // 
             // tableLayoutPanelMultiChoiceC
             // 
@@ -897,6 +908,7 @@
             this.textBoxMultiChoiceC.Name = "textBoxMultiChoiceC";
             this.textBoxMultiChoiceC.Size = new System.Drawing.Size(174, 20);
             this.textBoxMultiChoiceC.TabIndex = 1;
+            this.textBoxMultiChoiceC.TextChanged += new System.EventHandler(this.textBoxMultiChoiceC_TextChanged);
             // 
             // tableLayoutPanelMultiChoiceB
             // 
@@ -934,6 +946,7 @@
             this.textBoxMultiChoiceB.Name = "textBoxMultiChoiceB";
             this.textBoxMultiChoiceB.Size = new System.Drawing.Size(175, 20);
             this.textBoxMultiChoiceB.TabIndex = 1;
+            this.textBoxMultiChoiceB.TextChanged += new System.EventHandler(this.textBoxMultiChoiceB_TextChanged);
             // 
             // tableLayoutPanelMultiChoiceA
             // 
@@ -971,6 +984,7 @@
             this.textBoxMultiChoiceA.Name = "textBoxMultiChoiceA";
             this.textBoxMultiChoiceA.Size = new System.Drawing.Size(174, 20);
             this.textBoxMultiChoiceA.TabIndex = 1;
+            this.textBoxMultiChoiceA.TextChanged += new System.EventHandler(this.textBoxMultiChoiceA_TextChanged);
             // 
             // panelMultiChoiceCommentContainer
             // 
@@ -995,6 +1009,7 @@
             this.richTextBoxAnswerMultiComments.Size = new System.Drawing.Size(207, 205);
             this.richTextBoxAnswerMultiComments.TabIndex = 1;
             this.richTextBoxAnswerMultiComments.Text = "";
+            this.richTextBoxAnswerMultiComments.TextChanged += new System.EventHandler(this.richTextBoxAnswerMultiComments_TextChanged);
             // 
             // labelAnswerMultiComment
             // 
@@ -1067,6 +1082,7 @@
             this.treeViewQuestionList.Name = "treeViewQuestionList";
             this.treeViewQuestionList.Size = new System.Drawing.Size(161, 473);
             this.treeViewQuestionList.TabIndex = 5;
+            this.treeViewQuestionList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewQuestionList_AfterSelect);
             this.treeViewQuestionList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewQuestionList_KeyDown);
             this.treeViewQuestionList.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeViewQuestionList_MouseUp);
             // 
@@ -1277,6 +1293,7 @@
             this.numericUpDownMarksAssigner.Name = "numericUpDownMarksAssigner";
             this.numericUpDownMarksAssigner.Size = new System.Drawing.Size(41, 20);
             this.numericUpDownMarksAssigner.TabIndex = 1;
+            this.numericUpDownMarksAssigner.ValueChanged += new System.EventHandler(this.numericUpDownMarksAssigner_ValueChanged);
             // 
             // labelMarksForQuestion
             // 
@@ -1299,9 +1316,12 @@
             this.contextMenuInsertBelow,
             this.contextMenuSeparatorMove,
             this.contextMenuMoveUp,
-            this.contextMenuMoveDown});
+            this.contextMenuMoveDown,
+            this.contextMenuSeparatorChangeLevel,
+            this.contextMenuChangeLevelUp,
+            this.contextMenuChangeLevelDown});
             this.contextMenuStripQuestionNode.Name = "contextMenuStripQuestionNode";
-            this.contextMenuStripQuestionNode.Size = new System.Drawing.Size(192, 176);
+            this.contextMenuStripQuestionNode.Size = new System.Drawing.Size(192, 204);
             // 
             // contextMenuDelete
             // 
@@ -1360,6 +1380,25 @@
             this.contextMenuMoveDown.Text = "Move &Down";
             this.contextMenuMoveDown.Click += new System.EventHandler(this.contextMenuMoveDown_Click);
             // 
+            // contextMenuSeparatorChangeLevel
+            // 
+            this.contextMenuSeparatorChangeLevel.Name = "contextMenuSeparatorChangeLevel";
+            this.contextMenuSeparatorChangeLevel.Size = new System.Drawing.Size(188, 6);
+            // 
+            // contextMenuChangeLevelUp
+            // 
+            this.contextMenuChangeLevelUp.Name = "contextMenuChangeLevelUp";
+            this.contextMenuChangeLevelUp.Size = new System.Drawing.Size(191, 22);
+            this.contextMenuChangeLevelUp.Text = "Change Level Up";
+            this.contextMenuChangeLevelUp.Click += new System.EventHandler(this.contextMenuChangeLevelUp_Click);
+            // 
+            // contextMenuChangeLevelDown
+            // 
+            this.contextMenuChangeLevelDown.Name = "contextMenuChangeLevelDown";
+            this.contextMenuChangeLevelDown.Size = new System.Drawing.Size(191, 22);
+            this.contextMenuChangeLevelDown.Text = "Change Level Down";
+            this.contextMenuChangeLevelDown.Click += new System.EventHandler(this.contextMenuChangeLevelDown_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1371,7 +1410,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(754, 576);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "AssessmentDesigner";
             this.menuStripMain.ResumeLayout(false);
             this.menuStripMain.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1536,5 +1575,8 @@
         private System.Windows.Forms.ToolStripMenuItem contextMenuMoveDown;
         private System.Windows.Forms.ToolStripSeparator contextMenuSeparatorSubQuestion;
         private System.Windows.Forms.ToolStripMenuItem contextMenuAddSubQuestion;
+        private System.Windows.Forms.ToolStripSeparator contextMenuSeparatorChangeLevel;
+        private System.Windows.Forms.ToolStripMenuItem contextMenuChangeLevelUp;
+        private System.Windows.Forms.ToolStripMenuItem contextMenuChangeLevelDown;
     }
 }
