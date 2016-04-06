@@ -50,6 +50,9 @@ namespace AssessmentManager
             openFileDialog.InitialDirectory = DefaultPath;
             openFileDialog.Filter = $"Assessment File (*{AssessmentExtension}) | *{AssessmentExtension}";
             openFileDialog.DefaultExt = AssessmentExtension.Remove(0, 1);
+
+            //Initialise the recent files menu
+            UpdateRecentFiles();
         }
 
         public Assessment Assessment
@@ -179,6 +182,25 @@ namespace AssessmentManager
                 }
             }
         }
+
+        private void assessmentInformationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (HasAssessmentOpen)
+            {
+                CourseInformationForm cif = new CourseInformationForm();
+                if (Assessment.Course.CourseCode != "" && Assessment.Course.CourseCode != null)
+                {
+                    cif.CourseCode = Assessment.Course.CourseCode;
+                }
+                cif.Author = Assessment.Course.Author;
+                if (cif.ShowDialog() == DialogResult.OK)
+                {
+                    Assessment.Course.Author = cif.Author;
+                    Assessment.Course.CourseCode = cif.CourseCode;
+                }
+            }
+        }
+
         #endregion
 
         #region TreeViewButtons
@@ -431,6 +453,39 @@ namespace AssessmentManager
             Text = file == null ? "AssessmentDesigner" : "AssessmentDesigner - " + file.Name;
         }
 
+        private void UpdateRecentFiles()
+        {
+            recentToolStripMenuItem.DropDownItems.Clear();
+            foreach(var path in Settings.Instance.RecentFiles)
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem();
+                item.Text = path;
+                item.Tag = path;
+                item.Size = new Size(100, 22);
+                item.Click += (sender, e) =>
+                {
+                    if (ChangesMade)
+                    {
+                        DialogResult result = MessageBox.Show("There are unsaved changes. Do you wish to save before opening a new file?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
+                        if (result == DialogResult.Yes)
+                        {
+                            if (file == null)
+                            {
+                                if (SaveToFile() == DialogResult.Cancel)
+                                    return;
+                            }
+                            else
+                                SaveToFile(file.FullName);
+                        }
+                        else if (result == DialogResult.Cancel)
+                            return;
+                    }
+                    OpenFromFile(item.Tag.ToString());
+                };
+                recentToolStripMenuItem.DropDownItems.Add(item);
+            }
+        }
+
         /// <summary>
         /// Save the currently open Assessment to file. Does not display SaveFileDialog, but instead is given the path to save to.
         /// </summary>
@@ -450,6 +505,8 @@ namespace AssessmentManager
                     file = new FileInfo(path);
                     changesMade = false;
                     UpdateFormText();
+                    Settings.Instance.AddRecentFile(path);
+                    UpdateRecentFiles();
                 }
                 catch (Exception ex)
                 {
@@ -492,6 +549,8 @@ namespace AssessmentManager
                     }
                     file = new FileInfo(path);
                     NotifyAssessmentOpened();
+                    Settings.Instance.AddRecentFile(path);
+                    UpdateRecentFiles();
                 }
                 catch (Exception ex)
                 {
@@ -1062,24 +1121,8 @@ namespace AssessmentManager
                 else if (result == DialogResult.Cancel)
                     e.Cancel = true;
             }
+            Settings.Instance.Save();
         }
 
-        private void assessmentInformationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (HasAssessmentOpen)
-            {
-                CourseInformationForm cif = new CourseInformationForm();
-                if (Assessment.Course.CourseCode != "" && Assessment.Course.CourseCode != null)
-                {
-                    cif.CourseCode = Assessment.Course.CourseCode;
-                }
-                cif.Author = Assessment.Course.Author;
-                if (cif.ShowDialog() == DialogResult.OK)
-                {
-                    Assessment.Course.Author = cif.Author;
-                    Assessment.Course.CourseCode = cif.CourseCode;
-                }
-            }
-        }
     }
 }

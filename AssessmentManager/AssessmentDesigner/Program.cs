@@ -16,6 +16,7 @@ namespace AssessmentManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Settings.Init();
             Application.Run(new MainForm());
         }
     }
