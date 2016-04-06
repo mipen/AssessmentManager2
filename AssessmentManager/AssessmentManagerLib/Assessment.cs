@@ -12,7 +12,6 @@ namespace AssessmentManager
     {
         private List<Question> questions = new List<Question>();
         private DateTime dateCreated;
-        private DateTime lastModified;
         private CourseInformation course = new CourseInformation();
 
         public Assessment()
@@ -32,10 +31,12 @@ namespace AssessmentManager
         {
             get
             {
-                int tmp=0;
+                int num=0;
                 foreach (var q in Questions)
-                    tmp += q.TotalMarks;
-                return tmp;
+                {
+                    num += q.TotalMarks;
+                }
+                return num;
             }
         }
 
@@ -55,7 +56,7 @@ namespace AssessmentManager
         /// </summary>
         public void AddQuestion()
         {
-            questions.Add(new Question());
+            AddQuestion("unnamed");
         }
 
         public void AddQuestion(string name)
@@ -64,6 +65,15 @@ namespace AssessmentManager
         }
         #endregion
 
+        public List<Question> CheckMissingMarks()
+        {
+            List<Question> list = new List<Question>();
+            foreach(var q in Questions)
+            {
+                q.CheckMissingMarks(list);
+            }
+            return list;
+        }
 
     }
 }

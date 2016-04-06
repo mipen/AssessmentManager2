@@ -10,6 +10,6 @@ namespace AssessmentManager
     public class CourseInformation
     {
         public string CourseCode;
-        public string CourseTitle;
+        public string Author;
     }
 }

@@ -17,33 +17,39 @@ namespace AssessmentManager
     public partial class MainForm : Form
     {
         private Assessment assessment;
-        private string fileName = "";
-        private string filePath = "";
+        private FileInfo file;
         private ColorDialog colorDialog = new ColorDialog();
         private SaveFileDialog xmlSaveFileDialog = new SaveFileDialog();
         private SaveFileDialog mainSaveFileDialog = new SaveFileDialog();
         private OpenFileDialog openFileDialog = new OpenFileDialog();
 
+        public const string AssessmentExtension = ".exm";
+        public const string XMLExtension = ".xml";
+        private string DefaultPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+        public const int MaxNumSubQuestionLevels = 3;
+
+        private bool changesMade = false;
 
         public MainForm()
         {
             InitializeComponent();
 
-            NotifyNoAssessmentOpen();
+            NotifyAssessmentClosed();
 
             //Initialise the xml save file dialog
-            xmlSaveFileDialog.Filter = "XML Document (*.xml) | *.xml";
-            xmlSaveFileDialog.DefaultExt = "xml";
-            xmlSaveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            xmlSaveFileDialog.Filter = $"XML Document (*{XMLExtension}) | *{XMLExtension}";
+            xmlSaveFileDialog.DefaultExt = XMLExtension.Remove(0, 1);
+            xmlSaveFileDialog.InitialDirectory = DefaultPath;
 
             //Initialise main save file dialog
-            mainSaveFileDialog.Filter = "Examination File (*.exm) | *.exm";
-            mainSaveFileDialog.DefaultExt = "exm";
+            mainSaveFileDialog.Filter = $"Assessment File (*{AssessmentExtension}) | *{AssessmentExtension}";
+            mainSaveFileDialog.DefaultExt = AssessmentExtension.Remove(0, 1);
 
             //Initialise open file dialog
-            openFileDialog.InitialDirectory= Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            openFileDialog.Filter= "Examination File (*.exm) | *.exm";
-            openFileDialog.DefaultExt= "exm";
+            openFileDialog.InitialDirectory = DefaultPath;
+            openFileDialog.Filter = $"Assessment File (*{AssessmentExtension}) | *{AssessmentExtension}";
+            openFileDialog.DefaultExt = AssessmentExtension.Remove(0, 1);
         }
 
         public Assessment Assessment
@@ -55,6 +61,18 @@ namespace AssessmentManager
         public bool HasAssessmentOpen
         {
             get { return Assessment != null; }
+        }
+
+        public bool ChangesMade
+        {
+            get
+            {
+                return HasAssessmentOpen && changesMade;
+            }
+            set
+            {
+                changesMade = value;
+            }
         }
 
         #region Toolstrip buttons
@@ -78,8 +96,7 @@ namespace AssessmentManager
 
             Assessment = new Assessment(DateTime.Now);
             Assessment.AddQuestion("Question 1");
-            fileName = "Untitled";
-            xmlSaveFileDialog.FileName = fileName;
+            changesMade = true;
             NotifyAssessmentOpened();
         }
 
@@ -90,8 +107,7 @@ namespace AssessmentManager
 
         private void exportToXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            xmlSaveFileDialog.FileName = fileName;
-            if (xmlSaveFileDialog.ShowDialog() == DialogResult.OK)
+            if (HasAssessmentOpen && xmlSaveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 using (var stream = new FileStream(xmlSaveFileDialog.FileName, FileMode.Create))
                 {
@@ -103,9 +119,64 @@ namespace AssessmentManager
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (fileName != "")
+            if (HasAssessmentOpen)
             {
+                if (file == null)
+                {
+                    mainSaveFileDialog.InitialDirectory = DefaultPath;
+                    SaveToFile();
+                }
+                else
+                {
+                    SaveToFile(file.FullName);
+                }
+            }
+        }
 
+        private void saveasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (HasAssessmentOpen)
+            {
+                SaveToFile();
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ChangesMade)
+            {
+                DialogResult result = MessageBox.Show("There are unsaved changes. Do you wish to save before opening a new file?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    if (file == null)
+                    {
+                        if (SaveToFile() == DialogResult.Cancel)
+                            return;
+                    }
+                    else
+                        SaveToFile(file.FullName);
+                }
+                else if (result == DialogResult.Cancel)
+                    return;
+            }
+            OpenFromFile();
+        }
+
+        private void checkForQuestionsWithoutMarksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (HasAssessmentOpen)
+            {
+                List<Question> list = Assessment.CheckMissingMarks();
+                if (list.Count > 0)
+                {
+                    list.Sort((a, b) => a.Name.CompareTo(b.Name));
+
+                    string questions = "";
+                    foreach (var q in list)
+                        questions += q.Name + "\n";
+
+                    MessageBox.Show("These questions do not have any marks assigned: \n\n" + questions, "Unassigned marks");
+                }
             }
         }
         #endregion
@@ -115,6 +186,7 @@ namespace AssessmentManager
         {
             treeViewQuestionList.Nodes.Add(new QuestionNode(new Question("unnamed")));
             Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
+            changesMade = true;
             treeViewQuestionList.Focus();
         }
 
@@ -124,11 +196,19 @@ namespace AssessmentManager
             {
                 QuestionNode node = (QuestionNode)treeViewQuestionList.SelectedNode;
 
+                //Check the node is able to have sub nodes(sub questions)
+                if (node.Level >= MaxNumSubQuestionLevels - 1)
+                {
+                    treeViewQuestionList.Focus();
+                    return;
+                }
+
                 Question subQ = new Question("unnamed");
 
                 node.Nodes.Add(new QuestionNode(subQ));
                 node.Expand();
                 Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
+                changesMade = true;
             }
             treeViewQuestionList.Focus();
         }
@@ -159,6 +239,7 @@ namespace AssessmentManager
                     collection.Insert(indexToInsertTo, node);
                     Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
                     treeViewQuestionList.SelectedNode = node;
+                    changesMade = true;
                 }
                 catch { }
             }
@@ -178,6 +259,7 @@ namespace AssessmentManager
                     collection.Insert(indexToInsertTo, node);
                     Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
                     treeViewQuestionList.SelectedNode = node;
+                    changesMade = true;
                 }
                 catch { }
             }
@@ -186,12 +268,16 @@ namespace AssessmentManager
         #endregion
 
         #region Methods
-        private void NotifyNoAssessmentOpen()
+        private void NotifyAssessmentClosed()
         {
             //Disable buttons
             panelButtons.Enabled = false;
             //Disable question editing area
             tableLayoutPanelDesignerContainer.Enabled = false;
+            //Clear the question text
+            richTextBoxQuestion.Text = "";
+            //Clear the question name
+            labelQuestion.Text = "";
             //Disable marks assign thingy
             numericUpDownMarksAssigner.Enabled = false;
             //Hide marks assignment information
@@ -209,8 +295,10 @@ namespace AssessmentManager
             saveToolStripMenuItem.Enabled = false;
             saveasToolStripMenuItem.Enabled = false;
             closeToolStripMenuItem.Enabled = false;
+            //Reset the fileinfo
+            file = null;
             //Reset the form text
-            Text = "AssessmentDesigner";
+            UpdateFormText();
         }
 
         private void NotifyAssessmentOpened()
@@ -234,18 +322,35 @@ namespace AssessmentManager
             saveasToolStripMenuItem.Enabled = true;
             closeToolStripMenuItem.Enabled = true;
             //Change form text
-            Text = fileName == "" ? "AssessmentDesigner" : "AssessmentDesigner - " + fileName;
+            UpdateFormText();
             //Populate the treeview with the questions from the assessment
             Util.PopulateTreeView(treeViewQuestionList, Assessment);
             if (treeViewQuestionList.Nodes.Count > 0) treeViewQuestionList.SelectedNode = treeViewQuestionList.Nodes[0];
+            //No changes will have been made yet
+            changesMade = false;
         }
 
         private void CloseAssessment()
         {
-            //TODO:: check for changes and prompt to save if needed. Perform proper closing action.
+            if (ChangesMade)
+            {
+                DialogResult result = MessageBox.Show("Changes have been made to this Assessment. Closing it now will cause those changes to be lost. Would you like to save before closing?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    if (file == null)
+                    {
+                        if (SaveToFile() == DialogResult.Cancel)
+                            return;
+                    }
+                    else
+                        SaveToFile(file.FullName);
+                }
+                else if (result == DialogResult.Cancel)
+                    return;
+            }
             Assessment = null;
             treeViewQuestionList.Nodes.Clear();
-            NotifyNoAssessmentOpen();
+            NotifyAssessmentClosed();
         }
 
         private bool DeleteNode(QuestionNode node)
@@ -321,33 +426,93 @@ namespace AssessmentManager
             }
         }
 
+        private void UpdateFormText()
+        {
+            Text = file == null ? "AssessmentDesigner" : "AssessmentDesigner - " + file.Name;
+        }
+
+        /// <summary>
+        /// Save the currently open Assessment to file. Does not display SaveFileDialog, but instead is given the path to save to.
+        /// </summary>
+        /// <param name="path">The specified path to save the Assessment to.</param>
         private void SaveToFile(string path)
         {
             //Save the file here
-            if (Assessment != null)
+            if (HasAssessmentOpen)
             {
-                using (FileStream s = File.Open(path, FileMode.Create, FileAccess.Write))
+                try
                 {
-                    BinaryFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(s, Assessment);
+                    using (FileStream s = File.Open(path, FileMode.Create, FileAccess.Write))
+                    {
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        formatter.Serialize(s, Assessment);
+                    }
+                    file = new FileInfo(path);
+                    changesMade = false;
+                    UpdateFormText();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to save: \n" + ex.Message);
                 }
             }
         }
 
-        private void SaveToFile()
+        /// <summary>
+        /// Save the currently open Assessment to file. Displays the SaveFileDialog
+        /// </summary>
+        private DialogResult SaveToFile()
         {
-            //Use save file dialog here
+            if (HasAssessmentOpen)
+            {
+                DialogResult result = mainSaveFileDialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    SaveToFile(mainSaveFileDialog.FileName);
+                }
+                return result;
+            }
+            return DialogResult.Cancel;
         }
 
+        /// <summary>
+        /// Open an Assessment from file. Does not show an OpenFileDialog.
+        /// </summary>
+        /// <param name="path">The specified path for the file</param>
         private void OpenFromFile(string path)
         {
-            //Open the file here
-
+            if (File.Exists(path))
+            {
+                try
+                {
+                    using (FileStream s = File.Open(path, FileMode.Open))
+                    {
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        Assessment = (Assessment)formatter.Deserialize(s);
+                    }
+                    file = new FileInfo(path);
+                    NotifyAssessmentOpened();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unable to load file: \n" + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Unable to find the file at: {path}\n\n Failed to open.");
+            }
         }
 
+        /// <summary>
+        /// Open an Assessment from file. Displays OpenFileDialog.
+        /// </summary>
         private void OpenFromFile()
         {
-            //Use open file dialog here
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                OpenFromFile(openFileDialog.FileName);
+            }
         }
         #endregion
 
@@ -398,6 +563,7 @@ namespace AssessmentManager
                     else
                         contextMenuSeparatorMove.Visible = true;
 
+
                     //Disable change level up if already top level
                     bool levelFlag1 = false, levelFlag2 = false;
                     if (node.Level == 0)
@@ -414,6 +580,22 @@ namespace AssessmentManager
                         contextMenuSeparatorChangeLevel.Visible = false;
                     else
                         contextMenuSeparatorChangeLevel.Visible = true;
+
+
+                    //Disable add sub question if question is at max level
+                    bool subQuestionFlag = false;
+                    if (node.Level >= MaxNumSubQuestionLevels - 1)
+                    {
+                        contextMenuAddSubQuestion.Visible = false;
+                        subQuestionFlag = true;
+                    }
+                    else
+                        contextMenuAddSubQuestion.Visible = true;
+                    //Disable the separator
+                    if (subQuestionFlag)
+                        contextMenuSeparatorSubQuestion.Visible = false;
+                    else
+                        contextMenuSeparatorSubQuestion.Visible = true;
 
                     //Show the contextmenu
                     contextMenuStripQuestionNode.Show(treeViewQuestionList, p);
@@ -442,9 +624,21 @@ namespace AssessmentManager
                 labelQuestion.Text = node.Question.Name;
                 //Display the question's text
                 richTextBoxQuestion.Text = node.Question.QuestionText;
-                //Display the marks in the numeric up/down
-                numericUpDownMarksAssigner.Value = node.Question.Marks;
-                //Display the marks in the mark allocations box
+                //Hide the marks assigner if the quesiton doesn't have an answer
+                if (node.Question.AnswerType == AnswerType.None)
+                {
+                    labelMarksForQuestion.Visible = false;
+                    numericUpDownMarksAssigner.Visible = false;
+                }
+                else
+                {
+                    labelMarksForQuestion.Visible = true;
+                    numericUpDownMarksAssigner.Visible = true;
+                    //Display the marks in the numeric up/down
+                    numericUpDownMarksAssigner.Value = node.Question.Marks;
+                }
+                //Update the mark allocations
+                UpdateMarkAllocations();
 
                 //Display the question's answer type
                 switch (node.Question.AnswerType)
@@ -483,8 +677,11 @@ namespace AssessmentManager
                 }
                 //Display the correct multi choice option
                 comboBoxAnswerMultiCorrect.SelectedItem = node.Question.CorrectOption.ToString();
-                //Update the mark allocations
-                UpdateMarkAllocations();
+                //Disable the subquestion box if the question cannot have any more subquestions
+                if (node.Level >= MaxNumSubQuestionLevels - 1)
+                    buttonAddSubQuestion.Enabled = false;
+                else
+                    buttonAddSubQuestion.Enabled = true;
             }
         }
         #endregion
@@ -610,8 +807,6 @@ namespace AssessmentManager
         #region QuestionEditingControls
         private void comboBoxAnswerType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //TODO:: If 'None' is chosen, then don't allow any marks to be assigned. Maybe set marks to 0 as well
-
             if (HasAssessmentOpen)
             {
                 QuestionNode node = (QuestionNode)treeViewQuestionList.SelectedNode;
@@ -622,6 +817,12 @@ namespace AssessmentManager
                         case "None":
                             {
                                 node.Question.AnswerType = AnswerType.None;
+                                //Hide the marks assigner
+                                labelMarksForQuestion.Visible = false;
+                                numericUpDownMarksAssigner.Visible = false;
+                                UpdateMarkAllocations();
+                                //Hide answer label
+                                labelAnswerText.Visible = false;
                                 break;
                             }
                         case "Multi-choice":
@@ -633,6 +834,12 @@ namespace AssessmentManager
                                 textBoxMultiChoiceC.Text = node.Question.OptionC;
                                 textBoxMultiChoiceD.Text = node.Question.OptionD;
                                 richTextBoxAnswerMultiComments.Text = node.Question.Comments;
+                                //Show the marks assigner
+                                labelMarksForQuestion.Visible = true;
+                                numericUpDownMarksAssigner.Visible = true;
+                                UpdateMarkAllocations();
+                                //Show answer label
+                                labelAnswerText.Visible = true;
                                 break;
                             }
                         case "Single":
@@ -641,6 +848,12 @@ namespace AssessmentManager
                                 //Display the answers
                                 richTextBoxAnswerSingleAcceptable.Text = node.Question.ModelAnswer;
                                 richTextBoxAnswerSingleComment.Text = node.Question.Comments;
+                                //Show the marks assigner
+                                labelMarksForQuestion.Visible = true;
+                                numericUpDownMarksAssigner.Visible = true;
+                                UpdateMarkAllocations();
+                                //Show answer label
+                                labelAnswerText.Visible = true;
                                 break;
                             }
                         case "Open":
@@ -648,9 +861,16 @@ namespace AssessmentManager
                                 node.Question.AnswerType = AnswerType.Open;
                                 //Display the answer
                                 richTextBoxAnswerOpen.Text = node.Question.ModelAnswer;
+                                //Show the marks assigner
+                                labelMarksForQuestion.Visible = true;
+                                numericUpDownMarksAssigner.Visible = true;
+                                UpdateMarkAllocations();
+                                //Show answer label
+                                labelAnswerText.Visible = true;
                                 break;
                             }
                     }
+                    changesMade = true;
                 }
             }
             switch (comboBoxAnswerType.Text)
@@ -696,6 +916,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.QuestionText = richTextBoxQuestion.Text;
+                changesMade = true;
             }
         }
 
@@ -705,6 +926,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.ModelAnswer = richTextBoxAnswerOpen.Text;
+                changesMade = true;
             }
         }
 
@@ -714,6 +936,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.ModelAnswer = richTextBoxAnswerSingleAcceptable.Text;
+                changesMade = true;
             }
         }
 
@@ -723,6 +946,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.Comments = richTextBoxAnswerSingleComment.Text;
+                changesMade = true;
             }
         }
 
@@ -732,6 +956,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionA = textBoxMultiChoiceA.Text;
+                changesMade = true;
             }
         }
 
@@ -741,6 +966,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionB = textBoxMultiChoiceB.Text;
+                changesMade = true;
             }
         }
 
@@ -750,6 +976,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionC = textBoxMultiChoiceC.Text;
+                changesMade = true;
             }
         }
 
@@ -759,6 +986,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionD = textBoxMultiChoiceD.Text;
+                changesMade = true;
             }
         }
 
@@ -768,6 +996,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.Comments = richTextBoxAnswerMultiComments.Text;
+                changesMade = true;
             }
         }
 
@@ -799,6 +1028,7 @@ namespace AssessmentManager
                             break;
                         }
                 }
+                changesMade = true;
             }
         }
 
@@ -808,10 +1038,48 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.Marks = (int)numericUpDownMarksAssigner.Value;
+                changesMade = true;
                 UpdateMarkAllocations();
             }
         }
         #endregion
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ChangesMade)
+            {
+                DialogResult result = MessageBox.Show("Changes have been made to this Assessment. Closing it now will cause those changes to be lost. Would you like to save before closing?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    if (file == null)
+                    {
+                        if (SaveToFile() == DialogResult.Cancel)
+                            e.Cancel = true;
+                    }
+                    else
+                        SaveToFile(file.FullName);
+                }
+                else if (result == DialogResult.Cancel)
+                    e.Cancel = true;
+            }
+        }
+
+        private void assessmentInformationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (HasAssessmentOpen)
+            {
+                CourseInformationForm cif = new CourseInformationForm();
+                if (Assessment.Course.CourseCode != "" && Assessment.Course.CourseCode != null)
+                {
+                    cif.CourseCode = Assessment.Course.CourseCode;
+                }
+                cif.Author = Assessment.Course.Author;
+                if (cif.ShowDialog() == DialogResult.OK)
+                {
+                    Assessment.Course.Author = cif.Author;
+                    Assessment.Course.CourseCode = cif.CourseCode;
+                }
+            }
+        }
     }
 }

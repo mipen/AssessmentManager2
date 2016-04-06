@@ -149,7 +149,6 @@ namespace AssessmentManager
         }
         #endregion
 
-
         #region Marks
         /// <summary>
         /// The sum of all sub question marks, including the marks for this question.
@@ -162,10 +161,14 @@ namespace AssessmentManager
                     return Marks;
                 else
                 {
-                    int tmp = Marks;
+                    int num = Marks;
                     foreach (var q in SubQuestions)
-                        tmp += q.TotalMarks;
-                    return tmp;
+                    {
+                        if (q.AnswerType == AnswerType.None)
+                            continue;
+                        num += q.TotalMarks;
+                    }
+                    return num;
                 }
             }
         }
@@ -177,6 +180,8 @@ namespace AssessmentManager
         {
             get
             {
+                if (AnswerType == AnswerType.None)
+                    return 0;
                 return marks;
             }
             set
@@ -184,6 +189,20 @@ namespace AssessmentManager
                 marks = value;
             }
         } 
+
+        public void CheckMissingMarks(List<Question> questions)
+        {
+            if (AnswerType != AnswerType.None && Marks == 0)
+                questions.Add(this);
+            if(HasSubQuestions)
+            {
+                foreach(var q in SubQuestions)
+                {
+                    q.CheckMissingMarks(questions);
+                }
+            }
+
+        }
         #endregion
 
     }
