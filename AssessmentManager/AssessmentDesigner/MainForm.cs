@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -53,6 +54,9 @@ namespace AssessmentManager
 
             //Initialise the recent files menu
             UpdateRecentFiles();
+
+            //Initialise the font combo boxes
+            InitialiseFontComboBoxes();
         }
 
         public Assessment Assessment
@@ -81,12 +85,104 @@ namespace AssessmentManager
         #region Toolstrip buttons
         private void toolStripButtonColour_Click(object sender, EventArgs e)
         {
-
+            if(colorDialog.ShowDialog()==DialogResult.OK)
+            {
+                toolStripButtonColour.BackColor = colorDialog.Color;
+                richTextBoxQuestion.SelectionColor = colorDialog.Color;
+            }
         }
 
         private void cutToolStripButton_Click(object sender, EventArgs e)
         {
+            richTextBoxQuestion.Cut();
+        }
 
+        private void copyToolStripButton_Click(object sender, EventArgs e)
+        {
+            richTextBoxQuestion.Copy();
+        }
+
+        private void pasteToolStripButton_Click(object sender, EventArgs e)
+        {
+            richTextBoxQuestion.Paste();
+        }
+
+        private void toolStripButtonBold_Click(object sender, EventArgs e)
+        {
+            Font bFont = new Font(richTextBoxQuestion.Font, FontStyle.Bold);
+            Font rFont = new Font(richTextBoxQuestion.Font, FontStyle.Regular);
+
+            if (richTextBoxQuestion.SelectionFont.Bold)
+            {
+                richTextBoxQuestion.SelectionFont = rFont;
+            }
+            else
+                richTextBoxQuestion.SelectionFont = bFont;
+        }
+
+        private void toolStripButtonItalic_Click(object sender, EventArgs e)
+        {
+            Font iFont = new Font(richTextBoxQuestion.Font, FontStyle.Italic);
+            Font rFont = new Font(richTextBoxQuestion.Font, FontStyle.Regular);
+
+            if (richTextBoxQuestion.SelectionFont.Italic)
+                richTextBoxQuestion.SelectionFont = rFont;
+            else
+                richTextBoxQuestion.SelectionFont = iFont;
+        }
+
+        private void toolStripButtonUnderline_Click(object sender, EventArgs e)
+        {
+            Font uFont = new Font(richTextBoxQuestion.Font, FontStyle.Underline);
+            Font rFont = new Font(richTextBoxQuestion.Font, FontStyle.Regular);
+
+            if (richTextBoxQuestion.SelectionFont.Underline)
+                richTextBoxQuestion.SelectionFont = rFont;
+            else
+                richTextBoxQuestion.SelectionFont = uFont;
+        }
+
+        private void toolStripButtonAlignLeft_Click(object sender, EventArgs e)
+        {
+            richTextBoxQuestion.SelectionAlignment = HorizontalAlignment.Left;
+        }
+
+        private void toolStripButtonAlignCentre_Click(object sender, EventArgs e)
+        {
+            richTextBoxQuestion.SelectionAlignment = HorizontalAlignment.Center;
+        }
+
+        private void toolStripButtonAlignRight_Click(object sender, EventArgs e)
+        {
+            richTextBoxQuestion.SelectionAlignment = HorizontalAlignment.Right;
+        }
+
+        private void toolStripButtonBulletList_Click(object sender, EventArgs e)
+        {
+            //TODO:: this
+            MessageBox.Show("Not yet done");
+        }
+
+        private void toolStripComboBoxFont_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                richTextBoxQuestion.SelectionFont = new Font(toolStripComboBoxFont.Text, richTextBoxQuestion.SelectionFont.Size, richTextBoxQuestion.SelectionFont.Style);
+            }
+            catch
+            {
+            }
+        }
+
+        private void toolStripComboBoxSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                richTextBoxQuestion.SelectionFont = new Font(richTextBoxQuestion.SelectionFont.Name, float.Parse(toolStripComboBoxSize.Text), richTextBoxQuestion.SelectionFont.Style);
+            }
+            catch
+            {
+            }
         }
         #endregion
 
@@ -199,6 +295,12 @@ namespace AssessmentManager
                     Assessment.Course.CourseCode = cif.CourseCode;
                 }
             }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CloseAssessment() == DialogResult.OK)
+                Close();
         }
 
         #endregion
@@ -352,7 +454,25 @@ namespace AssessmentManager
             changesMade = false;
         }
 
-        private void CloseAssessment()
+        private void InitialiseFontComboBoxes()
+        {
+            for (int i = 8; i <= 75; i++)
+            {
+                toolStripComboBoxSize.Items.Add(i.ToString());
+            }
+
+            InstalledFontCollection fonts = new InstalledFontCollection();
+            foreach (var f in fonts.Families)
+            {
+                toolStripComboBoxFont.Items.Add(f.Name);
+            }
+        }
+
+        /// <summary>
+        /// Closes the open assessment.
+        /// </summary>
+        /// <returns>Returns DialogResult.Cancel if the user cancels saving and closing the document. Returns DialogResult.OK if it closes the document.</returns>
+        private DialogResult CloseAssessment()
         {
             if (ChangesMade)
             {
@@ -362,17 +482,20 @@ namespace AssessmentManager
                     if (file == null)
                     {
                         if (SaveToFile() == DialogResult.Cancel)
-                            return;
+                            return DialogResult.Cancel;
                     }
                     else
+                    {
                         SaveToFile(file.FullName);
+                    }
                 }
                 else if (result == DialogResult.Cancel)
-                    return;
+                    return DialogResult.Cancel;
             }
             Assessment = null;
             treeViewQuestionList.Nodes.Clear();
             NotifyAssessmentClosed();
+            return DialogResult.OK;
         }
 
         private bool DeleteNode(QuestionNode node)
@@ -456,7 +579,7 @@ namespace AssessmentManager
         private void UpdateRecentFiles()
         {
             recentToolStripMenuItem.DropDownItems.Clear();
-            foreach(var path in Settings.Instance.RecentFiles)
+            foreach (var path in Settings.Instance.RecentFiles)
             {
                 ToolStripMenuItem item = new ToolStripMenuItem();
                 item.Text = path;
@@ -682,7 +805,7 @@ namespace AssessmentManager
                 //Display the question's name
                 labelQuestion.Text = node.Question.Name;
                 //Display the question's text
-                richTextBoxQuestion.Text = node.Question.QuestionText;
+                richTextBoxQuestion.Rtf = node.Question.QuestionText;
                 //Hide the marks assigner if the quesiton doesn't have an answer
                 if (node.Question.AnswerType == AnswerType.None)
                 {
@@ -698,6 +821,12 @@ namespace AssessmentManager
                 }
                 //Update the mark allocations
                 UpdateMarkAllocations();
+
+                //Update the font combo boxes
+                toolStripComboBoxFont.SelectedItem = richTextBoxQuestion.SelectionFont.Name;
+                toolStripComboBoxSize.SelectedItem = ((int)richTextBoxQuestion.SelectionFont.Size).ToString();
+                //Update the colour button
+                toolStripButtonColour.BackColor = richTextBoxQuestion.SelectionColor;
 
                 //Display the question's answer type
                 switch (node.Question.AnswerType)
@@ -736,7 +865,7 @@ namespace AssessmentManager
                 }
                 //Display the correct multi choice option
                 comboBoxAnswerMultiCorrect.SelectedItem = node.Question.CorrectOption.ToString();
-                //Disable the subquestion box if the question cannot have any more subquestions
+                //Disable the subquestion button if the question cannot have any more subquestions
                 if (node.Level >= MaxNumSubQuestionLevels - 1)
                     buttonAddSubQuestion.Enabled = false;
                 else
@@ -974,9 +1103,17 @@ namespace AssessmentManager
             QuestionNode node = (QuestionNode)treeViewQuestionList.SelectedNode;
             if (node != null)
             {
-                node.Question.QuestionText = richTextBoxQuestion.Text;
+                node.Question.QuestionText = richTextBoxQuestion.Rtf;
                 changesMade = true;
             }
+        }
+
+        private void richTextBoxQuestion_SelectionChanged(object sender, EventArgs e)
+        {
+            //Set the values of the font combo boxes to the selected font
+            toolStripComboBoxFont.SelectedItem = richTextBoxQuestion.SelectionFont.Name;
+            toolStripComboBoxSize.SelectedItem = ((int)richTextBoxQuestion.SelectionFont.Size).ToString();
+            toolStripButtonColour.BackColor = richTextBoxQuestion.SelectionColor;
         }
 
         private void richTextBoxAnswerOpen_TextChanged(object sender, EventArgs e)

@@ -59,16 +59,35 @@
             this.panelQuestion = new System.Windows.Forms.Panel();
             this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
             this.toolStripQuestion = new System.Windows.Forms.ToolStrip();
+            this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonBold = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonItalic = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonUnderline = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonAlignLeft = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAlignCentre = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAlignRight = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonBulletList = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBoxFont = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripComboBoxSize = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripButtonColour = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonAddImage = new System.Windows.Forms.ToolStripButton();
             this.panelQuestionNameContainer = new System.Windows.Forms.Panel();
             this.labelQuestion = new System.Windows.Forms.Label();
             this.panelAnswerAreaContainer = new System.Windows.Forms.Panel();
             this.panelAnswersContainer = new System.Windows.Forms.Panel();
+            this.panelAnswerSingle = new System.Windows.Forms.TableLayoutPanel();
+            this.panelAnswerSingleAcceptableContainer = new System.Windows.Forms.Panel();
+            this.richTextBoxAnswerSingleAcceptable = new System.Windows.Forms.RichTextBox();
+            this.labelAnswerSingleAcceptable = new System.Windows.Forms.Label();
+            this.panelAnswerSingleCommentContainer = new System.Windows.Forms.Panel();
+            this.richTextBoxAnswerSingleComment = new System.Windows.Forms.RichTextBox();
+            this.labelAnswerSingleComment = new System.Windows.Forms.Label();
             this.panelAnswerMultiChoice = new System.Windows.Forms.Panel();
             this.tableLayoutPanelAnswerMultiChoiceContainer = new System.Windows.Forms.TableLayoutPanel();
             this.panelMultiChoiceOptionsContainer = new System.Windows.Forms.Panel();
@@ -90,13 +109,6 @@
             this.panelMultiChoiceCommentContainer = new System.Windows.Forms.Panel();
             this.richTextBoxAnswerMultiComments = new System.Windows.Forms.RichTextBox();
             this.labelAnswerMultiComment = new System.Windows.Forms.Label();
-            this.panelAnswerSingle = new System.Windows.Forms.TableLayoutPanel();
-            this.panelAnswerSingleAcceptableContainer = new System.Windows.Forms.Panel();
-            this.richTextBoxAnswerSingleAcceptable = new System.Windows.Forms.RichTextBox();
-            this.labelAnswerSingleAcceptable = new System.Windows.Forms.Label();
-            this.panelAnswerSingleCommentContainer = new System.Windows.Forms.Panel();
-            this.richTextBoxAnswerSingleComment = new System.Windows.Forms.RichTextBox();
-            this.labelAnswerSingleComment = new System.Windows.Forms.Label();
             this.panelAnswerOpen = new System.Windows.Forms.Panel();
             this.richTextBoxAnswerOpen = new System.Windows.Forms.RichTextBox();
             this.panelAnswerTools = new System.Windows.Forms.Panel();
@@ -136,18 +148,7 @@
             this.contextMenuSeparatorChangeLevel = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuChangeLevelUp = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuChangeLevelDown = new System.Windows.Forms.ToolStripMenuItem();
-            this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonBold = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonItalic = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonUnderline = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAlignLeft = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAlignCentre = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAlignRight = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonBulletList = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonColour = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAddImage = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -158,6 +159,9 @@
             this.panelQuestionNameContainer.SuspendLayout();
             this.panelAnswerAreaContainer.SuspendLayout();
             this.panelAnswersContainer.SuspendLayout();
+            this.panelAnswerSingle.SuspendLayout();
+            this.panelAnswerSingleAcceptableContainer.SuspendLayout();
+            this.panelAnswerSingleCommentContainer.SuspendLayout();
             this.panelAnswerMultiChoice.SuspendLayout();
             this.tableLayoutPanelAnswerMultiChoiceContainer.SuspendLayout();
             this.panelMultiChoiceOptionsContainer.SuspendLayout();
@@ -167,9 +171,6 @@
             this.tableLayoutPanelMultiChoiceB.SuspendLayout();
             this.tableLayoutPanelMultiChoiceA.SuspendLayout();
             this.panelMultiChoiceCommentContainer.SuspendLayout();
-            this.panelAnswerSingle.SuspendLayout();
-            this.panelAnswerSingleAcceptableContainer.SuspendLayout();
-            this.panelAnswerSingleCommentContainer.SuspendLayout();
             this.panelAnswerOpen.SuspendLayout();
             this.panelAnswerTools.SuspendLayout();
             this.panelButtons.SuspendLayout();
@@ -325,6 +326,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(303, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // configureToolStripMenuItem
             // 
@@ -337,7 +339,7 @@
             // emailSettingsToolStripMenuItem
             // 
             this.emailSettingsToolStripMenuItem.Name = "emailSettingsToolStripMenuItem";
-            this.emailSettingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.emailSettingsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.emailSettingsToolStripMenuItem.Text = "&Email Settings";
             // 
             // aboutToolStripMenuItem
@@ -432,6 +434,7 @@
             this.richTextBoxQuestion.Size = new System.Drawing.Size(685, 181);
             this.richTextBoxQuestion.TabIndex = 1;
             this.richTextBoxQuestion.Text = "";
+            this.richTextBoxQuestion.SelectionChanged += new System.EventHandler(this.richTextBoxQuestion_SelectionChanged);
             this.richTextBoxQuestion.TextChanged += new System.EventHandler(this.richTextBoxQuestion_TextChanged);
             // 
             // toolStripQuestion
@@ -454,6 +457,7 @@
             this.toolStripSeparator6,
             this.toolStripComboBoxFont,
             this.toolStripComboBoxSize,
+            this.toolStripSeparator8,
             this.toolStripButtonColour,
             this.toolStripSeparator7,
             this.toolStripButtonAddImage});
@@ -464,15 +468,115 @@
             this.toolStripQuestion.TabIndex = 0;
             this.toolStripQuestion.Text = "toolStrip1";
             // 
+            // cutToolStripButton
+            // 
+            this.cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
+            this.cutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cutToolStripButton.Name = "cutToolStripButton";
+            this.cutToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.cutToolStripButton.Text = "C&ut";
+            this.cutToolStripButton.Click += new System.EventHandler(this.cutToolStripButton_Click);
+            // 
+            // copyToolStripButton
+            // 
+            this.copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
+            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.copyToolStripButton.Name = "copyToolStripButton";
+            this.copyToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.copyToolStripButton.Text = "&Copy";
+            this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
+            // 
+            // pasteToolStripButton
+            // 
+            this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pasteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
+            this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pasteToolStripButton.Name = "pasteToolStripButton";
+            this.pasteToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.pasteToolStripButton.Text = "&Paste";
+            this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripButton_Click);
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
             // 
+            // toolStripButtonBold
+            // 
+            this.toolStripButtonBold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonBold.Image = global::AssessmentManager.Properties.Resources.FormatBold;
+            this.toolStripButtonBold.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonBold.Name = "toolStripButtonBold";
+            this.toolStripButtonBold.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonBold.Text = "Bold";
+            this.toolStripButtonBold.Click += new System.EventHandler(this.toolStripButtonBold_Click);
+            // 
+            // toolStripButtonItalic
+            // 
+            this.toolStripButtonItalic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonItalic.Image = global::AssessmentManager.Properties.Resources.FormatItalic;
+            this.toolStripButtonItalic.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonItalic.Name = "toolStripButtonItalic";
+            this.toolStripButtonItalic.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonItalic.Text = "Italic";
+            this.toolStripButtonItalic.Click += new System.EventHandler(this.toolStripButtonItalic_Click);
+            // 
+            // toolStripButtonUnderline
+            // 
+            this.toolStripButtonUnderline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonUnderline.Image = global::AssessmentManager.Properties.Resources.FormatUnderline;
+            this.toolStripButtonUnderline.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonUnderline.Name = "toolStripButtonUnderline";
+            this.toolStripButtonUnderline.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonUnderline.Text = "Underline";
+            this.toolStripButtonUnderline.Click += new System.EventHandler(this.toolStripButtonUnderline_Click);
+            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonAlignLeft
+            // 
+            this.toolStripButtonAlignLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAlignLeft.Image = global::AssessmentManager.Properties.Resources.AlignLeft;
+            this.toolStripButtonAlignLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAlignLeft.Name = "toolStripButtonAlignLeft";
+            this.toolStripButtonAlignLeft.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAlignLeft.Text = "Align Left";
+            this.toolStripButtonAlignLeft.Click += new System.EventHandler(this.toolStripButtonAlignLeft_Click);
+            // 
+            // toolStripButtonAlignCentre
+            // 
+            this.toolStripButtonAlignCentre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAlignCentre.Image = global::AssessmentManager.Properties.Resources.AlignCentre;
+            this.toolStripButtonAlignCentre.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAlignCentre.Name = "toolStripButtonAlignCentre";
+            this.toolStripButtonAlignCentre.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAlignCentre.Text = "Align Right";
+            this.toolStripButtonAlignCentre.Click += new System.EventHandler(this.toolStripButtonAlignCentre_Click);
+            // 
+            // toolStripButtonAlignRight
+            // 
+            this.toolStripButtonAlignRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAlignRight.Image = global::AssessmentManager.Properties.Resources.AlignRight;
+            this.toolStripButtonAlignRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAlignRight.Name = "toolStripButtonAlignRight";
+            this.toolStripButtonAlignRight.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAlignRight.Text = "Align Right";
+            this.toolStripButtonAlignRight.Click += new System.EventHandler(this.toolStripButtonAlignRight_Click);
+            // 
+            // toolStripButtonBulletList
+            // 
+            this.toolStripButtonBulletList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonBulletList.Image = global::AssessmentManager.Properties.Resources.List_Bullets;
+            this.toolStripButtonBulletList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonBulletList.Name = "toolStripButtonBulletList";
+            this.toolStripButtonBulletList.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonBulletList.Text = "Bullet List";
+            this.toolStripButtonBulletList.Click += new System.EventHandler(this.toolStripButtonBulletList_Click);
             // 
             // toolStripSeparator6
             // 
@@ -481,18 +585,42 @@
             // 
             // toolStripComboBoxFont
             // 
+            this.toolStripComboBoxFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripComboBoxFont.Name = "toolStripComboBoxFont";
-            this.toolStripComboBoxFont.Size = new System.Drawing.Size(92, 27);
+            this.toolStripComboBoxFont.Size = new System.Drawing.Size(150, 27);
+            this.toolStripComboBoxFont.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxFont_SelectedIndexChanged);
             // 
             // toolStripComboBoxSize
             // 
+            this.toolStripComboBoxSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripComboBoxSize.Name = "toolStripComboBoxSize";
-            this.toolStripComboBoxSize.Size = new System.Drawing.Size(92, 27);
+            this.toolStripComboBoxSize.Size = new System.Drawing.Size(75, 27);
+            this.toolStripComboBoxSize.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxSize_SelectedIndexChanged);
+            // 
+            // toolStripButtonColour
+            // 
+            this.toolStripButtonColour.BackColor = System.Drawing.Color.Black;
+            this.toolStripButtonColour.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripButtonColour.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonColour.Image")));
+            this.toolStripButtonColour.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonColour.Name = "toolStripButtonColour";
+            this.toolStripButtonColour.Size = new System.Drawing.Size(23, 24);
+            this.toolStripButtonColour.Text = "Font Colour";
+            this.toolStripButtonColour.Click += new System.EventHandler(this.toolStripButtonColour_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonAddImage
+            // 
+            this.toolStripButtonAddImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddImage.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddImage.Image")));
+            this.toolStripButtonAddImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddImage.Name = "toolStripButtonAddImage";
+            this.toolStripButtonAddImage.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAddImage.Text = "Add Image";
             // 
             // panelQuestionNameContainer
             // 
@@ -538,6 +666,96 @@
             this.panelAnswersContainer.Name = "panelAnswersContainer";
             this.panelAnswersContainer.Size = new System.Drawing.Size(689, 209);
             this.panelAnswersContainer.TabIndex = 2;
+            // 
+            // panelAnswerSingle
+            // 
+            this.panelAnswerSingle.ColumnCount = 2;
+            this.panelAnswerSingle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.panelAnswerSingle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.panelAnswerSingle.Controls.Add(this.panelAnswerSingleAcceptableContainer, 0, 0);
+            this.panelAnswerSingle.Controls.Add(this.panelAnswerSingleCommentContainer, 1, 0);
+            this.panelAnswerSingle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnswerSingle.Location = new System.Drawing.Point(0, 0);
+            this.panelAnswerSingle.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAnswerSingle.Name = "panelAnswerSingle";
+            this.panelAnswerSingle.RowCount = 1;
+            this.panelAnswerSingle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.panelAnswerSingle.Size = new System.Drawing.Size(689, 209);
+            this.panelAnswerSingle.TabIndex = 1;
+            // 
+            // panelAnswerSingleAcceptableContainer
+            // 
+            this.panelAnswerSingleAcceptableContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelAnswerSingleAcceptableContainer.Controls.Add(this.richTextBoxAnswerSingleAcceptable);
+            this.panelAnswerSingleAcceptableContainer.Controls.Add(this.labelAnswerSingleAcceptable);
+            this.panelAnswerSingleAcceptableContainer.Location = new System.Drawing.Point(2, 2);
+            this.panelAnswerSingleAcceptableContainer.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAnswerSingleAcceptableContainer.Name = "panelAnswerSingleAcceptableContainer";
+            this.panelAnswerSingleAcceptableContainer.Size = new System.Drawing.Size(374, 205);
+            this.panelAnswerSingleAcceptableContainer.TabIndex = 0;
+            // 
+            // richTextBoxAnswerSingleAcceptable
+            // 
+            this.richTextBoxAnswerSingleAcceptable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxAnswerSingleAcceptable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBoxAnswerSingleAcceptable.Location = new System.Drawing.Point(111, 0);
+            this.richTextBoxAnswerSingleAcceptable.Margin = new System.Windows.Forms.Padding(0);
+            this.richTextBoxAnswerSingleAcceptable.Name = "richTextBoxAnswerSingleAcceptable";
+            this.richTextBoxAnswerSingleAcceptable.Size = new System.Drawing.Size(264, 206);
+            this.richTextBoxAnswerSingleAcceptable.TabIndex = 1;
+            this.richTextBoxAnswerSingleAcceptable.Text = "";
+            this.richTextBoxAnswerSingleAcceptable.TextChanged += new System.EventHandler(this.richTextBoxAnswerSingleAcceptable_TextChanged);
+            // 
+            // labelAnswerSingleAcceptable
+            // 
+            this.labelAnswerSingleAcceptable.AutoSize = true;
+            this.labelAnswerSingleAcceptable.Location = new System.Drawing.Point(2, 0);
+            this.labelAnswerSingleAcceptable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelAnswerSingleAcceptable.Name = "labelAnswerSingleAcceptable";
+            this.labelAnswerSingleAcceptable.Size = new System.Drawing.Size(107, 13);
+            this.labelAnswerSingleAcceptable.TabIndex = 0;
+            this.labelAnswerSingleAcceptable.Text = "Acceptable Answers:";
+            // 
+            // panelAnswerSingleCommentContainer
+            // 
+            this.panelAnswerSingleCommentContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelAnswerSingleCommentContainer.Controls.Add(this.richTextBoxAnswerSingleComment);
+            this.panelAnswerSingleCommentContainer.Controls.Add(this.labelAnswerSingleComment);
+            this.panelAnswerSingleCommentContainer.Location = new System.Drawing.Point(380, 2);
+            this.panelAnswerSingleCommentContainer.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAnswerSingleCommentContainer.Name = "panelAnswerSingleCommentContainer";
+            this.panelAnswerSingleCommentContainer.Size = new System.Drawing.Size(307, 205);
+            this.panelAnswerSingleCommentContainer.TabIndex = 1;
+            // 
+            // richTextBoxAnswerSingleComment
+            // 
+            this.richTextBoxAnswerSingleComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxAnswerSingleComment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBoxAnswerSingleComment.Location = new System.Drawing.Point(65, 0);
+            this.richTextBoxAnswerSingleComment.Margin = new System.Windows.Forms.Padding(0);
+            this.richTextBoxAnswerSingleComment.Name = "richTextBoxAnswerSingleComment";
+            this.richTextBoxAnswerSingleComment.Size = new System.Drawing.Size(243, 203);
+            this.richTextBoxAnswerSingleComment.TabIndex = 1;
+            this.richTextBoxAnswerSingleComment.Text = "";
+            this.richTextBoxAnswerSingleComment.TextChanged += new System.EventHandler(this.richTextBoxAnswerSingleComment_TextChanged);
+            // 
+            // labelAnswerSingleComment
+            // 
+            this.labelAnswerSingleComment.AutoSize = true;
+            this.labelAnswerSingleComment.Location = new System.Drawing.Point(2, 0);
+            this.labelAnswerSingleComment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelAnswerSingleComment.Name = "labelAnswerSingleComment";
+            this.labelAnswerSingleComment.Size = new System.Drawing.Size(59, 13);
+            this.labelAnswerSingleComment.TabIndex = 0;
+            this.labelAnswerSingleComment.Text = "Comments:";
             // 
             // panelAnswerMultiChoice
             // 
@@ -810,96 +1028,6 @@
             this.labelAnswerMultiComment.Size = new System.Drawing.Size(59, 13);
             this.labelAnswerMultiComment.TabIndex = 0;
             this.labelAnswerMultiComment.Text = "Comments:";
-            // 
-            // panelAnswerSingle
-            // 
-            this.panelAnswerSingle.ColumnCount = 2;
-            this.panelAnswerSingle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.panelAnswerSingle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.panelAnswerSingle.Controls.Add(this.panelAnswerSingleAcceptableContainer, 0, 0);
-            this.panelAnswerSingle.Controls.Add(this.panelAnswerSingleCommentContainer, 1, 0);
-            this.panelAnswerSingle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAnswerSingle.Location = new System.Drawing.Point(0, 0);
-            this.panelAnswerSingle.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAnswerSingle.Name = "panelAnswerSingle";
-            this.panelAnswerSingle.RowCount = 1;
-            this.panelAnswerSingle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.panelAnswerSingle.Size = new System.Drawing.Size(689, 209);
-            this.panelAnswerSingle.TabIndex = 1;
-            // 
-            // panelAnswerSingleAcceptableContainer
-            // 
-            this.panelAnswerSingleAcceptableContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelAnswerSingleAcceptableContainer.Controls.Add(this.richTextBoxAnswerSingleAcceptable);
-            this.panelAnswerSingleAcceptableContainer.Controls.Add(this.labelAnswerSingleAcceptable);
-            this.panelAnswerSingleAcceptableContainer.Location = new System.Drawing.Point(2, 2);
-            this.panelAnswerSingleAcceptableContainer.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAnswerSingleAcceptableContainer.Name = "panelAnswerSingleAcceptableContainer";
-            this.panelAnswerSingleAcceptableContainer.Size = new System.Drawing.Size(374, 205);
-            this.panelAnswerSingleAcceptableContainer.TabIndex = 0;
-            // 
-            // richTextBoxAnswerSingleAcceptable
-            // 
-            this.richTextBoxAnswerSingleAcceptable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxAnswerSingleAcceptable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBoxAnswerSingleAcceptable.Location = new System.Drawing.Point(111, 0);
-            this.richTextBoxAnswerSingleAcceptable.Margin = new System.Windows.Forms.Padding(0);
-            this.richTextBoxAnswerSingleAcceptable.Name = "richTextBoxAnswerSingleAcceptable";
-            this.richTextBoxAnswerSingleAcceptable.Size = new System.Drawing.Size(264, 206);
-            this.richTextBoxAnswerSingleAcceptable.TabIndex = 1;
-            this.richTextBoxAnswerSingleAcceptable.Text = "";
-            this.richTextBoxAnswerSingleAcceptable.TextChanged += new System.EventHandler(this.richTextBoxAnswerSingleAcceptable_TextChanged);
-            // 
-            // labelAnswerSingleAcceptable
-            // 
-            this.labelAnswerSingleAcceptable.AutoSize = true;
-            this.labelAnswerSingleAcceptable.Location = new System.Drawing.Point(2, 0);
-            this.labelAnswerSingleAcceptable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelAnswerSingleAcceptable.Name = "labelAnswerSingleAcceptable";
-            this.labelAnswerSingleAcceptable.Size = new System.Drawing.Size(107, 13);
-            this.labelAnswerSingleAcceptable.TabIndex = 0;
-            this.labelAnswerSingleAcceptable.Text = "Acceptable Answers:";
-            // 
-            // panelAnswerSingleCommentContainer
-            // 
-            this.panelAnswerSingleCommentContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelAnswerSingleCommentContainer.Controls.Add(this.richTextBoxAnswerSingleComment);
-            this.panelAnswerSingleCommentContainer.Controls.Add(this.labelAnswerSingleComment);
-            this.panelAnswerSingleCommentContainer.Location = new System.Drawing.Point(380, 2);
-            this.panelAnswerSingleCommentContainer.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAnswerSingleCommentContainer.Name = "panelAnswerSingleCommentContainer";
-            this.panelAnswerSingleCommentContainer.Size = new System.Drawing.Size(307, 205);
-            this.panelAnswerSingleCommentContainer.TabIndex = 1;
-            // 
-            // richTextBoxAnswerSingleComment
-            // 
-            this.richTextBoxAnswerSingleComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxAnswerSingleComment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBoxAnswerSingleComment.Location = new System.Drawing.Point(65, 0);
-            this.richTextBoxAnswerSingleComment.Margin = new System.Windows.Forms.Padding(0);
-            this.richTextBoxAnswerSingleComment.Name = "richTextBoxAnswerSingleComment";
-            this.richTextBoxAnswerSingleComment.Size = new System.Drawing.Size(243, 203);
-            this.richTextBoxAnswerSingleComment.TabIndex = 1;
-            this.richTextBoxAnswerSingleComment.Text = "";
-            this.richTextBoxAnswerSingleComment.TextChanged += new System.EventHandler(this.richTextBoxAnswerSingleComment_TextChanged);
-            // 
-            // labelAnswerSingleComment
-            // 
-            this.labelAnswerSingleComment.AutoSize = true;
-            this.labelAnswerSingleComment.Location = new System.Drawing.Point(2, 0);
-            this.labelAnswerSingleComment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelAnswerSingleComment.Name = "labelAnswerSingleComment";
-            this.labelAnswerSingleComment.Size = new System.Drawing.Size(59, 13);
-            this.labelAnswerSingleComment.TabIndex = 0;
-            this.labelAnswerSingleComment.Text = "Comments:";
             // 
             // panelAnswerOpen
             // 
@@ -1301,114 +1429,10 @@
             this.contextMenuChangeLevelDown.Text = "Change Level Down";
             this.contextMenuChangeLevelDown.Click += new System.EventHandler(this.contextMenuChangeLevelDown_Click);
             // 
-            // cutToolStripButton
+            // toolStripSeparator8
             // 
-            this.cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.cutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
-            this.cutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cutToolStripButton.Name = "cutToolStripButton";
-            this.cutToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.cutToolStripButton.Text = "C&ut";
-            // 
-            // copyToolStripButton
-            // 
-            this.copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
-            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.copyToolStripButton.Name = "copyToolStripButton";
-            this.copyToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.copyToolStripButton.Text = "&Copy";
-            // 
-            // pasteToolStripButton
-            // 
-            this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pasteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
-            this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pasteToolStripButton.Name = "pasteToolStripButton";
-            this.pasteToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.pasteToolStripButton.Text = "&Paste";
-            // 
-            // toolStripButtonBold
-            // 
-            this.toolStripButtonBold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonBold.Image = global::AssessmentManager.Properties.Resources.FormatBold;
-            this.toolStripButtonBold.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonBold.Name = "toolStripButtonBold";
-            this.toolStripButtonBold.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonBold.Text = "Bold";
-            // 
-            // toolStripButtonItalic
-            // 
-            this.toolStripButtonItalic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonItalic.Image = global::AssessmentManager.Properties.Resources.FormatItalic;
-            this.toolStripButtonItalic.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonItalic.Name = "toolStripButtonItalic";
-            this.toolStripButtonItalic.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonItalic.Text = "Italic";
-            // 
-            // toolStripButtonUnderline
-            // 
-            this.toolStripButtonUnderline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonUnderline.Image = global::AssessmentManager.Properties.Resources.FormatUnderline;
-            this.toolStripButtonUnderline.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonUnderline.Name = "toolStripButtonUnderline";
-            this.toolStripButtonUnderline.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonUnderline.Text = "Underline";
-            // 
-            // toolStripButtonAlignLeft
-            // 
-            this.toolStripButtonAlignLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAlignLeft.Image = global::AssessmentManager.Properties.Resources.AlignLeft;
-            this.toolStripButtonAlignLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAlignLeft.Name = "toolStripButtonAlignLeft";
-            this.toolStripButtonAlignLeft.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAlignLeft.Text = "Align Left";
-            // 
-            // toolStripButtonAlignCentre
-            // 
-            this.toolStripButtonAlignCentre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAlignCentre.Image = global::AssessmentManager.Properties.Resources.AlignCentre;
-            this.toolStripButtonAlignCentre.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAlignCentre.Name = "toolStripButtonAlignCentre";
-            this.toolStripButtonAlignCentre.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAlignCentre.Text = "Align Right";
-            // 
-            // toolStripButtonAlignRight
-            // 
-            this.toolStripButtonAlignRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAlignRight.Image = global::AssessmentManager.Properties.Resources.AlignRight;
-            this.toolStripButtonAlignRight.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAlignRight.Name = "toolStripButtonAlignRight";
-            this.toolStripButtonAlignRight.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAlignRight.Text = "Align Right";
-            // 
-            // toolStripButtonBulletList
-            // 
-            this.toolStripButtonBulletList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonBulletList.Image = global::AssessmentManager.Properties.Resources.List_Bullets;
-            this.toolStripButtonBulletList.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonBulletList.Name = "toolStripButtonBulletList";
-            this.toolStripButtonBulletList.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonBulletList.Text = "Bullet List";
-            // 
-            // toolStripButtonColour
-            // 
-            this.toolStripButtonColour.BackColor = System.Drawing.Color.Black;
-            this.toolStripButtonColour.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
-            this.toolStripButtonColour.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonColour.Image")));
-            this.toolStripButtonColour.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonColour.Name = "toolStripButtonColour";
-            this.toolStripButtonColour.Size = new System.Drawing.Size(23, 24);
-            this.toolStripButtonColour.Text = "Font Colour";
-            // 
-            // toolStripButtonAddImage
-            // 
-            this.toolStripButtonAddImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAddImage.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddImage.Image")));
-            this.toolStripButtonAddImage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAddImage.Name = "toolStripButtonAddImage";
-            this.toolStripButtonAddImage.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAddImage.Text = "Add Image";
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 27);
             // 
             // MainForm
             // 
@@ -1436,6 +1460,11 @@
             this.panelQuestionNameContainer.ResumeLayout(false);
             this.panelAnswerAreaContainer.ResumeLayout(false);
             this.panelAnswersContainer.ResumeLayout(false);
+            this.panelAnswerSingle.ResumeLayout(false);
+            this.panelAnswerSingleAcceptableContainer.ResumeLayout(false);
+            this.panelAnswerSingleAcceptableContainer.PerformLayout();
+            this.panelAnswerSingleCommentContainer.ResumeLayout(false);
+            this.panelAnswerSingleCommentContainer.PerformLayout();
             this.panelAnswerMultiChoice.ResumeLayout(false);
             this.tableLayoutPanelAnswerMultiChoiceContainer.ResumeLayout(false);
             this.panelMultiChoiceOptionsContainer.ResumeLayout(false);
@@ -1451,11 +1480,6 @@
             this.tableLayoutPanelMultiChoiceA.PerformLayout();
             this.panelMultiChoiceCommentContainer.ResumeLayout(false);
             this.panelMultiChoiceCommentContainer.PerformLayout();
-            this.panelAnswerSingle.ResumeLayout(false);
-            this.panelAnswerSingleAcceptableContainer.ResumeLayout(false);
-            this.panelAnswerSingleAcceptableContainer.PerformLayout();
-            this.panelAnswerSingleCommentContainer.ResumeLayout(false);
-            this.panelAnswerSingleCommentContainer.PerformLayout();
             this.panelAnswerOpen.ResumeLayout(false);
             this.panelAnswerTools.ResumeLayout(false);
             this.panelButtons.ResumeLayout(false);
@@ -1590,5 +1614,6 @@
         private System.Windows.Forms.ToolStripSeparator contextMenuSeparatorChangeLevel;
         private System.Windows.Forms.ToolStripMenuItem contextMenuChangeLevelUp;
         private System.Windows.Forms.ToolStripMenuItem contextMenuChangeLevelDown;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     }
 }
