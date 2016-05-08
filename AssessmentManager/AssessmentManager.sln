@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssessmentDesigner", "AssessmentDesigner\AssessmentDesigner.csproj", "{E213D0F1-3AEB-4F94-8418-B08374D20F8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examiner", "Examiner\Examiner.csproj", "{18564089-7E79-4917-906F-21A5D98CF95D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examinee", "Examinee\Examinee.csproj", "{18564089-7E79-4917-906F-21A5D98CF95D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssessmentManagerLib", "AssessmentManagerLib\AssessmentManagerLib.csproj", "{E649487F-0CD0-4724-BE2A-A21E92B3FA9C}"
 EndProject

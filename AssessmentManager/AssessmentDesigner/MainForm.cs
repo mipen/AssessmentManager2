@@ -195,8 +195,8 @@ namespace AssessmentManager
 
             Assessment = new Assessment(DateTime.Now);
             Assessment.AddQuestion("Question 1");
-            changesMade = true;
             NotifyAssessmentOpened();
+            changesMade = true;
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -561,8 +561,13 @@ namespace AssessmentManager
                     }
                     else
                     {
+                        //Disable parent marks text boxes if there is no parent
                         labelMarksSelectedQuestionParent.Visible = false;
                         labelMarksSelectedQuestionParentNum.Visible = false;
+
+                        //Also disable the parent parent text
+                        labelMarksSelectedQuestionParentParent.Visible = false;
+                        labelMarksSelectedQuestionParentParentNum.Visible = false;
                     }
                 }
                 catch
@@ -659,7 +664,7 @@ namespace AssessmentManager
         /// Open an Assessment from file. Does not show an OpenFileDialog.
         /// </summary>
         /// <param name="path">The specified path for the file</param>
-        private void OpenFromFile(string path)
+        public void OpenFromFile(string path)
         {
             if (File.Exists(path))
             {
@@ -689,7 +694,7 @@ namespace AssessmentManager
         /// <summary>
         /// Open an Assessment from file. Displays OpenFileDialog.
         /// </summary>
-        private void OpenFromFile()
+        public void OpenFromFile()
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -839,7 +844,6 @@ namespace AssessmentManager
                             textBoxMultiChoiceB.Text = node.Question.OptionB;
                             textBoxMultiChoiceC.Text = node.Question.OptionC;
                             textBoxMultiChoiceD.Text = node.Question.OptionD;
-                            richTextBoxAnswerMultiComments.Text = node.Question.Comments;
                             break;
                         }
                     case AnswerType.Single:
@@ -847,7 +851,6 @@ namespace AssessmentManager
                             comboBoxAnswerType.SelectedItem = "Single";
                             //Display the answers
                             richTextBoxAnswerSingleAcceptable.Text = node.Question.ModelAnswer;
-                            richTextBoxAnswerSingleComment.Text = node.Question.Comments;
                             break;
                         }
                     case AnswerType.Open:
@@ -1021,7 +1024,6 @@ namespace AssessmentManager
                                 textBoxMultiChoiceB.Text = node.Question.OptionB;
                                 textBoxMultiChoiceC.Text = node.Question.OptionC;
                                 textBoxMultiChoiceD.Text = node.Question.OptionD;
-                                richTextBoxAnswerMultiComments.Text = node.Question.Comments;
                                 //Show the marks assigner
                                 labelMarksForQuestion.Visible = true;
                                 numericUpDownMarksAssigner.Visible = true;
@@ -1035,7 +1037,6 @@ namespace AssessmentManager
                                 node.Question.AnswerType = AnswerType.Single;
                                 //Display the answers
                                 richTextBoxAnswerSingleAcceptable.Text = node.Question.ModelAnswer;
-                                richTextBoxAnswerSingleComment.Text = node.Question.Comments;
                                 //Show the marks assigner
                                 labelMarksForQuestion.Visible = true;
                                 numericUpDownMarksAssigner.Visible = true;
@@ -1136,16 +1137,6 @@ namespace AssessmentManager
             }
         }
 
-        private void richTextBoxAnswerSingleComment_TextChanged(object sender, EventArgs e)
-        {
-            QuestionNode node = (QuestionNode)treeViewQuestionList.SelectedNode;
-            if (node != null)
-            {
-                node.Question.Comments = richTextBoxAnswerSingleComment.Text;
-                changesMade = true;
-            }
-        }
-
         private void textBoxMultiChoiceA_TextChanged(object sender, EventArgs e)
         {
             QuestionNode node = (QuestionNode)treeViewQuestionList.SelectedNode;
@@ -1182,16 +1173,6 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionD = textBoxMultiChoiceD.Text;
-                changesMade = true;
-            }
-        }
-
-        private void richTextBoxAnswerMultiComments_TextChanged(object sender, EventArgs e)
-        {
-            QuestionNode node = (QuestionNode)treeViewQuestionList.SelectedNode;
-            if (node != null)
-            {
-                node.Question.Comments = richTextBoxAnswerMultiComments.Text;
                 changesMade = true;
             }
         }

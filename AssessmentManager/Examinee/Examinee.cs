@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AssessmentManager
 {
-    public partial class Examiner : Form
+    public partial class Examinee : Form
     {
-        public Examiner()
+        public Examinee()
         {
             InitializeComponent();
         }

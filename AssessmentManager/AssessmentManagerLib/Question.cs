@@ -15,7 +15,6 @@ namespace AssessmentManager
         private string modelAnswer;
         private string optionA, optionB, optionC, optionD;
         private MultiChoiceOption correctOption = MultiChoiceOption.A;
-        private string comments;
         private AnswerType answerType = AnswerType.Open;
         private List<Question> subQuestions = new List<Question>();
 
@@ -133,18 +132,6 @@ namespace AssessmentManager
             set
             {
                 correctOption = value;
-            }
-        }
-
-        public string Comments
-        {
-            get
-            {
-                return comments;
-            }
-            set
-            {
-                comments = value;
             }
         }
         #endregion

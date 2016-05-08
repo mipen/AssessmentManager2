@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>examinee_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,16 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Examiner.cs">
+    <Compile Include="Examinee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Examiner.Designer.cs">
-      <DependentUpon>Examiner.cs</DependentUpon>
+    <Compile Include="Examinee.Designer.cs">
+      <DependentUpon>Examinee.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Examiner.resx">
-      <DependentUpon>Examiner.cs</DependentUpon>
+    <EmbeddedResource Include="Examinee.resx">
+      <DependentUpon>Examinee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -85,6 +88,9 @@
       <Project>{e649487f-0cd0-4724-be2a-a21e92b3fa9c}</Project>
       <Name>AssessmentManagerLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="examinee_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

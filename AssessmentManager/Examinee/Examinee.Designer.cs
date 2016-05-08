@@ -1,6 +1,6 @@
 ﻿namespace AssessmentManager
 {
-    partial class Examiner
+    partial class Examinee
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Examiner));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Examinee));
             this.panelTop = new System.Windows.Forms.Panel();
             this.labelTimeBegan = new System.Windows.Forms.Label();
             this.labelBeginning = new System.Windows.Forms.Label();
@@ -91,38 +91,40 @@
             this.panelTop.Controls.Add(this.panel2);
             this.panelTop.Controls.Add(this.labelMarksAttempted);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(11, 28);
-            this.panelTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelTop.Location = new System.Drawing.Point(8, 24);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelTop.Size = new System.Drawing.Size(853, 100);
+            this.panelTop.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTop.Size = new System.Drawing.Size(640, 81);
             this.panelTop.TabIndex = 0;
             // 
             // labelTimeBegan
             // 
             this.labelTimeBegan.AutoSize = true;
-            this.labelTimeBegan.Location = new System.Drawing.Point(131, 73);
+            this.labelTimeBegan.Location = new System.Drawing.Point(98, 59);
+            this.labelTimeBegan.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTimeBegan.Name = "labelTimeBegan";
-            this.labelTimeBegan.Size = new System.Drawing.Size(64, 17);
+            this.labelTimeBegan.Size = new System.Drawing.Size(49, 13);
             this.labelTimeBegan.TabIndex = 9;
             this.labelTimeBegan.Text = "00:00:00";
             // 
             // labelBeginning
             // 
             this.labelBeginning.AutoSize = true;
-            this.labelBeginning.Location = new System.Drawing.Point(5, 73);
+            this.labelBeginning.Location = new System.Drawing.Point(4, 59);
+            this.labelBeginning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelBeginning.Name = "labelBeginning";
-            this.labelBeginning.Size = new System.Drawing.Size(87, 17);
+            this.labelBeginning.Size = new System.Drawing.Size(66, 13);
             this.labelBeginning.TabIndex = 8;
             this.labelBeginning.Text = "Time began:";
             // 
             // buttonSubmitAssessment
             // 
             this.buttonSubmitAssessment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSubmitAssessment.Location = new System.Drawing.Point(456, 48);
-            this.buttonSubmitAssessment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonSubmitAssessment.Location = new System.Drawing.Point(342, 39);
+            this.buttonSubmitAssessment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonSubmitAssessment.Name = "buttonSubmitAssessment";
-            this.buttonSubmitAssessment.Size = new System.Drawing.Size(139, 32);
+            this.buttonSubmitAssessment.Size = new System.Drawing.Size(104, 26);
             this.buttonSubmitAssessment.TabIndex = 7;
             this.buttonSubmitAssessment.Text = "Submit assessment";
             this.buttonSubmitAssessment.UseVisualStyleBackColor = true;
@@ -130,18 +132,20 @@
             // labelTimeRemainingTimer
             // 
             this.labelTimeRemainingTimer.AutoSize = true;
-            this.labelTimeRemainingTimer.Location = new System.Drawing.Point(131, 48);
+            this.labelTimeRemainingTimer.Location = new System.Drawing.Point(98, 39);
+            this.labelTimeRemainingTimer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTimeRemainingTimer.Name = "labelTimeRemainingTimer";
-            this.labelTimeRemainingTimer.Size = new System.Drawing.Size(64, 17);
+            this.labelTimeRemainingTimer.Size = new System.Drawing.Size(49, 13);
             this.labelTimeRemainingTimer.TabIndex = 6;
             this.labelTimeRemainingTimer.Text = "00:00:00";
             // 
             // labelTimeRemaining
             // 
             this.labelTimeRemaining.AutoSize = true;
-            this.labelTimeRemaining.Location = new System.Drawing.Point(5, 48);
+            this.labelTimeRemaining.Location = new System.Drawing.Point(4, 39);
+            this.labelTimeRemaining.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTimeRemaining.Name = "labelTimeRemaining";
-            this.labelTimeRemaining.Size = new System.Drawing.Size(109, 17);
+            this.labelTimeRemaining.Size = new System.Drawing.Size(81, 13);
             this.labelTimeRemaining.TabIndex = 5;
             this.labelTimeRemaining.Text = "Time remaining:";
             // 
@@ -149,10 +153,10 @@
             // 
             this.progressBarMarksAttempted.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBarMarksAttempted.Location = new System.Drawing.Point(213, 6);
-            this.progressBarMarksAttempted.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.progressBarMarksAttempted.Location = new System.Drawing.Point(160, 5);
+            this.progressBarMarksAttempted.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.progressBarMarksAttempted.Name = "progressBarMarksAttempted";
-            this.progressBarMarksAttempted.Size = new System.Drawing.Size(381, 23);
+            this.progressBarMarksAttempted.Size = new System.Drawing.Size(286, 19);
             this.progressBarMarksAttempted.TabIndex = 4;
             // 
             // panel2
@@ -160,38 +164,39 @@
             this.panel2.Controls.Add(this.listBoxUnansweredQuestions);
             this.panel2.Controls.Add(this.labelUnansweredQuestions);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(599, 2);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel2.Location = new System.Drawing.Point(450, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(251, 96);
+            this.panel2.Size = new System.Drawing.Size(188, 77);
             this.panel2.TabIndex = 3;
             // 
             // listBoxUnansweredQuestions
             // 
             this.listBoxUnansweredQuestions.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.listBoxUnansweredQuestions.FormattingEnabled = true;
-            this.listBoxUnansweredQuestions.ItemHeight = 16;
-            this.listBoxUnansweredQuestions.Location = new System.Drawing.Point(0, 28);
-            this.listBoxUnansweredQuestions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listBoxUnansweredQuestions.Location = new System.Drawing.Point(0, 21);
+            this.listBoxUnansweredQuestions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBoxUnansweredQuestions.Name = "listBoxUnansweredQuestions";
-            this.listBoxUnansweredQuestions.Size = new System.Drawing.Size(251, 68);
+            this.listBoxUnansweredQuestions.Size = new System.Drawing.Size(188, 56);
             this.listBoxUnansweredQuestions.TabIndex = 1;
             // 
             // labelUnansweredQuestions
             // 
             this.labelUnansweredQuestions.AutoSize = true;
-            this.labelUnansweredQuestions.Location = new System.Drawing.Point(3, 0);
+            this.labelUnansweredQuestions.Location = new System.Drawing.Point(2, 0);
+            this.labelUnansweredQuestions.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelUnansweredQuestions.Name = "labelUnansweredQuestions";
-            this.labelUnansweredQuestions.Size = new System.Drawing.Size(248, 17);
+            this.labelUnansweredQuestions.Size = new System.Drawing.Size(187, 13);
             this.labelUnansweredQuestions.TabIndex = 0;
             this.labelUnansweredQuestions.Text = "Unanswered Questions (click to go to)";
             // 
             // labelMarksAttempted
             // 
             this.labelMarksAttempted.AutoSize = true;
-            this.labelMarksAttempted.Location = new System.Drawing.Point(17, 12);
+            this.labelMarksAttempted.Location = new System.Drawing.Point(13, 10);
+            this.labelMarksAttempted.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMarksAttempted.Name = "labelMarksAttempted";
-            this.labelMarksAttempted.Size = new System.Drawing.Size(160, 17);
+            this.labelMarksAttempted.Size = new System.Drawing.Size(120, 13);
             this.labelMarksAttempted.TabIndex = 1;
             this.labelMarksAttempted.Text = "x/y marks attempted (%)";
             // 
@@ -201,10 +206,10 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.settingsToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(11, 0);
+            this.menuStrip1.Location = new System.Drawing.Point(8, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(853, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(640, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -215,31 +220,31 @@
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(115, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(112, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(95, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(115, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "&Settings";
             // 
             // panelLeft
@@ -247,12 +252,12 @@
             this.panelLeft.Controls.Add(this.panelTreeView);
             this.panelLeft.Controls.Add(this.panelMarks);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelLeft.Location = new System.Drawing.Point(11, 128);
-            this.panelLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelLeft.MinimumSize = new System.Drawing.Size(227, 150);
+            this.panelLeft.Location = new System.Drawing.Point(8, 105);
+            this.panelLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelLeft.MinimumSize = new System.Drawing.Size(170, 122);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelLeft.Size = new System.Drawing.Size(227, 420);
+            this.panelLeft.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelLeft.Size = new System.Drawing.Size(170, 340);
             this.panelLeft.TabIndex = 2;
             // 
             // panelTreeView
@@ -262,11 +267,11 @@
             this.panelTreeView.Controls.Add(this.treeViewQuestionDisplay);
             this.panelTreeView.Controls.Add(this.buttonCollapse);
             this.panelTreeView.Controls.Add(this.buttonExpand);
-            this.panelTreeView.Location = new System.Drawing.Point(3, 2);
-            this.panelTreeView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelTreeView.MinimumSize = new System.Drawing.Size(219, 0);
+            this.panelTreeView.Location = new System.Drawing.Point(2, 2);
+            this.panelTreeView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTreeView.MinimumSize = new System.Drawing.Size(164, 0);
             this.panelTreeView.Name = "panelTreeView";
-            this.panelTreeView.Size = new System.Drawing.Size(219, 311);
+            this.panelTreeView.Size = new System.Drawing.Size(164, 252);
             this.panelTreeView.TabIndex = 2;
             // 
             // treeViewQuestionDisplay
@@ -274,18 +279,18 @@
             this.treeViewQuestionDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.treeViewQuestionDisplay.Location = new System.Drawing.Point(0, 0);
-            this.treeViewQuestionDisplay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.treeViewQuestionDisplay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.treeViewQuestionDisplay.Name = "treeViewQuestionDisplay";
-            this.treeViewQuestionDisplay.Size = new System.Drawing.Size(217, 278);
+            this.treeViewQuestionDisplay.Size = new System.Drawing.Size(164, 226);
             this.treeViewQuestionDisplay.TabIndex = 0;
             // 
             // buttonCollapse
             // 
             this.buttonCollapse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonCollapse.Location = new System.Drawing.Point(117, 283);
-            this.buttonCollapse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonCollapse.Location = new System.Drawing.Point(88, 229);
+            this.buttonCollapse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonCollapse.Name = "buttonCollapse";
-            this.buttonCollapse.Size = new System.Drawing.Size(100, 28);
+            this.buttonCollapse.Size = new System.Drawing.Size(75, 23);
             this.buttonCollapse.TabIndex = 2;
             this.buttonCollapse.Text = "&Collapse all";
             this.buttonCollapse.UseVisualStyleBackColor = true;
@@ -293,10 +298,10 @@
             // buttonExpand
             // 
             this.buttonExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonExpand.Location = new System.Drawing.Point(3, 283);
-            this.buttonExpand.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonExpand.Location = new System.Drawing.Point(2, 229);
+            this.buttonExpand.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonExpand.Name = "buttonExpand";
-            this.buttonExpand.Size = new System.Drawing.Size(100, 28);
+            this.buttonExpand.Size = new System.Drawing.Size(75, 23);
             this.buttonExpand.TabIndex = 1;
             this.buttonExpand.Text = "E&xpand all";
             this.buttonExpand.UseVisualStyleBackColor = true;
@@ -309,11 +314,11 @@
             this.panelMarks.Controls.Add(this.label4);
             this.panelMarks.Controls.Add(this.label3);
             this.panelMarks.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelMarks.Location = new System.Drawing.Point(3, 318);
-            this.panelMarks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelMarks.MinimumSize = new System.Drawing.Size(221, 100);
+            this.panelMarks.Location = new System.Drawing.Point(2, 257);
+            this.panelMarks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelMarks.MinimumSize = new System.Drawing.Size(166, 81);
             this.panelMarks.Name = "panelMarks";
-            this.panelMarks.Size = new System.Drawing.Size(221, 100);
+            this.panelMarks.Size = new System.Drawing.Size(166, 81);
             this.panelMarks.TabIndex = 1;
             // 
             // panel5
@@ -321,27 +326,29 @@
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Location = new System.Drawing.Point(11, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(11, 2, 11, 2);
+            this.panel5.Location = new System.Drawing.Point(8, 0);
+            this.panel5.Margin = new System.Windows.Forms.Padding(8, 2, 8, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(201, 1);
+            this.panel5.Size = new System.Drawing.Size(151, 1);
             this.panel5.TabIndex = 7;
             // 
             // labelSubQuestionMarks
             // 
             this.labelSubQuestionMarks.AutoSize = true;
-            this.labelSubQuestionMarks.Location = new System.Drawing.Point(160, 62);
+            this.labelSubQuestionMarks.Location = new System.Drawing.Point(120, 50);
+            this.labelSubQuestionMarks.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelSubQuestionMarks.Name = "labelSubQuestionMarks";
-            this.labelSubQuestionMarks.Size = new System.Drawing.Size(14, 17);
+            this.labelSubQuestionMarks.Size = new System.Drawing.Size(12, 13);
             this.labelSubQuestionMarks.TabIndex = 6;
             this.labelSubQuestionMarks.Text = "x";
             // 
             // labelQuestionMarks
             // 
             this.labelQuestionMarks.AutoSize = true;
-            this.labelQuestionMarks.Location = new System.Drawing.Point(160, 22);
+            this.labelQuestionMarks.Location = new System.Drawing.Point(120, 18);
+            this.labelQuestionMarks.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelQuestionMarks.Name = "labelQuestionMarks";
-            this.labelQuestionMarks.Size = new System.Drawing.Size(14, 17);
+            this.labelQuestionMarks.Size = new System.Drawing.Size(12, 13);
             this.labelQuestionMarks.TabIndex = 5;
             this.labelQuestionMarks.Text = "x";
             // 
@@ -350,18 +357,20 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 62);
+            this.label4.Location = new System.Drawing.Point(7, 50);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(145, 17);
+            this.label4.Size = new System.Drawing.Size(108, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "Sub-questions marks:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 22);
+            this.label3.Location = new System.Drawing.Point(7, 18);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(111, 17);
+            this.label3.Size = new System.Drawing.Size(83, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Question marks:";
             // 
@@ -373,11 +382,11 @@
             this.panelQuestionAnswer.Controls.Add(this.panelAnswerLong);
             this.panelQuestionAnswer.Controls.Add(this.panelNextPrevButtons);
             this.panelQuestionAnswer.Controls.Add(this.panelQuestion);
-            this.panelQuestionAnswer.Location = new System.Drawing.Point(243, 134);
-            this.panelQuestionAnswer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelQuestionAnswer.Location = new System.Drawing.Point(182, 109);
+            this.panelQuestionAnswer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelQuestionAnswer.Name = "panelQuestionAnswer";
-            this.panelQuestionAnswer.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.panelQuestionAnswer.Size = new System.Drawing.Size(621, 414);
+            this.panelQuestionAnswer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelQuestionAnswer.Size = new System.Drawing.Size(466, 336);
             this.panelQuestionAnswer.TabIndex = 3;
             // 
             // panelAnswerLong
@@ -387,10 +396,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAnswerLong.Controls.Add(this.richTextBoxAnswer);
             this.panelAnswerLong.Controls.Add(this.labelAnswer);
-            this.panelAnswerLong.Location = new System.Drawing.Point(5, 160);
-            this.panelAnswerLong.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelAnswerLong.Location = new System.Drawing.Point(4, 130);
+            this.panelAnswerLong.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelAnswerLong.Name = "panelAnswerLong";
-            this.panelAnswerLong.Size = new System.Drawing.Size(612, 208);
+            this.panelAnswerLong.Size = new System.Drawing.Size(459, 169);
             this.panelAnswerLong.TabIndex = 2;
             // 
             // richTextBoxAnswer
@@ -399,10 +408,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxAnswer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBoxAnswer.Location = new System.Drawing.Point(0, 16);
-            this.richTextBoxAnswer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.richTextBoxAnswer.Location = new System.Drawing.Point(0, 13);
+            this.richTextBoxAnswer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.richTextBoxAnswer.Name = "richTextBoxAnswer";
-            this.richTextBoxAnswer.Size = new System.Drawing.Size(612, 192);
+            this.richTextBoxAnswer.Size = new System.Drawing.Size(460, 157);
             this.richTextBoxAnswer.TabIndex = 1;
             this.richTextBoxAnswer.Text = "";
             // 
@@ -411,8 +420,9 @@
             this.labelAnswer.AutoSize = true;
             this.labelAnswer.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelAnswer.Location = new System.Drawing.Point(0, 0);
+            this.labelAnswer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAnswer.Name = "labelAnswer";
-            this.labelAnswer.Size = new System.Drawing.Size(54, 17);
+            this.labelAnswer.Size = new System.Drawing.Size(42, 13);
             this.labelAnswer.TabIndex = 0;
             this.labelAnswer.Text = "Answer";
             // 
@@ -422,11 +432,11 @@
             this.panelNextPrevButtons.Controls.Add(this.buttonNextQuestion);
             this.panelNextPrevButtons.Controls.Add(this.buttonPreviousQuestion);
             this.panelNextPrevButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelNextPrevButtons.Location = new System.Drawing.Point(5, 373);
-            this.panelNextPrevButtons.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelNextPrevButtons.Location = new System.Drawing.Point(4, 302);
+            this.panelNextPrevButtons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelNextPrevButtons.Name = "panelNextPrevButtons";
-            this.panelNextPrevButtons.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelNextPrevButtons.Size = new System.Drawing.Size(611, 36);
+            this.panelNextPrevButtons.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelNextPrevButtons.Size = new System.Drawing.Size(458, 30);
             this.panelNextPrevButtons.TabIndex = 1;
             // 
             // buttonNextQuestion
@@ -434,10 +444,10 @@
             this.buttonNextQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonNextQuestion.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonNextQuestion.BackgroundImage")));
             this.buttonNextQuestion.Image = ((System.Drawing.Image)(resources.GetObject("buttonNextQuestion.Image")));
-            this.buttonNextQuestion.Location = new System.Drawing.Point(501, 1);
-            this.buttonNextQuestion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonNextQuestion.Location = new System.Drawing.Point(375, 1);
+            this.buttonNextQuestion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonNextQuestion.Name = "buttonNextQuestion";
-            this.buttonNextQuestion.Size = new System.Drawing.Size(32, 32);
+            this.buttonNextQuestion.Size = new System.Drawing.Size(24, 26);
             this.buttonNextQuestion.TabIndex = 1;
             this.buttonNextQuestion.UseVisualStyleBackColor = true;
             // 
@@ -445,10 +455,10 @@
             // 
             this.buttonPreviousQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonPreviousQuestion.Image = ((System.Drawing.Image)(resources.GetObject("buttonPreviousQuestion.Image")));
-            this.buttonPreviousQuestion.Location = new System.Drawing.Point(75, 1);
-            this.buttonPreviousQuestion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonPreviousQuestion.Location = new System.Drawing.Point(56, 1);
+            this.buttonPreviousQuestion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonPreviousQuestion.Name = "buttonPreviousQuestion";
-            this.buttonPreviousQuestion.Size = new System.Drawing.Size(32, 32);
+            this.buttonPreviousQuestion.Size = new System.Drawing.Size(24, 26);
             this.buttonPreviousQuestion.TabIndex = 0;
             this.buttonPreviousQuestion.UseVisualStyleBackColor = true;
             // 
@@ -458,18 +468,18 @@
             this.panelQuestion.Controls.Add(this.richTextBox1);
             this.panelQuestion.Controls.Add(this.labelQuestionNumber);
             this.panelQuestion.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelQuestion.Location = new System.Drawing.Point(5, 5);
-            this.panelQuestion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelQuestion.Location = new System.Drawing.Point(4, 4);
+            this.panelQuestion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelQuestion.Name = "panelQuestion";
-            this.panelQuestion.Size = new System.Drawing.Size(611, 149);
+            this.panelQuestion.Size = new System.Drawing.Size(458, 121);
             this.panelQuestion.TabIndex = 0;
             // 
             // buttonShowQuestionImage
             // 
-            this.buttonShowQuestionImage.Location = new System.Drawing.Point(533, 2);
-            this.buttonShowQuestionImage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonShowQuestionImage.Location = new System.Drawing.Point(400, 2);
+            this.buttonShowQuestionImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonShowQuestionImage.Name = "buttonShowQuestionImage";
-            this.buttonShowQuestionImage.Size = new System.Drawing.Size(75, 23);
+            this.buttonShowQuestionImage.Size = new System.Drawing.Size(56, 19);
             this.buttonShowQuestionImage.TabIndex = 2;
             this.buttonShowQuestionImage.Text = "Image";
             this.buttonShowQuestionImage.UseVisualStyleBackColor = true;
@@ -479,11 +489,11 @@
             this.richTextBox1.BackColor = System.Drawing.SystemColors.Window;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 30);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.richTextBox1.Location = new System.Drawing.Point(0, 24);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(611, 119);
+            this.richTextBox1.Size = new System.Drawing.Size(458, 97);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -492,25 +502,27 @@
             this.labelQuestionNumber.AutoSize = true;
             this.labelQuestionNumber.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelQuestionNumber.Location = new System.Drawing.Point(0, 0);
+            this.labelQuestionNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelQuestionNumber.Name = "labelQuestionNumber";
-            this.labelQuestionNumber.Size = new System.Drawing.Size(65, 17);
+            this.labelQuestionNumber.Size = new System.Drawing.Size(49, 13);
             this.labelQuestionNumber.TabIndex = 0;
             this.labelQuestionNumber.Text = "Question";
             // 
-            // Examiner
+            // Examinee
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(875, 558);
+            this.ClientSize = new System.Drawing.Size(656, 453);
             this.Controls.Add(this.panelQuestionAnswer);
             this.Controls.Add(this.panelLeft);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MinimumSize = new System.Drawing.Size(529, 432);
-            this.Name = "Examiner";
-            this.Padding = new System.Windows.Forms.Padding(11, 0, 11, 10);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(401, 358);
+            this.Name = "Examinee";
+            this.Padding = new System.Windows.Forms.Padding(8, 0, 8, 8);
             this.Text = "ExamTaker";
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();

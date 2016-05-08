@@ -74,6 +74,7 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBoxFont = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripComboBoxSize = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonColour = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonAddImage = new System.Windows.Forms.ToolStripButton();
@@ -85,9 +86,6 @@
             this.panelAnswerSingleAcceptableContainer = new System.Windows.Forms.Panel();
             this.richTextBoxAnswerSingleAcceptable = new System.Windows.Forms.RichTextBox();
             this.labelAnswerSingleAcceptable = new System.Windows.Forms.Label();
-            this.panelAnswerSingleCommentContainer = new System.Windows.Forms.Panel();
-            this.richTextBoxAnswerSingleComment = new System.Windows.Forms.RichTextBox();
-            this.labelAnswerSingleComment = new System.Windows.Forms.Label();
             this.panelAnswerMultiChoice = new System.Windows.Forms.Panel();
             this.tableLayoutPanelAnswerMultiChoiceContainer = new System.Windows.Forms.TableLayoutPanel();
             this.panelMultiChoiceOptionsContainer = new System.Windows.Forms.Panel();
@@ -106,9 +104,6 @@
             this.tableLayoutPanelMultiChoiceA = new System.Windows.Forms.TableLayoutPanel();
             this.labelA = new System.Windows.Forms.Label();
             this.textBoxMultiChoiceA = new System.Windows.Forms.TextBox();
-            this.panelMultiChoiceCommentContainer = new System.Windows.Forms.Panel();
-            this.richTextBoxAnswerMultiComments = new System.Windows.Forms.RichTextBox();
-            this.labelAnswerMultiComment = new System.Windows.Forms.Label();
             this.panelAnswerOpen = new System.Windows.Forms.Panel();
             this.richTextBoxAnswerOpen = new System.Windows.Forms.RichTextBox();
             this.panelAnswerTools = new System.Windows.Forms.Panel();
@@ -148,7 +143,6 @@
             this.contextMenuSeparatorChangeLevel = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuChangeLevelUp = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuChangeLevelDown = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -161,7 +155,6 @@
             this.panelAnswersContainer.SuspendLayout();
             this.panelAnswerSingle.SuspendLayout();
             this.panelAnswerSingleAcceptableContainer.SuspendLayout();
-            this.panelAnswerSingleCommentContainer.SuspendLayout();
             this.panelAnswerMultiChoice.SuspendLayout();
             this.tableLayoutPanelAnswerMultiChoiceContainer.SuspendLayout();
             this.panelMultiChoiceOptionsContainer.SuspendLayout();
@@ -170,7 +163,6 @@
             this.tableLayoutPanelMultiChoiceC.SuspendLayout();
             this.tableLayoutPanelMultiChoiceB.SuspendLayout();
             this.tableLayoutPanelMultiChoiceA.SuspendLayout();
-            this.panelMultiChoiceCommentContainer.SuspendLayout();
             this.panelAnswerOpen.SuspendLayout();
             this.panelAnswerTools.SuspendLayout();
             this.panelButtons.SuspendLayout();
@@ -597,6 +589,11 @@
             this.toolStripComboBoxSize.Size = new System.Drawing.Size(75, 27);
             this.toolStripComboBoxSize.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxSize_SelectedIndexChanged);
             // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 27);
+            // 
             // toolStripButtonColour
             // 
             this.toolStripButtonColour.BackColor = System.Drawing.Color.Black;
@@ -657,9 +654,9 @@
             // 
             // panelAnswersContainer
             // 
-            this.panelAnswersContainer.Controls.Add(this.panelAnswerSingle);
-            this.panelAnswersContainer.Controls.Add(this.panelAnswerMultiChoice);
             this.panelAnswersContainer.Controls.Add(this.panelAnswerOpen);
+            this.panelAnswersContainer.Controls.Add(this.panelAnswerMultiChoice);
+            this.panelAnswersContainer.Controls.Add(this.panelAnswerSingle);
             this.panelAnswersContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnswersContainer.Location = new System.Drawing.Point(0, 24);
             this.panelAnswersContainer.Margin = new System.Windows.Forms.Padding(2);
@@ -669,11 +666,10 @@
             // 
             // panelAnswerSingle
             // 
-            this.panelAnswerSingle.ColumnCount = 2;
+            this.panelAnswerSingle.ColumnCount = 1;
             this.panelAnswerSingle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
             this.panelAnswerSingle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.panelAnswerSingle.Controls.Add(this.panelAnswerSingleAcceptableContainer, 0, 0);
-            this.panelAnswerSingle.Controls.Add(this.panelAnswerSingleCommentContainer, 1, 0);
             this.panelAnswerSingle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnswerSingle.Location = new System.Drawing.Point(0, 0);
             this.panelAnswerSingle.Margin = new System.Windows.Forms.Padding(2);
@@ -693,7 +689,7 @@
             this.panelAnswerSingleAcceptableContainer.Location = new System.Drawing.Point(2, 2);
             this.panelAnswerSingleAcceptableContainer.Margin = new System.Windows.Forms.Padding(2);
             this.panelAnswerSingleAcceptableContainer.Name = "panelAnswerSingleAcceptableContainer";
-            this.panelAnswerSingleAcceptableContainer.Size = new System.Drawing.Size(374, 205);
+            this.panelAnswerSingleAcceptableContainer.Size = new System.Drawing.Size(685, 205);
             this.panelAnswerSingleAcceptableContainer.TabIndex = 0;
             // 
             // richTextBoxAnswerSingleAcceptable
@@ -705,7 +701,7 @@
             this.richTextBoxAnswerSingleAcceptable.Location = new System.Drawing.Point(111, 0);
             this.richTextBoxAnswerSingleAcceptable.Margin = new System.Windows.Forms.Padding(0);
             this.richTextBoxAnswerSingleAcceptable.Name = "richTextBoxAnswerSingleAcceptable";
-            this.richTextBoxAnswerSingleAcceptable.Size = new System.Drawing.Size(264, 206);
+            this.richTextBoxAnswerSingleAcceptable.Size = new System.Drawing.Size(575, 206);
             this.richTextBoxAnswerSingleAcceptable.TabIndex = 1;
             this.richTextBoxAnswerSingleAcceptable.Text = "";
             this.richTextBoxAnswerSingleAcceptable.TextChanged += new System.EventHandler(this.richTextBoxAnswerSingleAcceptable_TextChanged);
@@ -720,43 +716,6 @@
             this.labelAnswerSingleAcceptable.TabIndex = 0;
             this.labelAnswerSingleAcceptable.Text = "Acceptable Answers:";
             // 
-            // panelAnswerSingleCommentContainer
-            // 
-            this.panelAnswerSingleCommentContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelAnswerSingleCommentContainer.Controls.Add(this.richTextBoxAnswerSingleComment);
-            this.panelAnswerSingleCommentContainer.Controls.Add(this.labelAnswerSingleComment);
-            this.panelAnswerSingleCommentContainer.Location = new System.Drawing.Point(380, 2);
-            this.panelAnswerSingleCommentContainer.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAnswerSingleCommentContainer.Name = "panelAnswerSingleCommentContainer";
-            this.panelAnswerSingleCommentContainer.Size = new System.Drawing.Size(307, 205);
-            this.panelAnswerSingleCommentContainer.TabIndex = 1;
-            // 
-            // richTextBoxAnswerSingleComment
-            // 
-            this.richTextBoxAnswerSingleComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxAnswerSingleComment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBoxAnswerSingleComment.Location = new System.Drawing.Point(65, 0);
-            this.richTextBoxAnswerSingleComment.Margin = new System.Windows.Forms.Padding(0);
-            this.richTextBoxAnswerSingleComment.Name = "richTextBoxAnswerSingleComment";
-            this.richTextBoxAnswerSingleComment.Size = new System.Drawing.Size(243, 203);
-            this.richTextBoxAnswerSingleComment.TabIndex = 1;
-            this.richTextBoxAnswerSingleComment.Text = "";
-            this.richTextBoxAnswerSingleComment.TextChanged += new System.EventHandler(this.richTextBoxAnswerSingleComment_TextChanged);
-            // 
-            // labelAnswerSingleComment
-            // 
-            this.labelAnswerSingleComment.AutoSize = true;
-            this.labelAnswerSingleComment.Location = new System.Drawing.Point(2, 0);
-            this.labelAnswerSingleComment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelAnswerSingleComment.Name = "labelAnswerSingleComment";
-            this.labelAnswerSingleComment.Size = new System.Drawing.Size(59, 13);
-            this.labelAnswerSingleComment.TabIndex = 0;
-            this.labelAnswerSingleComment.Text = "Comments:";
-            // 
             // panelAnswerMultiChoice
             // 
             this.panelAnswerMultiChoice.Controls.Add(this.tableLayoutPanelAnswerMultiChoiceContainer);
@@ -769,11 +728,10 @@
             // 
             // tableLayoutPanelAnswerMultiChoiceContainer
             // 
-            this.tableLayoutPanelAnswerMultiChoiceContainer.ColumnCount = 2;
+            this.tableLayoutPanelAnswerMultiChoiceContainer.ColumnCount = 1;
             this.tableLayoutPanelAnswerMultiChoiceContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanelAnswerMultiChoiceContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanelAnswerMultiChoiceContainer.Controls.Add(this.panelMultiChoiceOptionsContainer, 0, 0);
-            this.tableLayoutPanelAnswerMultiChoiceContainer.Controls.Add(this.panelMultiChoiceCommentContainer, 1, 0);
             this.tableLayoutPanelAnswerMultiChoiceContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelAnswerMultiChoiceContainer.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelAnswerMultiChoiceContainer.Margin = new System.Windows.Forms.Padding(2);
@@ -792,14 +750,14 @@
             this.panelMultiChoiceOptionsContainer.Location = new System.Drawing.Point(2, 2);
             this.panelMultiChoiceOptionsContainer.Margin = new System.Windows.Forms.Padding(2);
             this.panelMultiChoiceOptionsContainer.Name = "panelMultiChoiceOptionsContainer";
-            this.panelMultiChoiceOptionsContainer.Size = new System.Drawing.Size(409, 205);
+            this.panelMultiChoiceOptionsContainer.Size = new System.Drawing.Size(685, 205);
             this.panelMultiChoiceOptionsContainer.TabIndex = 0;
             // 
             // labelAnswerMultiCorrect
             // 
             this.labelAnswerMultiCorrect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAnswerMultiCorrect.AutoSize = true;
-            this.labelAnswerMultiCorrect.Location = new System.Drawing.Point(257, 126);
+            this.labelAnswerMultiCorrect.Location = new System.Drawing.Point(533, 126);
             this.labelAnswerMultiCorrect.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAnswerMultiCorrect.Name = "labelAnswerMultiCorrect";
             this.labelAnswerMultiCorrect.Size = new System.Drawing.Size(82, 13);
@@ -816,7 +774,7 @@
             "B",
             "C",
             "D"});
-            this.comboBoxAnswerMultiCorrect.Location = new System.Drawing.Point(343, 124);
+            this.comboBoxAnswerMultiCorrect.Location = new System.Drawing.Point(619, 124);
             this.comboBoxAnswerMultiCorrect.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxAnswerMultiCorrect.Name = "comboBoxAnswerMultiCorrect";
             this.comboBoxAnswerMultiCorrect.Size = new System.Drawing.Size(63, 21);
@@ -839,7 +797,7 @@
             this.tableLayoutPanelMultiChoiceOptions.RowCount = 2;
             this.tableLayoutPanelMultiChoiceOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelMultiChoiceOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelMultiChoiceOptions.Size = new System.Drawing.Size(409, 119);
+            this.tableLayoutPanelMultiChoiceOptions.Size = new System.Drawing.Size(685, 119);
             this.tableLayoutPanelMultiChoiceOptions.TabIndex = 0;
             // 
             // tableLayoutPanelMultiChoiceD
@@ -850,12 +808,12 @@
             this.tableLayoutPanelMultiChoiceD.Controls.Add(this.labelD, 0, 0);
             this.tableLayoutPanelMultiChoiceD.Controls.Add(this.textBoxMultiChoiceD, 1, 0);
             this.tableLayoutPanelMultiChoiceD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelMultiChoiceD.Location = new System.Drawing.Point(206, 61);
+            this.tableLayoutPanelMultiChoiceD.Location = new System.Drawing.Point(344, 61);
             this.tableLayoutPanelMultiChoiceD.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanelMultiChoiceD.Name = "tableLayoutPanelMultiChoiceD";
             this.tableLayoutPanelMultiChoiceD.RowCount = 1;
             this.tableLayoutPanelMultiChoiceD.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMultiChoiceD.Size = new System.Drawing.Size(201, 56);
+            this.tableLayoutPanelMultiChoiceD.Size = new System.Drawing.Size(339, 56);
             this.tableLayoutPanelMultiChoiceD.TabIndex = 3;
             // 
             // labelD
@@ -876,7 +834,7 @@
             this.textBoxMultiChoiceD.Location = new System.Drawing.Point(24, 18);
             this.textBoxMultiChoiceD.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxMultiChoiceD.Name = "textBoxMultiChoiceD";
-            this.textBoxMultiChoiceD.Size = new System.Drawing.Size(175, 20);
+            this.textBoxMultiChoiceD.Size = new System.Drawing.Size(313, 20);
             this.textBoxMultiChoiceD.TabIndex = 1;
             this.textBoxMultiChoiceD.TextChanged += new System.EventHandler(this.textBoxMultiChoiceD_TextChanged);
             // 
@@ -893,7 +851,7 @@
             this.tableLayoutPanelMultiChoiceC.Name = "tableLayoutPanelMultiChoiceC";
             this.tableLayoutPanelMultiChoiceC.RowCount = 1;
             this.tableLayoutPanelMultiChoiceC.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMultiChoiceC.Size = new System.Drawing.Size(200, 56);
+            this.tableLayoutPanelMultiChoiceC.Size = new System.Drawing.Size(338, 56);
             this.tableLayoutPanelMultiChoiceC.TabIndex = 2;
             // 
             // labelC
@@ -914,7 +872,7 @@
             this.textBoxMultiChoiceC.Location = new System.Drawing.Point(24, 18);
             this.textBoxMultiChoiceC.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxMultiChoiceC.Name = "textBoxMultiChoiceC";
-            this.textBoxMultiChoiceC.Size = new System.Drawing.Size(174, 20);
+            this.textBoxMultiChoiceC.Size = new System.Drawing.Size(312, 20);
             this.textBoxMultiChoiceC.TabIndex = 1;
             this.textBoxMultiChoiceC.TextChanged += new System.EventHandler(this.textBoxMultiChoiceC_TextChanged);
             // 
@@ -926,12 +884,12 @@
             this.tableLayoutPanelMultiChoiceB.Controls.Add(this.labelB, 0, 0);
             this.tableLayoutPanelMultiChoiceB.Controls.Add(this.textBoxMultiChoiceB, 1, 0);
             this.tableLayoutPanelMultiChoiceB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelMultiChoiceB.Location = new System.Drawing.Point(206, 2);
+            this.tableLayoutPanelMultiChoiceB.Location = new System.Drawing.Point(344, 2);
             this.tableLayoutPanelMultiChoiceB.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanelMultiChoiceB.Name = "tableLayoutPanelMultiChoiceB";
             this.tableLayoutPanelMultiChoiceB.RowCount = 1;
             this.tableLayoutPanelMultiChoiceB.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMultiChoiceB.Size = new System.Drawing.Size(201, 55);
+            this.tableLayoutPanelMultiChoiceB.Size = new System.Drawing.Size(339, 55);
             this.tableLayoutPanelMultiChoiceB.TabIndex = 1;
             // 
             // labelB
@@ -952,7 +910,7 @@
             this.textBoxMultiChoiceB.Location = new System.Drawing.Point(24, 17);
             this.textBoxMultiChoiceB.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxMultiChoiceB.Name = "textBoxMultiChoiceB";
-            this.textBoxMultiChoiceB.Size = new System.Drawing.Size(175, 20);
+            this.textBoxMultiChoiceB.Size = new System.Drawing.Size(313, 20);
             this.textBoxMultiChoiceB.TabIndex = 1;
             this.textBoxMultiChoiceB.TextChanged += new System.EventHandler(this.textBoxMultiChoiceB_TextChanged);
             // 
@@ -969,7 +927,7 @@
             this.tableLayoutPanelMultiChoiceA.Name = "tableLayoutPanelMultiChoiceA";
             this.tableLayoutPanelMultiChoiceA.RowCount = 1;
             this.tableLayoutPanelMultiChoiceA.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMultiChoiceA.Size = new System.Drawing.Size(200, 55);
+            this.tableLayoutPanelMultiChoiceA.Size = new System.Drawing.Size(338, 55);
             this.tableLayoutPanelMultiChoiceA.TabIndex = 0;
             // 
             // labelA
@@ -990,44 +948,9 @@
             this.textBoxMultiChoiceA.Location = new System.Drawing.Point(24, 17);
             this.textBoxMultiChoiceA.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxMultiChoiceA.Name = "textBoxMultiChoiceA";
-            this.textBoxMultiChoiceA.Size = new System.Drawing.Size(174, 20);
+            this.textBoxMultiChoiceA.Size = new System.Drawing.Size(312, 20);
             this.textBoxMultiChoiceA.TabIndex = 1;
             this.textBoxMultiChoiceA.TextChanged += new System.EventHandler(this.textBoxMultiChoiceA_TextChanged);
-            // 
-            // panelMultiChoiceCommentContainer
-            // 
-            this.panelMultiChoiceCommentContainer.Controls.Add(this.richTextBoxAnswerMultiComments);
-            this.panelMultiChoiceCommentContainer.Controls.Add(this.labelAnswerMultiComment);
-            this.panelMultiChoiceCommentContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMultiChoiceCommentContainer.Location = new System.Drawing.Point(415, 2);
-            this.panelMultiChoiceCommentContainer.Margin = new System.Windows.Forms.Padding(2);
-            this.panelMultiChoiceCommentContainer.Name = "panelMultiChoiceCommentContainer";
-            this.panelMultiChoiceCommentContainer.Size = new System.Drawing.Size(272, 205);
-            this.panelMultiChoiceCommentContainer.TabIndex = 1;
-            // 
-            // richTextBoxAnswerMultiComments
-            // 
-            this.richTextBoxAnswerMultiComments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxAnswerMultiComments.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBoxAnswerMultiComments.Location = new System.Drawing.Point(65, 1);
-            this.richTextBoxAnswerMultiComments.Margin = new System.Windows.Forms.Padding(2);
-            this.richTextBoxAnswerMultiComments.Name = "richTextBoxAnswerMultiComments";
-            this.richTextBoxAnswerMultiComments.Size = new System.Drawing.Size(207, 205);
-            this.richTextBoxAnswerMultiComments.TabIndex = 1;
-            this.richTextBoxAnswerMultiComments.Text = "";
-            this.richTextBoxAnswerMultiComments.TextChanged += new System.EventHandler(this.richTextBoxAnswerMultiComments_TextChanged);
-            // 
-            // labelAnswerMultiComment
-            // 
-            this.labelAnswerMultiComment.AutoSize = true;
-            this.labelAnswerMultiComment.Location = new System.Drawing.Point(2, 3);
-            this.labelAnswerMultiComment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelAnswerMultiComment.Name = "labelAnswerMultiComment";
-            this.labelAnswerMultiComment.Size = new System.Drawing.Size(59, 13);
-            this.labelAnswerMultiComment.TabIndex = 0;
-            this.labelAnswerMultiComment.Text = "Comments:";
             // 
             // panelAnswerOpen
             // 
@@ -1429,11 +1352,6 @@
             this.contextMenuChangeLevelDown.Text = "Change Level Down";
             this.contextMenuChangeLevelDown.Click += new System.EventHandler(this.contextMenuChangeLevelDown_Click);
             // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 27);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1441,6 +1359,7 @@
             this.ClientSize = new System.Drawing.Size(880, 634);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStripMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStripMain;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(754, 576);
@@ -1463,8 +1382,6 @@
             this.panelAnswerSingle.ResumeLayout(false);
             this.panelAnswerSingleAcceptableContainer.ResumeLayout(false);
             this.panelAnswerSingleAcceptableContainer.PerformLayout();
-            this.panelAnswerSingleCommentContainer.ResumeLayout(false);
-            this.panelAnswerSingleCommentContainer.PerformLayout();
             this.panelAnswerMultiChoice.ResumeLayout(false);
             this.tableLayoutPanelAnswerMultiChoiceContainer.ResumeLayout(false);
             this.panelMultiChoiceOptionsContainer.ResumeLayout(false);
@@ -1478,8 +1395,6 @@
             this.tableLayoutPanelMultiChoiceB.PerformLayout();
             this.tableLayoutPanelMultiChoiceA.ResumeLayout(false);
             this.tableLayoutPanelMultiChoiceA.PerformLayout();
-            this.panelMultiChoiceCommentContainer.ResumeLayout(false);
-            this.panelMultiChoiceCommentContainer.PerformLayout();
             this.panelAnswerOpen.ResumeLayout(false);
             this.panelAnswerTools.ResumeLayout(false);
             this.panelButtons.ResumeLayout(false);
@@ -1564,9 +1479,6 @@
         private System.Windows.Forms.Panel panelAnswerSingleAcceptableContainer;
         private System.Windows.Forms.RichTextBox richTextBoxAnswerSingleAcceptable;
         private System.Windows.Forms.Label labelAnswerSingleAcceptable;
-        private System.Windows.Forms.Panel panelAnswerSingleCommentContainer;
-        private System.Windows.Forms.RichTextBox richTextBoxAnswerSingleComment;
-        private System.Windows.Forms.Label labelAnswerSingleComment;
         private System.Windows.Forms.Panel panelAnswerOpen;
         private System.Windows.Forms.RichTextBox richTextBoxAnswerOpen;
         private System.Windows.Forms.Panel panelAnswerMultiChoice;
@@ -1585,11 +1497,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMultiChoiceA;
         private System.Windows.Forms.Label labelA;
         private System.Windows.Forms.TextBox textBoxMultiChoiceA;
-        private System.Windows.Forms.Panel panelMultiChoiceCommentContainer;
         private System.Windows.Forms.ComboBox comboBoxAnswerMultiCorrect;
         private System.Windows.Forms.Label labelAnswerMultiCorrect;
-        private System.Windows.Forms.RichTextBox richTextBoxAnswerMultiComments;
-        private System.Windows.Forms.Label labelAnswerMultiComment;
         private System.Windows.Forms.NumericUpDown numericUpDownMarksAssigner;
         private System.Windows.Forms.Label labelMarksForQuestion;
         private System.Windows.Forms.GroupBox groupBoxMarks;
