@@ -93,9 +93,9 @@ namespace AssessmentManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap arrow_down {
+        internal static System.Drawing.Bitmap ArrowDown {
             get {
-                object obj = ResourceManager.GetObject("arrow-down", resourceCulture);
+                object obj = ResourceManager.GetObject("ArrowDown", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,49 @@ namespace AssessmentManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap arrow_up {
+        internal static System.Drawing.Bitmap ArrowDown32 {
             get {
-                object obj = ResourceManager.GetObject("arrow-up", resourceCulture);
+                object obj = ResourceManager.GetObject("ArrowDown32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ArrowUp {
+            get {
+                object obj = ResourceManager.GetObject("ArrowUp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ArrowUp32 {
+            get {
+                object obj = ResourceManager.GetObject("ArrowUp32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CollapseAll32 {
+            get {
+                object obj = ResourceManager.GetObject("CollapseAll32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ExpandAll32 {
+            get {
+                object obj = ResourceManager.GetObject("ExpandAll32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

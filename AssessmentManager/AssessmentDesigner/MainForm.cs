@@ -85,7 +85,7 @@ namespace AssessmentManager
         #region Toolstrip buttons
         private void toolStripButtonColour_Click(object sender, EventArgs e)
         {
-            if(colorDialog.ShowDialog()==DialogResult.OK)
+            if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 toolStripButtonColour.BackColor = colorDialog.Color;
                 richTextBoxQuestion.SelectionColor = colorDialog.Color;
@@ -308,9 +308,11 @@ namespace AssessmentManager
         #region TreeViewButtons
         private void buttonAddMajorQuestion_Click(object sender, EventArgs e)
         {
-            treeViewQuestionList.Nodes.Add(new QuestionNode(new Question("unnamed")));
+            QuestionNode node = new QuestionNode(new Question("unnamed"));
+            treeViewQuestionList.Nodes.Add(node);
             Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
             changesMade = true;
+            treeViewQuestionList.SelectedNode = node;
             treeViewQuestionList.Focus();
         }
 
@@ -578,7 +580,7 @@ namespace AssessmentManager
 
         private void UpdateFormText()
         {
-            Text = file == null ? "AssessmentDesigner" : "AssessmentDesigner - " + file.Name;
+            Text = file == null ? "Assessment Designer" : "Assessment Designer - " + file.Name;
         }
 
         private void UpdateRecentFiles()
@@ -890,10 +892,18 @@ namespace AssessmentManager
             {
                 int indexToInsertTo = node.Index - 1;
                 if (indexToInsertTo < 0) indexToInsertTo = 0;
-
-                treeViewQuestionList.Nodes.Insert(indexToInsertTo, new QuestionNode(new Question("unnamed")));
-                Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
-
+                if (node.Parent != null)
+                {
+                    node.Parent.Nodes.Insert(indexToInsertTo, new QuestionNode(new Question("unnamed")));
+                    Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
+                }
+                else
+                {
+                    treeViewQuestionList.Nodes.Insert(indexToInsertTo, new QuestionNode(new Question("unnamed")));
+                    Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
+                }
+                treeViewQuestionList.SelectedNode = null;
+                treeViewQuestionList.SelectedNode = node;
             }
             treeViewQuestionList.Focus();
         }
@@ -903,15 +913,32 @@ namespace AssessmentManager
             QuestionNode node = (QuestionNode)treeViewQuestionList.SelectedNode;
             if (node != null)
             {
-                if (!node.CanMoveDown) buttonAddMajorQuestion_Click(sender, e);
+                int indexToInsertTo = node.Index + 1;
+                if (indexToInsertTo < 0) indexToInsertTo = 0;
+                if (node.Parent == null)
+                {
+                    if (!node.CanMoveDown) buttonAddMajorQuestion_Click(sender, e);
+                    else
+                    {
+                        treeViewQuestionList.Nodes.Insert(indexToInsertTo, new QuestionNode(new Question("unnamed")));
+                        Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
+                    }
+                }
                 else
                 {
-                    int indexToInsertTo = node.Index + 1;
-                    if (indexToInsertTo < 0) indexToInsertTo = 0;
-
-                    treeViewQuestionList.Nodes.Insert(indexToInsertTo, new QuestionNode(new Question("unnamed")));
-                    Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
+                    if (!node.CanMoveDown)
+                    {
+                        node.Parent.Nodes.Add(new QuestionNode(new Question("unnamed")));
+                        Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
+                    }
+                    else
+                    {
+                        node.Parent.Nodes.Insert(indexToInsertTo, new QuestionNode(new Question("unnamed")));
+                        Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
+                    }
                 }
+                treeViewQuestionList.SelectedNode = null;
+                treeViewQuestionList.SelectedNode = node;
             }
             treeViewQuestionList.Focus();
         }

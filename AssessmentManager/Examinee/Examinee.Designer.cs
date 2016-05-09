@@ -92,9 +92,9 @@
             this.panelTop.Controls.Add(this.labelMarksAttempted);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(8, 24);
-            this.panelTop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(2);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTop.Padding = new System.Windows.Forms.Padding(2);
             this.panelTop.Size = new System.Drawing.Size(640, 81);
             this.panelTop.TabIndex = 0;
             // 
@@ -122,7 +122,7 @@
             // 
             this.buttonSubmitAssessment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSubmitAssessment.Location = new System.Drawing.Point(342, 39);
-            this.buttonSubmitAssessment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonSubmitAssessment.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSubmitAssessment.Name = "buttonSubmitAssessment";
             this.buttonSubmitAssessment.Size = new System.Drawing.Size(104, 26);
             this.buttonSubmitAssessment.TabIndex = 7;
@@ -154,7 +154,7 @@
             this.progressBarMarksAttempted.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBarMarksAttempted.Location = new System.Drawing.Point(160, 5);
-            this.progressBarMarksAttempted.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.progressBarMarksAttempted.Margin = new System.Windows.Forms.Padding(2);
             this.progressBarMarksAttempted.Name = "progressBarMarksAttempted";
             this.progressBarMarksAttempted.Size = new System.Drawing.Size(286, 19);
             this.progressBarMarksAttempted.TabIndex = 4;
@@ -165,7 +165,7 @@
             this.panel2.Controls.Add(this.labelUnansweredQuestions);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(450, 2);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(188, 77);
             this.panel2.TabIndex = 3;
@@ -175,7 +175,7 @@
             this.listBoxUnansweredQuestions.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.listBoxUnansweredQuestions.FormattingEnabled = true;
             this.listBoxUnansweredQuestions.Location = new System.Drawing.Point(0, 21);
-            this.listBoxUnansweredQuestions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxUnansweredQuestions.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxUnansweredQuestions.Name = "listBoxUnansweredQuestions";
             this.listBoxUnansweredQuestions.Size = new System.Drawing.Size(188, 56);
             this.listBoxUnansweredQuestions.TabIndex = 1;
@@ -253,10 +253,10 @@
             this.panelLeft.Controls.Add(this.panelMarks);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(8, 105);
-            this.panelLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelLeft.Margin = new System.Windows.Forms.Padding(2);
             this.panelLeft.MinimumSize = new System.Drawing.Size(170, 122);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelLeft.Padding = new System.Windows.Forms.Padding(2);
             this.panelLeft.Size = new System.Drawing.Size(170, 340);
             this.panelLeft.TabIndex = 2;
             // 
@@ -268,7 +268,7 @@
             this.panelTreeView.Controls.Add(this.buttonCollapse);
             this.panelTreeView.Controls.Add(this.buttonExpand);
             this.panelTreeView.Location = new System.Drawing.Point(2, 2);
-            this.panelTreeView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTreeView.Margin = new System.Windows.Forms.Padding(2);
             this.panelTreeView.MinimumSize = new System.Drawing.Size(164, 0);
             this.panelTreeView.Name = "panelTreeView";
             this.panelTreeView.Size = new System.Drawing.Size(164, 252);
@@ -279,7 +279,7 @@
             this.treeViewQuestionDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.treeViewQuestionDisplay.Location = new System.Drawing.Point(0, 0);
-            this.treeViewQuestionDisplay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.treeViewQuestionDisplay.Margin = new System.Windows.Forms.Padding(2);
             this.treeViewQuestionDisplay.Name = "treeViewQuestionDisplay";
             this.treeViewQuestionDisplay.Size = new System.Drawing.Size(164, 226);
             this.treeViewQuestionDisplay.TabIndex = 0;
@@ -288,7 +288,7 @@
             // 
             this.buttonCollapse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCollapse.Location = new System.Drawing.Point(88, 229);
-            this.buttonCollapse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonCollapse.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCollapse.Name = "buttonCollapse";
             this.buttonCollapse.Size = new System.Drawing.Size(75, 23);
             this.buttonCollapse.TabIndex = 2;
@@ -299,7 +299,7 @@
             // 
             this.buttonExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonExpand.Location = new System.Drawing.Point(2, 229);
-            this.buttonExpand.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonExpand.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExpand.Name = "buttonExpand";
             this.buttonExpand.Size = new System.Drawing.Size(75, 23);
             this.buttonExpand.TabIndex = 1;
@@ -315,7 +315,7 @@
             this.panelMarks.Controls.Add(this.label3);
             this.panelMarks.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelMarks.Location = new System.Drawing.Point(2, 257);
-            this.panelMarks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelMarks.Margin = new System.Windows.Forms.Padding(2);
             this.panelMarks.MinimumSize = new System.Drawing.Size(166, 81);
             this.panelMarks.Name = "panelMarks";
             this.panelMarks.Size = new System.Drawing.Size(166, 81);
@@ -383,9 +383,9 @@
             this.panelQuestionAnswer.Controls.Add(this.panelNextPrevButtons);
             this.panelQuestionAnswer.Controls.Add(this.panelQuestion);
             this.panelQuestionAnswer.Location = new System.Drawing.Point(182, 109);
-            this.panelQuestionAnswer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelQuestionAnswer.Margin = new System.Windows.Forms.Padding(2);
             this.panelQuestionAnswer.Name = "panelQuestionAnswer";
-            this.panelQuestionAnswer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelQuestionAnswer.Padding = new System.Windows.Forms.Padding(4);
             this.panelQuestionAnswer.Size = new System.Drawing.Size(466, 336);
             this.panelQuestionAnswer.TabIndex = 3;
             // 
@@ -397,7 +397,7 @@
             this.panelAnswerLong.Controls.Add(this.richTextBoxAnswer);
             this.panelAnswerLong.Controls.Add(this.labelAnswer);
             this.panelAnswerLong.Location = new System.Drawing.Point(4, 130);
-            this.panelAnswerLong.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelAnswerLong.Margin = new System.Windows.Forms.Padding(2);
             this.panelAnswerLong.Name = "panelAnswerLong";
             this.panelAnswerLong.Size = new System.Drawing.Size(459, 169);
             this.panelAnswerLong.TabIndex = 2;
@@ -409,7 +409,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxAnswer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.richTextBoxAnswer.Location = new System.Drawing.Point(0, 13);
-            this.richTextBoxAnswer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.richTextBoxAnswer.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBoxAnswer.Name = "richTextBoxAnswer";
             this.richTextBoxAnswer.Size = new System.Drawing.Size(460, 157);
             this.richTextBoxAnswer.TabIndex = 1;
@@ -433,9 +433,9 @@
             this.panelNextPrevButtons.Controls.Add(this.buttonPreviousQuestion);
             this.panelNextPrevButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelNextPrevButtons.Location = new System.Drawing.Point(4, 302);
-            this.panelNextPrevButtons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelNextPrevButtons.Margin = new System.Windows.Forms.Padding(2);
             this.panelNextPrevButtons.Name = "panelNextPrevButtons";
-            this.panelNextPrevButtons.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelNextPrevButtons.Padding = new System.Windows.Forms.Padding(2);
             this.panelNextPrevButtons.Size = new System.Drawing.Size(458, 30);
             this.panelNextPrevButtons.TabIndex = 1;
             // 
@@ -445,7 +445,7 @@
             this.buttonNextQuestion.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonNextQuestion.BackgroundImage")));
             this.buttonNextQuestion.Image = ((System.Drawing.Image)(resources.GetObject("buttonNextQuestion.Image")));
             this.buttonNextQuestion.Location = new System.Drawing.Point(375, 1);
-            this.buttonNextQuestion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonNextQuestion.Margin = new System.Windows.Forms.Padding(2);
             this.buttonNextQuestion.Name = "buttonNextQuestion";
             this.buttonNextQuestion.Size = new System.Drawing.Size(24, 26);
             this.buttonNextQuestion.TabIndex = 1;
@@ -456,7 +456,7 @@
             this.buttonPreviousQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonPreviousQuestion.Image = ((System.Drawing.Image)(resources.GetObject("buttonPreviousQuestion.Image")));
             this.buttonPreviousQuestion.Location = new System.Drawing.Point(56, 1);
-            this.buttonPreviousQuestion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonPreviousQuestion.Margin = new System.Windows.Forms.Padding(2);
             this.buttonPreviousQuestion.Name = "buttonPreviousQuestion";
             this.buttonPreviousQuestion.Size = new System.Drawing.Size(24, 26);
             this.buttonPreviousQuestion.TabIndex = 0;
@@ -469,7 +469,7 @@
             this.panelQuestion.Controls.Add(this.labelQuestionNumber);
             this.panelQuestion.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuestion.Location = new System.Drawing.Point(4, 4);
-            this.panelQuestion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelQuestion.Margin = new System.Windows.Forms.Padding(2);
             this.panelQuestion.Name = "panelQuestion";
             this.panelQuestion.Size = new System.Drawing.Size(458, 121);
             this.panelQuestion.TabIndex = 0;
@@ -477,7 +477,7 @@
             // buttonShowQuestionImage
             // 
             this.buttonShowQuestionImage.Location = new System.Drawing.Point(400, 2);
-            this.buttonShowQuestionImage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonShowQuestionImage.Margin = new System.Windows.Forms.Padding(2);
             this.buttonShowQuestionImage.Name = "buttonShowQuestionImage";
             this.buttonShowQuestionImage.Size = new System.Drawing.Size(56, 19);
             this.buttonShowQuestionImage.TabIndex = 2;
@@ -490,7 +490,7 @@
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.richTextBox1.Location = new System.Drawing.Point(0, 24);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(458, 97);
@@ -519,7 +519,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(401, 358);
             this.Name = "Examinee";
             this.Padding = new System.Windows.Forms.Padding(8, 0, 8, 8);
