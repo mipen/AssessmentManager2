@@ -120,39 +120,13 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonNextQuestion.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EgAACxIB0t1+/AAAAZ1JREFUeF7t28FJA1EUheFUIRaiqNiGC4sQK7MdSRvqyp3eJ5lNmDgJM5v3zvfB
-        hWyH80NCYHYAAAAAAAAAAAAA0LuHwxGoDf9V93n4TJBp/J/DiSDI8fgiCHJq/OlEMLCl8acTwYDOHX86
-        EQzktu6S8acTwSCu6t7r5kZeOhEMQgSsjuC+js6JABEgAooIEAEioIgAESACiggQAesjuKujcyJABIiA
-        IgJEgAgoIkAEiIAiAlZF8FEnggGIABEggj+Pdc/B91r3XTc38tINEcFb3dzDufOu+wgEsP66jkAA21y3
-        EQhgu+syAgFse91FIIBtTwDB5ysg+PwIDL5ux28EsO66Hr9pr0Y9Bd9LXfRfwcmu6/Z1c+MunfE7Z/xg
-        xg9m/GDGD2b8YMYPZvxgxg9m/GDGD2b8YMYPZvxgxg9m/GDGD2b8YMYPZvxgxg9m/GDGD2b8YMYPZvxg
-        xg9m/GDGD3dT14acG/i/M/5A2pCXRGD8AZ0bgfEHthSB8QOcisD4QY4jMH6gKQLjB2vDGx8AAAAAAAAA
-        AACAnu12v4J8X/yQTfd2AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="buttonNextQuestion.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EgAACxIB0t1+/AAAAIVJREFUWEftk8EJgDAQBKNNqdiGiFYlfn1YgQ3ZhdqA7kJSQKLcqdzAQF6ZhRBn
-        GF+n8qrA8AF3fxZngKeXI0ooSgYnaCNeO6KAovxrRA27RHu4wjBig9EjFhgueMLoEeoD+I2aRFt4+wlS
-        yeEMLW5xEVTjZIRqccIgwyrxAMNqccN4AOcuFq52HUkfyUkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="buttonPreviousQuestion.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EgAACxIB0t1+/AAAAJFJREFUWEftlMsJgDAQRGNP4qcPBa1JvHqwAjuyDbUBnUEXRDxIkI3CPngQ9pAZ
-        yMcZxt/JD4PA4AXOMOVAEwlfDxuoxjW8gxFUwcItPGj4CGtYecr9HnMNf8MBPiZ4AXJ3BCUsPPX6rlmC
-        f72U6KHaJRSshJBBK0E+UYJP6lyihepIiQnGHISAJZJ9aRi/xLkNDCl1+2dgASsAAAAASUVORK5CYII=
-</value>
-  </data>
+  <metadata name="toolTipButtons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>132, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>46</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAYAAAAAAAEAIAAoIAQAZgAAABAQAAABACAAaAQAAI4gBAAwMAAAAQAgAKglAAD2JAQAICAAAAEA

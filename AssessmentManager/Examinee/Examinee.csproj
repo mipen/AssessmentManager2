@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AssessmentManager</RootNamespace>
-    <AssemblyName>Examiner</AssemblyName>
+    <AssemblyName>Examinee</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -91,6 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="examinee_icon.ico" />
+    <None Include="Resources\1457348260_ic_arrow_back_48px.png" />
+    <None Include="Resources\1457348170_ic_arrow_forward_48px.png" />
+    <None Include="Resources\expand-all32.png" />
+    <None Include="Resources\collapse-all32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

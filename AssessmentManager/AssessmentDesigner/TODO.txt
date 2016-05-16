@@ -1,0 +1,10 @@
+﻿Feature:
+	- Ability to generate information hand out
+	- Print out temp username and password
+	- Include student name
+	- Have rules and so on
+
+	- Autosave feature
+		- Will save to separate file
+		- When manually saved, delete autosave file
+		- Maybe set flag to determine whether to load autosave?

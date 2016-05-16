@@ -22,5 +22,14 @@ namespace AssessmentManager
             //TODO:: Implement saving on closing.
             this.Close();
         }
+
+        #region Methods
+
+        public void OpenFromFile(string path)
+        {
+
+        }
+
+        #endregion
     }
 }
