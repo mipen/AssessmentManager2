@@ -658,8 +658,8 @@
             // 
             // panelAnswersContainer
             // 
-            this.panelAnswersContainer.Controls.Add(this.panelAnswerOpen);
             this.panelAnswersContainer.Controls.Add(this.panelAnswerMultiChoice);
+            this.panelAnswersContainer.Controls.Add(this.panelAnswerOpen);
             this.panelAnswersContainer.Controls.Add(this.panelAnswerSingle);
             this.panelAnswersContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnswersContainer.Location = new System.Drawing.Point(0, 24);
@@ -1181,46 +1181,46 @@
             // labelMarksSelectedQuestionParentParentNum
             // 
             this.labelMarksSelectedQuestionParentParentNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelMarksSelectedQuestionParentParentNum.AutoSize = true;
-            this.labelMarksSelectedQuestionParentParentNum.Location = new System.Drawing.Point(213, 62);
+            this.labelMarksSelectedQuestionParentParentNum.Location = new System.Drawing.Point(160, 62);
             this.labelMarksSelectedQuestionParentParentNum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMarksSelectedQuestionParentParentNum.Name = "labelMarksSelectedQuestionParentParentNum";
-            this.labelMarksSelectedQuestionParentParentNum.Size = new System.Drawing.Size(13, 13);
+            this.labelMarksSelectedQuestionParentParentNum.Size = new System.Drawing.Size(66, 13);
             this.labelMarksSelectedQuestionParentParentNum.TabIndex = 7;
             this.labelMarksSelectedQuestionParentParentNum.Text = "0";
+            this.labelMarksSelectedQuestionParentParentNum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelMarksSelectedQuestionParentNum
             // 
             this.labelMarksSelectedQuestionParentNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelMarksSelectedQuestionParentNum.AutoSize = true;
-            this.labelMarksSelectedQuestionParentNum.Location = new System.Drawing.Point(213, 48);
+            this.labelMarksSelectedQuestionParentNum.Location = new System.Drawing.Point(160, 48);
             this.labelMarksSelectedQuestionParentNum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMarksSelectedQuestionParentNum.Name = "labelMarksSelectedQuestionParentNum";
-            this.labelMarksSelectedQuestionParentNum.Size = new System.Drawing.Size(13, 13);
+            this.labelMarksSelectedQuestionParentNum.Size = new System.Drawing.Size(66, 13);
             this.labelMarksSelectedQuestionParentNum.TabIndex = 6;
             this.labelMarksSelectedQuestionParentNum.Text = "0";
+            this.labelMarksSelectedQuestionParentNum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelMarksSelectedQuestionNum
             // 
             this.labelMarksSelectedQuestionNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelMarksSelectedQuestionNum.AutoSize = true;
-            this.labelMarksSelectedQuestionNum.Location = new System.Drawing.Point(213, 34);
+            this.labelMarksSelectedQuestionNum.Location = new System.Drawing.Point(157, 34);
             this.labelMarksSelectedQuestionNum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMarksSelectedQuestionNum.Name = "labelMarksSelectedQuestionNum";
-            this.labelMarksSelectedQuestionNum.Size = new System.Drawing.Size(13, 13);
+            this.labelMarksSelectedQuestionNum.Size = new System.Drawing.Size(69, 13);
             this.labelMarksSelectedQuestionNum.TabIndex = 5;
             this.labelMarksSelectedQuestionNum.Text = "0";
+            this.labelMarksSelectedQuestionNum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelMarksWholeAssessmentNum
             // 
             this.labelMarksWholeAssessmentNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelMarksWholeAssessmentNum.AutoSize = true;
-            this.labelMarksWholeAssessmentNum.Location = new System.Drawing.Point(213, 20);
+            this.labelMarksWholeAssessmentNum.Location = new System.Drawing.Point(154, 20);
             this.labelMarksWholeAssessmentNum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMarksWholeAssessmentNum.Name = "labelMarksWholeAssessmentNum";
-            this.labelMarksWholeAssessmentNum.Size = new System.Drawing.Size(13, 13);
+            this.labelMarksWholeAssessmentNum.Size = new System.Drawing.Size(72, 13);
             this.labelMarksWholeAssessmentNum.TabIndex = 4;
             this.labelMarksWholeAssessmentNum.Text = "0";
+            this.labelMarksWholeAssessmentNum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelMarksWholeAssessment
             // 

@@ -8,3 +8,13 @@
 		- Will save to separate file
 		- When manually saved, delete autosave file
 		- Maybe set flag to determine whether to load autosave?
+
+	- Check for things that could be wrong when saving the exam
+		- Questions missing marks
+		- Multi choice answers missing answers
+		- Questions missing answers
+
+	- Bullet list feature for questions.
+	- Images for questions
+
+	- When a question has no answer type and has sub questions, display the total amount of marks.

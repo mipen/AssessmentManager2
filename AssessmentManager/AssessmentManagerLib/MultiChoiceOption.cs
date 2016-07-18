@@ -11,6 +11,7 @@ namespace AssessmentManager
         A,
         B,
         C,
-        D
+        D,
+        None
     }
 }

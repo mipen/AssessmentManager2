@@ -16,7 +16,18 @@ namespace AssessmentManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Examinee());
+            if (args.Count() > 0)
+            {
+                //TODO:: Implement splash screen
+                //Application.Run(new EntryForm(args[0]));
+
+                //Test
+                Application.Run(new Examinee(args[0]));
+            }
+            else
+            {
+                Application.Run(new Examinee());
+            }
         }
     }
 }

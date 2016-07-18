@@ -532,14 +532,17 @@ namespace AssessmentManager
                     labelMarksWholeAssessmentNum.Text = Assessment.TotalMarks.ToString();
                     //Display the marks for the selected question
                     labelMarksSelectedQuestion.Text = q.Name + ":";
-                    labelMarksSelectedQuestionNum.Text = q.Marks.ToString();
+                    //labelMarksSelectedQuestionNum.Text = q.Marks.ToString();
+                    labelMarksSelectedQuestionNum.Text = q.Marks.ToString() + $" ({q.TotalMarks.ToString()} total)";
+
                     //If the question has a parent, display total marks for that question
                     if (node.Parent != null)
                     {
                         Question parentQ = ((QuestionNode)node.Parent).Question;
 
                         labelMarksSelectedQuestionParent.Text = parentQ.Name + ":";
-                        labelMarksSelectedQuestionParentNum.Text = parentQ.TotalMarks.ToString();
+                        //labelMarksSelectedQuestionParentNum.Text = parentQ.TotalMarks.ToString();
+                        labelMarksSelectedQuestionParentNum.Text = parentQ.Marks.ToString() + $" ({parentQ.TotalMarks.ToString()} total)";
 
                         labelMarksSelectedQuestionParent.Visible = true;
                         labelMarksSelectedQuestionParentNum.Visible = true;
@@ -550,7 +553,8 @@ namespace AssessmentManager
                             Question parentParentQ = ((QuestionNode)node.Parent.Parent).Question;
 
                             labelMarksSelectedQuestionParentParent.Text = parentParentQ.Name + ":";
-                            labelMarksSelectedQuestionParentParentNum.Text = parentParentQ.TotalMarks.ToString();
+                            //labelMarksSelectedQuestionParentParentNum.Text = parentParentQ.TotalMarks.ToString();
+                            labelMarksSelectedQuestionParentParentNum.Text = parentParentQ.Marks.ToString() + $" ({parentParentQ.TotalMarks.ToString()} total)";
 
                             labelMarksSelectedQuestionParentParent.Visible = true;
                             labelMarksSelectedQuestionParentParentNum.Visible = true;
