@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AssessmentManager
 {
-    public static class StringExtentionMethods
+    public static class StringExtensionMethods
     {
         public static bool NullOrEmpty(this string str)
         {
