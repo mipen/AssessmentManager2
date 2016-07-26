@@ -42,9 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Answer.cs" />
     <Compile Include="AnswerType.cs" />
     <Compile Include="Assessment.cs" />
-    <Compile Include="AssessmentResultScript.cs" />
+    <Compile Include="AssessmentScript.cs" />
     <Compile Include="BorderlessMove.cs" />
     <Compile Include="BorderlessResize.cs" />
     <Compile Include="CourseInformation.cs" />
@@ -53,6 +54,8 @@
     <Compile Include="Question.cs" />
     <Compile Include="QuestionNode.cs" />
     <Compile Include="StringExtensionMethods.cs" />
+    <Compile Include="StudentData.cs" />
+    <Compile Include="TimeData.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

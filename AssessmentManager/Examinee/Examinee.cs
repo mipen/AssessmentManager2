@@ -146,6 +146,9 @@ namespace AssessmentManager
 
             //Load questions into tree view
             Util.PopulateTreeView(treeViewQuestionDisplay, Assessment);
+
+            //Reset the image tracker
+            ImageTracker.Reset();
         }
 
         public void NotifyAssessmentClosed()
@@ -241,6 +244,7 @@ namespace AssessmentManager
             lblQuestionNumber.Text = question.Name;
 
             //Show the correct answer page and any answer already entered
+            #region Answer
             switch (question.AnswerType)
             {
                 case AnswerType.None:
@@ -311,6 +315,7 @@ namespace AssessmentManager
                         break;
                     }
             }
+            #endregion
 
             //Show or hide the image button
             if (question.Image != null)
@@ -318,11 +323,18 @@ namespace AssessmentManager
                 btnQuestionImage.Enabled = true;
                 btnQuestionImage.Visible = true;
 
-                //Show the image
-                ImageDisplay id = new ImageDisplay(question.Name, question.Image);
-                id.Show();
-                id.TopMost = true;
-                id.BringToFront();
+                //Show the image if not already shown
+                if (!ImageTracker.ImageDisplayShown(question.Name))
+                {
+                    ImageDisplay id = new ImageDisplay(question.Name, question.Image);
+                    id.Show();
+                    id.TopMost = true;
+                    id.BringToFront();
+                }
+                else
+                {
+                    ImageTracker.FindImageDisplay(question.Name).Focus();
+                }
             }
             else
             {
@@ -333,7 +345,7 @@ namespace AssessmentManager
             //TODO:: Update unanswered questions
         }
 
-        #region Button Events
+        #region Control Events
 
         private void buttonExpand_Click(object sender, EventArgs e)
         {
@@ -347,12 +359,22 @@ namespace AssessmentManager
 
         private void buttonPrevQuestion_Click(object sender, EventArgs e)
         {
-
+            QuestionNode node = SelectedNode;
+            if (node != null)
+            {
+                treeViewQuestionDisplay.SelectedNode = node.PrevVisibleNode;
+            }
+            treeViewQuestionDisplay.Focus();
         }
 
         private void buttonNextQuestion_Click(object sender, EventArgs e)
         {
-
+            QuestionNode node = SelectedNode;
+            if (node != null)
+            {
+                treeViewQuestionDisplay.SelectedNode = node.NextVisibleNode;
+            }
+            treeViewQuestionDisplay.Focus();
         }
 
         private void btnQuestionImage_Click(object sender, EventArgs e)
@@ -360,12 +382,24 @@ namespace AssessmentManager
             Question question = SelectedQuestion;
             if (question != null && question.Image != null)
             {
-                //Show the image
-                ImageDisplay id = new ImageDisplay(question.Name, question.Image);
-                id.Show();
-                id.TopMost = true;
-                id.BringToFront();
+                //Show the image if not already shown
+                if (!ImageTracker.ImageDisplayShown(question.Name))
+                {
+                    ImageDisplay id = new ImageDisplay(question.Name, question.Image);
+                    id.Show();
+                    id.TopMost = true;
+                    id.BringToFront();
+                }
+                else
+                {
+                    ImageTracker.FindImageDisplay(question.Name).Focus();
+                }
             }
+        }
+
+        private void trackBarMagnification_Scroll(object sender, EventArgs e)
+        {
+            rtbQuestion.ZoomFactor = trackBarMagnification.Value;
         }
 
         #endregion
@@ -413,5 +447,6 @@ namespace AssessmentManager
         }
 
         #endregion
+
     }
 }

@@ -19,6 +19,12 @@ namespace AssessmentManager
             pbImage.Image = image;
             StartPosition = FormStartPosition.Manual;
             Location = new Point(Screen.PrimaryScreen.WorkingArea.Right - Width, Screen.PrimaryScreen.WorkingArea.Bottom - Height);
+            ImageTracker.RegisterImageDisplay(this);
+        }
+
+        private void ImageDisplay_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ImageTracker.DeregisterImageDisplay(this);
         }
     }
 }

@@ -52,6 +52,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ImageDisplay";
             this.Text = "ImageDisplay";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImageDisplay_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

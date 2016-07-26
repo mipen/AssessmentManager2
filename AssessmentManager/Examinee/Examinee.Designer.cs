@@ -820,11 +820,14 @@
             // trackBarMagnification
             // 
             this.trackBarMagnification.Location = new System.Drawing.Point(180, 0);
+            this.trackBarMagnification.Minimum = 1;
             this.trackBarMagnification.Name = "trackBarMagnification";
             this.trackBarMagnification.Size = new System.Drawing.Size(131, 45);
             this.trackBarMagnification.TabIndex = 3;
             this.trackBarMagnification.TickStyle = System.Windows.Forms.TickStyle.None;
             this.toolTipButtons.SetToolTip(this.trackBarMagnification, "Adjust the size of the question text.");
+            this.trackBarMagnification.Value = 1;
+            this.trackBarMagnification.Scroll += new System.EventHandler(this.trackBarMagnification_Scroll);
             // 
             // pbMagnifyingGlass
             // 
@@ -839,7 +842,6 @@
             // 
             // lblMotivational
             // 
-            this.lblMotivational.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMotivational.AutoSize = true;
             this.lblMotivational.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMotivational.Location = new System.Drawing.Point(301, 66);

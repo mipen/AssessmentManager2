@@ -1,0 +1,13 @@
+﻿- Implement AssessmentScript
+
+- Record answers
+
+- Introduction splash screen
+	- If assessment doesn't have TimeData then prompt for time limit
+
+- Implement things to Assessment
+	- Implement TimeData to Assessment
+	- StudentData
+	- Some way of telling if it was published or not. If not published then give practise run.
+	- Fill out course information.
+	- Remove Date created from constructor.

@@ -7,14 +7,7 @@ using System.Threading.Tasks;
 namespace AssessmentManager
 {
     [Serializable]
-    public class AssessmentResultScript
+    public class Answer
     {
-        public AssessmentResultScript()
-        {
-
-        }
-
-        private Assessment _assessment;
-
     }
 }
