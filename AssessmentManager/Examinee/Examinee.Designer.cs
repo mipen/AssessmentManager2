@@ -68,9 +68,9 @@
             this.tableLayoutQuestionAnswer = new System.Windows.Forms.TableLayoutPanel();
             this.panelQuestionContainer = new System.Windows.Forms.Panel();
             this.panelQuestion = new System.Windows.Forms.Panel();
-            this.buttonShowQuestionImage = new System.Windows.Forms.Button();
+            this.btnQuestionImage = new System.Windows.Forms.Button();
             this.rtbQuestion = new System.Windows.Forms.RichTextBox();
-            this.labelQuestionNumber = new System.Windows.Forms.Label();
+            this.lblQuestionNumber = new System.Windows.Forms.Label();
             this.panelAnswerContainer = new System.Windows.Forms.Panel();
             this.labelAnswerText = new System.Windows.Forms.Label();
             this.tlpMultiAnswerContainer = new System.Windows.Forms.TableLayoutPanel();
@@ -152,8 +152,7 @@
             // 
             // buttonSubmitAssessment
             // 
-            this.buttonSubmitAssessment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSubmitAssessment.Location = new System.Drawing.Point(174, 39);
+            this.buttonSubmitAssessment.Location = new System.Drawing.Point(324, 39);
             this.buttonSubmitAssessment.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSubmitAssessment.Name = "buttonSubmitAssessment";
             this.buttonSubmitAssessment.Size = new System.Drawing.Size(104, 26);
@@ -527,9 +526,9 @@
             // 
             // panelQuestion
             // 
-            this.panelQuestion.Controls.Add(this.buttonShowQuestionImage);
+            this.panelQuestion.Controls.Add(this.btnQuestionImage);
             this.panelQuestion.Controls.Add(this.rtbQuestion);
-            this.panelQuestion.Controls.Add(this.labelQuestionNumber);
+            this.panelQuestion.Controls.Add(this.lblQuestionNumber);
             this.panelQuestion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelQuestion.Location = new System.Drawing.Point(0, 0);
             this.panelQuestion.Margin = new System.Windows.Forms.Padding(2);
@@ -537,16 +536,18 @@
             this.panelQuestion.Size = new System.Drawing.Size(460, 139);
             this.panelQuestion.TabIndex = 2;
             // 
-            // buttonShowQuestionImage
+            // btnQuestionImage
             // 
-            this.buttonShowQuestionImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonShowQuestionImage.Location = new System.Drawing.Point(402, 2);
-            this.buttonShowQuestionImage.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonShowQuestionImage.Name = "buttonShowQuestionImage";
-            this.buttonShowQuestionImage.Size = new System.Drawing.Size(56, 21);
-            this.buttonShowQuestionImage.TabIndex = 2;
-            this.buttonShowQuestionImage.Text = "Image";
-            this.buttonShowQuestionImage.UseVisualStyleBackColor = true;
+            this.btnQuestionImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnQuestionImage.Location = new System.Drawing.Point(402, 0);
+            this.btnQuestionImage.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuestionImage.Name = "btnQuestionImage";
+            this.btnQuestionImage.Size = new System.Drawing.Size(56, 21);
+            this.btnQuestionImage.TabIndex = 2;
+            this.btnQuestionImage.Text = "&Image";
+            this.btnQuestionImage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnQuestionImage.UseVisualStyleBackColor = true;
+            this.btnQuestionImage.Click += new System.EventHandler(this.btnQuestionImage_Click);
             // 
             // rtbQuestion
             // 
@@ -562,16 +563,16 @@
             this.rtbQuestion.TabIndex = 1;
             this.rtbQuestion.Text = "";
             // 
-            // labelQuestionNumber
+            // lblQuestionNumber
             // 
-            this.labelQuestionNumber.AutoSize = true;
-            this.labelQuestionNumber.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelQuestionNumber.Location = new System.Drawing.Point(0, 0);
-            this.labelQuestionNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelQuestionNumber.Name = "labelQuestionNumber";
-            this.labelQuestionNumber.Size = new System.Drawing.Size(49, 13);
-            this.labelQuestionNumber.TabIndex = 0;
-            this.labelQuestionNumber.Text = "Question";
+            this.lblQuestionNumber.AutoSize = true;
+            this.lblQuestionNumber.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblQuestionNumber.Location = new System.Drawing.Point(0, 0);
+            this.lblQuestionNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblQuestionNumber.Name = "lblQuestionNumber";
+            this.lblQuestionNumber.Size = new System.Drawing.Size(49, 13);
+            this.lblQuestionNumber.TabIndex = 0;
+            this.lblQuestionNumber.Text = "Question";
             // 
             // panelAnswerContainer
             // 
@@ -650,6 +651,7 @@
             this.rbOptionD.TabStop = true;
             this.rbOptionD.Text = "radioButton1";
             this.rbOptionD.UseVisualStyleBackColor = true;
+            this.rbOptionD.Click += new System.EventHandler(this.rbOptionD_Click);
             // 
             // tlpOptionC
             // 
@@ -687,6 +689,7 @@
             this.rbOptionC.TabStop = true;
             this.rbOptionC.Text = "radioButton1";
             this.rbOptionC.UseVisualStyleBackColor = true;
+            this.rbOptionC.Click += new System.EventHandler(this.rbOptionC_Click);
             // 
             // tlpOptionB
             // 
@@ -724,6 +727,7 @@
             this.rbOptionB.TabStop = true;
             this.rbOptionB.Text = "radioButton1";
             this.rbOptionB.UseVisualStyleBackColor = true;
+            this.rbOptionB.Click += new System.EventHandler(this.rbOptionB_Click);
             // 
             // tlpOptionA
             // 
@@ -751,6 +755,7 @@
             this.rbOptionA.TabStop = true;
             this.rbOptionA.Text = "radioButton1";
             this.rbOptionA.UseVisualStyleBackColor = true;
+            this.rbOptionA.Click += new System.EventHandler(this.rbOptionA_Click);
             // 
             // labelOptionA
             // 
@@ -814,7 +819,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(401, 358);
+            this.MinimumSize = new System.Drawing.Size(672, 492);
             this.Name = "Examinee";
             this.Padding = new System.Windows.Forms.Padding(8, 0, 8, 8);
             this.Text = "Examinee";
@@ -886,9 +891,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutQuestionAnswer;
         private System.Windows.Forms.Panel panelQuestionContainer;
         private System.Windows.Forms.Panel panelQuestion;
-        private System.Windows.Forms.Button buttonShowQuestionImage;
+        private System.Windows.Forms.Button btnQuestionImage;
         private System.Windows.Forms.RichTextBox rtbQuestion;
-        private System.Windows.Forms.Label labelQuestionNumber;
+        private System.Windows.Forms.Label lblQuestionNumber;
         private System.Windows.Forms.Panel panelAnswerContainer;
         private System.Windows.Forms.Label labelAnswerText;
         private System.Windows.Forms.Panel panelAnswerShortContainer;

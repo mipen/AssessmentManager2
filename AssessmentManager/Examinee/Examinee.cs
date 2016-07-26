@@ -46,7 +46,7 @@ namespace AssessmentManager
         {
             get
             {
-                return ((QuestionNode)treeViewQuestionDisplay.SelectedNode).Question;
+                return SelectedNode.Question;
             }
         }
 
@@ -218,14 +218,28 @@ namespace AssessmentManager
 
         private void treeViewQuestionDisplay_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            Question question;
+            try
+            {
+                question = SelectedQuestion;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong, tried to display null question.\n\n" + ex.Message);
+                return;
+            }
+
             //Display the question text
-            rtbQuestion.Rtf = SelectedQuestion?.QuestionText;
+            rtbQuestion.Rtf = question.QuestionText;
 
             //Update the marks display
             UpdateMarksDisplay();
 
+            //Show the question name
+            lblQuestionNumber.Text = question.Name;
+
             //Show the correct answer page and any answer already entered
-            switch (SelectedQuestion?.AnswerType)
+            switch (question.AnswerType)
             {
                 case AnswerType.None:
                     {
@@ -297,8 +311,27 @@ namespace AssessmentManager
             }
 
             //Show or hide the image button
-            //TODO:: Show/hide the image button
+            if (question.Image != null)
+            {
+                btnQuestionImage.Enabled = true;
+                btnQuestionImage.Visible = true;
+
+                //Show the image
+                ImageDisplay id = new ImageDisplay(question.Name, question.Image);
+                id.Show();
+                id.TopMost = true;
+                id.BringToFront();
+            }
+            else
+            {
+                btnQuestionImage.Enabled = false;
+                btnQuestionImage.Visible = false;
+            }
+
+            //TODO:: Update unanswered questions
         }
+
+        #region Button Events
 
         private void buttonExpand_Click(object sender, EventArgs e)
         {
@@ -319,5 +352,64 @@ namespace AssessmentManager
         {
 
         }
+
+        private void btnQuestionImage_Click(object sender, EventArgs e)
+        {
+            Question question = SelectedQuestion;
+            if (question != null && question.Image != null)
+            {
+                //Show the image
+                ImageDisplay id = new ImageDisplay(question.Name, question.Image);
+                id.Show();
+                id.TopMost = true;
+                id.BringToFront();
+            }
+        }
+
+        #endregion
+
+        #region Radio Buttons
+
+        private void rbOptionA_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = true;
+            rbOptionB.Checked = false;
+            rbOptionC.Checked = false;
+            rbOptionD.Checked = false;
+
+            //TODO:: record answer
+        }
+
+        private void rbOptionB_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = false;
+            rbOptionB.Checked = true;
+            rbOptionC.Checked = false;
+            rbOptionD.Checked = false;
+
+            //TODO:: record answer
+        }
+
+        private void rbOptionC_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = false;
+            rbOptionB.Checked = false;
+            rbOptionC.Checked = true;
+            rbOptionD.Checked = false;
+
+            //TODO:: record answer
+        }
+
+        private void rbOptionD_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = false;
+            rbOptionB.Checked = false;
+            rbOptionC.Checked = false;
+            rbOptionD.Checked = true;
+
+            //TODO:: record answer
+        }
+
+        #endregion
     }
 }

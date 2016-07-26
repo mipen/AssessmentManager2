@@ -16,7 +16,7 @@ namespace AssessmentManager
 
         public ImageSelector(string text) : this()
         {
-            Text = text;
+            Text = text + " Image";
         }
 
         public ImageSelector (string text, Bitmap image) : this(text)
