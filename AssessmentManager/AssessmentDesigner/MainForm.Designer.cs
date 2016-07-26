@@ -82,8 +82,6 @@
             this.labelQuestion = new System.Windows.Forms.Label();
             this.panelAnswerAreaContainer = new System.Windows.Forms.Panel();
             this.panelAnswersContainer = new System.Windows.Forms.Panel();
-            this.panelAnswerOpen = new System.Windows.Forms.Panel();
-            this.richTextBoxAnswerOpen = new System.Windows.Forms.RichTextBox();
             this.panelAnswerMultiChoice = new System.Windows.Forms.Panel();
             this.tableLayoutPanelAnswerMultiChoiceContainer = new System.Windows.Forms.TableLayoutPanel();
             this.panelMultiChoiceOptionsContainer = new System.Windows.Forms.Panel();
@@ -102,6 +100,8 @@
             this.tableLayoutPanelMultiChoiceA = new System.Windows.Forms.TableLayoutPanel();
             this.labelA = new System.Windows.Forms.Label();
             this.textBoxMultiChoiceA = new System.Windows.Forms.TextBox();
+            this.panelAnswerOpen = new System.Windows.Forms.Panel();
+            this.richTextBoxAnswerOpen = new System.Windows.Forms.RichTextBox();
             this.panelAnswerSingle = new System.Windows.Forms.TableLayoutPanel();
             this.panelAnswerSingleAcceptableContainer = new System.Windows.Forms.Panel();
             this.richTextBoxAnswerSingleAcceptable = new System.Windows.Forms.RichTextBox();
@@ -156,7 +156,6 @@
             this.panelQuestionNameContainer.SuspendLayout();
             this.panelAnswerAreaContainer.SuspendLayout();
             this.panelAnswersContainer.SuspendLayout();
-            this.panelAnswerOpen.SuspendLayout();
             this.panelAnswerMultiChoice.SuspendLayout();
             this.tableLayoutPanelAnswerMultiChoiceContainer.SuspendLayout();
             this.panelMultiChoiceOptionsContainer.SuspendLayout();
@@ -165,6 +164,7 @@
             this.tableLayoutPanelMultiChoiceC.SuspendLayout();
             this.tableLayoutPanelMultiChoiceB.SuspendLayout();
             this.tableLayoutPanelMultiChoiceA.SuspendLayout();
+            this.panelAnswerOpen.SuspendLayout();
             this.panelAnswerSingle.SuspendLayout();
             this.panelAnswerSingleAcceptableContainer.SuspendLayout();
             this.panelAnswerTools.SuspendLayout();
@@ -622,6 +622,7 @@
             this.toolStripButtonAddImage.Name = "toolStripButtonAddImage";
             this.toolStripButtonAddImage.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAddImage.Text = "Add Image";
+            this.toolStripButtonAddImage.Click += new System.EventHandler(this.toolStripButtonAddImage_Click);
             // 
             // panelQuestionNameContainer
             // 
@@ -667,28 +668,6 @@
             this.panelAnswersContainer.Name = "panelAnswersContainer";
             this.panelAnswersContainer.Size = new System.Drawing.Size(689, 209);
             this.panelAnswersContainer.TabIndex = 2;
-            // 
-            // panelAnswerOpen
-            // 
-            this.panelAnswerOpen.Controls.Add(this.richTextBoxAnswerOpen);
-            this.panelAnswerOpen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAnswerOpen.Location = new System.Drawing.Point(0, 0);
-            this.panelAnswerOpen.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAnswerOpen.Name = "panelAnswerOpen";
-            this.panelAnswerOpen.Size = new System.Drawing.Size(689, 209);
-            this.panelAnswerOpen.TabIndex = 0;
-            // 
-            // richTextBoxAnswerOpen
-            // 
-            this.richTextBoxAnswerOpen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBoxAnswerOpen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxAnswerOpen.Location = new System.Drawing.Point(0, 0);
-            this.richTextBoxAnswerOpen.Margin = new System.Windows.Forms.Padding(2);
-            this.richTextBoxAnswerOpen.Name = "richTextBoxAnswerOpen";
-            this.richTextBoxAnswerOpen.Size = new System.Drawing.Size(689, 209);
-            this.richTextBoxAnswerOpen.TabIndex = 0;
-            this.richTextBoxAnswerOpen.Text = "";
-            this.richTextBoxAnswerOpen.TextChanged += new System.EventHandler(this.richTextBoxAnswerOpen_TextChanged);
             // 
             // panelAnswerMultiChoice
             // 
@@ -925,6 +904,28 @@
             this.textBoxMultiChoiceA.Size = new System.Drawing.Size(312, 20);
             this.textBoxMultiChoiceA.TabIndex = 1;
             this.textBoxMultiChoiceA.TextChanged += new System.EventHandler(this.textBoxMultiChoiceA_TextChanged);
+            // 
+            // panelAnswerOpen
+            // 
+            this.panelAnswerOpen.Controls.Add(this.richTextBoxAnswerOpen);
+            this.panelAnswerOpen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnswerOpen.Location = new System.Drawing.Point(0, 0);
+            this.panelAnswerOpen.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAnswerOpen.Name = "panelAnswerOpen";
+            this.panelAnswerOpen.Size = new System.Drawing.Size(689, 209);
+            this.panelAnswerOpen.TabIndex = 0;
+            // 
+            // richTextBoxAnswerOpen
+            // 
+            this.richTextBoxAnswerOpen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBoxAnswerOpen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxAnswerOpen.Location = new System.Drawing.Point(0, 0);
+            this.richTextBoxAnswerOpen.Margin = new System.Windows.Forms.Padding(2);
+            this.richTextBoxAnswerOpen.Name = "richTextBoxAnswerOpen";
+            this.richTextBoxAnswerOpen.Size = new System.Drawing.Size(689, 209);
+            this.richTextBoxAnswerOpen.TabIndex = 0;
+            this.richTextBoxAnswerOpen.Text = "";
+            this.richTextBoxAnswerOpen.TextChanged += new System.EventHandler(this.richTextBoxAnswerOpen_TextChanged);
             // 
             // panelAnswerSingle
             // 
@@ -1402,7 +1403,6 @@
             this.panelQuestionNameContainer.ResumeLayout(false);
             this.panelAnswerAreaContainer.ResumeLayout(false);
             this.panelAnswersContainer.ResumeLayout(false);
-            this.panelAnswerOpen.ResumeLayout(false);
             this.panelAnswerMultiChoice.ResumeLayout(false);
             this.tableLayoutPanelAnswerMultiChoiceContainer.ResumeLayout(false);
             this.panelMultiChoiceOptionsContainer.ResumeLayout(false);
@@ -1416,6 +1416,7 @@
             this.tableLayoutPanelMultiChoiceB.PerformLayout();
             this.tableLayoutPanelMultiChoiceA.ResumeLayout(false);
             this.tableLayoutPanelMultiChoiceA.PerformLayout();
+            this.panelAnswerOpen.ResumeLayout(false);
             this.panelAnswerSingle.ResumeLayout(false);
             this.panelAnswerSingleAcceptableContainer.ResumeLayout(false);
             this.panelAnswerSingleAcceptableContainer.PerformLayout();

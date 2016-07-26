@@ -13,7 +13,6 @@ namespace AssessmentManager
 
         public QuestionNode(Question question)
         {
-            //TODO:: set the text from the quesiton name
             Question = question;
             Text = question.Name;
         }

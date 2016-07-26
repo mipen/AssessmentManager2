@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace AssessmentManager
         private MultiChoiceOption correctOption = MultiChoiceOption.A;
         private AnswerType answerType = AnswerType.Open;
         private List<Question> subQuestions = new List<Question>();
+        private Bitmap image;
 
         public Question()
         {
@@ -42,6 +44,18 @@ namespace AssessmentManager
             set
             {
                 questionText = value;
+            }
+        }
+
+        public Bitmap Image
+        {
+            get
+            {
+                return image;
+            }
+            set
+            {
+                image = value;
             }
         }
 

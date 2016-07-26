@@ -1273,5 +1273,28 @@ namespace AssessmentManager
             Settings.Instance.Save();
         }
 
+        private void toolStripButtonAddImage_Click(object sender, EventArgs e)
+        {
+            QuestionNode qn = (QuestionNode)treeViewQuestionList.SelectedNode;
+            if(qn!= null)
+            {
+                Question q = qn.Question;
+                ImageSelector i;
+
+                if (q.Image != null)
+                {
+                    i = new ImageSelector(q.Name, q.Image);
+                }
+                else
+                {
+                    i = new ImageSelector(q.Name);
+                }
+
+                if (i.ShowDialog() == DialogResult.OK)
+                {
+                    q.Image = i.Image;
+                }
+            }
+        }
     }
 }
