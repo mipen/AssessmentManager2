@@ -23,12 +23,14 @@ namespace AssessmentManager
         public Examinee()
         {
             InitializeComponent();
+            buttonSubmitAssessment.UseCompatibleTextRendering = true;
             NotifyAssessmentClosed();
         }
 
         public Examinee(string path)
         {
             InitializeComponent();
+            buttonSubmitAssessment.UseCompatibleTextRendering = true;
             OpenFromFile(path);
             if (treeViewQuestionDisplay.Nodes.Count > 0)
             {

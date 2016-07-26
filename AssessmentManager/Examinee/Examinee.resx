@@ -123,10 +123,25 @@
   <metadata name="toolTipButtons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
+  <metadata name="toolTipButtons.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>132, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pbMagnifyingGlass.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAE7SURBVDhPnZI/S8NQFMWzKZkcHaSDBNeQv1NrJif9Fk7F
+        wVgpSj9TKaXfQkoVFMVBJ8GPUOvm78RbktAEqQcu7553zznvvTZOG7Is2w3D8DoIgvsoilYq+gXrled5
+        OyZrBqIO9UzAmLWrMAvswScEPaVpemDyOiSUmRqIJ0lyhDFn3S8EAD5USONNdG2drJ6Qc/q+7/t7xbAC
+        9qdUbrSEvblrJ/dtewPojtHNjZZgc2XvzZtOXgOdS8jSaAkG3wqovrkJrQFsLji9Z7QVcRxnjU/APGIw
+        MdoKNDO0l0Z/QeohN3il3hgObXsDmG/RPNb+xrWZ4Yk+Evp3Qqas+rVdlV17JnPtQ6qaxTGe0r9QN9Sc
+        2Re1VK9rt54sXjF3CsFfwPDwb7OA6QODy3q2tVnAeMETPqm7rc2O4/wAN0V011g6KH8AAAAASUVORK5C
+        YII=
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>46</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAYAAAAAAAEAIAAoIAQAZgAAABAQAAABACAAaAQAAI4gBAAwMAAAAQAgAKglAAD2JAQAICAAAAEA

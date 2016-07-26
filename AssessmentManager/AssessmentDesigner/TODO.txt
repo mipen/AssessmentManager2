@@ -18,3 +18,5 @@
 	- Images for questions
 
 	- When a question has no answer type and has sub questions, display the total amount of marks.
+
+	- About window: display information for icons; licenses + links and acknowledgement. My information. Acknowledgement of original program.
