@@ -49,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntryForm.cs">
+    <Compile Include="TimeConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EntryForm.Designer.cs">
-      <DependentUpon>EntryForm.cs</DependentUpon>
+    <Compile Include="TimeConfig.Designer.cs">
+      <DependentUpon>TimeConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Examinee.cs">
       <SubType>Form</SubType>
@@ -68,16 +68,25 @@
       <DependentUpon>ImageDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageTracker.cs" />
+    <Compile Include="IntroductionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IntroductionForm.Designer.cs">
+      <DependentUpon>IntroductionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="EntryForm.resx">
-      <DependentUpon>EntryForm.cs</DependentUpon>
+    <EmbeddedResource Include="TimeConfig.resx">
+      <DependentUpon>TimeConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Examinee.resx">
       <DependentUpon>Examinee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageDisplay.resx">
       <DependentUpon>ImageDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IntroductionForm.resx">
+      <DependentUpon>IntroductionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

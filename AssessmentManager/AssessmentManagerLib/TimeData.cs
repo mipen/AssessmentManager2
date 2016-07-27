@@ -9,5 +9,71 @@ namespace AssessmentManager
     [Serializable]
     public class TimeData
     {
+        private DateTime plannedDate;
+        private bool dateIsPlanned = false;
+
+        //The number of minutes for the assessment
+        private int minutes = 0;
+        private bool minutesArePlanned = false;
+
+        //Reading time
+        private int readingMinutes = 0;
+
+        //The time that the user started the assessment
+        public DateTime TimeStarted;
+
+        public TimeData()
+        {
+
+        }
+
+        public bool MinutesArePlanned
+        {
+            get
+            {
+                return minutesArePlanned;
+            }
+            set
+            {
+                minutesArePlanned = value;
+            }
+        }
+
+        public int Minutes
+        {
+            get
+            {
+                return minutes;
+            }
+            set
+            {
+                minutes = value;
+            }
+        }
+
+        public DateTime PlannedDate
+        {
+            get
+            {
+                return plannedDate;
+            }
+            set
+            {
+                plannedDate = value;
+            }
+        }
+
+        public bool DateIsPlanned
+        {
+            get
+            {
+                return dateIsPlanned;
+            }
+            set
+            {
+                dateIsPlanned = value;
+            }
+        }
+
     }
 }

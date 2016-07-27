@@ -11,20 +11,16 @@ namespace AssessmentManager
     public class Assessment
     {
         private List<Question> questions = new List<Question>();
-        private DateTime dateCreated;
-        private CourseInformation course = new CourseInformation();
+        private CourseInformation courseInformation = new CourseInformation();
+
+        public TimeData TimeData = null;
+        public StudentData StudentData = null;
+
+        private bool published = false;
 
         public Assessment()
         {
 
-        }
-        /// <summary>
-        /// Constructor used for creating a new assessment.
-        /// </summary>
-        /// <param name="createdDateTime">The current date and time the assessment was created.</param>
-        public Assessment(DateTime createdDateTime)
-        {
-            DateCreated = createdDateTime;
         }
 
         public int TotalMarks
@@ -40,14 +36,31 @@ namespace AssessmentManager
             }
         }
 
+        //TODO:: Set this to true when publishing assessment
+        public bool Published
+        {
+            get
+            {
+                return published;
+            }
+            set
+            {
+                published = value;
+            }
+        }
+
         public List<Question> Questions => questions;
 
-        public CourseInformation Course => course;
-
-        public DateTime DateCreated
+        public CourseInformation CourseInformation
         {
-            get { return dateCreated; }
-            set { dateCreated = value; }
+            get
+            {
+               return courseInformation;
+            }
+            set
+            {
+                courseInformation = value;
+            }
         }
 
         #region Add Question Methods

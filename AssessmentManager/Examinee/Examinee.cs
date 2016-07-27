@@ -17,8 +17,6 @@ namespace AssessmentManager
 
         private Assessment assessment;
         private FileInfo file;
-        private string DefaultPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
 
         public Examinee()
         {
@@ -113,9 +111,9 @@ namespace AssessmentManager
         public void OpenFromFile()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = $"Assessment File (*{Util.ASSESSMENT_EXT}) | *{Util.ASSESSMENT_EXT}";
-            ofd.DefaultExt = Util.ASSESSMENT_EXT.Remove(0, 1);
-            ofd.InitialDirectory = DefaultPath;
+            ofd.Filter = CONSTANTS.COMBINED_FILTER;
+            ofd.DefaultExt = CONSTANTS.ASSESSMENT_EXT.Remove(0, 1);
+            ofd.InitialDirectory = CONSTANTS.DESKTOP_PATH;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {

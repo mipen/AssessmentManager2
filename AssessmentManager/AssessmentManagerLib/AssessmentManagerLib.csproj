@@ -48,6 +48,7 @@
     <Compile Include="AssessmentScript.cs" />
     <Compile Include="BorderlessMove.cs" />
     <Compile Include="BorderlessResize.cs" />
+    <Compile Include="CONSTANTS.cs" />
     <Compile Include="CourseInformation.cs" />
     <Compile Include="MultiChoiceOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

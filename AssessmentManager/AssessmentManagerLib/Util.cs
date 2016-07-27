@@ -10,8 +10,6 @@ namespace AssessmentManager
     public static class Util
     {
 
-        public static readonly string ASSESSMENT_EXT = ".exm";
-
         public static void PopulateTreeView(TreeView treeView, Assessment assessment)
         {
             treeView.Nodes.Clear();

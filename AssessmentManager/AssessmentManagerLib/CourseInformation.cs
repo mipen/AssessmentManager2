@@ -9,7 +9,10 @@ namespace AssessmentManager
     [Serializable]
     public class CourseInformation
     {
-        public string CourseCode;
-        public string Author;
+        public string CourseName        = "";
+        public string CourseCode        = "";
+        public string AssessmentName    = "";
+        public string Author            = "";
+        public int AssessmentWeighting = 0;
     }
 }

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using static AssessmentManager.CONSTANTS;
 
 namespace AssessmentManager
 {
@@ -24,8 +25,6 @@ namespace AssessmentManager
         private SaveFileDialog mainSaveFileDialog = new SaveFileDialog();
         private OpenFileDialog openFileDialog = new OpenFileDialog();
 
-        public const string AssessmentExtension = ".exm";
-        public const string XMLExtension = ".xml";
         private string DefaultPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         public const int MaxNumSubQuestionLevels = 3;
@@ -39,18 +38,18 @@ namespace AssessmentManager
             NotifyAssessmentClosed();
 
             //Initialise the xml save file dialog
-            xmlSaveFileDialog.Filter = $"XML Document (*{XMLExtension}) | *{XMLExtension}";
-            xmlSaveFileDialog.DefaultExt = XMLExtension.Remove(0, 1);
-            xmlSaveFileDialog.InitialDirectory = DefaultPath;
+            xmlSaveFileDialog.Filter = XML_FILTER;
+            xmlSaveFileDialog.DefaultExt = XML_EXT.Remove(0, 1);
+            xmlSaveFileDialog.InitialDirectory = DESKTOP_PATH;
 
             //Initialise main save file dialog
-            mainSaveFileDialog.Filter = $"Assessment File (*{AssessmentExtension}) | *{AssessmentExtension}";
-            mainSaveFileDialog.DefaultExt = AssessmentExtension.Remove(0, 1);
+            mainSaveFileDialog.Filter = ASSESSMENT_FILTER;
+            mainSaveFileDialog.DefaultExt = ASSESSMENT_EXT.Remove(0, 1);
 
             //Initialise open file dialog
-            openFileDialog.InitialDirectory = DefaultPath;
-            openFileDialog.Filter = $"Assessment File (*{AssessmentExtension}) | *{AssessmentExtension}";
-            openFileDialog.DefaultExt = AssessmentExtension.Remove(0, 1);
+            openFileDialog.InitialDirectory = DESKTOP_PATH;
+            openFileDialog.Filter = ASSESSMENT_FILTER;
+            openFileDialog.DefaultExt = ASSESSMENT_EXT.Remove(0, 1);
 
             //Initialise the recent files menu
             UpdateRecentFiles();
@@ -190,13 +189,18 @@ namespace AssessmentManager
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO:: If a file is already open, check for changes and ask if the user wants to save.
-            //TODO:: Display a dialog which asks for the course information
-
-            Assessment = new Assessment(DateTime.Now);
-            Assessment.AddQuestion("Question 1");
-            NotifyAssessmentOpened();
-            changesMade = true;
+            if (CloseAssessment() == DialogResult.OK)
+            {
+                CourseInformationForm cif = new CourseInformationForm();
+                if (cif.ShowDialog() == DialogResult.OK)
+                {
+                    Assessment = new Assessment();
+                    Assessment.AddQuestion("Question 1");
+                    CourseInformationForm.PopulateCourseInformation(Assessment, cif);
+                    NotifyAssessmentOpened();
+                    changesMade = true;
+                }
+            }
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -283,16 +287,11 @@ namespace AssessmentManager
         {
             if (HasAssessmentOpen)
             {
-                CourseInformationForm cif = new CourseInformationForm();
-                if (Assessment.Course.CourseCode != "" && Assessment.Course.CourseCode != null)
-                {
-                    cif.CourseCode = Assessment.Course.CourseCode;
-                }
-                cif.Author = Assessment.Course.Author;
+                CourseInformationForm cif = CourseInformationForm.FromAssessment(Assessment);
                 if (cif.ShowDialog() == DialogResult.OK)
                 {
-                    Assessment.Course.Author = cif.Author;
-                    Assessment.Course.CourseCode = cif.CourseCode;
+                    CourseInformationForm.PopulateCourseInformation(Assessment, cif);
+                    ChangesMade = true;
                 }
             }
         }
@@ -1276,7 +1275,7 @@ namespace AssessmentManager
         private void toolStripButtonAddImage_Click(object sender, EventArgs e)
         {
             QuestionNode qn = (QuestionNode)treeViewQuestionList.SelectedNode;
-            if(qn!= null)
+            if (qn != null)
             {
                 Question q = qn.Question;
                 ImageSelector i;

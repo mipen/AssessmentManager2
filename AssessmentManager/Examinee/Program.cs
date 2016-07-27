@@ -18,15 +18,11 @@ namespace AssessmentManager
             Application.SetCompatibleTextRenderingDefault(false);
             if (args.Count() > 0)
             {
-                //TODO:: Implement splash screen
-                //Application.Run(new EntryForm(args[0]));
-
-                //Test
-                Application.Run(new Examinee(args[0]));
+                Application.Run(new IntroductionForm(args[0]));
             }
             else
             {
-                Application.Run(new Examinee());
+                Application.Run(new IntroductionForm());
             }
         }
     }
