@@ -17,3 +17,12 @@
 
 - Record time began, time remaining, finish time
 
+- Include a mode system: ReadOnlyMode, WritingMode
+	- Different timer for each
+
+- Controller for message area to display messages to the user (the 'motivational' label)
+	- 10 minutes remaining warning
+	- Reading time over message
+
+- Event for when time runs out
+

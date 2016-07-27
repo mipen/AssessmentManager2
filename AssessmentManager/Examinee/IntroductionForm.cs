@@ -17,18 +17,22 @@ namespace AssessmentManager
     {
 
         private Assessment assessment = null;
-        private AssessmentScript assessmentScript = null;
+        private AssessmentScript script = null;
 
-        public IntroductionForm()
+        public IntroductionForm(string[] args)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
-            NotifyNothingOpened();
-        }
-
-        public IntroductionForm(string path) : this()
-        {
-            OpenFromFile(path);
+            DateTime dt = DateTime.Now;
+            lblDateTimeDisp.Text = dt.ToLongDateString() + " " + dt.ToLongTimeString();
+            if (args.Count() > 0)
+            {
+                OpenFromFile(args[0]);
+            }
+            else
+            {
+                NotifyNothingOpened();
+            }
         }
 
         #region Events
@@ -64,22 +68,21 @@ namespace AssessmentManager
                 string ext = Path.GetExtension(path);
                 if (ext == ASSESSMENT_EXT)
                 {
-                    //TODO:: Open assessment
                     try
                     {
-                        using(FileStream s = File.Open(path, FileMode.Open))
+                        using (FileStream s = File.Open(path, FileMode.Open))
                         {
                             BinaryFormatter f = new BinaryFormatter();
                             assessment = (Assessment)f.Deserialize(s);
                             NotifyAssessmentOpened();
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MessageBox.Show("Unable to load file.\n" + ex.Message);
                     }
                 }
-                else if(ext == ASSESSMENT_SCRIPT_EXT)
+                else if (ext == ASSESSMENT_SCRIPT_EXT)
                 {
                     //TODO:: Open assessment script
                 }
@@ -127,7 +130,7 @@ namespace AssessmentManager
 
             //Build the assessment script
             AssessmentScript script = AssessmentScript.BuildFromAssessment(assessment);
-            assessmentScript = script;
+            this.script = script;
 
             //Determine if the assessment is published or not and show the correct window
             if (assessment.Published)
@@ -180,11 +183,23 @@ namespace AssessmentManager
 
         private void btnYesPractice_Click(object sender, EventArgs e)
         {
+            //Ask for the time allowed for the assessment. TimeData should never be null here
             TimeConfig tc = new TimeConfig(false);
+            tc.AssessmentTime = script.TimeData.Minutes;
+            tc.ReadingTime = script.TimeData.ReadingMinutes;
+
             if (tc.ShowDialog() == DialogResult.OK)
             {
-                return;
+                script.TimeData.Minutes = tc.AssessmentTime;
+                script.TimeData.ReadingMinutes = tc.ReadingTime;
             }
+
+            //Set the start time
+            script.TimeData.TimeStarted = DateTime.Now;
+
+            Examinee ex = new Examinee(script);
+            ex.Show();
+            Hide();
         }
 
         private void btnNoPractice_Click(object sender, EventArgs e)

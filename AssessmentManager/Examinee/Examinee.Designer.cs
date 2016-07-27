@@ -31,23 +31,19 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Examinee));
             this.panelTop = new System.Windows.Forms.Panel();
-            this.labelTimeBegan = new System.Windows.Forms.Label();
-            this.labelBeginning = new System.Windows.Forms.Label();
+            this.lblFinishTime = new System.Windows.Forms.Label();
+            this.lblFinish = new System.Windows.Forms.Label();
+            this.lblMotivational = new System.Windows.Forms.Label();
+            this.lblTimeBegan = new System.Windows.Forms.Label();
+            this.lblBeginning = new System.Windows.Forms.Label();
             this.buttonSubmitAssessment = new System.Windows.Forms.Button();
-            this.labelTimeRemainingTimer = new System.Windows.Forms.Label();
-            this.labelTimeRemaining = new System.Windows.Forms.Label();
+            this.lblTimeRemainingTimer = new System.Windows.Forms.Label();
+            this.lblTimeRemaining = new System.Windows.Forms.Label();
             this.progressBarMarksAttempted = new System.Windows.Forms.ProgressBar();
             this.pnlUnanswered = new System.Windows.Forms.Panel();
             this.listBoxUnansweredQuestions = new System.Windows.Forms.ListBox();
             this.labelUnansweredQuestions = new System.Windows.Forms.Label();
             this.labelMarksAttempted = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorSave = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorOpen = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLeft = new System.Windows.Forms.Panel();
             this.panelTreeView = new System.Windows.Forms.Panel();
             this.treeViewQuestionDisplay = new System.Windows.Forms.TreeView();
@@ -68,8 +64,10 @@
             this.tableLayoutQuestionAnswer = new System.Windows.Forms.TableLayoutPanel();
             this.panelQuestionContainer = new System.Windows.Forms.Panel();
             this.panelQuestion = new System.Windows.Forms.Panel();
+            this.pbMagnifyingGlass = new System.Windows.Forms.PictureBox();
             this.btnQuestionImage = new System.Windows.Forms.Button();
             this.rtbQuestion = new System.Windows.Forms.RichTextBox();
+            this.trackBarMagnification = new System.Windows.Forms.TrackBar();
             this.lblQuestionNumber = new System.Windows.Forms.Label();
             this.panelAnswerContainer = new System.Windows.Forms.Panel();
             this.labelAnswerText = new System.Windows.Forms.Label();
@@ -91,14 +89,9 @@
             this.panelAnswerLongContainer = new System.Windows.Forms.Panel();
             this.rtbAnswerLong = new System.Windows.Forms.RichTextBox();
             this.toolTipButtons = new System.Windows.Forms.ToolTip(this.components);
-            this.trackBarMagnification = new System.Windows.Forms.TrackBar();
-            this.pbMagnifyingGlass = new System.Windows.Forms.PictureBox();
-            this.lblMotivational = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.panelTop.SuspendLayout();
             this.pnlUnanswered.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.panelLeft.SuspendLayout();
             this.panelTreeView.SuspendLayout();
             this.panelMarks.SuspendLayout();
@@ -107,6 +100,8 @@
             this.tableLayoutQuestionAnswer.SuspendLayout();
             this.panelQuestionContainer.SuspendLayout();
             this.panelQuestion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMagnifyingGlass)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMagnification)).BeginInit();
             this.panelAnswerContainer.SuspendLayout();
             this.tlpMultiAnswerContainer.SuspendLayout();
             this.tlpOptionD.SuspendLayout();
@@ -115,50 +110,76 @@
             this.tlpOptionA.SuspendLayout();
             this.panelAnswerShortContainer.SuspendLayout();
             this.panelAnswerLongContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarMagnification)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMagnifyingGlass)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTop
             // 
-            this.panelTop.Controls.Add(this.label2);
-            this.panelTop.Controls.Add(this.label1);
+            this.panelTop.Controls.Add(this.lblFinishTime);
+            this.panelTop.Controls.Add(this.lblFinish);
             this.panelTop.Controls.Add(this.lblMotivational);
-            this.panelTop.Controls.Add(this.labelTimeBegan);
-            this.panelTop.Controls.Add(this.labelBeginning);
+            this.panelTop.Controls.Add(this.lblTimeBegan);
+            this.panelTop.Controls.Add(this.lblBeginning);
             this.panelTop.Controls.Add(this.buttonSubmitAssessment);
-            this.panelTop.Controls.Add(this.labelTimeRemainingTimer);
-            this.panelTop.Controls.Add(this.labelTimeRemaining);
+            this.panelTop.Controls.Add(this.lblTimeRemainingTimer);
+            this.panelTop.Controls.Add(this.lblTimeRemaining);
             this.panelTop.Controls.Add(this.progressBarMarksAttempted);
             this.panelTop.Controls.Add(this.pnlUnanswered);
             this.panelTop.Controls.Add(this.labelMarksAttempted);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(8, 24);
+            this.panelTop.Location = new System.Drawing.Point(8, 0);
             this.panelTop.Margin = new System.Windows.Forms.Padding(2);
             this.panelTop.Name = "panelTop";
             this.panelTop.Padding = new System.Windows.Forms.Padding(2);
             this.panelTop.Size = new System.Drawing.Size(735, 100);
             this.panelTop.TabIndex = 0;
             // 
-            // labelTimeBegan
+            // lblFinishTime
             // 
-            this.labelTimeBegan.AutoSize = true;
-            this.labelTimeBegan.Location = new System.Drawing.Point(98, 24);
-            this.labelTimeBegan.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelTimeBegan.Name = "labelTimeBegan";
-            this.labelTimeBegan.Size = new System.Drawing.Size(49, 13);
-            this.labelTimeBegan.TabIndex = 9;
-            this.labelTimeBegan.Text = "00:00:00";
+            this.lblFinishTime.AutoSize = true;
+            this.lblFinishTime.Location = new System.Drawing.Point(98, 44);
+            this.lblFinishTime.Name = "lblFinishTime";
+            this.lblFinishTime.Size = new System.Drawing.Size(49, 13);
+            this.lblFinishTime.TabIndex = 12;
+            this.lblFinishTime.Text = "00:00:00";
             // 
-            // labelBeginning
+            // lblFinish
             // 
-            this.labelBeginning.AutoSize = true;
-            this.labelBeginning.Location = new System.Drawing.Point(4, 24);
-            this.labelBeginning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelBeginning.Name = "labelBeginning";
-            this.labelBeginning.Size = new System.Drawing.Size(66, 13);
-            this.labelBeginning.TabIndex = 8;
-            this.labelBeginning.Text = "Time began:";
+            this.lblFinish.AutoSize = true;
+            this.lblFinish.Location = new System.Drawing.Point(5, 44);
+            this.lblFinish.Name = "lblFinish";
+            this.lblFinish.Size = new System.Drawing.Size(63, 13);
+            this.lblFinish.TabIndex = 11;
+            this.lblFinish.Text = "Finish Time:";
+            // 
+            // lblMotivational
+            // 
+            this.lblMotivational.AutoSize = true;
+            this.lblMotivational.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMotivational.Location = new System.Drawing.Point(301, 66);
+            this.lblMotivational.Name = "lblMotivational";
+            this.lblMotivational.Size = new System.Drawing.Size(93, 20);
+            this.lblMotivational.TabIndex = 10;
+            this.lblMotivational.Text = "motivational";
+            // 
+            // lblTimeBegan
+            // 
+            this.lblTimeBegan.AutoSize = true;
+            this.lblTimeBegan.Location = new System.Drawing.Point(98, 24);
+            this.lblTimeBegan.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTimeBegan.Name = "lblTimeBegan";
+            this.lblTimeBegan.Size = new System.Drawing.Size(49, 13);
+            this.lblTimeBegan.TabIndex = 9;
+            this.lblTimeBegan.Text = "00:00:00";
+            // 
+            // lblBeginning
+            // 
+            this.lblBeginning.AutoSize = true;
+            this.lblBeginning.Location = new System.Drawing.Point(4, 24);
+            this.lblBeginning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBeginning.Name = "lblBeginning";
+            this.lblBeginning.Size = new System.Drawing.Size(66, 13);
+            this.lblBeginning.TabIndex = 8;
+            this.lblBeginning.Text = "Time began:";
             // 
             // buttonSubmitAssessment
             // 
@@ -170,25 +191,25 @@
             this.buttonSubmitAssessment.Text = "Submit";
             this.buttonSubmitAssessment.UseVisualStyleBackColor = true;
             // 
-            // labelTimeRemainingTimer
+            // lblTimeRemainingTimer
             // 
-            this.labelTimeRemainingTimer.AutoSize = true;
-            this.labelTimeRemainingTimer.Location = new System.Drawing.Point(98, 64);
-            this.labelTimeRemainingTimer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelTimeRemainingTimer.Name = "labelTimeRemainingTimer";
-            this.labelTimeRemainingTimer.Size = new System.Drawing.Size(49, 13);
-            this.labelTimeRemainingTimer.TabIndex = 6;
-            this.labelTimeRemainingTimer.Text = "00:00:00";
+            this.lblTimeRemainingTimer.AutoSize = true;
+            this.lblTimeRemainingTimer.Location = new System.Drawing.Point(98, 64);
+            this.lblTimeRemainingTimer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTimeRemainingTimer.Name = "lblTimeRemainingTimer";
+            this.lblTimeRemainingTimer.Size = new System.Drawing.Size(49, 13);
+            this.lblTimeRemainingTimer.TabIndex = 6;
+            this.lblTimeRemainingTimer.Text = "00:00:00";
             // 
-            // labelTimeRemaining
+            // lblTimeRemaining
             // 
-            this.labelTimeRemaining.AutoSize = true;
-            this.labelTimeRemaining.Location = new System.Drawing.Point(4, 64);
-            this.labelTimeRemaining.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelTimeRemaining.Name = "labelTimeRemaining";
-            this.labelTimeRemaining.Size = new System.Drawing.Size(81, 13);
-            this.labelTimeRemaining.TabIndex = 5;
-            this.labelTimeRemaining.Text = "Time remaining:";
+            this.lblTimeRemaining.AutoSize = true;
+            this.lblTimeRemaining.Location = new System.Drawing.Point(4, 64);
+            this.lblTimeRemaining.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTimeRemaining.Name = "lblTimeRemaining";
+            this.lblTimeRemaining.Size = new System.Drawing.Size(81, 13);
+            this.lblTimeRemaining.TabIndex = 5;
+            this.lblTimeRemaining.Text = "Time remaining:";
             // 
             // progressBarMarksAttempted
             // 
@@ -236,79 +257,21 @@
             this.labelMarksAttempted.Location = new System.Drawing.Point(178, 42);
             this.labelMarksAttempted.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMarksAttempted.Name = "labelMarksAttempted";
-            this.labelMarksAttempted.Size = new System.Drawing.Size(120, 13);
+            this.labelMarksAttempted.Size = new System.Drawing.Size(103, 13);
             this.labelMarksAttempted.TabIndex = 1;
-            this.labelMarksAttempted.Text = "x/y marks attempted (%)";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(8, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(735, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem,
-            this.toolStripSeparatorSave,
-            this.toolStripMenuItemOpen,
-            this.toolStripSeparatorOpen,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.saveToolStripMenuItem.Text = "&Save";
-            // 
-            // toolStripSeparatorSave
-            // 
-            this.toolStripSeparatorSave.Name = "toolStripSeparatorSave";
-            this.toolStripSeparatorSave.Size = new System.Drawing.Size(100, 6);
-            // 
-            // toolStripMenuItemOpen
-            // 
-            this.toolStripMenuItemOpen.Enabled = false;
-            this.toolStripMenuItemOpen.Name = "toolStripMenuItemOpen";
-            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(103, 22);
-            this.toolStripMenuItemOpen.Text = "&Open";
-            this.toolStripMenuItemOpen.Visible = false;
-            this.toolStripMenuItemOpen.Click += new System.EventHandler(this.toolStripMenuItemOpen_Click);
-            // 
-            // toolStripSeparatorOpen
-            // 
-            this.toolStripSeparatorOpen.Name = "toolStripSeparatorOpen";
-            this.toolStripSeparatorOpen.Size = new System.Drawing.Size(100, 6);
-            this.toolStripSeparatorOpen.Visible = false;
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.labelMarksAttempted.Text = "x/y marks attempted";
             // 
             // panelLeft
             // 
             this.panelLeft.Controls.Add(this.panelTreeView);
             this.panelLeft.Controls.Add(this.panelMarks);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelLeft.Location = new System.Drawing.Point(8, 124);
+            this.panelLeft.Location = new System.Drawing.Point(8, 100);
             this.panelLeft.Margin = new System.Windows.Forms.Padding(2);
             this.panelLeft.MinimumSize = new System.Drawing.Size(170, 122);
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Padding = new System.Windows.Forms.Padding(2);
-            this.panelLeft.Size = new System.Drawing.Size(170, 361);
+            this.panelLeft.Size = new System.Drawing.Size(170, 385);
             this.panelLeft.TabIndex = 2;
             // 
             // panelTreeView
@@ -322,7 +285,7 @@
             this.panelTreeView.Margin = new System.Windows.Forms.Padding(2);
             this.panelTreeView.MinimumSize = new System.Drawing.Size(164, 0);
             this.panelTreeView.Name = "panelTreeView";
-            this.panelTreeView.Size = new System.Drawing.Size(164, 273);
+            this.panelTreeView.Size = new System.Drawing.Size(164, 296);
             this.panelTreeView.TabIndex = 2;
             // 
             // treeViewQuestionDisplay
@@ -332,7 +295,7 @@
             this.treeViewQuestionDisplay.Location = new System.Drawing.Point(0, 0);
             this.treeViewQuestionDisplay.Margin = new System.Windows.Forms.Padding(2);
             this.treeViewQuestionDisplay.Name = "treeViewQuestionDisplay";
-            this.treeViewQuestionDisplay.Size = new System.Drawing.Size(164, 237);
+            this.treeViewQuestionDisplay.Size = new System.Drawing.Size(164, 260);
             this.treeViewQuestionDisplay.TabIndex = 0;
             this.treeViewQuestionDisplay.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewQuestionDisplay_AfterSelect);
             // 
@@ -340,7 +303,7 @@
             // 
             this.buttonCollapse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCollapse.Image = global::AssessmentManager.Properties.Resources.collapse_all32;
-            this.buttonCollapse.Location = new System.Drawing.Point(130, 239);
+            this.buttonCollapse.Location = new System.Drawing.Point(132, 264);
             this.buttonCollapse.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCollapse.Name = "buttonCollapse";
             this.buttonCollapse.Size = new System.Drawing.Size(32, 32);
@@ -353,7 +316,7 @@
             // 
             this.buttonExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonExpand.Image = global::AssessmentManager.Properties.Resources.expand_all32;
-            this.buttonExpand.Location = new System.Drawing.Point(2, 239);
+            this.buttonExpand.Location = new System.Drawing.Point(0, 264);
             this.buttonExpand.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExpand.Name = "buttonExpand";
             this.buttonExpand.Size = new System.Drawing.Size(32, 32);
@@ -372,7 +335,7 @@
             this.panelMarks.Controls.Add(this.labelSubQuestionMarks);
             this.panelMarks.Controls.Add(this.labelQuestionMarks);
             this.panelMarks.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelMarks.Location = new System.Drawing.Point(2, 278);
+            this.panelMarks.Location = new System.Drawing.Point(2, 302);
             this.panelMarks.Margin = new System.Windows.Forms.Padding(2);
             this.panelMarks.MinimumSize = new System.Drawing.Size(166, 81);
             this.panelMarks.Name = "panelMarks";
@@ -461,10 +424,10 @@
             this.panelQuestionAnswer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelQuestionAnswer.Controls.Add(this.tableLayoutPanel1);
             this.panelQuestionAnswer.Controls.Add(this.tableLayoutQuestionAnswer);
-            this.panelQuestionAnswer.Location = new System.Drawing.Point(182, 126);
+            this.panelQuestionAnswer.Location = new System.Drawing.Point(182, 102);
             this.panelQuestionAnswer.Margin = new System.Windows.Forms.Padding(2);
             this.panelQuestionAnswer.Name = "panelQuestionAnswer";
-            this.panelQuestionAnswer.Size = new System.Drawing.Size(561, 359);
+            this.panelQuestionAnswer.Size = new System.Drawing.Size(561, 383);
             this.panelQuestionAnswer.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -475,7 +438,7 @@
             this.tableLayoutPanel1.Controls.Add(this.buttonPrevQuestion, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.buttonNextQuestion, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 317);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 341);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -521,7 +484,7 @@
             this.tableLayoutQuestionAnswer.RowCount = 2;
             this.tableLayoutQuestionAnswer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutQuestionAnswer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutQuestionAnswer.Size = new System.Drawing.Size(561, 314);
+            this.tableLayoutQuestionAnswer.Size = new System.Drawing.Size(561, 339);
             this.tableLayoutQuestionAnswer.TabIndex = 0;
             // 
             // panelQuestionContainer
@@ -530,7 +493,7 @@
             this.panelQuestionContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelQuestionContainer.Location = new System.Drawing.Point(3, 3);
             this.panelQuestionContainer.Name = "panelQuestionContainer";
-            this.panelQuestionContainer.Size = new System.Drawing.Size(555, 151);
+            this.panelQuestionContainer.Size = new System.Drawing.Size(555, 163);
             this.panelQuestionContainer.TabIndex = 0;
             // 
             // panelQuestion
@@ -544,8 +507,19 @@
             this.panelQuestion.Location = new System.Drawing.Point(0, 0);
             this.panelQuestion.Margin = new System.Windows.Forms.Padding(2);
             this.panelQuestion.Name = "panelQuestion";
-            this.panelQuestion.Size = new System.Drawing.Size(555, 151);
+            this.panelQuestion.Size = new System.Drawing.Size(555, 163);
             this.panelQuestion.TabIndex = 2;
+            // 
+            // pbMagnifyingGlass
+            // 
+            this.pbMagnifyingGlass.Image = ((System.Drawing.Image)(resources.GetObject("pbMagnifyingGlass.Image")));
+            this.pbMagnifyingGlass.Location = new System.Drawing.Point(158, 1);
+            this.pbMagnifyingGlass.Name = "pbMagnifyingGlass";
+            this.pbMagnifyingGlass.Size = new System.Drawing.Size(20, 20);
+            this.pbMagnifyingGlass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbMagnifyingGlass.TabIndex = 4;
+            this.pbMagnifyingGlass.TabStop = false;
+            this.toolTipButtons.SetToolTip(this.pbMagnifyingGlass, "Adjust the size of the question text.");
             // 
             // btnQuestionImage
             // 
@@ -570,9 +544,21 @@
             this.rtbQuestion.Margin = new System.Windows.Forms.Padding(2);
             this.rtbQuestion.Name = "rtbQuestion";
             this.rtbQuestion.ReadOnly = true;
-            this.rtbQuestion.Size = new System.Drawing.Size(555, 126);
+            this.rtbQuestion.Size = new System.Drawing.Size(555, 136);
             this.rtbQuestion.TabIndex = 1;
             this.rtbQuestion.Text = "";
+            // 
+            // trackBarMagnification
+            // 
+            this.trackBarMagnification.Location = new System.Drawing.Point(180, 0);
+            this.trackBarMagnification.Minimum = 1;
+            this.trackBarMagnification.Name = "trackBarMagnification";
+            this.trackBarMagnification.Size = new System.Drawing.Size(131, 45);
+            this.trackBarMagnification.TabIndex = 3;
+            this.trackBarMagnification.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.toolTipButtons.SetToolTip(this.trackBarMagnification, "Adjust the size of the question text.");
+            this.trackBarMagnification.Value = 1;
+            this.trackBarMagnification.Scroll += new System.EventHandler(this.trackBarMagnification_Scroll);
             // 
             // lblQuestionNumber
             // 
@@ -591,9 +577,9 @@
             this.panelAnswerContainer.Controls.Add(this.panelAnswerShortContainer);
             this.panelAnswerContainer.Controls.Add(this.panelAnswerLongContainer);
             this.panelAnswerContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAnswerContainer.Location = new System.Drawing.Point(3, 160);
+            this.panelAnswerContainer.Location = new System.Drawing.Point(3, 172);
             this.panelAnswerContainer.Name = "panelAnswerContainer";
-            this.panelAnswerContainer.Size = new System.Drawing.Size(555, 151);
+            this.panelAnswerContainer.Size = new System.Drawing.Size(555, 164);
             this.panelAnswerContainer.TabIndex = 1;
             // 
             // labelAnswerText
@@ -622,7 +608,7 @@
             this.tlpMultiAnswerContainer.RowCount = 2;
             this.tlpMultiAnswerContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMultiAnswerContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpMultiAnswerContainer.Size = new System.Drawing.Size(555, 82);
+            this.tlpMultiAnswerContainer.Size = new System.Drawing.Size(555, 78);
             this.tlpMultiAnswerContainer.TabIndex = 2;
             // 
             // tlpOptionD
@@ -633,18 +619,18 @@
             this.tlpOptionD.Controls.Add(this.labelOptionD, 0, 0);
             this.tlpOptionD.Controls.Add(this.rbOptionD, 0, 0);
             this.tlpOptionD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpOptionD.Location = new System.Drawing.Point(280, 44);
+            this.tlpOptionD.Location = new System.Drawing.Point(280, 42);
             this.tlpOptionD.Name = "tlpOptionD";
             this.tlpOptionD.RowCount = 1;
             this.tlpOptionD.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpOptionD.Size = new System.Drawing.Size(272, 35);
+            this.tlpOptionD.Size = new System.Drawing.Size(272, 33);
             this.tlpOptionD.TabIndex = 3;
             // 
             // labelOptionD
             // 
             this.labelOptionD.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelOptionD.AutoSize = true;
-            this.labelOptionD.Location = new System.Drawing.Point(23, 11);
+            this.labelOptionD.Location = new System.Drawing.Point(23, 10);
             this.labelOptionD.Name = "labelOptionD";
             this.labelOptionD.Size = new System.Drawing.Size(35, 13);
             this.labelOptionD.TabIndex = 2;
@@ -654,7 +640,7 @@
             // 
             this.rbOptionD.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rbOptionD.AutoSize = true;
-            this.rbOptionD.Location = new System.Drawing.Point(3, 9);
+            this.rbOptionD.Location = new System.Drawing.Point(3, 8);
             this.rbOptionD.Name = "rbOptionD";
             this.rbOptionD.Size = new System.Drawing.Size(14, 17);
             this.rbOptionD.TabIndex = 1;
@@ -671,18 +657,18 @@
             this.tlpOptionC.Controls.Add(this.labelOptionC, 0, 0);
             this.tlpOptionC.Controls.Add(this.rbOptionC, 0, 0);
             this.tlpOptionC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpOptionC.Location = new System.Drawing.Point(3, 44);
+            this.tlpOptionC.Location = new System.Drawing.Point(3, 42);
             this.tlpOptionC.Name = "tlpOptionC";
             this.tlpOptionC.RowCount = 1;
             this.tlpOptionC.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpOptionC.Size = new System.Drawing.Size(271, 35);
+            this.tlpOptionC.Size = new System.Drawing.Size(271, 33);
             this.tlpOptionC.TabIndex = 2;
             // 
             // labelOptionC
             // 
             this.labelOptionC.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelOptionC.AutoSize = true;
-            this.labelOptionC.Location = new System.Drawing.Point(23, 11);
+            this.labelOptionC.Location = new System.Drawing.Point(23, 10);
             this.labelOptionC.Name = "labelOptionC";
             this.labelOptionC.Size = new System.Drawing.Size(35, 13);
             this.labelOptionC.TabIndex = 2;
@@ -692,7 +678,7 @@
             // 
             this.rbOptionC.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rbOptionC.AutoSize = true;
-            this.rbOptionC.Location = new System.Drawing.Point(3, 9);
+            this.rbOptionC.Location = new System.Drawing.Point(3, 8);
             this.rbOptionC.Name = "rbOptionC";
             this.rbOptionC.Size = new System.Drawing.Size(14, 17);
             this.rbOptionC.TabIndex = 1;
@@ -713,14 +699,14 @@
             this.tlpOptionB.Name = "tlpOptionB";
             this.tlpOptionB.RowCount = 1;
             this.tlpOptionB.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpOptionB.Size = new System.Drawing.Size(272, 35);
+            this.tlpOptionB.Size = new System.Drawing.Size(272, 33);
             this.tlpOptionB.TabIndex = 1;
             // 
             // labelOptionB
             // 
             this.labelOptionB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelOptionB.AutoSize = true;
-            this.labelOptionB.Location = new System.Drawing.Point(23, 11);
+            this.labelOptionB.Location = new System.Drawing.Point(23, 10);
             this.labelOptionB.Name = "labelOptionB";
             this.labelOptionB.Size = new System.Drawing.Size(35, 13);
             this.labelOptionB.TabIndex = 2;
@@ -730,7 +716,7 @@
             // 
             this.rbOptionB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rbOptionB.AutoSize = true;
-            this.rbOptionB.Location = new System.Drawing.Point(3, 9);
+            this.rbOptionB.Location = new System.Drawing.Point(3, 8);
             this.rbOptionB.Name = "rbOptionB";
             this.rbOptionB.Size = new System.Drawing.Size(14, 17);
             this.rbOptionB.TabIndex = 1;
@@ -751,14 +737,14 @@
             this.tlpOptionA.Name = "tlpOptionA";
             this.tlpOptionA.RowCount = 1;
             this.tlpOptionA.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpOptionA.Size = new System.Drawing.Size(271, 35);
+            this.tlpOptionA.Size = new System.Drawing.Size(271, 33);
             this.tlpOptionA.TabIndex = 0;
             // 
             // rbOptionA
             // 
             this.rbOptionA.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rbOptionA.AutoSize = true;
-            this.rbOptionA.Location = new System.Drawing.Point(3, 9);
+            this.rbOptionA.Location = new System.Drawing.Point(3, 8);
             this.rbOptionA.Name = "rbOptionA";
             this.rbOptionA.Size = new System.Drawing.Size(14, 17);
             this.rbOptionA.TabIndex = 0;
@@ -771,7 +757,7 @@
             // 
             this.labelOptionA.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelOptionA.AutoSize = true;
-            this.labelOptionA.Location = new System.Drawing.Point(23, 11);
+            this.labelOptionA.Location = new System.Drawing.Point(23, 10);
             this.labelOptionA.Name = "labelOptionA";
             this.labelOptionA.Size = new System.Drawing.Size(35, 13);
             this.labelOptionA.TabIndex = 1;
@@ -785,7 +771,7 @@
             this.panelAnswerShortContainer.Controls.Add(this.textBoxAnswerShort);
             this.panelAnswerShortContainer.Location = new System.Drawing.Point(0, 16);
             this.panelAnswerShortContainer.Name = "panelAnswerShortContainer";
-            this.panelAnswerShortContainer.Size = new System.Drawing.Size(555, 135);
+            this.panelAnswerShortContainer.Size = new System.Drawing.Size(555, 131);
             this.panelAnswerShortContainer.TabIndex = 1;
             // 
             // textBoxAnswerShort
@@ -805,7 +791,7 @@
             this.panelAnswerLongContainer.Controls.Add(this.rtbAnswerLong);
             this.panelAnswerLongContainer.Location = new System.Drawing.Point(0, 16);
             this.panelAnswerLongContainer.Name = "panelAnswerLongContainer";
-            this.panelAnswerLongContainer.Size = new System.Drawing.Size(555, 135);
+            this.panelAnswerLongContainer.Size = new System.Drawing.Size(555, 131);
             this.panelAnswerLongContainer.TabIndex = 0;
             // 
             // rtbAnswerLong
@@ -813,60 +799,15 @@
             this.rtbAnswerLong.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbAnswerLong.Location = new System.Drawing.Point(0, 0);
             this.rtbAnswerLong.Name = "rtbAnswerLong";
-            this.rtbAnswerLong.Size = new System.Drawing.Size(555, 135);
+            this.rtbAnswerLong.Size = new System.Drawing.Size(555, 131);
             this.rtbAnswerLong.TabIndex = 0;
             this.rtbAnswerLong.Text = "";
             // 
-            // trackBarMagnification
+            // timer
             // 
-            this.trackBarMagnification.Location = new System.Drawing.Point(180, 0);
-            this.trackBarMagnification.Minimum = 1;
-            this.trackBarMagnification.Name = "trackBarMagnification";
-            this.trackBarMagnification.Size = new System.Drawing.Size(131, 45);
-            this.trackBarMagnification.TabIndex = 3;
-            this.trackBarMagnification.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.toolTipButtons.SetToolTip(this.trackBarMagnification, "Adjust the size of the question text.");
-            this.trackBarMagnification.Value = 1;
-            this.trackBarMagnification.Scroll += new System.EventHandler(this.trackBarMagnification_Scroll);
-            // 
-            // pbMagnifyingGlass
-            // 
-            this.pbMagnifyingGlass.Image = ((System.Drawing.Image)(resources.GetObject("pbMagnifyingGlass.Image")));
-            this.pbMagnifyingGlass.Location = new System.Drawing.Point(158, 1);
-            this.pbMagnifyingGlass.Name = "pbMagnifyingGlass";
-            this.pbMagnifyingGlass.Size = new System.Drawing.Size(20, 20);
-            this.pbMagnifyingGlass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbMagnifyingGlass.TabIndex = 4;
-            this.pbMagnifyingGlass.TabStop = false;
-            this.toolTipButtons.SetToolTip(this.pbMagnifyingGlass, "Adjust the size of the question text.");
-            // 
-            // lblMotivational
-            // 
-            this.lblMotivational.AutoSize = true;
-            this.lblMotivational.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMotivational.Location = new System.Drawing.Point(301, 66);
-            this.lblMotivational.Name = "lblMotivational";
-            this.lblMotivational.Size = new System.Drawing.Size(93, 20);
-            this.lblMotivational.TabIndex = 10;
-            this.lblMotivational.Text = "motivational";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Finish Time:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(98, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "00:00:00";
+            this.timer.Enabled = true;
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // Examinee
             // 
@@ -876,20 +817,18 @@
             this.Controls.Add(this.panelQuestionAnswer);
             this.Controls.Add(this.panelLeft);
             this.Controls.Add(this.panelTop);
-            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(672, 492);
             this.Name = "Examinee";
             this.Padding = new System.Windows.Forms.Padding(8, 0, 8, 8);
             this.Text = "Examinee";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Examinee_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Examinee_FormClosed);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.pnlUnanswered.ResumeLayout(false);
             this.pnlUnanswered.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.panelLeft.ResumeLayout(false);
             this.panelTreeView.ResumeLayout(false);
             this.panelMarks.ResumeLayout(false);
@@ -900,6 +839,8 @@
             this.panelQuestionContainer.ResumeLayout(false);
             this.panelQuestion.ResumeLayout(false);
             this.panelQuestion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMagnifyingGlass)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMagnification)).EndInit();
             this.panelAnswerContainer.ResumeLayout(false);
             this.panelAnswerContainer.PerformLayout();
             this.tlpMultiAnswerContainer.ResumeLayout(false);
@@ -914,21 +855,13 @@
             this.panelAnswerShortContainer.ResumeLayout(false);
             this.panelAnswerShortContainer.PerformLayout();
             this.panelAnswerLongContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarMagnification)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbMagnifyingGlass)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorSave;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Label labelMarksAttempted;
         private System.Windows.Forms.Panel panelLeft;
         private System.Windows.Forms.Label labelSubQuestionMarks;
@@ -946,11 +879,11 @@
         private System.Windows.Forms.ListBox listBoxUnansweredQuestions;
         private System.Windows.Forms.Label labelUnansweredQuestions;
         private System.Windows.Forms.Button buttonSubmitAssessment;
-        private System.Windows.Forms.Label labelTimeRemainingTimer;
-        private System.Windows.Forms.Label labelTimeRemaining;
+        private System.Windows.Forms.Label lblTimeRemainingTimer;
+        private System.Windows.Forms.Label lblTimeRemaining;
         private System.Windows.Forms.ProgressBar progressBarMarksAttempted;
-        private System.Windows.Forms.Label labelTimeBegan;
-        private System.Windows.Forms.Label labelBeginning;
+        private System.Windows.Forms.Label lblTimeBegan;
+        private System.Windows.Forms.Label lblBeginning;
         private System.Windows.Forms.TableLayoutPanel tableLayoutQuestionAnswer;
         private System.Windows.Forms.Panel panelQuestionContainer;
         private System.Windows.Forms.Panel panelQuestion;
@@ -969,8 +902,6 @@
         private System.Windows.Forms.Label labelSubSubQuestionMarks;
         private System.Windows.Forms.Label labelSubSubQuestionMarksNum;
         private System.Windows.Forms.TextBox textBoxAnswerShort;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpen;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorOpen;
         private System.Windows.Forms.TableLayoutPanel tlpMultiAnswerContainer;
         private System.Windows.Forms.TableLayoutPanel tlpOptionA;
         private System.Windows.Forms.TableLayoutPanel tlpOptionD;
@@ -986,8 +917,9 @@
         private System.Windows.Forms.Label labelOptionA;
         private System.Windows.Forms.TrackBar trackBarMagnification;
         private System.Windows.Forms.PictureBox pbMagnifyingGlass;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblFinishTime;
+        private System.Windows.Forms.Label lblFinish;
         private System.Windows.Forms.Label lblMotivational;
+        private System.Windows.Forms.Timer timer;
     }
 }

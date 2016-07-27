@@ -14,10 +14,8 @@ namespace AssessmentManager
 
         //The number of minutes for the assessment
         private int minutes = 0;
-        private bool minutesArePlanned = false;
-
-        //Reading time
         private int readingMinutes = 0;
+        private bool minutesArePlanned = false;
 
         //The time that the user started the assessment
         public DateTime TimeStarted;
@@ -48,6 +46,18 @@ namespace AssessmentManager
             set
             {
                 minutes = value;
+            }
+        }
+
+        public int ReadingMinutes
+        {
+            get
+            {
+                return readingMinutes;
+            }
+            set
+            {
+                readingMinutes = value;
             }
         }
 
