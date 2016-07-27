@@ -2,7 +2,9 @@
 	- Ability to generate information hand out
 	- Print out temp username and password
 	- Include student name
-	- Have rules and so on
+	- Have the rules and so on
+
+- Hotkeys F4 and F5 move to previous/next question
 
 	- Autosave feature
 		- Will save to separate file

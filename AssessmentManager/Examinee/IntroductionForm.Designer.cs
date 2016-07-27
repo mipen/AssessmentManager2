@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IntroductionForm));
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblCourseCode = new System.Windows.Forms.Label();
             this.lblCourseName = new System.Windows.Forms.Label();
@@ -37,20 +38,20 @@
             this.pnlInformation = new System.Windows.Forms.Panel();
             this.pnlUserInteract = new System.Windows.Forms.Panel();
             this.pnlLine = new System.Windows.Forms.Panel();
-            this.pnlOpenAssessment = new System.Windows.Forms.Panel();
-            this.btnOpen = new System.Windows.Forms.Button();
-            this.lblOpenAssessment = new System.Windows.Forms.Label();
             this.pnlPractise = new System.Windows.Forms.Panel();
             this.btnNoPractice = new System.Windows.Forms.Button();
             this.btnYesPractice = new System.Windows.Forms.Button();
             this.lblPractice = new System.Windows.Forms.Label();
+            this.pnlOpenAssessment = new System.Windows.Forms.Panel();
+            this.btnOpen = new System.Windows.Forms.Button();
+            this.lblOpenAssessment = new System.Windows.Forms.Label();
             this.lblDateTimeDisp = new System.Windows.Forms.Label();
             this.lblDateTime = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.pnlInformation.SuspendLayout();
             this.pnlUserInteract.SuspendLayout();
-            this.pnlOpenAssessment.SuspendLayout();
             this.pnlPractise.SuspendLayout();
+            this.pnlOpenAssessment.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAuthor
@@ -130,40 +131,10 @@
             // pnlLine
             // 
             this.pnlLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlLine.Location = new System.Drawing.Point(0, 20);
+            this.pnlLine.Location = new System.Drawing.Point(15, 20);
             this.pnlLine.Name = "pnlLine";
             this.pnlLine.Size = new System.Drawing.Size(641, 1);
             this.pnlLine.TabIndex = 3;
-            // 
-            // pnlOpenAssessment
-            // 
-            this.pnlOpenAssessment.Controls.Add(this.btnOpen);
-            this.pnlOpenAssessment.Controls.Add(this.lblOpenAssessment);
-            this.pnlOpenAssessment.Location = new System.Drawing.Point(0, 21);
-            this.pnlOpenAssessment.Name = "pnlOpenAssessment";
-            this.pnlOpenAssessment.Size = new System.Drawing.Size(669, 108);
-            this.pnlOpenAssessment.TabIndex = 4;
-            // 
-            // btnOpen
-            // 
-            this.btnOpen.Location = new System.Drawing.Point(581, 72);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(75, 23);
-            this.btnOpen.TabIndex = 1;
-            this.btnOpen.Text = "&Open";
-            this.btnOpen.UseVisualStyleBackColor = true;
-            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
-            // 
-            // lblOpenAssessment
-            // 
-            this.lblOpenAssessment.AutoSize = true;
-            this.lblOpenAssessment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOpenAssessment.ForeColor = System.Drawing.Color.Blue;
-            this.lblOpenAssessment.Location = new System.Drawing.Point(283, 72);
-            this.lblOpenAssessment.Name = "lblOpenAssessment";
-            this.lblOpenAssessment.Size = new System.Drawing.Size(234, 20);
-            this.lblOpenAssessment.TabIndex = 0;
-            this.lblOpenAssessment.Text = "Please open an assessment";
             // 
             // pnlPractise
             // 
@@ -205,6 +176,36 @@
             this.lblPractice.TabIndex = 0;
             this.lblPractice.Text = "This assessment is available for use as practice. Would you like to continue?";
             // 
+            // pnlOpenAssessment
+            // 
+            this.pnlOpenAssessment.Controls.Add(this.btnOpen);
+            this.pnlOpenAssessment.Controls.Add(this.lblOpenAssessment);
+            this.pnlOpenAssessment.Location = new System.Drawing.Point(0, 21);
+            this.pnlOpenAssessment.Name = "pnlOpenAssessment";
+            this.pnlOpenAssessment.Size = new System.Drawing.Size(669, 108);
+            this.pnlOpenAssessment.TabIndex = 4;
+            // 
+            // btnOpen
+            // 
+            this.btnOpen.Location = new System.Drawing.Point(581, 72);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(75, 23);
+            this.btnOpen.TabIndex = 1;
+            this.btnOpen.Text = "&Open";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+            // 
+            // lblOpenAssessment
+            // 
+            this.lblOpenAssessment.AutoSize = true;
+            this.lblOpenAssessment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOpenAssessment.ForeColor = System.Drawing.Color.Blue;
+            this.lblOpenAssessment.Location = new System.Drawing.Point(283, 72);
+            this.lblOpenAssessment.Name = "lblOpenAssessment";
+            this.lblOpenAssessment.Size = new System.Drawing.Size(234, 20);
+            this.lblOpenAssessment.TabIndex = 0;
+            this.lblOpenAssessment.Text = "Please open an assessment";
+            // 
             // lblDateTimeDisp
             // 
             this.lblDateTimeDisp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -237,15 +238,16 @@
             this.Controls.Add(this.pnlUserInteract);
             this.Controls.Add(this.pnlInformation);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "IntroductionForm";
-            this.Text = "Introduction";
+            this.Text = "Examinee";
             this.pnlInformation.ResumeLayout(false);
             this.pnlInformation.PerformLayout();
             this.pnlUserInteract.ResumeLayout(false);
             this.pnlUserInteract.PerformLayout();
+            this.pnlPractise.ResumeLayout(false);
             this.pnlOpenAssessment.ResumeLayout(false);
             this.pnlOpenAssessment.PerformLayout();
-            this.pnlPractise.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

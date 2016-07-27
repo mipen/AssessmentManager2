@@ -15,31 +15,23 @@ namespace AssessmentManager
     public partial class Examinee : Form
     {
 
-        private Assessment assessment;
-        private FileInfo file;
+        private AssessmentScript script;
 
-        public Examinee()
+        public Examinee(AssessmentScript script)
         {
             InitializeComponent();
             buttonSubmitAssessment.UseCompatibleTextRendering = true;
-            NotifyAssessmentClosed();
+            StartPosition = FormStartPosition.CenterScreen;
+            Script = script;
+            NotifyAssessmentOpened();
         }
 
-        public Examinee(string path)
-        {
-            InitializeComponent();
-            buttonSubmitAssessment.UseCompatibleTextRendering = true;
-            OpenFromFile(path);
-            if (treeViewQuestionDisplay.Nodes.Count > 0)
-            {
-                treeViewQuestionDisplay.SelectedNode = treeViewQuestionDisplay.Nodes[0];
-            }
-        }
+        #region Properties
 
-        public Assessment Assessment
+        public AssessmentScript Script
         {
-            get { return assessment; }
-            private set { assessment = value; }
+            get { return script; }
+            private set { script = value; }
         }
 
         public Question SelectedQuestion
@@ -58,68 +50,9 @@ namespace AssessmentManager
             }
         }
 
-        #region Toolstrip Menu Items
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //TODO:: Implement saving on closing.
-            this.Close();
-        }
-
-        private void toolStripMenuItemOpen_Click(object sender, EventArgs e)
-        {
-            //TODO:: close the main form and open the splash screen
-            OpenFromFile();
-            if (treeViewQuestionDisplay.Nodes.Count > 0)
-                treeViewQuestionDisplay.SelectedNode = treeViewQuestionDisplay.Nodes[0];
-        }
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Open an Assessment from file. Does not show an OpenFileDialog.
-        /// </summary>
-        /// <param name="path">The specified path for the file</param>
-        public void OpenFromFile(string path)
-        {
-            if (File.Exists(path))
-            {
-                try
-                {
-                    using (FileStream s = File.Open(path, FileMode.Open))
-                    {
-                        BinaryFormatter formatter = new BinaryFormatter();
-                        Assessment = (Assessment)formatter.Deserialize(s);
-                    }
-                    file = new FileInfo(path);
-                    NotifyAssessmentOpened();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unable to load file: \n" + ex.Message);
-                }
-            }
-            else
-            {
-                MessageBox.Show($"Unable to find the file at: {path}\n\n Failed to open.");
-            }
-        }
-
-        /// <summary>
-        /// Open an Assessment from file. Displays OpenFileDialog.
-        /// </summary>
-        public void OpenFromFile()
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = CONSTANTS.COMBINED_FILTER;
-            ofd.DefaultExt = CONSTANTS.ASSESSMENT_EXT.Remove(0, 1);
-            ofd.InitialDirectory = CONSTANTS.DESKTOP_PATH;
-
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                OpenFromFile(ofd.FileName);
-            }
-        }
 
         public void NotifyAssessmentOpened()
         {
@@ -133,20 +66,23 @@ namespace AssessmentManager
             panelTop.Enabled = true;
             panelTop.Visible = true;
 
-            //Enable the open button in the menu bar, disable save.
-            toolStripMenuItemOpen.Enabled = false;
-            toolStripMenuItemOpen.Visible = false;
-            toolStripSeparatorOpen.Visible = false;
-
-            saveToolStripMenuItem.Enabled = true;
-            saveToolStripMenuItem.Visible = true;
-            toolStripSeparatorSave.Visible = true;
-
             //Load questions into tree view
-            Util.PopulateTreeView(treeViewQuestionDisplay, Assessment);
+            Util.PopulateTreeView(treeViewQuestionDisplay, Script);
+
+            //Select the first question
+            if (treeViewQuestionDisplay.Nodes.Count > 0)
+                treeViewQuestionDisplay.SelectedNode = treeViewQuestionDisplay.Nodes[0];
 
             //Reset the image tracker
             ImageTracker.Reset();
+
+            //Display the times
+            DateTime timeStarted = Script.TimeData.TimeStarted;
+            lblTimeBegan.Text = timeStarted.ToString("hh:mm:ss");
+            DateTime finishTime = timeStarted.AddMinutes(Script.TimeData.Minutes);
+            lblFinishTime.Text = finishTime.ToString("hh:mm:ss");
+            TimeSpan time = finishTime - timeStarted;
+            lblTimeRemainingTimer.Text = time.ToString();
         }
 
         public void NotifyAssessmentClosed()
@@ -160,15 +96,6 @@ namespace AssessmentManager
 
             panelTop.Enabled = false;
             panelTop.Visible = false;
-
-            //Enable the open button in the menu bar, disable save.
-            toolStripMenuItemOpen.Enabled = true;
-            toolStripMenuItemOpen.Visible = true;
-            toolStripSeparatorOpen.Visible = true;
-
-            saveToolStripMenuItem.Enabled = false;
-            saveToolStripMenuItem.Visible = false;
-            toolStripSeparatorSave.Visible = false;
         }
 
         private void UpdateMarksDisplay()
@@ -214,7 +141,122 @@ namespace AssessmentManager
 
             //Update the progress display
             //TODO:: Show the marks attempted
-            labelMarksAttempted.Text = $"x / {Assessment.TotalMarks} marks attempted ((y)%)";
+            labelMarksAttempted.Text = $"x // {Script.TotalMarks} marks attempted ((y)%)";
+        }
+
+        #endregion
+
+        #region Control Events
+
+        private void buttonExpand_Click(object sender, EventArgs e)
+        {
+            treeViewQuestionDisplay.ExpandAll();
+        }
+
+        private void buttonCollapse_Click(object sender, EventArgs e)
+        {
+            treeViewQuestionDisplay.CollapseAll();
+        }
+
+        private void buttonPrevQuestion_Click(object sender, EventArgs e)
+        {
+            QuestionNode node = SelectedNode;
+            if (node != null)
+            {
+                treeViewQuestionDisplay.SelectedNode = node.PrevVisibleNode;
+            }
+            treeViewQuestionDisplay.Focus();
+        }
+
+        private void buttonNextQuestion_Click(object sender, EventArgs e)
+        {
+            QuestionNode node = SelectedNode;
+            if (node != null)
+            {
+                treeViewQuestionDisplay.SelectedNode = node.NextVisibleNode;
+            }
+            treeViewQuestionDisplay.Focus();
+        }
+
+        private void btnQuestionImage_Click(object sender, EventArgs e)
+        {
+            Question question = SelectedQuestion;
+            if (question != null && question.Image != null)
+            {
+                //Show the image if not already shown
+                if (!ImageTracker.ImageDisplayShown(question.Name))
+                {
+                    ImageDisplay id = new ImageDisplay(question.Name, question.Image);
+                    id.Show();
+                    id.TopMost = true;
+                    id.BringToFront();
+                }
+                else
+                {
+                    ImageTracker.FindImageDisplay(question.Name).Focus();
+                }
+            }
+        }
+
+        private void trackBarMagnification_Scroll(object sender, EventArgs e)
+        {
+            rtbQuestion.ZoomFactor = trackBarMagnification.Value;
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            //TODO:: Include reading minutes
+            //TODO:: Event for when time runs out. Go into ReadOnly mode and ask to save.
+
+            //Update the time remaining display
+            DateTime startTime = Script.TimeData.TimeStarted;
+            DateTime finishTime = startTime.AddMinutes(Script.TimeData.Minutes);
+            TimeSpan ts = finishTime - DateTime.Now;
+            lblTimeRemainingTimer.Text = $"{ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
+        }
+
+        #endregion
+
+        #region Radio Buttons
+
+        private void rbOptionA_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = true;
+            rbOptionB.Checked = false;
+            rbOptionC.Checked = false;
+            rbOptionD.Checked = false;
+
+            //TODO:: record answer
+        }
+
+        private void rbOptionB_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = false;
+            rbOptionB.Checked = true;
+            rbOptionC.Checked = false;
+            rbOptionD.Checked = false;
+
+            //TODO:: record answer
+        }
+
+        private void rbOptionC_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = false;
+            rbOptionB.Checked = false;
+            rbOptionC.Checked = true;
+            rbOptionD.Checked = false;
+
+            //TODO:: record answer
+        }
+
+        private void rbOptionD_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = false;
+            rbOptionB.Checked = false;
+            rbOptionC.Checked = false;
+            rbOptionD.Checked = true;
+
+            //TODO:: record answer
         }
 
         #endregion
@@ -343,108 +385,15 @@ namespace AssessmentManager
             //TODO:: Update unanswered questions
         }
 
-        #region Control Events
-
-        private void buttonExpand_Click(object sender, EventArgs e)
+        private void Examinee_FormClosing(object sender, FormClosingEventArgs e)
         {
-            treeViewQuestionDisplay.ExpandAll();
+            //TODO:: Ask if user is finished. Save assessment
         }
 
-        private void buttonCollapse_Click(object sender, EventArgs e)
+        private void Examinee_FormClosed(object sender, FormClosedEventArgs e)
         {
-            treeViewQuestionDisplay.CollapseAll();
+            Application.Exit();
         }
-
-        private void buttonPrevQuestion_Click(object sender, EventArgs e)
-        {
-            QuestionNode node = SelectedNode;
-            if (node != null)
-            {
-                treeViewQuestionDisplay.SelectedNode = node.PrevVisibleNode;
-            }
-            treeViewQuestionDisplay.Focus();
-        }
-
-        private void buttonNextQuestion_Click(object sender, EventArgs e)
-        {
-            QuestionNode node = SelectedNode;
-            if (node != null)
-            {
-                treeViewQuestionDisplay.SelectedNode = node.NextVisibleNode;
-            }
-            treeViewQuestionDisplay.Focus();
-        }
-
-        private void btnQuestionImage_Click(object sender, EventArgs e)
-        {
-            Question question = SelectedQuestion;
-            if (question != null && question.Image != null)
-            {
-                //Show the image if not already shown
-                if (!ImageTracker.ImageDisplayShown(question.Name))
-                {
-                    ImageDisplay id = new ImageDisplay(question.Name, question.Image);
-                    id.Show();
-                    id.TopMost = true;
-                    id.BringToFront();
-                }
-                else
-                {
-                    ImageTracker.FindImageDisplay(question.Name).Focus();
-                }
-            }
-        }
-
-        private void trackBarMagnification_Scroll(object sender, EventArgs e)
-        {
-            rtbQuestion.ZoomFactor = trackBarMagnification.Value;
-        }
-
-        #endregion
-
-        #region Radio Buttons
-
-        private void rbOptionA_Click(object sender, EventArgs e)
-        {
-            rbOptionA.Checked = true;
-            rbOptionB.Checked = false;
-            rbOptionC.Checked = false;
-            rbOptionD.Checked = false;
-
-            //TODO:: record answer
-        }
-
-        private void rbOptionB_Click(object sender, EventArgs e)
-        {
-            rbOptionA.Checked = false;
-            rbOptionB.Checked = true;
-            rbOptionC.Checked = false;
-            rbOptionD.Checked = false;
-
-            //TODO:: record answer
-        }
-
-        private void rbOptionC_Click(object sender, EventArgs e)
-        {
-            rbOptionA.Checked = false;
-            rbOptionB.Checked = false;
-            rbOptionC.Checked = true;
-            rbOptionD.Checked = false;
-
-            //TODO:: record answer
-        }
-
-        private void rbOptionD_Click(object sender, EventArgs e)
-        {
-            rbOptionA.Checked = false;
-            rbOptionB.Checked = false;
-            rbOptionC.Checked = false;
-            rbOptionD.Checked = true;
-
-            //TODO:: record answer
-        }
-
-        #endregion
 
     }
 }

@@ -23,6 +23,19 @@ namespace AssessmentManager
             treeView.Nodes.AddRange(nodeList.ToArray());
         }
 
+        public static void PopulateTreeView(TreeView treeView, AssessmentScript script)
+        {
+            treeView.Nodes.Clear();
+
+            List<QuestionNode> nodeList = new List<QuestionNode>();
+            foreach (var q in script.Questions)
+            {
+                nodeList.Add(BuildQuestionNodeRecursive(q));
+            }
+
+            treeView.Nodes.AddRange(nodeList.ToArray());
+        }
+
         /// <summary>
         /// Builds a Node for the given Question for use in a TreeView. If the Question has subquestions, the
         /// method will recursively call itself to build a Node for those questions as well, adding them to the top level

@@ -26,6 +26,19 @@ namespace AssessmentManager
         public TimeData TimeData => timeData;
         public StudentData StudentData => studentData;
 
+        public int TotalMarks
+        {
+            get
+            {
+                int num = 0;
+                foreach (var q in Questions)
+                {
+                    num += q.TotalMarks;
+                }
+                return num;
+            }
+        }
+
         #endregion
 
         #region Methods

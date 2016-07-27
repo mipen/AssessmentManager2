@@ -16,14 +16,8 @@ namespace AssessmentManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (args.Count() > 0)
-            {
-                Application.Run(new IntroductionForm(args[0]));
-            }
-            else
-            {
-                Application.Run(new IntroductionForm());
-            }
+            IntroductionForm i = new IntroductionForm(args);
+            Application.Run(i);
         }
     }
 }
