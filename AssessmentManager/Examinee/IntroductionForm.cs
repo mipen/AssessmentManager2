@@ -25,6 +25,7 @@ namespace AssessmentManager
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             DateTime dt = DateTime.Now;
+            pnlInformation.Visible = false;
             lblDateTimeDisp.Text = dt.ToLongDateString() + " " + dt.ToLongTimeString();
             if (args.Count() > 0)
             {
@@ -110,41 +111,13 @@ namespace AssessmentManager
         {
             //Record the file path
             filePath = path;
-            //Show the assessment information
-            #region Assessment information
-            if (assessment.CourseInformation != null)
-            {
-                CourseInformation c = assessment.CourseInformation;
-                if (!c.CourseCode.NullOrEmpty())
-                    lblCourseCode.Text = c.CourseCode;
-                else
-                    lblCourseCode.Text = "";
-
-                if (!c.CourseName.NullOrEmpty())
-                    lblCourseName.Text = c.CourseName;
-                else
-                    lblCourseName.Text = "Unkown course";
-
-                if (!c.AssessmentName.NullOrEmpty())
-                    lblAssessmentName.Text = c.AssessmentName;
-                else
-                    lblAssessmentName.Text = "Assessment";
-
-                if (!c.Author.NullOrEmpty())
-                    lblAuthor.Text = $"Author: {c.Author}";
-                else
-                    lblAuthor.Text = "";
-
-                lblWeighting.Text = $"{c.AssessmentWeighting}%";
-
-                //Enable the information panel
-                pnlInformation.Enabled = true;
-                pnlInformation.Visible = true;
-            }
-            #endregion
 
             //Build the assessment script
             script = AssessmentScript.BuildFromAssessment(assessment);
+            //Use 'script' variable from now on in this method, except for checking if published
+
+            //Show the assessment information
+            DisplayInformation(script);
 
             //Determine if the assessment is published or not and show the correct window
             if (assessment.Published)
@@ -153,32 +126,143 @@ namespace AssessmentManager
             }
             else
             {
-                //Enable practice panel
-                pnlPractise.Enabled = true;
-                pnlPractise.Visible = true;
-
-                //Disable open assessment panel
-                pnlOpenAssessment.Enabled = false;
-                pnlOpenAssessment.Visible = false;
-
-                //Disable continue panel
-                pnlContinueAssessment.Enabled = false;
-                pnlContinueAssessment.Visible = false;
+                //Use the assessment for practice
+                ChangeView(View.Practice);
             }
         }
 
         private void NotifyAssessmentScriptOpened(string path)
         {
-            //TODO:: Do script opening stuff here
-
             //Record the path
             filePath = path;
 
             //Show the assessment information
-            #region Assessment information
-            if (script.CourseInformation != null)
+            DisplayInformation(script);
+
+            //Determine if the assessment can be continued
+            if (DateTime.Now < script.TimeData.FinishTime)
             {
-                CourseInformation c = script.CourseInformation;
+                //Assessment can be continued
+
+                ChangeView(View.Continue);
+
+            }
+            else
+            {
+                //Assessment has finished
+
+                ChangeView(View.Finished);
+            }
+        }
+
+        private void NotifyNothingOpened()
+        {
+            ChangeView(View.Open);
+        }
+
+        private void ChangeView(View v)
+        {
+            switch (v)
+            {
+                case View.Open:
+                    {
+                        //continue panel
+                        pnlContinueAssessment.Enabled = false;
+                        pnlContinueAssessment.Visible = false;
+
+                        //practice panel
+                        pnlPractise.Enabled = false;
+                        pnlPractise.Visible = false;
+
+                        //open assessment panel
+                        pnlOpenAssessment.Enabled = true;
+                        pnlOpenAssessment.Visible = true;
+
+                        //finished panel
+                        pnlAssessmentFinished.Enabled = false;
+                        pnlAssessmentFinished.Visible = false;
+
+                        break;
+                    }
+                case View.Practice:
+                    {
+                        //continue panel
+                        pnlContinueAssessment.Enabled = false;
+                        pnlContinueAssessment.Visible = false;
+
+                        //practice panel
+                        pnlPractise.Enabled = true;
+                        pnlPractise.Visible = true;
+
+                        //open assessment panel
+                        pnlOpenAssessment.Enabled = false;
+                        pnlOpenAssessment.Visible = false;
+
+                        //finished panel
+                        pnlAssessmentFinished.Enabled = false;
+                        pnlAssessmentFinished.Visible = false;
+
+                        break;
+                    }
+                case View.Continue:
+                    {
+                        //continue panel
+                        pnlContinueAssessment.Enabled = true;
+                        pnlContinueAssessment.Visible = true;
+
+                        //practice panel
+                        pnlPractise.Enabled = false;
+                        pnlPractise.Visible = false;
+
+                        //open assessment panel
+                        pnlOpenAssessment.Enabled = false;
+                        pnlOpenAssessment.Visible = false;
+
+                        //finished panel
+                        pnlAssessmentFinished.Enabled = false;
+                        pnlAssessmentFinished.Visible = false;
+
+                        //Add check for remaining time to timer tick
+                        timer.Tick += CheckTimeRemainingForContinue;
+
+                        //Show start and finish times
+                        lblTimeStarted.Text = "Start: " + script.TimeData.StartTime.ToString("F");
+                        lblFinishingTime.Text = "Finish: " + script.TimeData.FinishTime.ToString("F");
+
+                        break;
+                    }
+                case View.Finished:
+                    {
+                        //continue panel
+                        pnlContinueAssessment.Enabled = false;
+                        pnlContinueAssessment.Visible = false;
+
+                        //practice panel
+                        pnlPractise.Enabled = false;
+                        pnlPractise.Visible = false;
+
+                        //open assessment panel
+                        pnlOpenAssessment.Enabled = false;
+                        pnlOpenAssessment.Visible = false;
+
+                        //finished panel
+                        pnlAssessmentFinished.Enabled = true;
+                        pnlAssessmentFinished.Visible = true;
+
+                        //Show start and finish times
+                        lblFinishedTimeStarted.Text = "Started: " + script.TimeData.StartTime.ToString("F");
+                        lblFinishedTimeFinished.Text = "Finished: " + script.TimeData.FinishTime.ToString("F");
+
+                        break;
+                    }
+            }
+        }
+
+        private void DisplayInformation(AssessmentScript a)
+        {
+            if (a.CourseInformation != null)
+            {
+                CourseInformation c = a.CourseInformation;
                 if (!c.CourseCode.NullOrEmpty())
                     lblCourseCode.Text = c.CourseCode;
                 else
@@ -200,82 +284,20 @@ namespace AssessmentManager
                     lblAuthor.Text = "";
 
                 lblWeighting.Text = $"{c.AssessmentWeighting}%";
-
-                //Enable the information panel
-                pnlInformation.Enabled = true;
-                pnlInformation.Visible = true;
             }
-            #endregion
-
-            //Determine if the assessment can be continued
-            if (DateTime.Now < script.TimeData.FinishTime)
-            {
-                //Assessment can be continued
-
-                //Enable continue panel
-                pnlContinueAssessment.Enabled = true;
-                pnlContinueAssessment.Visible = true;
-
-                //Disable practice panel
-                pnlPractise.Enabled = false;
-                pnlPractise.Visible = false;
-
-                //Disable open assessment panel
-                pnlOpenAssessment.Enabled = false;
-                pnlOpenAssessment.Visible = false;
-
-                //Add check for remaining time to timer tick
-                timer.Tick += CheckTimeRemainingForContinue;
-
-                //Show start and finish times
-                lblTimeStarted.Text = script.TimeData.StartTime.ToString("F");
-                lblFinishingTime.Text = script.TimeData.FinishTime.ToString("F");
-            }
-            else
-            {
-                //Assessment has finished
-
-                //TODO:: Show panel which lets user know the assessment has finished
-            }
-        }
-
-        private void NotifyNothingOpened()
-        {
-            //Disable information panel
-            pnlInformation.Enabled = false;
-            pnlInformation.Visible = false;
-
-            //Disable practice panel
-            pnlPractise.Enabled = false;
-            pnlPractise.Visible = false;
-
-            //TODO:: Disable assessment panel
-
-            //Enable Open Assessment panel
-            pnlOpenAssessment.Enabled = true;
-            pnlOpenAssessment.Visible = true;
+            //Enable the information panel
+            pnlInformation.Enabled = true;
+            pnlInformation.Visible = true;
         }
 
         private void CheckTimeRemainingForContinue(object sender, EventArgs e)
         {
-            if(DateTime.Now>=script.TimeData.FinishTime)
+            if (DateTime.Now >= script.TimeData.FinishTime)
             {
                 //Remove check method from timer
                 timer.Tick -= CheckTimeRemainingForContinue;
 
-                //Enable assessment finished panel
-
-                //Disable continue panel
-                pnlContinueAssessment.Enabled = false;
-                pnlContinueAssessment.Visible = false;
-
-                //Disable practice panel
-                pnlPractise.Enabled = false;
-                pnlPractise.Visible = false;
-
-                //Disable open assessment panel
-                pnlOpenAssessment.Enabled = false;
-                pnlOpenAssessment.Visible = false;
+                ChangeView(View.Finished);
             }
         }
 
@@ -326,10 +348,17 @@ namespace AssessmentManager
 
         private void btnContinueYes_Click(object sender, EventArgs e)
         {
+            Examinee ex = new Examinee(script, filePath);
+            ex.Show();
+            timer.Enabled = false;
+            Hide();
+        }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         #endregion
-
     }
 }

@@ -119,10 +119,16 @@ namespace AssessmentManager
             if (Script.Started)
             {
                 //TODO:: Handle an already started assessment
+                if (Script.TimeData.HasReadingTime && DateTime.Now < Script.TimeData.ReadingFinishTime)
+                    ChangeMode(Mode.Reading);
+                else if (DateTime.Now < Script.TimeData.FinishTime)
+                    ChangeMode(Mode.Running);
+                else
+                    ChangeMode(Mode.Completed);
             }
             else
             {
-                //Script has not been started yet:
+                //AssessmentScript has not been started yet:
                 Script.Started = true;
                 if (Script.TimeData.HasReadingTime)
                     ChangeMode(Mode.Reading);
@@ -324,14 +330,14 @@ namespace AssessmentManager
             }
             try
             {
-                using(FileStream s = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write))
+                using (FileStream s = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write))
                 {
                     BinaryFormatter bf = new BinaryFormatter();
                     bf.Serialize(s, Script);
                     filePath = path;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error: Failed to save \n\n" + ex.Message);
             }
@@ -642,7 +648,8 @@ namespace AssessmentManager
 
         private void Examinee_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //TODO:: Ask if user is finished. Save assessment
+            //TODO:: Save assessment
+            SaveToFile();
         }
 
         private void Examinee_FormClosed(object sender, FormClosedEventArgs e)

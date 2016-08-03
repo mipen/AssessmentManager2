@@ -57,11 +57,16 @@
             this.btnContinueYes = new System.Windows.Forms.Button();
             this.btnContinueNo = new System.Windows.Forms.Button();
             this.pnlAssessmentFinished = new System.Windows.Forms.Panel();
+            this.lblAssessmentFinished = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.lblFinishedTimeStarted = new System.Windows.Forms.Label();
+            this.lblFinishedTimeFinished = new System.Windows.Forms.Label();
             this.pnlInformation.SuspendLayout();
             this.pnlUserInteract.SuspendLayout();
             this.pnlPractise.SuspendLayout();
             this.pnlOpenAssessment.SuspendLayout();
             this.pnlContinueAssessment.SuspendLayout();
+            this.pnlAssessmentFinished.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAuthor
@@ -69,9 +74,9 @@
             this.lblAuthor.AutoSize = true;
             this.lblAuthor.Location = new System.Drawing.Point(4, 79);
             this.lblAuthor.Name = "lblAuthor";
-            this.lblAuthor.Size = new System.Drawing.Size(38, 13);
+            this.lblAuthor.Size = new System.Drawing.Size(84, 13);
             this.lblAuthor.TabIndex = 0;
-            this.lblAuthor.Text = "Author";
+            this.lblAuthor.Text = "Author: Unkown";
             // 
             // lblCourseCode
             // 
@@ -80,7 +85,6 @@
             this.lblCourseCode.Name = "lblCourseCode";
             this.lblCourseCode.Size = new System.Drawing.Size(155, 23);
             this.lblCourseCode.TabIndex = 2;
-            this.lblCourseCode.Text = "xxx.xxx";
             this.lblCourseCode.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblCourseName
@@ -90,7 +94,7 @@
             this.lblCourseName.Name = "lblCourseName";
             this.lblCourseName.Size = new System.Drawing.Size(502, 47);
             this.lblCourseName.TabIndex = 3;
-            this.lblCourseName.Text = "professional user interface design";
+            this.lblCourseName.Text = "Unkown Course";
             // 
             // lblAssessmentName
             // 
@@ -99,7 +103,7 @@
             this.lblAssessmentName.Name = "lblAssessmentName";
             this.lblAssessmentName.Size = new System.Drawing.Size(663, 29);
             this.lblAssessmentName.TabIndex = 4;
-            this.lblAssessmentName.Text = "a super long title";
+            this.lblAssessmentName.Text = "Assessment";
             this.lblAssessmentName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblWeighting
@@ -109,7 +113,6 @@
             this.lblWeighting.Name = "lblWeighting";
             this.lblWeighting.Size = new System.Drawing.Size(100, 23);
             this.lblWeighting.TabIndex = 5;
-            this.lblWeighting.Text = "50%";
             this.lblWeighting.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pnlInformation
@@ -294,7 +297,7 @@
             // 
             // lblContinueDescription
             // 
-            this.lblContinueDescription.Location = new System.Drawing.Point(254, 32);
+            this.lblContinueDescription.Location = new System.Drawing.Point(276, 32);
             this.lblContinueDescription.Name = "lblContinueDescription";
             this.lblContinueDescription.Size = new System.Drawing.Size(203, 73);
             this.lblContinueDescription.TabIndex = 6;
@@ -323,10 +326,52 @@
             // 
             // pnlAssessmentFinished
             // 
+            this.pnlAssessmentFinished.Controls.Add(this.lblFinishedTimeFinished);
+            this.pnlAssessmentFinished.Controls.Add(this.lblFinishedTimeStarted);
+            this.pnlAssessmentFinished.Controls.Add(this.btnClose);
+            this.pnlAssessmentFinished.Controls.Add(this.lblAssessmentFinished);
             this.pnlAssessmentFinished.Location = new System.Drawing.Point(0, 21);
             this.pnlAssessmentFinished.Name = "pnlAssessmentFinished";
             this.pnlAssessmentFinished.Size = new System.Drawing.Size(669, 108);
             this.pnlAssessmentFinished.TabIndex = 9;
+            // 
+            // lblAssessmentFinished
+            // 
+            this.lblAssessmentFinished.AutoSize = true;
+            this.lblAssessmentFinished.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAssessmentFinished.Location = new System.Drawing.Point(16, 18);
+            this.lblAssessmentFinished.Name = "lblAssessmentFinished";
+            this.lblAssessmentFinished.Size = new System.Drawing.Size(509, 18);
+            this.lblAssessmentFinished.TabIndex = 0;
+            this.lblAssessmentFinished.Text = "This assessment has now finished. Thank you for using Examinee.";
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(581, 72);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.Text = "&Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // lblFinishedTimeStarted
+            // 
+            this.lblFinishedTimeStarted.AutoSize = true;
+            this.lblFinishedTimeStarted.Location = new System.Drawing.Point(37, 50);
+            this.lblFinishedTimeStarted.Name = "lblFinishedTimeStarted";
+            this.lblFinishedTimeStarted.Size = new System.Drawing.Size(61, 13);
+            this.lblFinishedTimeStarted.TabIndex = 2;
+            this.lblFinishedTimeStarted.Text = "started time";
+            // 
+            // lblFinishedTimeFinished
+            // 
+            this.lblFinishedTimeFinished.AutoSize = true;
+            this.lblFinishedTimeFinished.Location = new System.Drawing.Point(37, 77);
+            this.lblFinishedTimeFinished.Name = "lblFinishedTimeFinished";
+            this.lblFinishedTimeFinished.Size = new System.Drawing.Size(65, 13);
+            this.lblFinishedTimeFinished.TabIndex = 3;
+            this.lblFinishedTimeFinished.Text = "finished time";
             // 
             // IntroductionForm
             // 
@@ -348,6 +393,8 @@
             this.pnlOpenAssessment.PerformLayout();
             this.pnlContinueAssessment.ResumeLayout(false);
             this.pnlContinueAssessment.PerformLayout();
+            this.pnlAssessmentFinished.ResumeLayout(false);
+            this.pnlAssessmentFinished.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -381,5 +428,9 @@
         private System.Windows.Forms.Label lblTimeStarted;
         private System.Windows.Forms.Label lblContinueAssessment;
         private System.Windows.Forms.Panel pnlAssessmentFinished;
+        private System.Windows.Forms.Label lblAssessmentFinished;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Label lblFinishedTimeFinished;
+        private System.Windows.Forms.Label lblFinishedTimeStarted;
     }
 }

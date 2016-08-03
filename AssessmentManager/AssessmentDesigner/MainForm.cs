@@ -632,6 +632,7 @@ namespace AssessmentManager
                 {
                     using (FileStream s = File.Open(path, FileMode.Create, FileAccess.Write))
                     {
+                        Assessment.Published = false;
                         BinaryFormatter formatter = new BinaryFormatter();
                         formatter.Serialize(s, Assessment);
                     }

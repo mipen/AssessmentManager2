@@ -66,6 +66,8 @@ namespace AssessmentManager
 
             if (assessment.StudentData != null)
                 script.studentData = assessment.StudentData;
+            if (assessment.CourseInformation != null)
+                script.CourseInformation = assessment.CourseInformation;
 
             return script;
         }
