@@ -71,6 +71,8 @@
             this.lblQuestionNumber = new System.Windows.Forms.Label();
             this.panelAnswerContainer = new System.Windows.Forms.Panel();
             this.labelAnswerText = new System.Windows.Forms.Label();
+            this.panelAnswerLongContainer = new System.Windows.Forms.Panel();
+            this.rtbAnswerLong = new System.Windows.Forms.RichTextBox();
             this.tlpMultiAnswerContainer = new System.Windows.Forms.TableLayoutPanel();
             this.tlpOptionD = new System.Windows.Forms.TableLayoutPanel();
             this.labelOptionD = new System.Windows.Forms.Label();
@@ -86,8 +88,6 @@
             this.labelOptionA = new System.Windows.Forms.Label();
             this.panelAnswerShortContainer = new System.Windows.Forms.Panel();
             this.textBoxAnswerShort = new System.Windows.Forms.TextBox();
-            this.panelAnswerLongContainer = new System.Windows.Forms.Panel();
-            this.rtbAnswerLong = new System.Windows.Forms.RichTextBox();
             this.toolTipButtons = new System.Windows.Forms.ToolTip(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.panelTop.SuspendLayout();
@@ -103,13 +103,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbMagnifyingGlass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMagnification)).BeginInit();
             this.panelAnswerContainer.SuspendLayout();
+            this.panelAnswerLongContainer.SuspendLayout();
             this.tlpMultiAnswerContainer.SuspendLayout();
             this.tlpOptionD.SuspendLayout();
             this.tlpOptionC.SuspendLayout();
             this.tlpOptionB.SuspendLayout();
             this.tlpOptionA.SuspendLayout();
             this.panelAnswerShortContainer.SuspendLayout();
-            this.panelAnswerLongContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTop
@@ -190,6 +190,7 @@
             this.buttonSubmitAssessment.TabIndex = 7;
             this.buttonSubmitAssessment.Text = "Submit";
             this.buttonSubmitAssessment.UseVisualStyleBackColor = true;
+            this.buttonSubmitAssessment.Click += new System.EventHandler(this.buttonSubmitAssessment_Click);
             // 
             // lblTimeRemainingTimer
             // 
@@ -240,6 +241,7 @@
             this.listBoxUnansweredQuestions.Name = "listBoxUnansweredQuestions";
             this.listBoxUnansweredQuestions.Size = new System.Drawing.Size(188, 82);
             this.listBoxUnansweredQuestions.TabIndex = 1;
+            this.listBoxUnansweredQuestions.SelectedIndexChanged += new System.EventHandler(this.listBoxUnansweredQuestions_SelectedIndexChanged);
             // 
             // labelUnansweredQuestions
             // 
@@ -573,9 +575,9 @@
             // panelAnswerContainer
             // 
             this.panelAnswerContainer.Controls.Add(this.labelAnswerText);
+            this.panelAnswerContainer.Controls.Add(this.panelAnswerLongContainer);
             this.panelAnswerContainer.Controls.Add(this.tlpMultiAnswerContainer);
             this.panelAnswerContainer.Controls.Add(this.panelAnswerShortContainer);
-            this.panelAnswerContainer.Controls.Add(this.panelAnswerLongContainer);
             this.panelAnswerContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnswerContainer.Location = new System.Drawing.Point(3, 172);
             this.panelAnswerContainer.Name = "panelAnswerContainer";
@@ -590,6 +592,27 @@
             this.labelAnswerText.Size = new System.Drawing.Size(42, 13);
             this.labelAnswerText.TabIndex = 0;
             this.labelAnswerText.Text = "Answer";
+            // 
+            // panelAnswerLongContainer
+            // 
+            this.panelAnswerLongContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelAnswerLongContainer.Controls.Add(this.rtbAnswerLong);
+            this.panelAnswerLongContainer.Location = new System.Drawing.Point(0, 16);
+            this.panelAnswerLongContainer.Name = "panelAnswerLongContainer";
+            this.panelAnswerLongContainer.Size = new System.Drawing.Size(555, 147);
+            this.panelAnswerLongContainer.TabIndex = 0;
+            // 
+            // rtbAnswerLong
+            // 
+            this.rtbAnswerLong.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbAnswerLong.Location = new System.Drawing.Point(0, 0);
+            this.rtbAnswerLong.Name = "rtbAnswerLong";
+            this.rtbAnswerLong.Size = new System.Drawing.Size(555, 147);
+            this.rtbAnswerLong.TabIndex = 0;
+            this.rtbAnswerLong.Text = "";
+            this.rtbAnswerLong.TextChanged += new System.EventHandler(this.rtbAnswerLong_TextChanged);
             // 
             // tlpMultiAnswerContainer
             // 
@@ -608,6 +631,7 @@
             this.tlpMultiAnswerContainer.RowCount = 2;
             this.tlpMultiAnswerContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMultiAnswerContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMultiAnswerContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMultiAnswerContainer.Size = new System.Drawing.Size(555, 78);
             this.tlpMultiAnswerContainer.TabIndex = 2;
             // 
@@ -771,7 +795,7 @@
             this.panelAnswerShortContainer.Controls.Add(this.textBoxAnswerShort);
             this.panelAnswerShortContainer.Location = new System.Drawing.Point(0, 16);
             this.panelAnswerShortContainer.Name = "panelAnswerShortContainer";
-            this.panelAnswerShortContainer.Size = new System.Drawing.Size(555, 131);
+            this.panelAnswerShortContainer.Size = new System.Drawing.Size(555, 147);
             this.panelAnswerShortContainer.TabIndex = 1;
             // 
             // textBoxAnswerShort
@@ -782,26 +806,7 @@
             this.textBoxAnswerShort.Name = "textBoxAnswerShort";
             this.textBoxAnswerShort.Size = new System.Drawing.Size(549, 20);
             this.textBoxAnswerShort.TabIndex = 0;
-            // 
-            // panelAnswerLongContainer
-            // 
-            this.panelAnswerLongContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelAnswerLongContainer.Controls.Add(this.rtbAnswerLong);
-            this.panelAnswerLongContainer.Location = new System.Drawing.Point(0, 16);
-            this.panelAnswerLongContainer.Name = "panelAnswerLongContainer";
-            this.panelAnswerLongContainer.Size = new System.Drawing.Size(555, 131);
-            this.panelAnswerLongContainer.TabIndex = 0;
-            // 
-            // rtbAnswerLong
-            // 
-            this.rtbAnswerLong.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbAnswerLong.Location = new System.Drawing.Point(0, 0);
-            this.rtbAnswerLong.Name = "rtbAnswerLong";
-            this.rtbAnswerLong.Size = new System.Drawing.Size(555, 131);
-            this.rtbAnswerLong.TabIndex = 0;
-            this.rtbAnswerLong.Text = "";
+            this.textBoxAnswerShort.TextChanged += new System.EventHandler(this.textBoxAnswerShort_TextChanged);
             // 
             // timer
             // 
@@ -843,6 +848,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMagnification)).EndInit();
             this.panelAnswerContainer.ResumeLayout(false);
             this.panelAnswerContainer.PerformLayout();
+            this.panelAnswerLongContainer.ResumeLayout(false);
             this.tlpMultiAnswerContainer.ResumeLayout(false);
             this.tlpOptionD.ResumeLayout(false);
             this.tlpOptionD.PerformLayout();
@@ -854,7 +860,6 @@
             this.tlpOptionA.PerformLayout();
             this.panelAnswerShortContainer.ResumeLayout(false);
             this.panelAnswerShortContainer.PerformLayout();
-            this.panelAnswerLongContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -7,8 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AssessmentManager.CONSTANTS;
 
 namespace AssessmentManager
 {
@@ -16,10 +18,15 @@ namespace AssessmentManager
     {
 
         private AssessmentScript script;
+        private Mode mode = Mode.Running;
+        private int marksAttempted = 0;
+        private int TotalMarksCache = 0;
+        private string filePath = null;
 
-        public Examinee(AssessmentScript script)
+        public Examinee(AssessmentScript script, string path)
         {
             InitializeComponent();
+            filePath = path;
             buttonSubmitAssessment.UseCompatibleTextRendering = true;
             StartPosition = FormStartPosition.CenterScreen;
             Script = script;
@@ -50,21 +57,56 @@ namespace AssessmentManager
             }
         }
 
+        public Answer SelectedQuestionAnswer
+        {
+            get
+            {
+                try
+                {
+                    return script.Answers[SelectedQuestion.Name];
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show($"An error has occured: {SelectedQuestion.Name} tried to access its answer, but it doesn't have one.");
+                    return null;
+                }
+            }
+        }
+
+        public List<string> UnattemptedQuestions
+        {
+            get
+            {
+                List<string> list = new List<string>();
+                foreach (var kvp in Script.Answers)
+                {
+                    if (!kvp.Value.Attempted)
+                        list.Add(kvp.Key);
+                }
+                return list;
+            }
+        }
+
+        public Mode Mode
+        {
+            get
+            {
+                return mode;
+            }
+            set
+            {
+                mode = value;
+            }
+        }
+
         #endregion
 
         #region Methods
 
         public void NotifyAssessmentOpened()
         {
-            //Enable all ui
-            panelQuestionAnswer.Enabled = true;
-            panelQuestionAnswer.Visible = true;
-
-            panelLeft.Enabled = true;
-            panelLeft.Visible = true;
-
-            panelTop.Enabled = true;
-            panelTop.Visible = true;
+            //Reset the image tracker
+            ImageTracker.Reset();
 
             //Load questions into tree view
             Util.PopulateTreeView(treeViewQuestionDisplay, Script);
@@ -73,16 +115,34 @@ namespace AssessmentManager
             if (treeViewQuestionDisplay.Nodes.Count > 0)
                 treeViewQuestionDisplay.SelectedNode = treeViewQuestionDisplay.Nodes[0];
 
-            //Reset the image tracker
-            ImageTracker.Reset();
+            //Set the mode:
+            if (Script.Started)
+            {
+                //TODO:: Handle an already started assessment
+            }
+            else
+            {
+                //Script has not been started yet:
+                Script.Started = true;
+                if (Script.TimeData.HasReadingTime)
+                    ChangeMode(Mode.Reading);
+                else
+                    ChangeMode(Mode.Running);
+            }
+
+            //Cache the total number of marks
+            TotalMarksCache = Script.TotalMarks;
+
+            //Set the maximum for the progress bar
+            progressBarMarksAttempted.Maximum = TotalMarksCache;
+
+            //Update the unattempted list
+            listBoxUnansweredQuestions.Items.Clear();
+            listBoxUnansweredQuestions.Items.AddRange(UnattemptedQuestions.ToArray());
 
             //Display the times
-            DateTime timeStarted = Script.TimeData.TimeStarted;
-            lblTimeBegan.Text = timeStarted.ToString("hh:mm:ss");
-            DateTime finishTime = timeStarted.AddMinutes(Script.TimeData.Minutes);
-            lblFinishTime.Text = finishTime.ToString("hh:mm:ss");
-            TimeSpan time = finishTime - timeStarted;
-            lblTimeRemainingTimer.Text = time.ToString();
+            UpdateTimeDisplay(true);
+
         }
 
         public void NotifyAssessmentClosed()
@@ -140,13 +200,202 @@ namespace AssessmentManager
             }
 
             //Update the progress display
-            //TODO:: Show the marks attempted
-            labelMarksAttempted.Text = $"x // {Script.TotalMarks} marks attempted ((y)%)";
+            UpdateAttemptedMarks();
+        }
+
+        private void UpdateAttemptedMarks()
+        {
+            marksAttempted = 0;
+            foreach (var q in Script.Questions)
+                marksAttempted += q.AttemptedMarks(script.Answers);
+
+            labelMarksAttempted.Text = $"{marksAttempted}/{TotalMarksCache} marks attempted";
+            progressBarMarksAttempted.Value = marksAttempted;
+        }
+
+        public void ChangeMode(Mode mode)
+        {
+            switch (mode)
+            {
+                case Mode.Reading:
+                    {
+                        //Disable all answer entry points
+                        panelAnswerContainer.Enabled = false;
+                        //Disable submit button
+                        buttonSubmitAssessment.Enabled = false;
+                        timer.Enabled = true;
+                        Mode = Mode.Reading;
+                        lblTimeRemaining.Text = "Reading time:";
+
+                        lblMotivational.ForeColor = Color.Orange;
+                        lblMotivational.Text = "Reading time";
+                        break;
+                    }
+                case Mode.Running:
+                    {
+                        //Enable all answer entry points
+                        panelAnswerContainer.Enabled = true;
+                        timer.Enabled = true;
+                        Mode = Mode.Running;
+                        lblTimeRemaining.Text = "Time remaining:";
+                        break;
+                    }
+                case Mode.Completed:
+                    {
+                        //Disable all answer entry points
+                        panelAnswerContainer.Enabled = false;
+                        Mode = Mode.Completed;
+                        lblTimeRemaining.Text = "";
+                        lblTimeRemainingTimer.Text = "";
+                        lblMotivational.ForeColor = Color.Blue;
+                        lblMotivational.Text = "Completed. Please Submit.";
+                        timer.Enabled = false;
+                        break;
+                    }
+            }
+        }
+
+        private void UpdateTimeDisplay(bool initial = false)
+        {
+            //Show the start and end times
+            if (initial)
+            {
+                lblTimeBegan.Text = Script.TimeData.StartTime.ToString("hh:mm:ss");
+                lblFinishTime.Text = Script.TimeData.FinishTime.ToString("hh:mm:ss");
+            }
+
+            switch (Mode)
+            {
+                case Mode.Reading:
+                    {
+                        //Will only get here if assessment has reading time, so ReadingFinishTime will never be null.
+                        TimeSpan ts = Script.TimeData.ReadingFinishTime - DateTime.Now;
+                        if (ts.Hours <= 0 && ts.Minutes <= 0 && ts.Seconds <= 0)
+                        {
+                            ChangeMode(Mode.Running);
+                            break;
+                        }
+                        lblTimeRemainingTimer.Text = $"{ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
+                        break;
+                    }
+                case Mode.Running:
+                    {
+                        TimeSpan ts = Script.TimeData.FinishTime - DateTime.Now;
+                        if (ts.Hours <= 0 && ts.Minutes <= 0 && ts.Seconds <= 0)
+                        {
+                            ChangeMode(Mode.Completed);
+                            break;
+                        }
+                        lblTimeRemainingTimer.Text = $"{ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
+
+                        //Update the motivational display
+                        double marksPercentage = (double)marksAttempted / (double)TotalMarksCache;
+                        double timePercentage = 1 - (ts.TotalMinutes / Script.TimeData.Minutes);
+                        if (marksPercentage >= timePercentage)
+                        {
+                            //Give good message
+                            lblMotivational.ForeColor = Color.Green;
+                            lblMotivational.Text = "You are ahead of time";
+                        }
+                        else
+                        {
+                            //Give bad message
+                            lblMotivational.ForeColor = Color.Red;
+                            lblMotivational.Text = "You are falling behind";
+                        }
+                        break;
+                    }
+            }
+        }
+
+        private void SaveToFile()
+        {
+            //TODO:: Name the file properly!
+            string path = "";
+            if (Path.GetExtension(filePath) == ASSESSMENT_SCRIPT_EXT)
+            {
+                path = filePath;
+            }
+            else
+            {
+                string filePath2 = Path.GetDirectoryName(filePath);
+                string fileName = Path.GetFileNameWithoutExtension(filePath);
+                path = filePath2 + "\\" + fileName + ASSESSMENT_SCRIPT_EXT;
+            }
+            try
+            {
+                using(FileStream s = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(s, Script);
+                    filePath = path;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: Failed to save \n\n" + ex.Message);
+            }
         }
 
         #endregion
 
         #region Control Events
+
+        #region Radio Buttons
+
+        private void rbOptionA_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = true;
+            rbOptionB.Checked = false;
+            rbOptionC.Checked = false;
+            rbOptionD.Checked = false;
+
+            if (SelectedQuestion != null && SelectedQuestion.AnswerType != AnswerType.None)
+            {
+                SelectedQuestionAnswer.SelectedOption = MultiChoiceOption.A;
+            }
+        }
+
+        private void rbOptionB_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = false;
+            rbOptionB.Checked = true;
+            rbOptionC.Checked = false;
+            rbOptionD.Checked = false;
+
+            if (SelectedQuestion != null && SelectedQuestion.AnswerType != AnswerType.None)
+            {
+                SelectedQuestionAnswer.SelectedOption = MultiChoiceOption.B;
+            }
+        }
+
+        private void rbOptionC_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = false;
+            rbOptionB.Checked = false;
+            rbOptionC.Checked = true;
+            rbOptionD.Checked = false;
+
+            if (SelectedQuestion != null && SelectedQuestion.AnswerType != AnswerType.None)
+            {
+                SelectedQuestionAnswer.SelectedOption = MultiChoiceOption.C;
+            }
+        }
+
+        private void rbOptionD_Click(object sender, EventArgs e)
+        {
+            rbOptionA.Checked = false;
+            rbOptionB.Checked = false;
+            rbOptionC.Checked = false;
+            rbOptionD.Checked = true;
+
+            if (SelectedQuestion != null && SelectedQuestion.AnswerType != AnswerType.None)
+            {
+                SelectedQuestionAnswer.SelectedOption = MultiChoiceOption.D;
+            }
+        }
+
+        #endregion
 
         private void buttonExpand_Click(object sender, EventArgs e)
         {
@@ -205,58 +454,39 @@ namespace AssessmentManager
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            //TODO:: Include reading minutes
-            //TODO:: Event for when time runs out. Go into ReadOnly mode and ask to save.
-
-            //Update the time remaining display
-            DateTime startTime = Script.TimeData.TimeStarted;
-            DateTime finishTime = startTime.AddMinutes(Script.TimeData.Minutes);
-            TimeSpan ts = finishTime - DateTime.Now;
-            lblTimeRemainingTimer.Text = $"{ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
+            UpdateTimeDisplay();
         }
 
-        #endregion
-
-        #region Radio Buttons
-
-        private void rbOptionA_Click(object sender, EventArgs e)
+        private void rtbAnswerLong_TextChanged(object sender, EventArgs e)
         {
-            rbOptionA.Checked = true;
-            rbOptionB.Checked = false;
-            rbOptionC.Checked = false;
-            rbOptionD.Checked = false;
-
-            //TODO:: record answer
+            if (SelectedQuestion != null && SelectedQuestion.AnswerType != AnswerType.None)
+            {
+                SelectedQuestionAnswer.LongAnswer = rtbAnswerLong.Text;
+            }
         }
 
-        private void rbOptionB_Click(object sender, EventArgs e)
+        private void textBoxAnswerShort_TextChanged(object sender, EventArgs e)
         {
-            rbOptionA.Checked = false;
-            rbOptionB.Checked = true;
-            rbOptionC.Checked = false;
-            rbOptionD.Checked = false;
-
-            //TODO:: record answer
+            if (SelectedQuestion != null && SelectedQuestion.AnswerType != AnswerType.None)
+            {
+                SelectedQuestionAnswer.ShortAnswer = textBoxAnswerShort.Text;
+            }
         }
 
-        private void rbOptionC_Click(object sender, EventArgs e)
+        private void listBoxUnansweredQuestions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            rbOptionA.Checked = false;
-            rbOptionB.Checked = false;
-            rbOptionC.Checked = true;
-            rbOptionD.Checked = false;
-
-            //TODO:: record answer
+            TreeNode[] nodes = treeViewQuestionDisplay.Nodes.Find((string)listBoxUnansweredQuestions.SelectedItem, true);
+            if (nodes.Count() > 0)
+            {
+                TreeNode match = nodes[0];
+                treeViewQuestionDisplay.SelectedNode = match;
+            }
         }
 
-        private void rbOptionD_Click(object sender, EventArgs e)
+        private void buttonSubmitAssessment_Click(object sender, EventArgs e)
         {
-            rbOptionA.Checked = false;
-            rbOptionB.Checked = false;
-            rbOptionC.Checked = false;
-            rbOptionD.Checked = true;
-
-            //TODO:: record answer
+            //TODO:: submit the assessment properly!
+            SaveToFile();
         }
 
         #endregion
@@ -319,7 +549,28 @@ namespace AssessmentManager
                         labelOptionC.Text = SelectedQuestion?.OptionC;
                         labelOptionD.Text = SelectedQuestion?.OptionD;
 
-                        //TODO:: Select the answer that has been selected (if so)
+                        //Select the answer that has been selected (if so)
+                        switch (SelectedQuestionAnswer.SelectedOption)
+                        {
+                            case MultiChoiceOption.A:
+                                rbOptionA_Click(sender, e);
+                                break;
+                            case MultiChoiceOption.B:
+                                rbOptionB_Click(sender, e);
+                                break;
+                            case MultiChoiceOption.C:
+                                rbOptionC_Click(sender, e);
+                                break;
+                            case MultiChoiceOption.D:
+                                rbOptionD_Click(sender, e);
+                                break;
+                            default:
+                                rbOptionA.Checked = false;
+                                rbOptionB.Checked = false;
+                                rbOptionC.Checked = false;
+                                rbOptionD.Checked = false;
+                                break;
+                        }
                         break;
                     }
                 case AnswerType.Open:
@@ -335,7 +586,8 @@ namespace AssessmentManager
 
                         labelAnswerText.Visible = true;
 
-                        //TODO:: Show the entered answer
+                        //Show the entered answer
+                        rtbAnswerLong.Text = SelectedQuestionAnswer.LongAnswer;
                         break;
                     }
                 case AnswerType.Single:
@@ -352,6 +604,7 @@ namespace AssessmentManager
                         labelAnswerText.Visible = true;
 
                         //TODO:: Show the enetered answer
+                        textBoxAnswerShort.Text = SelectedQuestionAnswer.ShortAnswer;
                         break;
                     }
             }
@@ -383,6 +636,8 @@ namespace AssessmentManager
             }
 
             //TODO:: Update unanswered questions
+            listBoxUnansweredQuestions.Items.Clear();
+            listBoxUnansweredQuestions.Items.AddRange(UnattemptedQuestions.ToArray());
         }
 
         private void Examinee_FormClosing(object sender, FormClosingEventArgs e)

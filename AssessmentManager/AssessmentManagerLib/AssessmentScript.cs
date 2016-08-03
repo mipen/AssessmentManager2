@@ -9,10 +9,12 @@ namespace AssessmentManager
     [Serializable]
     public class AssessmentScript
     {
+        public CourseInformation CourseInformation = null;
         private List<Question> questions = new List<Question>();
         private Dictionary<string, Answer> answers = new Dictionary<string, Answer>();
         private TimeData timeData = null;
         private StudentData studentData = null;
+        public bool Started = false;
 
         public AssessmentScript()
         {
@@ -50,8 +52,7 @@ namespace AssessmentManager
             //Populate answers dictionary with answer objects for each question
             foreach (var q in script.Questions)
             {
-                if (!script.Answers.Keys.Contains(q.Name))
-                    script.Answers.Add(q.Name, new Answer());
+                q.AddToAnswerDict(script.Answers);
             }
             if (assessment.TimeData != null)
                 script.timeData = assessment.TimeData;

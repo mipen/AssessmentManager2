@@ -48,10 +48,20 @@
             this.lblDateTimeDisp = new System.Windows.Forms.Label();
             this.lblDateTime = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.pnlContinueAssessment = new System.Windows.Forms.Panel();
+            this.lblContinueAssessment = new System.Windows.Forms.Label();
+            this.lblTimeStarted = new System.Windows.Forms.Label();
+            this.pnlLine2 = new System.Windows.Forms.Panel();
+            this.lblFinishingTime = new System.Windows.Forms.Label();
+            this.lblContinueDescription = new System.Windows.Forms.Label();
+            this.btnContinueYes = new System.Windows.Forms.Button();
+            this.btnContinueNo = new System.Windows.Forms.Button();
+            this.pnlAssessmentFinished = new System.Windows.Forms.Panel();
             this.pnlInformation.SuspendLayout();
             this.pnlUserInteract.SuspendLayout();
             this.pnlPractise.SuspendLayout();
             this.pnlOpenAssessment.SuspendLayout();
+            this.pnlContinueAssessment.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAuthor
@@ -119,6 +129,8 @@
             // 
             this.pnlUserInteract.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlUserInteract.Controls.Add(this.pnlLine);
+            this.pnlUserInteract.Controls.Add(this.pnlAssessmentFinished);
+            this.pnlUserInteract.Controls.Add(this.pnlContinueAssessment);
             this.pnlUserInteract.Controls.Add(this.pnlPractise);
             this.pnlUserInteract.Controls.Add(this.pnlOpenAssessment);
             this.pnlUserInteract.Controls.Add(this.lblDateTimeDisp);
@@ -230,6 +242,92 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // pnlContinueAssessment
+            // 
+            this.pnlContinueAssessment.Controls.Add(this.btnContinueNo);
+            this.pnlContinueAssessment.Controls.Add(this.btnContinueYes);
+            this.pnlContinueAssessment.Controls.Add(this.lblContinueDescription);
+            this.pnlContinueAssessment.Controls.Add(this.lblFinishingTime);
+            this.pnlContinueAssessment.Controls.Add(this.pnlLine2);
+            this.pnlContinueAssessment.Controls.Add(this.lblTimeStarted);
+            this.pnlContinueAssessment.Controls.Add(this.lblContinueAssessment);
+            this.pnlContinueAssessment.Location = new System.Drawing.Point(0, 21);
+            this.pnlContinueAssessment.Name = "pnlContinueAssessment";
+            this.pnlContinueAssessment.Size = new System.Drawing.Size(669, 108);
+            this.pnlContinueAssessment.TabIndex = 3;
+            // 
+            // lblContinueAssessment
+            // 
+            this.lblContinueAssessment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblContinueAssessment.Location = new System.Drawing.Point(0, 0);
+            this.lblContinueAssessment.Name = "lblContinueAssessment";
+            this.lblContinueAssessment.Size = new System.Drawing.Size(669, 23);
+            this.lblContinueAssessment.TabIndex = 0;
+            this.lblContinueAssessment.Text = "Assessment still available. Would you like to continue?";
+            this.lblContinueAssessment.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lblTimeStarted
+            // 
+            this.lblTimeStarted.AutoSize = true;
+            this.lblTimeStarted.Location = new System.Drawing.Point(15, 37);
+            this.lblTimeStarted.Name = "lblTimeStarted";
+            this.lblTimeStarted.Size = new System.Drawing.Size(61, 13);
+            this.lblTimeStarted.TabIndex = 1;
+            this.lblTimeStarted.Text = "time started";
+            // 
+            // pnlLine2
+            // 
+            this.pnlLine2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlLine2.Location = new System.Drawing.Point(114, 22);
+            this.pnlLine2.Name = "pnlLine2";
+            this.pnlLine2.Size = new System.Drawing.Size(441, 1);
+            this.pnlLine2.TabIndex = 4;
+            // 
+            // lblFinishingTime
+            // 
+            this.lblFinishingTime.AutoSize = true;
+            this.lblFinishingTime.Location = new System.Drawing.Point(15, 66);
+            this.lblFinishingTime.Name = "lblFinishingTime";
+            this.lblFinishingTime.Size = new System.Drawing.Size(67, 13);
+            this.lblFinishingTime.TabIndex = 5;
+            this.lblFinishingTime.Text = "finishing time";
+            // 
+            // lblContinueDescription
+            // 
+            this.lblContinueDescription.Location = new System.Drawing.Point(254, 32);
+            this.lblContinueDescription.Name = "lblContinueDescription";
+            this.lblContinueDescription.Size = new System.Drawing.Size(203, 73);
+            this.lblContinueDescription.TabIndex = 6;
+            this.lblContinueDescription.Text = "This assessment has already been started, but there is still time remaining to co" +
+    "ntinue with it. Press the \'Yes\' button to continue taking this assessment.";
+            // 
+            // btnContinueYes
+            // 
+            this.btnContinueYes.Location = new System.Drawing.Point(480, 72);
+            this.btnContinueYes.Name = "btnContinueYes";
+            this.btnContinueYes.Size = new System.Drawing.Size(75, 23);
+            this.btnContinueYes.TabIndex = 7;
+            this.btnContinueYes.Text = "&Yes";
+            this.btnContinueYes.UseVisualStyleBackColor = true;
+            this.btnContinueYes.Click += new System.EventHandler(this.btnContinueYes_Click);
+            // 
+            // btnContinueNo
+            // 
+            this.btnContinueNo.Location = new System.Drawing.Point(581, 72);
+            this.btnContinueNo.Name = "btnContinueNo";
+            this.btnContinueNo.Size = new System.Drawing.Size(75, 23);
+            this.btnContinueNo.TabIndex = 8;
+            this.btnContinueNo.Text = "&No";
+            this.btnContinueNo.UseVisualStyleBackColor = true;
+            this.btnContinueNo.Click += new System.EventHandler(this.btnContinueNo_Click);
+            // 
+            // pnlAssessmentFinished
+            // 
+            this.pnlAssessmentFinished.Location = new System.Drawing.Point(0, 21);
+            this.pnlAssessmentFinished.Name = "pnlAssessmentFinished";
+            this.pnlAssessmentFinished.Size = new System.Drawing.Size(669, 108);
+            this.pnlAssessmentFinished.TabIndex = 9;
+            // 
             // IntroductionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -248,6 +346,8 @@
             this.pnlPractise.ResumeLayout(false);
             this.pnlOpenAssessment.ResumeLayout(false);
             this.pnlOpenAssessment.PerformLayout();
+            this.pnlContinueAssessment.ResumeLayout(false);
+            this.pnlContinueAssessment.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -272,5 +372,14 @@
         private System.Windows.Forms.Panel pnlOpenAssessment;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.Label lblOpenAssessment;
+        private System.Windows.Forms.Panel pnlContinueAssessment;
+        private System.Windows.Forms.Button btnContinueNo;
+        private System.Windows.Forms.Button btnContinueYes;
+        private System.Windows.Forms.Label lblContinueDescription;
+        private System.Windows.Forms.Label lblFinishingTime;
+        private System.Windows.Forms.Panel pnlLine2;
+        private System.Windows.Forms.Label lblTimeStarted;
+        private System.Windows.Forms.Label lblContinueAssessment;
+        private System.Windows.Forms.Panel pnlAssessmentFinished;
     }
 }

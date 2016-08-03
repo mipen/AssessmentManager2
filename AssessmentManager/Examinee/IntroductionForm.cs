@@ -18,6 +18,7 @@ namespace AssessmentManager
 
         private Assessment assessment = null;
         private AssessmentScript script = null;
+        private string filePath = null;
 
         public IntroductionForm(string[] args)
         {
@@ -74,17 +75,29 @@ namespace AssessmentManager
                         {
                             BinaryFormatter f = new BinaryFormatter();
                             assessment = (Assessment)f.Deserialize(s);
-                            NotifyAssessmentOpened();
+                            NotifyAssessmentOpened(path);
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Unable to load file.\n" + ex.Message);
+                        MessageBox.Show("Unable to load file " + path + "\n\n" + ex.Message);
                     }
                 }
                 else if (ext == ASSESSMENT_SCRIPT_EXT)
                 {
-                    //TODO:: Open assessment script
+                    try
+                    {
+                        using (FileStream s = File.Open(path, FileMode.Open))
+                        {
+                            BinaryFormatter formatter = new BinaryFormatter();
+                            script = (AssessmentScript)formatter.Deserialize(s);
+                            NotifyAssessmentScriptOpened(path);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Unable to load file " + path + "\n\n" + ex.Message);
+                    }
                 }
                 else
                 {
@@ -93,8 +106,10 @@ namespace AssessmentManager
             }
         }
 
-        private void NotifyAssessmentOpened()
+        private void NotifyAssessmentOpened(string path)
         {
+            //Record the file path
+            filePath = path;
             //Show the assessment information
             #region Assessment information
             if (assessment.CourseInformation != null)
@@ -129,8 +144,7 @@ namespace AssessmentManager
             #endregion
 
             //Build the assessment script
-            AssessmentScript script = AssessmentScript.BuildFromAssessment(assessment);
-            this.script = script;
+            script = AssessmentScript.BuildFromAssessment(assessment);
 
             //Determine if the assessment is published or not and show the correct window
             if (assessment.Published)
@@ -146,13 +160,83 @@ namespace AssessmentManager
                 //Disable open assessment panel
                 pnlOpenAssessment.Enabled = false;
                 pnlOpenAssessment.Visible = false;
+
+                //Disable continue panel
+                pnlContinueAssessment.Enabled = false;
+                pnlContinueAssessment.Visible = false;
             }
         }
 
-        private void NotifyAssessmentScriptOpened()
+        private void NotifyAssessmentScriptOpened(string path)
         {
             //TODO:: Do script opening stuff here
 
+            //Record the path
+            filePath = path;
+
+            //Show the assessment information
+            #region Assessment information
+            if (script.CourseInformation != null)
+            {
+                CourseInformation c = script.CourseInformation;
+                if (!c.CourseCode.NullOrEmpty())
+                    lblCourseCode.Text = c.CourseCode;
+                else
+                    lblCourseCode.Text = "";
+
+                if (!c.CourseName.NullOrEmpty())
+                    lblCourseName.Text = c.CourseName;
+                else
+                    lblCourseName.Text = "Unkown course";
+
+                if (!c.AssessmentName.NullOrEmpty())
+                    lblAssessmentName.Text = c.AssessmentName;
+                else
+                    lblAssessmentName.Text = "Assessment";
+
+                if (!c.Author.NullOrEmpty())
+                    lblAuthor.Text = $"Author: {c.Author}";
+                else
+                    lblAuthor.Text = "";
+
+                lblWeighting.Text = $"{c.AssessmentWeighting}%";
+
+                //Enable the information panel
+                pnlInformation.Enabled = true;
+                pnlInformation.Visible = true;
+            }
+            #endregion
+
+            //Determine if the assessment can be continued
+            if (DateTime.Now < script.TimeData.FinishTime)
+            {
+                //Assessment can be continued
+
+                //Enable continue panel
+                pnlContinueAssessment.Enabled = true;
+                pnlContinueAssessment.Visible = true;
+
+                //Disable practice panel
+                pnlPractise.Enabled = false;
+                pnlPractise.Visible = false;
+
+                //Disable open assessment panel
+                pnlOpenAssessment.Enabled = false;
+                pnlOpenAssessment.Visible = false;
+
+                //Add check for remaining time to timer tick
+                timer.Tick += CheckTimeRemainingForContinue;
+
+                //Show start and finish times
+                lblTimeStarted.Text = script.TimeData.StartTime.ToString("F");
+                lblFinishingTime.Text = script.TimeData.FinishTime.ToString("F");
+            }
+            else
+            {
+                //Assessment has finished
+
+                //TODO:: Show panel which lets user know the assessment has finished
+            }
         }
 
         private void NotifyNothingOpened()
@@ -170,6 +254,29 @@ namespace AssessmentManager
             //Enable Open Assessment panel
             pnlOpenAssessment.Enabled = true;
             pnlOpenAssessment.Visible = true;
+        }
+
+        private void CheckTimeRemainingForContinue(object sender, EventArgs e)
+        {
+            if(DateTime.Now>=script.TimeData.FinishTime)
+            {
+                //Remove check method from timer
+                timer.Tick -= CheckTimeRemainingForContinue;
+
+                //Enable assessment finished panel
+
+                //Disable continue panel
+                pnlContinueAssessment.Enabled = false;
+                pnlContinueAssessment.Visible = false;
+
+                //Disable practice panel
+                pnlPractise.Enabled = false;
+                pnlPractise.Visible = false;
+
+                //Disable open assessment panel
+                pnlOpenAssessment.Enabled = false;
+                pnlOpenAssessment.Visible = false;
+            }
         }
 
         #endregion
@@ -195,10 +302,15 @@ namespace AssessmentManager
             }
 
             //Set the start time
-            script.TimeData.TimeStarted = DateTime.Now;
+            script.TimeData.StartTime = DateTime.Now;
+            //Set the finish time
+            script.TimeData.FinishTime = script.TimeData.StartTime.AddMinutes(script.TimeData.Minutes + script.TimeData.ReadingMinutes);
+            //Set reading finish time
+            script.TimeData.ReadingFinishTime = script.TimeData.StartTime.AddMinutes(script.TimeData.ReadingMinutes);
 
-            Examinee ex = new Examinee(script);
+            Examinee ex = new Examinee(script, filePath);
             ex.Show();
+            timer.Enabled = false;
             Hide();
         }
 
@@ -207,6 +319,17 @@ namespace AssessmentManager
             Close();
         }
 
+        private void btnContinueNo_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnContinueYes_Click(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
+
     }
 }

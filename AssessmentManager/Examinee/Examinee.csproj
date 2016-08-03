@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mode.cs" />
     <Compile Include="TimeConfig.cs">
       <SubType>Form</SubType>
     </Compile>

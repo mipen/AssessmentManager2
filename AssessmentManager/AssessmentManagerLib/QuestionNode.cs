@@ -15,6 +15,7 @@ namespace AssessmentManager
         {
             Question = question;
             Text = question.Name;
+            Name = Text;
         }
 
         public QuestionNode(Question question, QuestionNode[] subQuestions) : this(question)

@@ -11,7 +11,7 @@ namespace AssessmentManager
     public class Question
     {
         private string name = "Question";
-        private int marks=0;
+        private int marks = 0;
         private string questionText = "";
         private string modelAnswer;
         private string optionA, optionB, optionC, optionD;
@@ -87,7 +87,7 @@ namespace AssessmentManager
             {
                 modelAnswer = value;
             }
-        } 
+        }
 
         public string OptionA
         {
@@ -189,22 +189,61 @@ namespace AssessmentManager
             {
                 marks = value;
             }
-        } 
+        }
 
         public void CheckMissingMarks(List<Question> questions)
         {
             if (AnswerType != AnswerType.None && Marks == 0)
                 questions.Add(this);
-            if(HasSubQuestions)
+            if (HasSubQuestions)
             {
-                foreach(var q in SubQuestions)
+                foreach (var q in SubQuestions)
                 {
                     q.CheckMissingMarks(questions);
                 }
             }
 
         }
+
+        public int AttemptedMarks(Dictionary<string, Answer> dict)
+        {
+            int num = 0;
+            if (AnswerType != AnswerType.None)
+            {
+                Answer answer = dict[Name];
+                if (answer != null && answer.Attempted)
+                {
+                    num += Marks;
+                }
+            }
+
+            if(HasSubQuestions)
+            {
+                foreach(var q in SubQuestions)
+                {
+                    num += q.AttemptedMarks(dict);
+                }
+            }
+            return num;
+        }
+
         #endregion
 
+        public void AddToAnswerDict(Dictionary<string, Answer> dict)
+        {
+            if (AnswerType != AnswerType.None)
+            {
+                if (!dict.ContainsKey(Name))
+                    dict.Add(Name, new Answer());
+            }
+
+            if (HasSubQuestions)
+            {
+                foreach(var q in SubQuestions)
+                {
+                    q.AddToAnswerDict(dict);
+                }
+            }
+        }
     }
 }

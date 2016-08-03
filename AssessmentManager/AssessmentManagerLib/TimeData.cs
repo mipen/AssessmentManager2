@@ -9,21 +9,27 @@ namespace AssessmentManager
     [Serializable]
     public class TimeData
     {
-        private DateTime plannedDate;
         private bool dateIsPlanned = false;
 
         //The number of minutes for the assessment
         private int minutes = 0;
         private int readingMinutes = 0;
         private bool minutesArePlanned = false;
+        private bool hasReadingTime = false;
 
         //The time that the user started the assessment
-        public DateTime TimeStarted;
+        public DateTime StartTime;
+        //Time that the assessment will finish
+        public DateTime FinishTime;
+        //Time that reading time will finish
+        public DateTime ReadingFinishTime;
 
         public TimeData()
         {
 
         }
+
+        #region Properties
 
         public bool MinutesArePlanned
         {
@@ -58,18 +64,10 @@ namespace AssessmentManager
             set
             {
                 readingMinutes = value;
-            }
-        }
-
-        public DateTime PlannedDate
-        {
-            get
-            {
-                return plannedDate;
-            }
-            set
-            {
-                plannedDate = value;
+                if (readingMinutes > 0)
+                    hasReadingTime = true;
+                else
+                    hasReadingTime = false;
             }
         }
 
@@ -84,6 +82,16 @@ namespace AssessmentManager
                 dateIsPlanned = value;
             }
         }
+
+        public bool HasReadingTime
+        {
+            get
+            {
+                return hasReadingTime;
+            }
+        }
+
+        #endregion
 
     }
 }
