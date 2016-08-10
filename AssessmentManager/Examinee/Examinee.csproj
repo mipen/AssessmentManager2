@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mode.cs" />
+    <Compile Include="Stage.cs" />
     <Compile Include="TimeConfig.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -146,6 +146,8 @@
             this.contextMenuChangeLevelUp = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuChangeLevelDown = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.tabPagePublish = new System.Windows.Forms.TabPage();
+            this.tabPageMark = new System.Windows.Forms.TabPage();
             this.menuStripMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -355,6 +357,8 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageDesigner);
+            this.tabControl1.Controls.Add(this.tabPagePublish);
+            this.tabControl1.Controls.Add(this.tabPageMark);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
@@ -1376,6 +1380,24 @@
             this.contextMenuChangeLevelDown.Text = "Change Level Down";
             this.contextMenuChangeLevelDown.Click += new System.EventHandler(this.contextMenuChangeLevelDown_Click);
             // 
+            // tabPagePublish
+            // 
+            this.tabPagePublish.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePublish.Name = "tabPagePublish";
+            this.tabPagePublish.Size = new System.Drawing.Size(872, 584);
+            this.tabPagePublish.TabIndex = 1;
+            this.tabPagePublish.Text = "Publish";
+            this.tabPagePublish.UseVisualStyleBackColor = true;
+            // 
+            // tabPageMark
+            // 
+            this.tabPageMark.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMark.Name = "tabPageMark";
+            this.tabPageMark.Size = new System.Drawing.Size(872, 584);
+            this.tabPageMark.TabIndex = 2;
+            this.tabPageMark.Text = "Mark";
+            this.tabPageMark.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1552,5 +1574,7 @@
         private System.Windows.Forms.ToolTip buttonToolTip;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripQuestionList;
         private System.Windows.Forms.ToolStripMenuItem addMajorQuestionToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPagePublish;
+        private System.Windows.Forms.TabPage tabPageMark;
     }
 }

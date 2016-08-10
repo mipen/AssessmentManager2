@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace AssessmentManager
 {
-    public enum Mode
+    public enum Stage
     {
-        Assessment,
-        Practice
+        Reading,
+        Running,
+        Completed
     }
 }

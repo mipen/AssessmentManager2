@@ -1,28 +1,7 @@
-﻿- Implement AssessmentScript
-
-- Record answers
-
-- Introduction splash screen
-	- If assessment doesn't have TimeData then prompt for time limit
-
-- Implement things to Assessment
-	- Implement TimeData to Assessment
-	- StudentData
-	- Some way of telling if it was published or not. If not published then give practise run.
-
-- Autosave feature
-	- Save to temporary file? Or to main file. Threaded
-
-- Unanswered questions box
-
-- Record time began, time remaining, finish time
-
-- Include a mode system: ReadOnlyMode, WritingMode
-	- Different timer for each
-
-- Controller for message area to display messages to the user (the 'motivational' label)
+﻿- Controller for message area to display messages to the user (the 'motivational' label)
 	- 10 minutes remaining warning
 	- Reading time over message
 
-- Event for when time runs out
+- Hotkeys F4 + F5 to move between questions
+
 

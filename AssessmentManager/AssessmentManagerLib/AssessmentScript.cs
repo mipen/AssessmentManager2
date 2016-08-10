@@ -15,10 +15,10 @@ namespace AssessmentManager
         private TimeData timeData = null;
         private StudentData studentData = null;
         public bool Started = false;
+        public bool Published = false;
 
         public AssessmentScript()
         {
-
         }
 
         #region Properties
@@ -49,6 +49,7 @@ namespace AssessmentManager
         {
             AssessmentScript script = new AssessmentScript();
             script.questions = assessment.Questions;
+            script.Published = assessment.Published;
             //Populate answers dictionary with answer objects for each question
             foreach (var q in script.Questions)
             {

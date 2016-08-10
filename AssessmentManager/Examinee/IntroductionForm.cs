@@ -114,13 +114,13 @@ namespace AssessmentManager
 
             //Build the assessment script
             script = AssessmentScript.BuildFromAssessment(assessment);
-            //Use 'script' variable from now on in this method, except for checking if published
+            //Use 'script' variable from now on in this method
 
             //Show the assessment information
             DisplayInformation(script);
 
             //Determine if the assessment is published or not and show the correct window
-            if (assessment.Published)
+            if (script.Published)
             {
                 //TODO:: do published stuff
             }
@@ -153,6 +153,7 @@ namespace AssessmentManager
 
                 ChangeView(View.Finished);
             }
+
         }
 
         private void NotifyNothingOpened()
@@ -226,8 +227,10 @@ namespace AssessmentManager
                         timer.Tick += CheckTimeRemainingForContinue;
 
                         //Show start and finish times
-                        lblTimeStarted.Text = "Start: " + script.TimeData.StartTime.ToString("F");
-                        lblFinishingTime.Text = "Finish: " + script.TimeData.FinishTime.ToString("F");
+                        lblTimeStarted.Text = "Start: " + script.TimeData.StartTime.ToShortDateString() + " " + script.TimeData.StartTime.ToLongTimeString();
+                        lblFinishingTime.Text = "Finish: " + script.TimeData.FinishTime.ToShortDateString() + " " + script.TimeData.StartTime.ToLongTimeString();
+                        TimeSpan ts = script.TimeData.TimeRemaining;
+                        lblTimeRemaining.Text = $"Time remaining: {ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
 
                         break;
                     }
@@ -292,7 +295,9 @@ namespace AssessmentManager
 
         private void CheckTimeRemainingForContinue(object sender, EventArgs e)
         {
-            if (DateTime.Now >= script.TimeData.FinishTime)
+            TimeSpan ts = script.TimeData.TimeRemaining;
+            lblTimeRemaining.Text = $"Time remaining: {ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
+            if (script.TimeData.Finished)
             {
                 //Remove check method from timer
                 timer.Tick -= CheckTimeRemainingForContinue;
@@ -348,6 +353,7 @@ namespace AssessmentManager
 
         private void btnContinueYes_Click(object sender, EventArgs e)
         {
+            //TODO:: If assessment is published, ask for password before opening
             Examinee ex = new Examinee(script, filePath);
             ex.Show();
             timer.Enabled = false;

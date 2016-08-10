@@ -21,5 +21,10 @@ namespace AssessmentManager
         public static string DOCUMENTS_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
         public static readonly DateTime UNPLANNED = new DateTime(1975, 1, 1, 1, 1, 1, 1);
+
+        public static string AUTOSAVE_FOLDER_NAME(string assessmentName)
+        {
+            return $"{assessmentName}_autosaves";
+        }
     }
 }

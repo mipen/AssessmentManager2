@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssessmentManager
 {
@@ -88,6 +84,22 @@ namespace AssessmentManager
             get
             {
                 return hasReadingTime;
+            }
+        }
+
+        public bool Finished
+        {
+            get
+            {
+                return DateTime.Now >= FinishTime;
+            }
+        }
+
+        public TimeSpan TimeRemaining
+        {
+            get
+            {
+                return FinishTime - DateTime.Now;
             }
         }
 

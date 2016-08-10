@@ -195,20 +195,22 @@
             // lblTimeRemainingTimer
             // 
             this.lblTimeRemainingTimer.AutoSize = true;
+            this.lblTimeRemainingTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTimeRemainingTimer.Location = new System.Drawing.Point(98, 64);
             this.lblTimeRemainingTimer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTimeRemainingTimer.Name = "lblTimeRemainingTimer";
-            this.lblTimeRemainingTimer.Size = new System.Drawing.Size(49, 13);
+            this.lblTimeRemainingTimer.Size = new System.Drawing.Size(57, 13);
             this.lblTimeRemainingTimer.TabIndex = 6;
             this.lblTimeRemainingTimer.Text = "00:00:00";
             // 
             // lblTimeRemaining
             // 
             this.lblTimeRemaining.AutoSize = true;
+            this.lblTimeRemaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTimeRemaining.Location = new System.Drawing.Point(4, 64);
             this.lblTimeRemaining.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTimeRemaining.Name = "lblTimeRemaining";
-            this.lblTimeRemaining.Size = new System.Drawing.Size(81, 13);
+            this.lblTimeRemaining.Size = new System.Drawing.Size(96, 13);
             this.lblTimeRemaining.TabIndex = 5;
             this.lblTimeRemaining.Text = "Time remaining:";
             // 
