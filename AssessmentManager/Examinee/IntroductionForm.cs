@@ -263,9 +263,29 @@ namespace AssessmentManager
 
         private void DisplayInformation(AssessmentScript a)
         {
+            //Show the assessment info. This will always be present
+            if (a.AssessmentInfo != null)
+            {
+                AssessmentInformation ai = a.AssessmentInfo;
+
+                if (!ai.AssessmentName.NullOrEmpty())
+                    lblAssessmentName.Text = ai.AssessmentName;
+                else
+                    lblAssessmentName.Text = "Assessment";
+
+                if (!ai.Author.NullOrEmpty())
+                    lblAuthor.Text = $"Author: {ai.Author}";
+                else
+                    lblAuthor.Text = "";
+
+                lblWeighting.Text = ai.AssessmentWeighting<0 ? $"{ai.AssessmentWeighting}%" : "";
+            }
+
+            //Show the course info. This will only be present if the assessment has been published.
+            //TODO:: Test this once publishing has been completed.
             if (a.CourseInformation != null)
             {
-                Course c = a.CourseInformation;
+                CourseInformation c = a.CourseInformation;
                 if (!c.CourseCode.NullOrEmpty())
                     lblCourseCode.Text = c.CourseCode;
                 else
@@ -276,17 +296,9 @@ namespace AssessmentManager
                 else
                     lblCourseName.Text = "Unkown course";
 
-                if (!c.AssessmentName.NullOrEmpty())
-                    lblAssessmentName.Text = c.AssessmentName;
-                else
-                    lblAssessmentName.Text = "Assessment";
 
-                if (!c.Author.NullOrEmpty())
-                    lblAuthor.Text = $"Author: {c.Author}";
-                else
-                    lblAuthor.Text = "";
 
-                lblWeighting.Text = $"{c.AssessmentWeighting}%";
+
             }
             //Enable the information panel
             pnlInformation.Enabled = true;

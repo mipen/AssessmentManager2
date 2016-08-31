@@ -110,7 +110,7 @@ namespace AssessmentManager
         {
             FontStyle newStyle;
 
-            if(richTextBoxQuestion.SelectionFont.Style.HasFlag(FontStyle.Bold))
+            if (richTextBoxQuestion.SelectionFont.Style.HasFlag(FontStyle.Bold))
             {
                 newStyle = richTextBoxQuestion.SelectionFont.Style & ~FontStyle.Bold;
             }
@@ -201,14 +201,25 @@ namespace AssessmentManager
         {
             if (CloseAssessment() == DialogResult.OK)
             {
-                CourseInformationForm cif = new CourseInformationForm();
-                if (cif.ShowDialog() == DialogResult.OK)
+                //TODO:: Prompt to do initial save here
+                AssessmentInformationForm aif = new AssessmentInformationForm();
+                aif.StartPosition = FormStartPosition.CenterParent;
+                if (aif.ShowDialog() == DialogResult.OK)
                 {
                     Assessment = new Assessment();
                     Assessment.AddQuestion("Question 1");
-                    CourseInformationForm.PopulateCourseInformation(Assessment, cif);
-                    NotifyAssessmentOpened();
-                    designerChangesMade = true;
+                    AssessmentInformationForm.PopulateAssessmentInformation(Assessment, aif);
+                    //Prompt the user to do an initial save here. This is to set up the path and allow for autosaving
+                    MessageBox.Show("Please do an initial save. This will allow the program to perform autosaves.", "Initial save");
+                    if (SaveToFile() == DialogResult.OK)
+                    {
+                        NotifyAssessmentOpened();
+                        designerChangesMade = true;
+                    }
+                    else
+                    {
+                        Assessment = null;
+                    }
                 }
             }
         }
@@ -256,23 +267,10 @@ namespace AssessmentManager
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (DesignerChangesMade)
+            if (CloseAssessment() == DialogResult.OK)
             {
-                DialogResult result = MessageBox.Show("There are unsaved changes. Do you wish to save before opening a new file?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
-                if (result == DialogResult.Yes)
-                {
-                    if (file == null)
-                    {
-                        if (SaveToFile() == DialogResult.Cancel)
-                            return;
-                    }
-                    else
-                        SaveToFile(file.FullName);
-                }
-                else if (result == DialogResult.Cancel)
-                    return;
+                OpenFromFile();
             }
-            OpenFromFile();
         }
 
         private void checkForQuestionsWithoutMarksToolStripMenuItem_Click(object sender, EventArgs e)
@@ -297,10 +295,10 @@ namespace AssessmentManager
         {
             if (HasAssessmentOpen)
             {
-                CourseInformationForm cif = CourseInformationForm.FromAssessment(Assessment);
-                if (cif.ShowDialog() == DialogResult.OK)
+                AssessmentInformationForm aif = AssessmentInformationForm.FromAssessment(Assessment);
+                if (aif.ShowDialog() == DialogResult.OK)
                 {
-                    CourseInformationForm.PopulateCourseInformation(Assessment, cif);
+                    AssessmentInformationForm.PopulateAssessmentInformation(Assessment, aif);
                     DesignerChangesMade = true;
                 }
             }
@@ -1310,7 +1308,7 @@ namespace AssessmentManager
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             //Hotkey for next/prev question in designer tab
-            if(tabControlMain.SelectedTab.Name == "tabPageDesigner")
+            if (tabControlMain.SelectedTab.Name == "tabPageDesigner")
             {
                 if (e.KeyCode == Keys.F4)
                 {

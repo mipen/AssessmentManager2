@@ -6,15 +6,10 @@ using System.Threading.Tasks;
 
 namespace AssessmentManager
 {
-    [Serializable]
     public class Course
     {
-        private string id       = "";
-        public string CourseName        = "";
-        public string CourseCode        = "";
-        public string AssessmentName    = "";
-        public string Author            = "";
-        public int AssessmentWeighting  = 0;
+        private CourseInformation courseInfo = new CourseInformation();
+        private string id = "";
         public string ID => id;
 
         public Course(string id)

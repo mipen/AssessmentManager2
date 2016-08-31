@@ -49,11 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseInformationForm.cs">
+    <Compile Include="AssessmentInformationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CourseInformationForm.Designer.cs">
-      <DependentUpon>CourseInformationForm.cs</DependentUpon>
+    <Compile Include="AssessmentInformationForm.Designer.cs">
+      <DependentUpon>AssessmentInformationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageSelector.cs">
       <SubType>Form</SubType>
@@ -75,8 +75,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <EmbeddedResource Include="CourseInformationForm.resx">
-      <DependentUpon>CourseInformationForm.cs</DependentUpon>
+    <EmbeddedResource Include="AssessmentInformationForm.resx">
+      <DependentUpon>AssessmentInformationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageSelector.resx">
       <DependentUpon>ImageSelector.cs</DependentUpon>

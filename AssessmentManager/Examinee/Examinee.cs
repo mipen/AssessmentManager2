@@ -92,7 +92,7 @@ namespace AssessmentManager
             }
             set
             {
-                string assessmentName = (Script.CourseInformation != null && !Script.CourseInformation.AssessmentName.NullOrEmpty()) ? Script.CourseInformation.AssessmentName : Path.GetFileNameWithoutExtension(filePath);
+                string assessmentName = (Script.AssessmentInfo != null && !Script.AssessmentInfo.AssessmentName.NullOrEmpty()) ? Script.AssessmentInfo.AssessmentName : Path.GetFileNameWithoutExtension(filePath);
                 switch (value)
                 {
                     case Mode.Assessment:

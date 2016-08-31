@@ -51,6 +51,7 @@
     <Compile Include="BorderlessResize.cs" />
     <Compile Include="CONSTANTS.cs" />
     <Compile Include="Course.cs" />
+    <Compile Include="CourseInformation.cs" />
     <Compile Include="MultiChoiceOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />

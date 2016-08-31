@@ -11,7 +11,8 @@ namespace AssessmentManager
     public class Assessment
     {
         private List<Question> questions = new List<Question>();
-        private Course courseInformation = new Course("TODO::");
+        private CourseInformation courseInformation = null;
+        private AssessmentInformation assessmentInfo = new AssessmentInformation();
 
         public TimeData TimeData = null;
         public StudentData StudentData = null;
@@ -51,7 +52,7 @@ namespace AssessmentManager
 
         public List<Question> Questions => questions;
 
-        public Course CourseInformation
+        public CourseInformation CourseInformation
         {
             get
             {
@@ -60,6 +61,18 @@ namespace AssessmentManager
             set
             {
                 courseInformation = value;
+            }
+        }
+
+        public AssessmentInformation AssessmentInfo
+        {
+            get
+            {
+                return assessmentInfo;
+            }
+            set
+            {
+                assessmentInfo = value;
             }
         }
 
