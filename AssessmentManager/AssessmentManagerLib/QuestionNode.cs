@@ -18,16 +18,6 @@ namespace AssessmentManager
             Name = Text;
         }
 
-        public QuestionNode(Question question, QuestionNode[] subQuestions) : this(question)
-        {
-            //TODO:: record the passes children nodes
-            Nodes.Clear();
-            foreach (var q in subQuestions)
-            {
-                Nodes.Add(q);
-            }
-        }
-
         public Question Question
         {
             get

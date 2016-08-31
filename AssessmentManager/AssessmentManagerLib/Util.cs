@@ -107,5 +107,13 @@ namespace AssessmentManager
 
             return str;
         }
+
+        public static string RandomString(int length)
+        {
+            Random r = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[r.Next(s.Length)]).ToArray());
+        }
+
     }
 }

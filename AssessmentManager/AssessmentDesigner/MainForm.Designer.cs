@@ -133,6 +133,7 @@
             this.numericUpDownMarksAssigner = new System.Windows.Forms.NumericUpDown();
             this.labelMarksForQuestion = new System.Windows.Forms.Label();
             this.tabPagePublish = new System.Windows.Forms.TabPage();
+            this.tabPageCourses = new System.Windows.Forms.TabPage();
             this.tabPageMark = new System.Windows.Forms.TabPage();
             this.contextMenuStripQuestionNode = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
@@ -148,7 +149,29 @@
             this.contextMenuChangeLevelUp = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuChangeLevelDown = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.tabPageCourses = new System.Windows.Forms.TabPage();
+            this.tvCourses = new System.Windows.Forms.TreeView();
+            this.btnNewCourse = new System.Windows.Forms.Button();
+            this.tbCourseSearch = new System.Windows.Forms.TextBox();
+            this.pnlCourseView = new System.Windows.Forms.Panel();
+            this.pnlAssessmentView = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbCourseName = new System.Windows.Forms.TextBox();
+            this.tbCourseCode1 = new System.Windows.Forms.TextBox();
+            this.tbCourseCode2 = new System.Windows.Forms.TextBox();
+            this.nudCourseYear = new System.Windows.Forms.NumericUpDown();
+            this.cbCourseSemester = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dgvCourseStudents = new System.Windows.Forms.DataGridView();
+            this.colUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStudentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnImportStudents = new System.Windows.Forms.Button();
+            this.btnApplyCourseChanges = new System.Windows.Forms.Button();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -176,7 +199,11 @@
             this.panelMarks.SuspendLayout();
             this.groupBoxMarks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMarksAssigner)).BeginInit();
+            this.tabPageCourses.SuspendLayout();
             this.contextMenuStripQuestionNode.SuspendLayout();
+            this.pnlCourseView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCourseStudents)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStripMain
@@ -1297,6 +1324,20 @@
             this.tabPagePublish.Text = "Publish";
             this.tabPagePublish.UseVisualStyleBackColor = true;
             // 
+            // tabPageCourses
+            // 
+            this.tabPageCourses.Controls.Add(this.pnlCourseView);
+            this.tabPageCourses.Controls.Add(this.pnlAssessmentView);
+            this.tabPageCourses.Controls.Add(this.tbCourseSearch);
+            this.tabPageCourses.Controls.Add(this.btnNewCourse);
+            this.tabPageCourses.Controls.Add(this.tvCourses);
+            this.tabPageCourses.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCourses.Name = "tabPageCourses";
+            this.tabPageCourses.Size = new System.Drawing.Size(872, 584);
+            this.tabPageCourses.TabIndex = 3;
+            this.tabPageCourses.Text = "Courses";
+            this.tabPageCourses.UseVisualStyleBackColor = true;
+            // 
             // tabPageMark
             // 
             this.tabPageMark.Location = new System.Drawing.Point(4, 22);
@@ -1400,14 +1441,240 @@
             this.contextMenuChangeLevelDown.Text = "Change Level Down";
             this.contextMenuChangeLevelDown.Click += new System.EventHandler(this.contextMenuChangeLevelDown_Click);
             // 
-            // tabPageCourses
+            // tvCourses
             // 
-            this.tabPageCourses.Location = new System.Drawing.Point(4, 22);
-            this.tabPageCourses.Name = "tabPageCourses";
-            this.tabPageCourses.Size = new System.Drawing.Size(872, 584);
-            this.tabPageCourses.TabIndex = 3;
-            this.tabPageCourses.Text = "Courses";
-            this.tabPageCourses.UseVisualStyleBackColor = true;
+            this.tvCourses.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tvCourses.Location = new System.Drawing.Point(3, 29);
+            this.tvCourses.Name = "tvCourses";
+            this.tvCourses.Size = new System.Drawing.Size(156, 518);
+            this.tvCourses.TabIndex = 0;
+            this.tvCourses.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvCourses_AfterSelect);
+            // 
+            // btnNewCourse
+            // 
+            this.btnNewCourse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnNewCourse.Location = new System.Drawing.Point(3, 553);
+            this.btnNewCourse.Name = "btnNewCourse";
+            this.btnNewCourse.Size = new System.Drawing.Size(156, 23);
+            this.btnNewCourse.TabIndex = 1;
+            this.btnNewCourse.Text = "Create New Course";
+            this.btnNewCourse.UseVisualStyleBackColor = true;
+            this.btnNewCourse.Click += new System.EventHandler(this.btnNewCourse_Click);
+            // 
+            // tbCourseSearch
+            // 
+            this.tbCourseSearch.Location = new System.Drawing.Point(3, 3);
+            this.tbCourseSearch.Name = "tbCourseSearch";
+            this.tbCourseSearch.Size = new System.Drawing.Size(156, 20);
+            this.tbCourseSearch.TabIndex = 2;
+            this.tbCourseSearch.TextChanged += new System.EventHandler(this.tbCourseSearch_TextChanged);
+            // 
+            // pnlCourseView
+            // 
+            this.pnlCourseView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCourseView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCourseView.Controls.Add(this.btnApplyCourseChanges);
+            this.pnlCourseView.Controls.Add(this.btnImportStudents);
+            this.pnlCourseView.Controls.Add(this.dgvCourseStudents);
+            this.pnlCourseView.Controls.Add(this.label6);
+            this.pnlCourseView.Controls.Add(this.cbCourseSemester);
+            this.pnlCourseView.Controls.Add(this.nudCourseYear);
+            this.pnlCourseView.Controls.Add(this.tbCourseCode2);
+            this.pnlCourseView.Controls.Add(this.tbCourseCode1);
+            this.pnlCourseView.Controls.Add(this.tbCourseName);
+            this.pnlCourseView.Controls.Add(this.label5);
+            this.pnlCourseView.Controls.Add(this.label4);
+            this.pnlCourseView.Controls.Add(this.label3);
+            this.pnlCourseView.Controls.Add(this.label2);
+            this.pnlCourseView.Controls.Add(this.label1);
+            this.pnlCourseView.Location = new System.Drawing.Point(165, 3);
+            this.pnlCourseView.Name = "pnlCourseView";
+            this.pnlCourseView.Size = new System.Drawing.Size(704, 573);
+            this.pnlCourseView.TabIndex = 3;
+            // 
+            // pnlAssessmentView
+            // 
+            this.pnlAssessmentView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAssessmentView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAssessmentView.Location = new System.Drawing.Point(165, 3);
+            this.pnlAssessmentView.Name = "pnlAssessmentView";
+            this.pnlAssessmentView.Size = new System.Drawing.Size(704, 573);
+            this.pnlAssessmentView.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Course Name:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 40);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Course Code:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(55, 69);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Year:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(162, 69);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Semester:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(169, 32);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 24);
+            this.label5.TabIndex = 4;
+            this.label5.Text = ".";
+            // 
+            // tbCourseName
+            // 
+            this.tbCourseName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbCourseName.Location = new System.Drawing.Point(93, 8);
+            this.tbCourseName.Name = "tbCourseName";
+            this.tbCourseName.Size = new System.Drawing.Size(605, 20);
+            this.tbCourseName.TabIndex = 5;
+            // 
+            // tbCourseCode1
+            // 
+            this.tbCourseCode1.Location = new System.Drawing.Point(93, 37);
+            this.tbCourseCode1.Name = "tbCourseCode1";
+            this.tbCourseCode1.Size = new System.Drawing.Size(70, 20);
+            this.tbCourseCode1.TabIndex = 6;
+            // 
+            // tbCourseCode2
+            // 
+            this.tbCourseCode2.Location = new System.Drawing.Point(191, 37);
+            this.tbCourseCode2.Name = "tbCourseCode2";
+            this.tbCourseCode2.Size = new System.Drawing.Size(70, 20);
+            this.tbCourseCode2.TabIndex = 7;
+            // 
+            // nudCourseYear
+            // 
+            this.nudCourseYear.Location = new System.Drawing.Point(93, 67);
+            this.nudCourseYear.Maximum = new decimal(new int[] {
+            3010,
+            0,
+            0,
+            0});
+            this.nudCourseYear.Minimum = new decimal(new int[] {
+            2010,
+            0,
+            0,
+            0});
+            this.nudCourseYear.Name = "nudCourseYear";
+            this.nudCourseYear.Size = new System.Drawing.Size(45, 20);
+            this.nudCourseYear.TabIndex = 8;
+            this.nudCourseYear.Value = new decimal(new int[] {
+            2010,
+            0,
+            0,
+            0});
+            // 
+            // cbCourseSemester
+            // 
+            this.cbCourseSemester.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCourseSemester.FormattingEnabled = true;
+            this.cbCourseSemester.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            this.cbCourseSemester.Location = new System.Drawing.Point(222, 66);
+            this.cbCourseSemester.Name = "cbCourseSemester";
+            this.cbCourseSemester.Size = new System.Drawing.Size(39, 21);
+            this.cbCourseSemester.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(35, 123);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Students:";
+            // 
+            // dgvCourseStudents
+            // 
+            this.dgvCourseStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvCourseStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCourseStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colUserName,
+            this.colLastName,
+            this.colFirstName,
+            this.colStudentID});
+            this.dgvCourseStudents.Location = new System.Drawing.Point(3, 139);
+            this.dgvCourseStudents.Name = "dgvCourseStudents";
+            this.dgvCourseStudents.Size = new System.Drawing.Size(695, 404);
+            this.dgvCourseStudents.TabIndex = 11;
+            // 
+            // colUserName
+            // 
+            this.colUserName.HeaderText = "Username";
+            this.colUserName.Name = "colUserName";
+            // 
+            // colLastName
+            // 
+            this.colLastName.HeaderText = "Last Name";
+            this.colLastName.Name = "colLastName";
+            // 
+            // colFirstName
+            // 
+            this.colFirstName.HeaderText = "First Name";
+            this.colFirstName.Name = "colFirstName";
+            // 
+            // colStudentID
+            // 
+            this.colStudentID.HeaderText = "Student ID";
+            this.colStudentID.Name = "colStudentID";
+            // 
+            // btnImportStudents
+            // 
+            this.btnImportStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImportStudents.Location = new System.Drawing.Point(604, 110);
+            this.btnImportStudents.Name = "btnImportStudents";
+            this.btnImportStudents.Size = new System.Drawing.Size(94, 23);
+            this.btnImportStudents.TabIndex = 12;
+            this.btnImportStudents.Text = "Import Students";
+            this.btnImportStudents.UseVisualStyleBackColor = true;
+            this.btnImportStudents.Click += new System.EventHandler(this.btnImportStudents_Click);
+            // 
+            // btnApplyCourseChanges
+            // 
+            this.btnApplyCourseChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnApplyCourseChanges.Location = new System.Drawing.Point(607, 545);
+            this.btnApplyCourseChanges.Name = "btnApplyCourseChanges";
+            this.btnApplyCourseChanges.Size = new System.Drawing.Size(91, 23);
+            this.btnApplyCourseChanges.TabIndex = 13;
+            this.btnApplyCourseChanges.Text = "Apply Changes";
+            this.btnApplyCourseChanges.UseVisualStyleBackColor = true;
+            this.btnApplyCourseChanges.Click += new System.EventHandler(this.btnApplyCourseChanges_Click);
             // 
             // MainForm
             // 
@@ -1463,7 +1730,13 @@
             this.groupBoxMarks.ResumeLayout(false);
             this.groupBoxMarks.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMarksAssigner)).EndInit();
+            this.tabPageCourses.ResumeLayout(false);
+            this.tabPageCourses.PerformLayout();
             this.contextMenuStripQuestionNode.ResumeLayout(false);
+            this.pnlCourseView.ResumeLayout(false);
+            this.pnlCourseView.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCourseStudents)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1590,5 +1863,28 @@
         private System.Windows.Forms.TabPage tabPagePublish;
         private System.Windows.Forms.TabPage tabPageMark;
         private System.Windows.Forms.TabPage tabPageCourses;
+        private System.Windows.Forms.TreeView tvCourses;
+        private System.Windows.Forms.Button btnNewCourse;
+        private System.Windows.Forms.TextBox tbCourseSearch;
+        private System.Windows.Forms.Panel pnlCourseView;
+        private System.Windows.Forms.Panel pnlAssessmentView;
+        private System.Windows.Forms.TextBox tbCourseCode2;
+        private System.Windows.Forms.TextBox tbCourseCode1;
+        private System.Windows.Forms.TextBox tbCourseName;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nudCourseYear;
+        private System.Windows.Forms.ComboBox cbCourseSemester;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView dgvCourseStudents;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFirstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStudentID;
+        private System.Windows.Forms.Button btnImportStudents;
+        private System.Windows.Forms.Button btnApplyCourseChanges;
     }
 }

@@ -19,3 +19,5 @@
 	- Bullet list feature for questions.
 
 	- About window: display information for icons; licenses + links and acknowledgement. My information. Acknowledgement of original program.
+
+- Import Students buttons on New Course form and Course tab

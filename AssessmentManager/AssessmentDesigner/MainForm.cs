@@ -24,6 +24,7 @@ namespace AssessmentManager
         private SaveFileDialog xmlSaveFileDialog = new SaveFileDialog();
         private SaveFileDialog mainSaveFileDialog = new SaveFileDialog();
         private OpenFileDialog openFileDialog = new OpenFileDialog();
+        private CourseManager CourseManager = new CourseManager();
 
         private string DefaultPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
@@ -56,6 +57,9 @@ namespace AssessmentManager
 
             //Initialise the font combo boxes
             InitialiseFontComboBoxes();
+
+            //Do the initialisation for the course tab
+            InitialiseCourseTab();
         }
 
         public Assessment Assessment
@@ -68,6 +72,8 @@ namespace AssessmentManager
         {
             get { return Assessment != null; }
         }
+
+        #region Designer
 
         public bool DesignerChangesMade
         {
@@ -1332,5 +1338,104 @@ namespace AssessmentManager
                 }
             }
         }
+
+        #endregion
+
+        #region CourseManagerTab
+
+        #region Methods
+
+        private void InitialiseCourseTab()
+        {
+            //course and assessment session panels initially disabled and cannot be viewed
+            pnlAssessmentView.Visible = false;
+            pnlAssessmentView.Enabled = false;
+            pnlCourseView.Visible = false;
+            pnlCourseView.Enabled = false;
+            //Initialise the course manager
+            CourseManager.Initialise(tvCourses);
+
+        }
+
+        #endregion
+
+        #region Events
+
+        private void btnNewCourse_Click(object sender, EventArgs e)
+        {
+            NewCourseForm ncf = new NewCourseForm();
+            ncf.StartPosition = FormStartPosition.CenterParent;
+            if(ncf.ShowDialog()==DialogResult.OK)
+            {
+                CourseManager.RegisterNewCourse(ncf.GetCourse);
+            }
+        }
+
+        private void tbCourseSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (!tbCourseSearch.Text.NullOrEmpty())
+            {
+                CourseManager.RebuildTreeView(tbCourseSearch.Text);
+            }
+            else
+                CourseManager.RebuildTreeView();
+        }
+
+        private void tvCourses_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+            if (e.Node is CourseNode)
+            {
+                CourseNode node = e.Node as CourseNode;
+                Course course = node.Course;
+                CourseInformation info = course.CourseInfo;
+                //Show the course panel and hide the session panel
+                pnlCourseView.Visible = true;
+                pnlCourseView.Enabled = true;
+                pnlAssessmentView.Visible = false;
+                pnlAssessmentView.Enabled = false;
+
+                //Show the course information
+                tbCourseName.Text = info.CourseName;
+                tbCourseCode1.Text = info.CourseCodeSeparated[0];
+                tbCourseCode2.Text = info.CourseCodeSeparated[1];
+                nudCourseYear.Value = int.Parse(info.Year);
+                cbCourseSemester.SelectedItem = info.Semester;
+
+                //Show all the students
+                dgvCourseStudents.Rows.Clear();
+                foreach (Student s in course.Students)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dgvCourseStudents);
+                    row.Cells[0].Value = s.UserName;
+                    row.Cells[1].Value = s.LastName;
+                    row.Cells[2].Value = s.FirstName;
+                    row.Cells[3].Value = s.StudentNumber;
+                    dgvCourseStudents.Rows.Add(row);
+                }
+            }
+            else if(e.Node is AssessmentSessionNode)
+            {
+                AssessmentSessionNode node = e.Node as AssessmentSessionNode;
+                //TODO:: Session related stuff here
+                //Show the session panel and hide course panel
+            }
+        }
+
+        private void btnImportStudents_Click(object sender, EventArgs e)
+        {
+            //TODO:: Import student data from another course
+        }
+
+        private void btnApplyCourseChanges_Click(object sender, EventArgs e)
+        {
+            //TODO::
+        }
+
+        #endregion
+
+        #endregion
+
     }
 }

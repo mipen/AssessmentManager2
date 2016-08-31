@@ -55,6 +55,8 @@
     <Compile Include="AssessmentInformationForm.Designer.cs">
       <DependentUpon>AssessmentInformationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CourseManager.cs" />
+    <Compile Include="CoursesExt.cs" />
     <Compile Include="ImageSelector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +68,12 @@
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewCourseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewCourseForm.Designer.cs">
+      <DependentUpon>NewCourseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewCourseForm.resx">
+      <DependentUpon>NewCourseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -132,6 +143,7 @@
   <ItemGroup>
     <Content Include="designer_icon.ico" />
     <Content Include="Publishing.txt" />
+    <Content Include="Resources\designer_icon.ico" />
     <Content Include="TODO.txt" />
     <None Include="Resources\expand-all32.png" />
     <None Include="Resources\collapse-all32.png" />
