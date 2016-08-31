@@ -9,7 +9,7 @@ namespace AssessmentManager
     [Serializable]
     public class AssessmentScript
     {
-        public CourseInformation CourseInformation = null;
+        public Course CourseInformation = null;
         private List<Question> questions = new List<Question>();
         private Dictionary<string, Answer> answers = new Dictionary<string, Answer>();
         private TimeData timeData = null;

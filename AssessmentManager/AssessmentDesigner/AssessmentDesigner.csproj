@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="designer_icon.ico" />
+    <Content Include="Publishing.txt" />
     <Content Include="TODO.txt" />
     <None Include="Resources\expand-all32.png" />
     <None Include="Resources\collapse-all32.png" />

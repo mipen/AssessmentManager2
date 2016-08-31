@@ -1,0 +1,18 @@
+﻿Course Manager:
+	- A tab page dedicated to managing the different courses
+	- Need a form for creating a new course
+	- When creating new assessment, ask which course to use.
+	- Course class has unique ID property which will be randomly generated string. This will be used when determining which Course an AssessmentSession belongs to.
+	- Save all courses in a file ( or maybe a database.)
+	- Course has list of students with information (name, student id, mit username)
+
+Assessment Session:
+	- AssessmentSession is created when publishing an assessment.
+	- Records where assessments were published, for whom, any other relevant information.
+	- Used when pulling them back for marking.
+
+Assessment Publish Screen:
+	- Settings for time, date etc for Assessment
+	- Allow for individual settings of student (use a spreadsheet view and can set different time limits for different students from here)
+	- Show student names and information
+	- Allow to print information handout (rules for exam, name, account name and pass)

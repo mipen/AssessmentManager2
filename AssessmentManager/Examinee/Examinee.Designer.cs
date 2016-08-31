@@ -825,6 +825,7 @@
             this.Controls.Add(this.panelLeft);
             this.Controls.Add(this.panelTop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(672, 492);
             this.Name = "Examinee";
@@ -832,6 +833,7 @@
             this.Text = "Examinee";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Examinee_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Examinee_FormClosed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Examinee_KeyDown);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.pnlUnanswered.ResumeLayout(false);

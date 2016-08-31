@@ -2,6 +2,3 @@
 	- 10 minutes remaining warning
 	- Reading time over message
 
-- Hotkeys F4 + F5 to move between questions
-
-

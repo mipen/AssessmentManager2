@@ -130,7 +130,7 @@ namespace AssessmentManager
         public static CourseInformationForm FromAssessment(Assessment assessment)
         {
             CourseInformationForm cif = new CourseInformationForm();
-            if (assessment.CourseInformation == null) assessment.CourseInformation = new CourseInformation();
+            if (assessment.CourseInformation == null) assessment.CourseInformation = new Course("TODO::");
             cif.CourseName = assessment.CourseInformation.CourseName;
             cif.CourseCode = assessment.CourseInformation.CourseCode;
             cif.AssessmentName = assessment.CourseInformation.AssessmentName;

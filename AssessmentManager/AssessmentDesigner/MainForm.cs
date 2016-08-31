@@ -29,7 +29,7 @@ namespace AssessmentManager
 
         public const int MaxNumSubQuestionLevels = 3;
 
-        private bool changesMade = false;
+        private bool designerChangesMade = false;
 
         public MainForm()
         {
@@ -69,15 +69,15 @@ namespace AssessmentManager
             get { return Assessment != null; }
         }
 
-        public bool ChangesMade
+        public bool DesignerChangesMade
         {
             get
             {
-                return HasAssessmentOpen && changesMade;
+                return HasAssessmentOpen && designerChangesMade;
             }
             set
             {
-                changesMade = value;
+                designerChangesMade = value;
             }
         }
 
@@ -108,37 +108,47 @@ namespace AssessmentManager
 
         private void toolStripButtonBold_Click(object sender, EventArgs e)
         {
-            Font bFont = new Font(richTextBoxQuestion.Font, FontStyle.Bold);
-            Font rFont = new Font(richTextBoxQuestion.Font, FontStyle.Regular);
+            FontStyle newStyle;
 
-            if (richTextBoxQuestion.SelectionFont.Bold)
+            if(richTextBoxQuestion.SelectionFont.Style.HasFlag(FontStyle.Bold))
             {
-                richTextBoxQuestion.SelectionFont = rFont;
+                newStyle = richTextBoxQuestion.SelectionFont.Style & ~FontStyle.Bold;
             }
             else
-                richTextBoxQuestion.SelectionFont = bFont;
+            {
+                newStyle = richTextBoxQuestion.SelectionFont.Style | FontStyle.Bold;
+            }
+            richTextBoxQuestion.SelectionFont = new Font(richTextBoxQuestion.SelectionFont, newStyle);
         }
 
         private void toolStripButtonItalic_Click(object sender, EventArgs e)
         {
-            Font iFont = new Font(richTextBoxQuestion.Font, FontStyle.Italic);
-            Font rFont = new Font(richTextBoxQuestion.Font, FontStyle.Regular);
+            FontStyle newStyle;
 
-            if (richTextBoxQuestion.SelectionFont.Italic)
-                richTextBoxQuestion.SelectionFont = rFont;
+            if (richTextBoxQuestion.SelectionFont.Style.HasFlag(FontStyle.Italic))
+            {
+                newStyle = richTextBoxQuestion.SelectionFont.Style & ~FontStyle.Italic;
+            }
             else
-                richTextBoxQuestion.SelectionFont = iFont;
+            {
+                newStyle = richTextBoxQuestion.SelectionFont.Style | FontStyle.Italic;
+            }
+            richTextBoxQuestion.SelectionFont = new Font(richTextBoxQuestion.SelectionFont, newStyle);
         }
 
         private void toolStripButtonUnderline_Click(object sender, EventArgs e)
         {
-            Font uFont = new Font(richTextBoxQuestion.Font, FontStyle.Underline);
-            Font rFont = new Font(richTextBoxQuestion.Font, FontStyle.Regular);
+            FontStyle newStyle;
 
-            if (richTextBoxQuestion.SelectionFont.Underline)
-                richTextBoxQuestion.SelectionFont = rFont;
+            if (richTextBoxQuestion.SelectionFont.Style.HasFlag(FontStyle.Underline))
+            {
+                newStyle = richTextBoxQuestion.SelectionFont.Style & ~FontStyle.Underline;
+            }
             else
-                richTextBoxQuestion.SelectionFont = uFont;
+            {
+                newStyle = richTextBoxQuestion.SelectionFont.Style | FontStyle.Underline;
+            }
+            richTextBoxQuestion.SelectionFont = new Font(richTextBoxQuestion.SelectionFont, newStyle);
         }
 
         private void toolStripButtonAlignLeft_Click(object sender, EventArgs e)
@@ -198,7 +208,7 @@ namespace AssessmentManager
                     Assessment.AddQuestion("Question 1");
                     CourseInformationForm.PopulateCourseInformation(Assessment, cif);
                     NotifyAssessmentOpened();
-                    changesMade = true;
+                    designerChangesMade = true;
                 }
             }
         }
@@ -246,7 +256,7 @@ namespace AssessmentManager
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ChangesMade)
+            if (DesignerChangesMade)
             {
                 DialogResult result = MessageBox.Show("There are unsaved changes. Do you wish to save before opening a new file?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes)
@@ -291,7 +301,7 @@ namespace AssessmentManager
                 if (cif.ShowDialog() == DialogResult.OK)
                 {
                     CourseInformationForm.PopulateCourseInformation(Assessment, cif);
-                    ChangesMade = true;
+                    DesignerChangesMade = true;
                 }
             }
         }
@@ -310,7 +320,7 @@ namespace AssessmentManager
             QuestionNode node = new QuestionNode(new Question("unnamed"));
             treeViewQuestionList.Nodes.Add(node);
             Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
-            changesMade = true;
+            designerChangesMade = true;
             treeViewQuestionList.SelectedNode = node;
             treeViewQuestionList.Focus();
         }
@@ -333,7 +343,7 @@ namespace AssessmentManager
                 node.Nodes.Add(new QuestionNode(subQ));
                 node.Expand();
                 Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
-                changesMade = true;
+                designerChangesMade = true;
             }
             treeViewQuestionList.Focus();
         }
@@ -364,7 +374,7 @@ namespace AssessmentManager
                     collection.Insert(indexToInsertTo, node);
                     Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
                     treeViewQuestionList.SelectedNode = node;
-                    changesMade = true;
+                    designerChangesMade = true;
                 }
                 catch { }
             }
@@ -384,7 +394,7 @@ namespace AssessmentManager
                     collection.Insert(indexToInsertTo, node);
                     Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
                     treeViewQuestionList.SelectedNode = node;
-                    changesMade = true;
+                    designerChangesMade = true;
                 }
                 catch { }
             }
@@ -452,7 +462,7 @@ namespace AssessmentManager
             Util.PopulateTreeView(treeViewQuestionList, Assessment);
             if (treeViewQuestionList.Nodes.Count > 0) treeViewQuestionList.SelectedNode = treeViewQuestionList.Nodes[0];
             //No changes will have been made yet
-            changesMade = false;
+            designerChangesMade = false;
         }
 
         private void InitialiseFontComboBoxes()
@@ -475,7 +485,7 @@ namespace AssessmentManager
         /// <returns>Returns DialogResult.Cancel if the user cancels saving and closing the document. Returns DialogResult.OK if it closes the document.</returns>
         private DialogResult CloseAssessment()
         {
-            if (ChangesMade)
+            if (DesignerChangesMade)
             {
                 DialogResult result = MessageBox.Show("Changes have been made to this Assessment. Closing it now will cause those changes to be lost. Would you like to save before closing?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes)
@@ -597,7 +607,7 @@ namespace AssessmentManager
                 item.Size = new Size(100, 22);
                 item.Click += (sender, e) =>
                 {
-                    if (ChangesMade)
+                    if (DesignerChangesMade)
                     {
                         DialogResult result = MessageBox.Show("There are unsaved changes. Do you wish to save before opening a new file?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
                         if (result == DialogResult.Yes)
@@ -637,7 +647,7 @@ namespace AssessmentManager
                         formatter.Serialize(s, Assessment);
                     }
                     file = new FileInfo(path);
-                    changesMade = false;
+                    designerChangesMade = false;
                     UpdateFormText();
                     Settings.Instance.AddRecentFile(path);
                     UpdateRecentFiles();
@@ -1090,7 +1100,7 @@ namespace AssessmentManager
                                 break;
                             }
                     }
-                    changesMade = true;
+                    designerChangesMade = true;
                 }
             }
             switch (comboBoxAnswerType.Text)
@@ -1136,7 +1146,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.QuestionText = richTextBoxQuestion.Rtf;
-                changesMade = true;
+                designerChangesMade = true;
             }
         }
 
@@ -1154,7 +1164,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.ModelAnswer = richTextBoxAnswerOpen.Text;
-                changesMade = true;
+                designerChangesMade = true;
             }
         }
 
@@ -1164,7 +1174,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.ModelAnswer = richTextBoxAnswerSingleAcceptable.Text;
-                changesMade = true;
+                designerChangesMade = true;
             }
         }
 
@@ -1174,7 +1184,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionA = textBoxMultiChoiceA.Text;
-                changesMade = true;
+                designerChangesMade = true;
             }
         }
 
@@ -1184,7 +1194,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionB = textBoxMultiChoiceB.Text;
-                changesMade = true;
+                designerChangesMade = true;
             }
         }
 
@@ -1194,7 +1204,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionC = textBoxMultiChoiceC.Text;
-                changesMade = true;
+                designerChangesMade = true;
             }
         }
 
@@ -1204,7 +1214,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionD = textBoxMultiChoiceD.Text;
-                changesMade = true;
+                designerChangesMade = true;
             }
         }
 
@@ -1236,7 +1246,7 @@ namespace AssessmentManager
                             break;
                         }
                 }
-                changesMade = true;
+                designerChangesMade = true;
             }
         }
 
@@ -1246,7 +1256,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.Marks = (int)numericUpDownMarksAssigner.Value;
-                changesMade = true;
+                designerChangesMade = true;
                 UpdateMarkAllocations();
             }
         }
@@ -1254,7 +1264,7 @@ namespace AssessmentManager
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (ChangesMade)
+            if (DesignerChangesMade)
             {
                 DialogResult result = MessageBox.Show("Changes have been made to this Assessment. Closing it now will cause those changes to be lost. Would you like to save before closing?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes)
@@ -1293,6 +1303,34 @@ namespace AssessmentManager
                 if (i.ShowDialog() == DialogResult.OK)
                 {
                     q.Image = i.Image;
+                }
+            }
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Hotkey for next/prev question in designer tab
+            if(tabControlMain.SelectedTab.Name == "tabPageDesigner")
+            {
+                if (e.KeyCode == Keys.F4)
+                {
+                    QuestionNode node = treeViewQuestionList.SelectedNode as QuestionNode;
+                    if (node != null)
+                    {
+                        treeViewQuestionList.SelectedNode = node.PrevVisibleNode;
+                    }
+                    treeViewQuestionList.Focus();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.F5)
+                {
+                    QuestionNode node = treeViewQuestionList.SelectedNode as QuestionNode;
+                    if (node != null)
+                    {
+                        treeViewQuestionList.SelectedNode = node.PrevVisibleNode;
+                    }
+                    treeViewQuestionList.Focus();
+                    e.Handled = true;
                 }
             }
         }

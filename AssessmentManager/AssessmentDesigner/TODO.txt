@@ -17,7 +17,6 @@
 		- Questions missing answers
 
 	- Bullet list feature for questions.
-	- Images for questions
 
 	- When a question has no answer type and has sub questions, display the total amount of marks.
 

@@ -21,7 +21,7 @@ namespace AssessmentManager
             if (args.Length >= 1)
             {
                 form.OpenFromFile(args[0]);
-                form.ChangesMade = false;
+                form.DesignerChangesMade = false;
             }
             Application.Run(form);
 

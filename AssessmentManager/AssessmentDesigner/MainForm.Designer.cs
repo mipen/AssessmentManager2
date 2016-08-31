@@ -52,7 +52,7 @@
             this.emailSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageDesigner = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelDesignerContainer = new System.Windows.Forms.TableLayoutPanel();
             this.panelQuestionContainer = new System.Windows.Forms.Panel();
@@ -132,6 +132,8 @@
             this.labelMarksSelectedQuestion = new System.Windows.Forms.Label();
             this.numericUpDownMarksAssigner = new System.Windows.Forms.NumericUpDown();
             this.labelMarksForQuestion = new System.Windows.Forms.Label();
+            this.tabPagePublish = new System.Windows.Forms.TabPage();
+            this.tabPageMark = new System.Windows.Forms.TabPage();
             this.contextMenuStripQuestionNode = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuSeparatorSubQuestion = new System.Windows.Forms.ToolStripSeparator();
@@ -146,10 +148,9 @@
             this.contextMenuChangeLevelUp = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuChangeLevelDown = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.tabPagePublish = new System.Windows.Forms.TabPage();
-            this.tabPageMark = new System.Windows.Forms.TabPage();
+            this.tabPageCourses = new System.Windows.Forms.TabPage();
             this.menuStripMain.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabControlMain.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
             this.tableLayoutPanelDesignerContainer.SuspendLayout();
             this.panelQuestionContainer.SuspendLayout();
@@ -354,18 +355,19 @@
             this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem1.Text = "&About";
             // 
-            // tabControl1
+            // tabControlMain
             // 
-            this.tabControl1.Controls.Add(this.tabPageDesigner);
-            this.tabControl1.Controls.Add(this.tabPagePublish);
-            this.tabControl1.Controls.Add(this.tabPageMark);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 24);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(880, 610);
-            this.tabControl1.TabIndex = 1;
+            this.tabControlMain.Controls.Add(this.tabPageDesigner);
+            this.tabControlMain.Controls.Add(this.tabPagePublish);
+            this.tabControlMain.Controls.Add(this.tabPageCourses);
+            this.tabControlMain.Controls.Add(this.tabPageMark);
+            this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlMain.Location = new System.Drawing.Point(0, 24);
+            this.tabControlMain.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControlMain.Name = "tabControlMain";
+            this.tabControlMain.SelectedIndex = 0;
+            this.tabControlMain.Size = new System.Drawing.Size(880, 610);
+            this.tabControlMain.TabIndex = 1;
             // 
             // tabPageDesigner
             // 
@@ -1286,6 +1288,24 @@
             this.labelMarksForQuestion.TabIndex = 0;
             this.labelMarksForQuestion.Text = "Marks for Question";
             // 
+            // tabPagePublish
+            // 
+            this.tabPagePublish.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePublish.Name = "tabPagePublish";
+            this.tabPagePublish.Size = new System.Drawing.Size(872, 584);
+            this.tabPagePublish.TabIndex = 1;
+            this.tabPagePublish.Text = "Publish";
+            this.tabPagePublish.UseVisualStyleBackColor = true;
+            // 
+            // tabPageMark
+            // 
+            this.tabPageMark.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMark.Name = "tabPageMark";
+            this.tabPageMark.Size = new System.Drawing.Size(872, 584);
+            this.tabPageMark.TabIndex = 2;
+            this.tabPageMark.Text = "Mark";
+            this.tabPageMark.UseVisualStyleBackColor = true;
+            // 
             // contextMenuStripQuestionNode
             // 
             this.contextMenuStripQuestionNode.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1380,41 +1400,34 @@
             this.contextMenuChangeLevelDown.Text = "Change Level Down";
             this.contextMenuChangeLevelDown.Click += new System.EventHandler(this.contextMenuChangeLevelDown_Click);
             // 
-            // tabPagePublish
+            // tabPageCourses
             // 
-            this.tabPagePublish.Location = new System.Drawing.Point(4, 22);
-            this.tabPagePublish.Name = "tabPagePublish";
-            this.tabPagePublish.Size = new System.Drawing.Size(872, 584);
-            this.tabPagePublish.TabIndex = 1;
-            this.tabPagePublish.Text = "Publish";
-            this.tabPagePublish.UseVisualStyleBackColor = true;
-            // 
-            // tabPageMark
-            // 
-            this.tabPageMark.Location = new System.Drawing.Point(4, 22);
-            this.tabPageMark.Name = "tabPageMark";
-            this.tabPageMark.Size = new System.Drawing.Size(872, 584);
-            this.tabPageMark.TabIndex = 2;
-            this.tabPageMark.Text = "Mark";
-            this.tabPageMark.UseVisualStyleBackColor = true;
+            this.tabPageCourses.Location = new System.Drawing.Point(4, 22);
+            this.tabPageCourses.Name = "tabPageCourses";
+            this.tabPageCourses.Size = new System.Drawing.Size(872, 584);
+            this.tabPageCourses.TabIndex = 3;
+            this.tabPageCourses.Text = "Courses";
+            this.tabPageCourses.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(880, 634);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.menuStripMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStripMain;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(754, 576);
             this.Name = "MainForm";
             this.Text = "Assessment Designer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.menuStripMain.ResumeLayout(false);
             this.menuStripMain.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.tabControlMain.ResumeLayout(false);
             this.tabPageDesigner.ResumeLayout(false);
             this.tableLayoutPanelDesignerContainer.ResumeLayout(false);
             this.panelQuestionContainer.ResumeLayout(false);
@@ -1460,7 +1473,7 @@
 
         private System.Windows.Forms.MenuStrip menuStripMain;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageDesigner;
         private System.Windows.Forms.Panel panelButtons;
         private System.Windows.Forms.Panel panelMarks;
@@ -1576,5 +1589,6 @@
         private System.Windows.Forms.ToolStripMenuItem addMajorQuestionToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPagePublish;
         private System.Windows.Forms.TabPage tabPageMark;
+        private System.Windows.Forms.TabPage tabPageCourses;
     }
 }

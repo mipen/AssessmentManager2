@@ -12,8 +12,8 @@ namespace AssessmentManager
     public partial class Examinee : Form
     {
         private AssessmentScript script;
-        private Stage stage = Stage.Running;
-        private Mode mode;
+        private Stage curStage;
+        private Mode curMode;
         private bool changesMade = false;
         private bool submitButtonPushed = false;
         private int marksAttempted = 0;
@@ -84,9 +84,83 @@ namespace AssessmentManager
             }
         }
 
-        public Stage Stage => stage;
+        public Mode CurMode
+        {
+            get
+            {
+                return curMode;
+            }
+            set
+            {
+                string assessmentName = (Script.CourseInformation != null && !Script.CourseInformation.AssessmentName.NullOrEmpty()) ? Script.CourseInformation.AssessmentName : Path.GetFileNameWithoutExtension(filePath);
+                switch (value)
+                {
+                    case Mode.Assessment:
+                        {
+                            curMode = Mode.Assessment;
+                            Text = $"Examinee - {assessmentName}";
+                            break;
+                        }
+                    case Mode.Practice:
+                        {
+                            curMode = Mode.Practice;
+                            Text = $"Examinee - {assessmentName} [Practice]";
+                            buttonSubmitAssessment.Text = "Save";
+                            break;
+                        }
+                }
+            }
+        }
 
-        public Mode Mode => mode;
+        public Stage CurStage
+        {
+            get
+            {
+                return curStage;
+            }
+            set
+            {
+                switch (value)
+                {
+                    case Stage.Reading:
+                        {
+                            //Disable all answer entry points
+                            panelAnswerContainer.Enabled = false;
+                            //Disable submit button
+                            buttonSubmitAssessment.Enabled = false;
+                            timer.Enabled = true;
+                            curStage = Stage.Reading;
+                            lblTimeRemaining.Text = "Reading time:";
+
+                            lblMotivational.ForeColor = Color.Orange;
+                            lblMotivational.Text = "Reading time";
+                            break;
+                        }
+                    case Stage.Running:
+                        {
+                            //Enable all answer entry points
+                            panelAnswerContainer.Enabled = true;
+                            timer.Enabled = true;
+                            buttonSubmitAssessment.Enabled = true;
+                            curStage = Stage.Running;
+                            lblTimeRemaining.Text = "Time remaining:";
+                            break;
+                        }
+                    case Stage.Completed:
+                        {
+                            //Disable all answer entry points
+                            panelAnswerContainer.Enabled = false;
+                            curStage = Stage.Completed;
+                            timer.Enabled = false;
+                            lblTimeRemaining.Text = "";
+                            lblTimeRemainingTimer.Text = "";
+                            lblMotivational.ForeColor = Color.Blue;
+                            lblMotivational.Text = "Completed. Please Submit.";
+                            break;
+                        }
+                }
+            }
+        }
 
         #endregion
 
@@ -106,29 +180,29 @@ namespace AssessmentManager
 
             //Set the mode:
             if (Script.Published)
-                ChangeMode(Mode.Assessment);
+                CurMode = Mode.Assessment;
             else
-                ChangeMode(Mode.Practice);
+                CurMode = Mode.Practice;
 
             //Set the stage:
             if (Script.Started)
             {
-                //TODO:: Handle an already started assessment
+                //Handle an already started assessment
                 if (Script.TimeData.HasReadingTime && DateTime.Now < Script.TimeData.ReadingFinishTime)
-                    ChangeStage(Stage.Reading);
+                    CurStage = Stage.Reading;
                 else if (DateTime.Now < Script.TimeData.FinishTime)
-                    ChangeStage(Stage.Running);
+                    CurStage = Stage.Running;
                 else
-                    ChangeStage(Stage.Completed);
+                    CurStage = Stage.Completed;
             }
             else
             {
                 //AssessmentScript has not been started yet:
                 Script.Started = true;
                 if (Script.TimeData.HasReadingTime)
-                    ChangeStage(Stage.Reading);
+                    CurStage = Stage.Reading;
                 else
-                    ChangeStage(Stage.Running);
+                    CurStage = Stage.Running;
             }
 
             //Cache the total number of marks
@@ -214,70 +288,6 @@ namespace AssessmentManager
             progressBarMarksAttempted.Value = marksAttempted;
         }
 
-        public void ChangeStage(Stage stage)
-        {
-            switch (stage)
-            {
-                case Stage.Reading:
-                    {
-                        //Disable all answer entry points
-                        panelAnswerContainer.Enabled = false;
-                        //Disable submit button
-                        buttonSubmitAssessment.Enabled = false;
-                        timer.Enabled = true;
-                        stage = Stage.Reading;
-                        lblTimeRemaining.Text = "Reading time:";
-
-                        lblMotivational.ForeColor = Color.Orange;
-                        lblMotivational.Text = "Reading time";
-                        break;
-                    }
-                case Stage.Running:
-                    {
-                        //Enable all answer entry points
-                        panelAnswerContainer.Enabled = true;
-                        timer.Enabled = true;
-                        buttonSubmitAssessment.Enabled = true;
-                        stage = Stage.Running;
-                        lblTimeRemaining.Text = "Time remaining:";
-                        break;
-                    }
-                case Stage.Completed:
-                    {
-                        //Disable all answer entry points
-                        panelAnswerContainer.Enabled = false;
-                        stage = Stage.Completed;
-                        timer.Enabled = false;
-                        lblTimeRemaining.Text = "";
-                        lblTimeRemainingTimer.Text = "";
-                        lblMotivational.ForeColor = Color.Blue;
-                        lblMotivational.Text = "Completed. Please Submit.";
-                        break;
-                    }
-            }
-        }
-
-        public void ChangeMode(Mode m)
-        {
-            string assessmentName = (Script.CourseInformation != null && !Script.CourseInformation.AssessmentName.NullOrEmpty()) ? Script.CourseInformation.AssessmentName : Path.GetFileNameWithoutExtension(filePath);
-            switch (m)
-            {
-                case Mode.Assessment:
-                    {
-                        mode = Mode.Assessment;
-                        Text = $"Examinee - {assessmentName}";
-                        break;
-                    }
-                case Mode.Practice:
-                    {
-                        mode = Mode.Practice;
-                        Text = $"Examinee - {assessmentName} [Practice]";
-                        buttonSubmitAssessment.Text = "Save";
-                        break;
-                    }
-            }
-        }
-
         private void UpdateTimeDisplay(bool initial = false)
         {
             //Show the start and end times
@@ -287,7 +297,7 @@ namespace AssessmentManager
                 lblFinishTime.Text = Script.TimeData.FinishTime.ToString("hh:mm:ss");
             }
 
-            switch (Stage)
+            switch (CurStage)
             {
                 case Stage.Reading:
                     {
@@ -295,7 +305,7 @@ namespace AssessmentManager
                         TimeSpan ts = Script.TimeData.ReadingFinishTime - DateTime.Now;
                         if (ts.Hours <= 0 && ts.Minutes <= 0 && ts.Seconds <= 0)
                         {
-                            ChangeStage(Stage.Running);
+                            CurStage = Stage.Running;
                             break;
                         }
                         lblTimeRemainingTimer.Text = $"{ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
@@ -306,7 +316,7 @@ namespace AssessmentManager
                         TimeSpan ts = Script.TimeData.FinishTime - DateTime.Now;
                         if (ts.Hours <= 0 && ts.Minutes <= 0 && ts.Seconds <= 0)
                         {
-                            ChangeStage(Stage.Completed);
+                            CurStage = Stage.Completed;
                             break;
                         }
                         lblTimeRemainingTimer.Text = $"{ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
@@ -333,7 +343,7 @@ namespace AssessmentManager
 
         private void SaveToFile(bool asBackup = false)
         {
-            if (Mode == Mode.Assessment)
+            if (CurMode == Mode.Assessment)
             {
                 string path = "";
                 FileMode fileMode;
@@ -353,8 +363,8 @@ namespace AssessmentManager
                     }
                     //Find the number to append to end of file
                     int number = (from t in Directory.GetFiles(dir2)
-                                      where Path.GetExtension(t) == ASSESSMENT_SCRIPT_EXT
-                                      select t).ToList().Count+1;
+                                  where Path.GetExtension(t) == ASSESSMENT_SCRIPT_EXT
+                                  select t).ToList().Count + 1;
                     string fileName = name + number.ToString("000");
 
                     path = dir2 + "\\" + fileName + ASSESSMENT_SCRIPT_EXT;
@@ -407,7 +417,7 @@ namespace AssessmentManager
         {
             string message;
             string title;
-            if (Mode == Mode.Assessment)
+            if (CurMode == Mode.Assessment)
             {
                 message = "You are about to submit your assessment. Once you have done so, you will not be able to open it again without talking to your supervisor. Once you have submitted it, the assessment is over and the application will close. Would you like to continue?";
                 title = "Submit assessment";
@@ -422,7 +432,7 @@ namespace AssessmentManager
             if (res == DialogResult.OK)
             {
                 //User wants to submit assessment
-                if (Mode == Mode.Assessment)
+                if (CurMode == Mode.Assessment)
                 {
                     MessageBox.Show($"Thank you for using Examinee. \n\n Your assessment has been saved as {Path.GetDirectoryName(filePath)}\\{Path.GetFileNameWithoutExtension(filePath)}{ASSESSMENT_SCRIPT_EXT} \n\n The application will now close.", "Assessment submitted");
                     SaveToFile();
@@ -430,7 +440,7 @@ namespace AssessmentManager
                 else
                 {
                     //Practice mode
-                    MessageBox.Show($"Thank you for using Examinee. \n\n Your practice assessment has been saved as {Path.GetDirectoryName(filePath)}\\{Path.GetFileNameWithoutExtension(filePath)}{ASSESSMENT_SCRIPT_EXT} \n\n The application will now close.","Assessment saved");
+                    MessageBox.Show($"Thank you for using Examinee. \n\n Your practice assessment has been saved as {Path.GetDirectoryName(filePath)}\\{Path.GetFileNameWithoutExtension(filePath)}{ASSESSMENT_SCRIPT_EXT} \n\n The application will now close.", "Assessment saved");
                     SaveToFile();
                 }
             }
@@ -775,7 +785,31 @@ namespace AssessmentManager
             Application.Exit();
         }
 
-        #endregion
+        private void Examinee_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Shortcut to previous question
+            if (e.KeyCode == Keys.F4)
+            {
+                QuestionNode node = SelectedNode;
+                if (node != null)
+                {
+                    treeViewQuestionDisplay.SelectedNode = node.PrevVisibleNode;
+                }
+                treeViewQuestionDisplay.Focus();
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.F5)
+            {
+                QuestionNode node = SelectedNode;
+                if (node != null)
+                {
+                    treeViewQuestionDisplay.SelectedNode = node.NextVisibleNode;
+                }
+                treeViewQuestionDisplay.Focus();
+                e.Handled = true;
+            }
+        }
 
+        #endregion
     }
 }
