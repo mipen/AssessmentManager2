@@ -82,5 +82,11 @@ namespace AssessmentManager
         }
 
         #endregion
+
+        public Student Clone()
+        {
+            Student s = new Student(userName, lastName, firstName, studentID);
+            return s;
+        }
     }
 }

@@ -31,14 +31,6 @@ namespace AssessmentManager
             }
         }
 
-        public string CourseCode
-        {
-            get
-            {
-                return tbCode1.Text + "." + tbCode2.Text;
-            }
-        }
-
         public string Year
         {
             get
@@ -85,7 +77,8 @@ namespace AssessmentManager
             {
                 Course c = new Course();
                 c.CourseInfo.CourseName = CourseName;
-                c.CourseInfo.CourseCode = CourseCode;
+                c.CourseInfo.CourseCode1 = tbCode1.Text;
+                c.CourseInfo.CourseCode2 = tbCode2.Text;
                 c.CourseInfo.Year = Year;
                 c.CourseInfo.Semester = Semester;
                 c.Students = Students;
@@ -111,12 +104,12 @@ namespace AssessmentManager
                 e.Handled = true;
                 return;
             }
-            if (tbCode1.Text.Length >= 3)
+            if (tbCode1.Text.Length >= 3 && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
                 tbCode2.Focus();
             }
-            else if (tbCode1.Text.Length >= 2)
+            else if (tbCode1.Text.Length >= 2 && !char.IsControl(e.KeyChar))
             {
                 tbCode2.Focus();
             }
@@ -129,7 +122,7 @@ namespace AssessmentManager
                 e.Handled = true;
                 return;
             }
-            if (tbCode2.Text.Length >= 3)
+            if (tbCode2.Text.Length >= 3 && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }

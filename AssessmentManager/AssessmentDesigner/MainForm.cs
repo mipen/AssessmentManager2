@@ -31,6 +31,9 @@ namespace AssessmentManager
         public const int MaxNumSubQuestionLevels = 3;
 
         private bool designerChangesMade = false;
+        private bool courseEdited = false;
+        private Course courseRevertPoint;
+        private CourseNode prevNode;
 
         public MainForm()
         {
@@ -1268,6 +1271,7 @@ namespace AssessmentManager
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //TODO:: Check for changes made to a course and prompt to save them. If cancled then dont close!
             if (DesignerChangesMade)
             {
                 DialogResult result = MessageBox.Show("Changes have been made to this Assessment. Closing it now will cause those changes to be lost. Would you like to save before closing?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
@@ -1343,6 +1347,23 @@ namespace AssessmentManager
 
         #region CourseManagerTab
 
+        #region Properties
+
+        private bool CourseEdited
+        {
+            get
+            {
+                return courseEdited;
+            }
+            set
+            {
+                courseEdited = value;
+                btnApplyCourseChanges.Enabled = value;
+            }
+        }
+
+        #endregion
+
         #region Methods
 
         private void InitialiseCourseTab()
@@ -1365,7 +1386,7 @@ namespace AssessmentManager
         {
             NewCourseForm ncf = new NewCourseForm();
             ncf.StartPosition = FormStartPosition.CenterParent;
-            if(ncf.ShowDialog()==DialogResult.OK)
+            if (ncf.ShowDialog() == DialogResult.OK)
             {
                 CourseManager.RegisterNewCourse(ncf.GetCourse);
             }
@@ -1389,6 +1410,12 @@ namespace AssessmentManager
                 CourseNode node = e.Node as CourseNode;
                 Course course = node.Course;
                 CourseInformation info = course.CourseInfo;
+
+                //Store the revert point
+                courseRevertPoint = course.Clone();
+                //Store the node for use later
+                prevNode = node;
+
                 //Show the course panel and hide the session panel
                 pnlCourseView.Visible = true;
                 pnlCourseView.Enabled = true;
@@ -1397,8 +1424,8 @@ namespace AssessmentManager
 
                 //Show the course information
                 tbCourseName.Text = info.CourseName;
-                tbCourseCode1.Text = info.CourseCodeSeparated[0];
-                tbCourseCode2.Text = info.CourseCodeSeparated[1];
+                tbCourseCode1.Text = info.CourseCode1;
+                tbCourseCode2.Text = info.CourseCode2;
                 nudCourseYear.Value = int.Parse(info.Year);
                 cbCourseSemester.SelectedItem = info.Semester;
 
@@ -1415,11 +1442,102 @@ namespace AssessmentManager
                     dgvCourseStudents.Rows.Add(row);
                 }
             }
-            else if(e.Node is AssessmentSessionNode)
+            else if (e.Node is AssessmentSessionNode)
             {
                 AssessmentSessionNode node = e.Node as AssessmentSessionNode;
                 //TODO:: Session related stuff here
                 //Show the session panel and hide course panel
+            }
+            CourseEdited = false;
+        }
+
+        private void tvCourses_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            //TODO:: Check for changes made to the current selected course. Propmpt the user to apply or discard changes before changing to new course
+            //if (tvCourses.SelectedNode != null)
+            //    e.Cancel = true;
+            if (CourseEdited && prevNode != null)
+            {
+                string message = "There have been changes made to this course. Changing to a different one now will cause those changes to be discarded. Do you wish to commit your changes before moving to a different course?";
+                DialogResult result = MessageBox.Show(message, "Unsaved changes to course", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    //TODO:: Record the changes made in the students dgv
+                    CourseManager.SerialiseCourse(prevNode.Course);
+                    CourseEdited = false;
+                }
+                else if (result == DialogResult.No)
+                {
+                    //Revert the changes
+                    prevNode.Course = courseRevertPoint;
+                    CourseEdited = false;
+                    prevNode.Text = prevNode.Course.CourseTitle;
+                    prevNode.Name = prevNode.Text;
+                }
+                else
+                {
+                    //Cancel the change
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void tbCourseName_TextChanged(object sender, EventArgs e)
+        {
+            CourseEdited = true;
+            //As this text box is only visible and editable when a coursenode is selected, this should never cause an exception. (hopefully)!!
+            CourseNode node = (CourseNode)tvCourses.SelectedNode;
+            node.Course.CourseInfo.CourseName = tbCourseName.Text;
+            node.Text = node.Course.CourseTitle;
+            node.Name = node.Text;
+        }
+
+        private void tbCourseCode1_TextChanged(object sender, EventArgs e)
+        {
+            CourseEdited = true;
+            CourseNode node = (CourseNode)tvCourses.SelectedNode;
+            node.Course.CourseInfo.CourseCode1 = tbCourseCode1.Text;
+            node.Text = node.Course.CourseTitle;
+            node.Name = node.Text;
+        }
+
+        private void tbCourseCode2_TextChanged(object sender, EventArgs e)
+        {
+            CourseEdited = true;
+            CourseNode node = (CourseNode)tvCourses.SelectedNode;
+            node.Course.CourseInfo.CourseCode2 = tbCourseCode2.Text;
+            node.Text = node.Course.CourseTitle;
+            node.Name = node.Text;
+        }
+
+        private void tbCourseCode1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+            if (tbCourseCode1.Text.Length >= 3 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                tbCourseCode2.Focus();
+            }
+            else if (tbCourseCode1.Text.Length >= 2 && !char.IsControl(e.KeyChar))
+            {
+                tbCourseCode2.Focus();
+            }
+        }
+
+        private void tbCourseCode2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+            if (tbCourseCode2.Text.Length >= 3 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
 
@@ -1430,7 +1548,13 @@ namespace AssessmentManager
 
         private void btnApplyCourseChanges_Click(object sender, EventArgs e)
         {
-            //TODO::
+            //TODO:: Record the changes made in the students dgv
+            if (tvCourses.SelectedNode is CourseNode)
+            {
+                CourseNode cn = tvCourses.SelectedNode as CourseNode;
+                CourseManager.SerialiseCourse(cn.Course);
+                CourseEdited = false;
+            }
         }
 
         #endregion

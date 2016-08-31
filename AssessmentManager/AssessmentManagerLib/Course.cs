@@ -29,7 +29,7 @@ namespace AssessmentManager
         {
             get
             {
-                return CourseInfo.CourseCode + " " + CourseInfo.CourseName;
+                return CourseInfo.CourseCodeFull + " " + CourseInfo.CourseName;
             }
         }
 
@@ -37,6 +37,28 @@ namespace AssessmentManager
         public void SetIdDirect(string newID)
         {
             id = newID;
+        }
+
+        public Course Clone()
+        {
+            Course c = new Course();
+            c.id = id;
+            c.courseInfo = courseInfo.Clone();
+            c.students = CloneStudentList();
+            return c;
+        }
+
+        private List<Student> CloneStudentList()
+        {
+            List<Student> list = new List<Student>();
+            if(students.Count>0)
+            {
+                foreach(var s in students)
+                {
+                    list.Add(s.Clone());
+                }
+            }
+            return list;
         }
     }
 }

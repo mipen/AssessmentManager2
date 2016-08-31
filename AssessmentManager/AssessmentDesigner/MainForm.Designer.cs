@@ -1447,16 +1447,17 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tvCourses.Location = new System.Drawing.Point(3, 29);
             this.tvCourses.Name = "tvCourses";
-            this.tvCourses.Size = new System.Drawing.Size(156, 518);
+            this.tvCourses.Size = new System.Drawing.Size(225, 518);
             this.tvCourses.TabIndex = 0;
+            this.tvCourses.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvCourses_BeforeSelect);
             this.tvCourses.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvCourses_AfterSelect);
             // 
             // btnNewCourse
             // 
             this.btnNewCourse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnNewCourse.Location = new System.Drawing.Point(3, 553);
+            this.btnNewCourse.Location = new System.Drawing.Point(59, 553);
             this.btnNewCourse.Name = "btnNewCourse";
-            this.btnNewCourse.Size = new System.Drawing.Size(156, 23);
+            this.btnNewCourse.Size = new System.Drawing.Size(112, 23);
             this.btnNewCourse.TabIndex = 1;
             this.btnNewCourse.Text = "Create New Course";
             this.btnNewCourse.UseVisualStyleBackColor = true;
@@ -1466,7 +1467,7 @@
             // 
             this.tbCourseSearch.Location = new System.Drawing.Point(3, 3);
             this.tbCourseSearch.Name = "tbCourseSearch";
-            this.tbCourseSearch.Size = new System.Drawing.Size(156, 20);
+            this.tbCourseSearch.Size = new System.Drawing.Size(225, 20);
             this.tbCourseSearch.TabIndex = 2;
             this.tbCourseSearch.TextChanged += new System.EventHandler(this.tbCourseSearch_TextChanged);
             // 
@@ -1490,9 +1491,9 @@
             this.pnlCourseView.Controls.Add(this.label3);
             this.pnlCourseView.Controls.Add(this.label2);
             this.pnlCourseView.Controls.Add(this.label1);
-            this.pnlCourseView.Location = new System.Drawing.Point(165, 3);
+            this.pnlCourseView.Location = new System.Drawing.Point(234, 3);
             this.pnlCourseView.Name = "pnlCourseView";
-            this.pnlCourseView.Size = new System.Drawing.Size(704, 573);
+            this.pnlCourseView.Size = new System.Drawing.Size(635, 573);
             this.pnlCourseView.TabIndex = 3;
             // 
             // pnlAssessmentView
@@ -1501,9 +1502,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlAssessmentView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAssessmentView.Location = new System.Drawing.Point(165, 3);
+            this.pnlAssessmentView.Location = new System.Drawing.Point(234, 3);
             this.pnlAssessmentView.Name = "pnlAssessmentView";
-            this.pnlAssessmentView.Size = new System.Drawing.Size(704, 573);
+            this.pnlAssessmentView.Size = new System.Drawing.Size(635, 573);
             this.pnlAssessmentView.TabIndex = 0;
             // 
             // label1
@@ -1558,8 +1559,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbCourseName.Location = new System.Drawing.Point(93, 8);
             this.tbCourseName.Name = "tbCourseName";
-            this.tbCourseName.Size = new System.Drawing.Size(605, 20);
+            this.tbCourseName.Size = new System.Drawing.Size(536, 20);
             this.tbCourseName.TabIndex = 5;
+            this.tbCourseName.TextChanged += new System.EventHandler(this.tbCourseName_TextChanged);
             // 
             // tbCourseCode1
             // 
@@ -1567,6 +1569,8 @@
             this.tbCourseCode1.Name = "tbCourseCode1";
             this.tbCourseCode1.Size = new System.Drawing.Size(70, 20);
             this.tbCourseCode1.TabIndex = 6;
+            this.tbCourseCode1.TextChanged += new System.EventHandler(this.tbCourseCode1_TextChanged);
+            this.tbCourseCode1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCourseCode1_KeyPress);
             // 
             // tbCourseCode2
             // 
@@ -1574,6 +1578,8 @@
             this.tbCourseCode2.Name = "tbCourseCode2";
             this.tbCourseCode2.Size = new System.Drawing.Size(70, 20);
             this.tbCourseCode2.TabIndex = 7;
+            this.tbCourseCode2.TextChanged += new System.EventHandler(this.tbCourseCode2_TextChanged);
+            this.tbCourseCode2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCourseCode2_KeyPress);
             // 
             // nudCourseYear
             // 
@@ -1631,7 +1637,7 @@
             this.colStudentID});
             this.dgvCourseStudents.Location = new System.Drawing.Point(3, 139);
             this.dgvCourseStudents.Name = "dgvCourseStudents";
-            this.dgvCourseStudents.Size = new System.Drawing.Size(695, 404);
+            this.dgvCourseStudents.Size = new System.Drawing.Size(626, 404);
             this.dgvCourseStudents.TabIndex = 11;
             // 
             // colUserName
@@ -1657,7 +1663,7 @@
             // btnImportStudents
             // 
             this.btnImportStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImportStudents.Location = new System.Drawing.Point(604, 110);
+            this.btnImportStudents.Location = new System.Drawing.Point(535, 110);
             this.btnImportStudents.Name = "btnImportStudents";
             this.btnImportStudents.Size = new System.Drawing.Size(94, 23);
             this.btnImportStudents.TabIndex = 12;
@@ -1668,7 +1674,7 @@
             // btnApplyCourseChanges
             // 
             this.btnApplyCourseChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApplyCourseChanges.Location = new System.Drawing.Point(607, 545);
+            this.btnApplyCourseChanges.Location = new System.Drawing.Point(538, 545);
             this.btnApplyCourseChanges.Name = "btnApplyCourseChanges";
             this.btnApplyCourseChanges.Size = new System.Drawing.Size(91, 23);
             this.btnApplyCourseChanges.TabIndex = 13;

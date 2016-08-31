@@ -10,28 +10,28 @@ namespace AssessmentManager
     public class CourseInformation
     {
         public string CourseName = "";
-        public string CourseCode = "";
+        public string CourseCode1 = "";
+        public string CourseCode2 = "";
         public string Year = "2010";
         public string Semester = "1";
 
-        public string[] CourseCodeSeparated
+        public string CourseCodeFull
         {
             get
             {
-                string[] str = new string[2] { "", "" };
-                if (!CourseCode.NullOrEmpty() && CourseCode.Contains("."))
-                {
-                    int index = CourseCode.IndexOf(".");
-                    str[0] = CourseCode.Substring(0, index);
-                    str[1] = CourseCode.Substring(index + 1);
-                }
-                else
-                {
-                    str[0] = "";
-                    str[1] = "";
-                }
-                return str;
+                return CourseCode1 + "." + CourseCode2;
             }
+        }
+
+        public CourseInformation Clone()
+        {
+            CourseInformation c = new CourseInformation();
+            c.CourseName = CourseName;
+            c.CourseCode1 = CourseCode1;
+            c.CourseCode2 = CourseCode2;
+            c.Year = Year;
+            c.Semester = Semester;
+            return c;
         }
     }
 }

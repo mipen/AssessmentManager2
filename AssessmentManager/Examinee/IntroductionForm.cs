@@ -286,8 +286,8 @@ namespace AssessmentManager
             if (a.CourseInformation != null)
             {
                 CourseInformation c = a.CourseInformation;
-                if (!c.CourseCode.NullOrEmpty())
-                    lblCourseCode.Text = c.CourseCode;
+                if (!c.CourseCodeFull.NullOrEmpty())
+                    lblCourseCode.Text = c.CourseCodeFull;
                 else
                     lblCourseCode.Text = "";
 
