@@ -62,7 +62,7 @@ namespace AssessmentManager
             InitialiseFontComboBoxes();
 
             //Do the initialisation for the course tab
-            InitialiseCourseTab();
+            InitialiseCourseTab(CourseManager);
         }
 
         public Assessment Assessment
@@ -1359,6 +1359,7 @@ namespace AssessmentManager
             {
                 courseEdited = value;
                 btnApplyCourseChanges.Enabled = value;
+                btnDiscardCourseChanges.Enabled = value;
             }
         }
 
@@ -1366,7 +1367,7 @@ namespace AssessmentManager
 
         #region Methods
 
-        private void InitialiseCourseTab()
+        private void InitialiseCourseTab(CourseManager courseManager)
         {
             //course and assessment session panels initially disabled and cannot be viewed
             pnlAssessmentView.Visible = false;
@@ -1374,8 +1375,46 @@ namespace AssessmentManager
             pnlCourseView.Visible = false;
             pnlCourseView.Enabled = false;
             //Initialise the course manager
-            CourseManager.Initialise(tvCourses);
+            CourseManager.Initialise(tvCourses, CourseManager);
 
+        }
+
+        public void ApplyCourseChanges()
+        {
+            if (tvCourses.SelectedNode is CourseNode)
+            {
+                CourseNode cn = tvCourses.SelectedNode as CourseNode;
+                //Clear the students list then reload from the dgv
+                Course c = cn.Course;
+                c.Students.Clear();
+                if (dgvCourseStudents.Rows.Count > 0)
+                {
+                    foreach (DataGridViewRow row in dgvCourseStudents.Rows)
+                    {
+                        if (row.Cells[0].Value == null && row.Cells[1].Value == null && row.Cells[2].Value == null && row.Cells[3].Value == null)
+                            continue;
+
+                        string userName = row.Cells[0].Value?.ToString();
+                        string lastName = row.Cells[1].Value?.ToString();
+                        string firstName = row.Cells[2].Value?.ToString();
+                        string studentID = row.Cells[3].Value?.ToString();
+                        Student s = new Student(userName, lastName, firstName, studentID);
+                        c.Students.Add(s);
+                    }
+                }
+
+                CourseManager.SerialiseCourse(cn.Course);
+                CourseEdited = false;
+            }
+        }
+
+        public void RevertCourseChanges()
+        {
+            //Revert the changes
+            prevNode.Course = courseRevertPoint;
+            CourseEdited = false;
+            prevNode.Text = prevNode.Course.CourseTitle;
+            prevNode.Name = prevNode.Text;
         }
 
         #endregion
@@ -1388,7 +1427,7 @@ namespace AssessmentManager
             ncf.StartPosition = FormStartPosition.CenterParent;
             if (ncf.ShowDialog() == DialogResult.OK)
             {
-                CourseManager.RegisterNewCourse(ncf.GetCourse);
+                CourseManager.RegisterNewCourse(ncf.Course);
             }
         }
 
@@ -1462,17 +1501,12 @@ namespace AssessmentManager
                 DialogResult result = MessageBox.Show(message, "Unsaved changes to course", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes)
                 {
-                    //TODO:: Record the changes made in the students dgv
-                    CourseManager.SerialiseCourse(prevNode.Course);
-                    CourseEdited = false;
+                    ApplyCourseChanges();
                 }
                 else if (result == DialogResult.No)
                 {
                     //Revert the changes
-                    prevNode.Course = courseRevertPoint;
-                    CourseEdited = false;
-                    prevNode.Text = prevNode.Course.CourseTitle;
-                    prevNode.Name = prevNode.Text;
+                    RevertCourseChanges();
                 }
                 else
                 {
@@ -1484,30 +1518,41 @@ namespace AssessmentManager
 
         private void tbCourseName_TextChanged(object sender, EventArgs e)
         {
-            CourseEdited = true;
-            //As this text box is only visible and editable when a coursenode is selected, this should never cause an exception. (hopefully)!!
-            CourseNode node = (CourseNode)tvCourses.SelectedNode;
-            node.Course.CourseInfo.CourseName = tbCourseName.Text;
-            node.Text = node.Course.CourseTitle;
-            node.Name = node.Text;
+            if (tvCourses.SelectedNode is CourseNode)
+            {
+                //As this text box is only visible and editable when a coursenode is selected, this should never cause an exception. (hopefully)!!
+                CourseNode node = tvCourses.SelectedNode as CourseNode;
+                CourseEdited = true;
+                node.Course.CourseInfo.CourseName = tbCourseName.Text;
+                node.Text = node.Course.CourseTitle;
+                node.Name = node.Text;
+            }
         }
+
+        #region CourseCode
 
         private void tbCourseCode1_TextChanged(object sender, EventArgs e)
         {
-            CourseEdited = true;
-            CourseNode node = (CourseNode)tvCourses.SelectedNode;
-            node.Course.CourseInfo.CourseCode1 = tbCourseCode1.Text;
-            node.Text = node.Course.CourseTitle;
-            node.Name = node.Text;
+            if (tvCourses.SelectedNode is CourseNode)
+            {
+                CourseNode node = tvCourses.SelectedNode as CourseNode;
+                CourseEdited = true;
+                node.Course.CourseInfo.CourseCode1 = tbCourseCode1.Text;
+                node.Text = node.Course.CourseTitle;
+                node.Name = node.Text;
+            }
         }
 
         private void tbCourseCode2_TextChanged(object sender, EventArgs e)
         {
-            CourseEdited = true;
-            CourseNode node = (CourseNode)tvCourses.SelectedNode;
-            node.Course.CourseInfo.CourseCode2 = tbCourseCode2.Text;
-            node.Text = node.Course.CourseTitle;
-            node.Name = node.Text;
+            if (tvCourses.SelectedNode is CourseNode)
+            {
+                CourseNode node = tvCourses.SelectedNode as CourseNode;
+                CourseEdited = true;
+                node.Course.CourseInfo.CourseCode2 = tbCourseCode2.Text;
+                node.Text = node.Course.CourseTitle;
+                node.Name = node.Text;
+            }
         }
 
         private void tbCourseCode1_KeyPress(object sender, KeyPressEventArgs e)
@@ -1541,19 +1586,71 @@ namespace AssessmentManager
             }
         }
 
+        #endregion
+
+        private void dgvCourseStudents_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            CourseEdited = true;
+        }
+
         private void btnImportStudents_Click(object sender, EventArgs e)
         {
             //TODO:: Import student data from another course
+            ImportStudentsForm ipf = new ImportStudentsForm();
+            ipf.StartPosition = FormStartPosition.CenterParent;
+
+            if (ipf.ShowDialog() == DialogResult.OK)
+            {
+                //Show a confirmation message box, warning that previous students list will be removed
+                if (MessageBox.Show("Importing this student list will overrite the current student list. Are you sure you wish to continue?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    dgvCourseStudents.Rows.Clear();
+                    foreach (Student s in ipf.Students)
+                    {
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.CreateCells(dgvCourseStudents);
+                        row.Cells[0].Value = s.UserName;
+                        row.Cells[1].Value = s.LastName;
+                        row.Cells[2].Value = s.FirstName;
+                        row.Cells[3].Value = s.StudentNumber;
+                        dgvCourseStudents.Rows.Add(row);
+                    }
+                    CourseEdited = true;
+                }
+            }
+        }
+
+        private void nudCourseYear_ValueChanged(object sender, EventArgs e)
+        {
+            if (tvCourses.SelectedNode is CourseNode)
+            {
+                CourseNode node = tvCourses.SelectedNode as CourseNode;
+                node.Course.CourseInfo.Year = nudCourseYear.Value.ToString();
+                CourseEdited = true;
+            }
+        }
+
+        private void cbCourseSemester_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tvCourses.SelectedNode is CourseNode)
+            {
+                CourseNode node = tvCourses.SelectedNode as CourseNode;
+                node.Course.CourseInfo.Semester = cbCourseSemester.SelectedItem.ToString();
+                CourseEdited = true;
+            }
         }
 
         private void btnApplyCourseChanges_Click(object sender, EventArgs e)
         {
-            //TODO:: Record the changes made in the students dgv
-            if (tvCourses.SelectedNode is CourseNode)
+            ApplyCourseChanges();
+        }
+
+        private void btnDiscardCourseChanges_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you wish to discard these changes? This cannot be undone.", "Discard confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                CourseNode cn = tvCourses.SelectedNode as CourseNode;
-                CourseManager.SerialiseCourse(cn.Course);
-                CourseEdited = false;
+                RevertCourseChanges();
+                tvCourses_AfterSelect(sender, new TreeViewEventArgs(tvCourses.SelectedNode));
             }
         }
 

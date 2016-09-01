@@ -43,7 +43,7 @@ namespace AssessmentManager
         {
             get
             {
-                return cbSemester.SelectedText;
+                return cbSemester.SelectedItem.ToString();
             }
         }
 
@@ -71,7 +71,7 @@ namespace AssessmentManager
             }
         }
 
-        public Course GetCourse
+        public Course Course
         {
             get
             {
@@ -93,7 +93,7 @@ namespace AssessmentManager
         private void lblInfo_Click(object sender, EventArgs e)
         {
             //TODO:: Write infomration about student details things
-            const string message = "This is where you fill out the details for each student in the class. These details will be used when publishing and marking any assessments deployed for this course. This list can be edited later on if need be.";
+            const string message = "This is where you fill out the details for each student in the class. These details will be used when publishing and marking any assessments deployed for this course. This list can be edited later on if need be. \n Use the 'Import Students' button to import students from another course.";
             MessageBox.Show(message, "Students list", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -145,11 +145,30 @@ namespace AssessmentManager
             Close();
         }
 
-        #endregion
-
         private void buttonImport_Click(object sender, EventArgs e)
         {
-            //TODO::
+            ImportStudentsForm ipf = new ImportStudentsForm();
+            ipf.StartPosition = FormStartPosition.CenterParent;
+            if (ipf.ShowDialog() == DialogResult.OK)
+            {
+                dgvStudents.Rows.Clear();
+                if (ipf.Students.Count > 0)
+                {
+                    foreach (var s in ipf.Students)
+                    {
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.CreateCells(dgvStudents);
+                        row.Cells[0].Value = s.UserName;
+                        row.Cells[1].Value = s.LastName;
+                        row.Cells[2].Value = s.FirstName;
+                        row.Cells[3].Value = s.StudentNumber;
+                        dgvStudents.Rows.Add(row);
+                    }
+                }
+            }
         }
+
+        #endregion
+
     }
 }

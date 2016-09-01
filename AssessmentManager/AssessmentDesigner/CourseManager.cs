@@ -15,22 +15,25 @@ namespace AssessmentManager
 
         private List<Course> courses = new List<Course>();
         private TreeView tree;
+        private static CourseManager instance;
 
         public CourseManager()
         {
-
         }
 
         #region Properties
 
         public List<Course> Courses => courses;
+        public static CourseManager Instance => instance;
 
         #endregion
 
         #region Methods
 
-        public void Initialise(TreeView tv)
+        public void Initialise(TreeView tv, CourseManager instance)
         {
+            //Record the instance of itself for access elsewhere
+            CourseManager.instance = instance;
             //Record the tree view to be used
             tree = tv;
             string p = Application.StartupPath + "\\" + COURSES_FOLDER_NAME;

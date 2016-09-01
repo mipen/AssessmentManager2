@@ -21,3 +21,6 @@
 	- About window: display information for icons; licenses + links and acknowledgement. My information. Acknowledgement of original program.
 
 - Import Students buttons on New Course form and Course tab
+
+- COntext menu for courses tree view
+- Delete key for courses tree view

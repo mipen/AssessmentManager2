@@ -60,5 +60,10 @@ namespace AssessmentManager
             }
             return list;
         }
+
+        public override string ToString()
+        {
+            return CourseTitle;
+        }
     }
 }

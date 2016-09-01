@@ -59,25 +59,13 @@
             this.panelQuestion = new System.Windows.Forms.Panel();
             this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
             this.toolStripQuestion = new System.Windows.Forms.ToolStrip();
-            this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonBold = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonItalic = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonUnderline = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonAlignLeft = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAlignCentre = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAlignRight = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonBulletList = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBoxFont = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripComboBoxSize = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonColour = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonAddImage = new System.Windows.Forms.ToolStripButton();
             this.panelQuestionNameContainer = new System.Windows.Forms.Panel();
             this.labelQuestion = new System.Windows.Forms.Label();
             this.panelAnswerAreaContainer = new System.Windows.Forms.Panel();
@@ -116,10 +104,6 @@
             this.panelButtons = new System.Windows.Forms.Panel();
             this.buttonAddSubQuestion = new System.Windows.Forms.Button();
             this.buttonAddMajorQuestion = new System.Windows.Forms.Button();
-            this.buttonMoveUp = new System.Windows.Forms.Button();
-            this.buttonMoveDown = new System.Windows.Forms.Button();
-            this.buttonCollapseAll = new System.Windows.Forms.Button();
-            this.buttonExpandAll = new System.Windows.Forms.Button();
             this.panelMarks = new System.Windows.Forms.Panel();
             this.groupBoxMarks = new System.Windows.Forms.GroupBox();
             this.labelMarksSelectedQuestionParentParentNum = new System.Windows.Forms.Label();
@@ -134,6 +118,29 @@
             this.labelMarksForQuestion = new System.Windows.Forms.Label();
             this.tabPagePublish = new System.Windows.Forms.TabPage();
             this.tabPageCourses = new System.Windows.Forms.TabPage();
+            this.pnlCourseView = new System.Windows.Forms.Panel();
+            this.btnApplyCourseChanges = new System.Windows.Forms.Button();
+            this.btnImportStudents = new System.Windows.Forms.Button();
+            this.dgvCourseStudents = new System.Windows.Forms.DataGridView();
+            this.colUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStudentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbCourseSemester = new System.Windows.Forms.ComboBox();
+            this.nudCourseYear = new System.Windows.Forms.NumericUpDown();
+            this.tbCourseCode2 = new System.Windows.Forms.TextBox();
+            this.tbCourseCode1 = new System.Windows.Forms.TextBox();
+            this.tbCourseName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnlAssessmentView = new System.Windows.Forms.Panel();
+            this.tbCourseSearch = new System.Windows.Forms.TextBox();
+            this.btnNewCourse = new System.Windows.Forms.Button();
+            this.tvCourses = new System.Windows.Forms.TreeView();
             this.tabPageMark = new System.Windows.Forms.TabPage();
             this.contextMenuStripQuestionNode = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,29 +156,23 @@
             this.contextMenuChangeLevelUp = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuChangeLevelDown = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.tvCourses = new System.Windows.Forms.TreeView();
-            this.btnNewCourse = new System.Windows.Forms.Button();
-            this.tbCourseSearch = new System.Windows.Forms.TextBox();
-            this.pnlCourseView = new System.Windows.Forms.Panel();
-            this.pnlAssessmentView = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbCourseName = new System.Windows.Forms.TextBox();
-            this.tbCourseCode1 = new System.Windows.Forms.TextBox();
-            this.tbCourseCode2 = new System.Windows.Forms.TextBox();
-            this.nudCourseYear = new System.Windows.Forms.NumericUpDown();
-            this.cbCourseSemester = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.dgvCourseStudents = new System.Windows.Forms.DataGridView();
-            this.colUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStudentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnImportStudents = new System.Windows.Forms.Button();
-            this.btnApplyCourseChanges = new System.Windows.Forms.Button();
+            this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonBold = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonItalic = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonUnderline = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAlignLeft = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAlignCentre = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAlignRight = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonBulletList = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonColour = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAddImage = new System.Windows.Forms.ToolStripButton();
+            this.buttonMoveUp = new System.Windows.Forms.Button();
+            this.buttonMoveDown = new System.Windows.Forms.Button();
+            this.buttonCollapseAll = new System.Windows.Forms.Button();
+            this.buttonExpandAll = new System.Windows.Forms.Button();
+            this.btnDiscardCourseChanges = new System.Windows.Forms.Button();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -200,10 +201,10 @@
             this.groupBoxMarks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMarksAssigner)).BeginInit();
             this.tabPageCourses.SuspendLayout();
-            this.contextMenuStripQuestionNode.SuspendLayout();
             this.pnlCourseView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourseStudents)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).BeginInit();
+            this.contextMenuStripQuestionNode.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStripMain
@@ -497,115 +498,15 @@
             this.toolStripQuestion.TabIndex = 0;
             this.toolStripQuestion.Text = "toolStrip1";
             // 
-            // cutToolStripButton
-            // 
-            this.cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.cutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
-            this.cutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cutToolStripButton.Name = "cutToolStripButton";
-            this.cutToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.cutToolStripButton.Text = "C&ut";
-            this.cutToolStripButton.Click += new System.EventHandler(this.cutToolStripButton_Click);
-            // 
-            // copyToolStripButton
-            // 
-            this.copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
-            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.copyToolStripButton.Name = "copyToolStripButton";
-            this.copyToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.copyToolStripButton.Text = "&Copy";
-            this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
-            // 
-            // pasteToolStripButton
-            // 
-            this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pasteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
-            this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pasteToolStripButton.Name = "pasteToolStripButton";
-            this.pasteToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.pasteToolStripButton.Text = "&Paste";
-            this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripButton_Click);
-            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
             // 
-            // toolStripButtonBold
-            // 
-            this.toolStripButtonBold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonBold.Image = global::AssessmentManager.Properties.Resources.FormatBold;
-            this.toolStripButtonBold.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonBold.Name = "toolStripButtonBold";
-            this.toolStripButtonBold.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonBold.Text = "Bold";
-            this.toolStripButtonBold.Click += new System.EventHandler(this.toolStripButtonBold_Click);
-            // 
-            // toolStripButtonItalic
-            // 
-            this.toolStripButtonItalic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonItalic.Image = global::AssessmentManager.Properties.Resources.FormatItalic;
-            this.toolStripButtonItalic.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonItalic.Name = "toolStripButtonItalic";
-            this.toolStripButtonItalic.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonItalic.Text = "Italic";
-            this.toolStripButtonItalic.Click += new System.EventHandler(this.toolStripButtonItalic_Click);
-            // 
-            // toolStripButtonUnderline
-            // 
-            this.toolStripButtonUnderline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonUnderline.Image = global::AssessmentManager.Properties.Resources.FormatUnderline;
-            this.toolStripButtonUnderline.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonUnderline.Name = "toolStripButtonUnderline";
-            this.toolStripButtonUnderline.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonUnderline.Text = "Underline";
-            this.toolStripButtonUnderline.Click += new System.EventHandler(this.toolStripButtonUnderline_Click);
-            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripButtonAlignLeft
-            // 
-            this.toolStripButtonAlignLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAlignLeft.Image = global::AssessmentManager.Properties.Resources.AlignLeft;
-            this.toolStripButtonAlignLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAlignLeft.Name = "toolStripButtonAlignLeft";
-            this.toolStripButtonAlignLeft.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAlignLeft.Text = "Align Left";
-            this.toolStripButtonAlignLeft.Click += new System.EventHandler(this.toolStripButtonAlignLeft_Click);
-            // 
-            // toolStripButtonAlignCentre
-            // 
-            this.toolStripButtonAlignCentre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAlignCentre.Image = global::AssessmentManager.Properties.Resources.AlignCentre;
-            this.toolStripButtonAlignCentre.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAlignCentre.Name = "toolStripButtonAlignCentre";
-            this.toolStripButtonAlignCentre.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAlignCentre.Text = "Align Right";
-            this.toolStripButtonAlignCentre.Click += new System.EventHandler(this.toolStripButtonAlignCentre_Click);
-            // 
-            // toolStripButtonAlignRight
-            // 
-            this.toolStripButtonAlignRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAlignRight.Image = global::AssessmentManager.Properties.Resources.AlignRight;
-            this.toolStripButtonAlignRight.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAlignRight.Name = "toolStripButtonAlignRight";
-            this.toolStripButtonAlignRight.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAlignRight.Text = "Align Right";
-            this.toolStripButtonAlignRight.Click += new System.EventHandler(this.toolStripButtonAlignRight_Click);
-            // 
-            // toolStripButtonBulletList
-            // 
-            this.toolStripButtonBulletList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonBulletList.Image = global::AssessmentManager.Properties.Resources.List_Bullets;
-            this.toolStripButtonBulletList.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonBulletList.Name = "toolStripButtonBulletList";
-            this.toolStripButtonBulletList.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonBulletList.Text = "Bullet List";
-            this.toolStripButtonBulletList.Click += new System.EventHandler(this.toolStripButtonBulletList_Click);
             // 
             // toolStripSeparator6
             // 
@@ -631,31 +532,10 @@
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 27);
             // 
-            // toolStripButtonColour
-            // 
-            this.toolStripButtonColour.BackColor = System.Drawing.Color.Black;
-            this.toolStripButtonColour.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
-            this.toolStripButtonColour.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonColour.Image")));
-            this.toolStripButtonColour.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonColour.Name = "toolStripButtonColour";
-            this.toolStripButtonColour.Size = new System.Drawing.Size(23, 24);
-            this.toolStripButtonColour.Text = "Font Colour";
-            this.toolStripButtonColour.Click += new System.EventHandler(this.toolStripButtonColour_Click);
-            // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripButtonAddImage
-            // 
-            this.toolStripButtonAddImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAddImage.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddImage.Image")));
-            this.toolStripButtonAddImage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAddImage.Name = "toolStripButtonAddImage";
-            this.toolStripButtonAddImage.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAddImage.Text = "Add Image";
-            this.toolStripButtonAddImage.Click += new System.EventHandler(this.toolStripButtonAddImage_Click);
             // 
             // panelQuestionNameContainer
             // 
@@ -1130,54 +1010,6 @@
             this.buttonAddMajorQuestion.UseVisualStyleBackColor = true;
             this.buttonAddMajorQuestion.Click += new System.EventHandler(this.buttonAddMajorQuestion_Click);
             // 
-            // buttonMoveUp
-            // 
-            this.buttonMoveUp.Image = global::AssessmentManager.Properties.Resources.ArrowUp32;
-            this.buttonMoveUp.Location = new System.Drawing.Point(2, 2);
-            this.buttonMoveUp.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonMoveUp.Name = "buttonMoveUp";
-            this.buttonMoveUp.Size = new System.Drawing.Size(35, 35);
-            this.buttonMoveUp.TabIndex = 3;
-            this.buttonToolTip.SetToolTip(this.buttonMoveUp, "Move selected question up");
-            this.buttonMoveUp.UseVisualStyleBackColor = true;
-            this.buttonMoveUp.Click += new System.EventHandler(this.buttonMoveUp_Click);
-            // 
-            // buttonMoveDown
-            // 
-            this.buttonMoveDown.Image = global::AssessmentManager.Properties.Resources.ArrowDown32;
-            this.buttonMoveDown.Location = new System.Drawing.Point(41, 2);
-            this.buttonMoveDown.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonMoveDown.Name = "buttonMoveDown";
-            this.buttonMoveDown.Size = new System.Drawing.Size(35, 35);
-            this.buttonMoveDown.TabIndex = 2;
-            this.buttonToolTip.SetToolTip(this.buttonMoveDown, "Move selected question down");
-            this.buttonMoveDown.UseVisualStyleBackColor = true;
-            this.buttonMoveDown.Click += new System.EventHandler(this.buttonMoveDown_Click);
-            // 
-            // buttonCollapseAll
-            // 
-            this.buttonCollapseAll.Image = global::AssessmentManager.Properties.Resources.CollapseAll32;
-            this.buttonCollapseAll.Location = new System.Drawing.Point(122, 2);
-            this.buttonCollapseAll.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonCollapseAll.Name = "buttonCollapseAll";
-            this.buttonCollapseAll.Size = new System.Drawing.Size(35, 35);
-            this.buttonCollapseAll.TabIndex = 1;
-            this.buttonToolTip.SetToolTip(this.buttonCollapseAll, "Collapse all nodes");
-            this.buttonCollapseAll.UseVisualStyleBackColor = true;
-            this.buttonCollapseAll.Click += new System.EventHandler(this.buttonCollapseAll_Click);
-            // 
-            // buttonExpandAll
-            // 
-            this.buttonExpandAll.Image = global::AssessmentManager.Properties.Resources.ExpandAll32;
-            this.buttonExpandAll.Location = new System.Drawing.Point(83, 2);
-            this.buttonExpandAll.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonExpandAll.Name = "buttonExpandAll";
-            this.buttonExpandAll.Size = new System.Drawing.Size(35, 35);
-            this.buttonExpandAll.TabIndex = 0;
-            this.buttonToolTip.SetToolTip(this.buttonExpandAll, "Expand all nodes");
-            this.buttonExpandAll.UseVisualStyleBackColor = true;
-            this.buttonExpandAll.Click += new System.EventHandler(this.buttonExpandAll_Click);
-            // 
             // panelMarks
             // 
             this.panelMarks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -1338,6 +1170,251 @@
             this.tabPageCourses.Text = "Courses";
             this.tabPageCourses.UseVisualStyleBackColor = true;
             // 
+            // pnlCourseView
+            // 
+            this.pnlCourseView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCourseView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCourseView.Controls.Add(this.btnDiscardCourseChanges);
+            this.pnlCourseView.Controls.Add(this.btnApplyCourseChanges);
+            this.pnlCourseView.Controls.Add(this.btnImportStudents);
+            this.pnlCourseView.Controls.Add(this.dgvCourseStudents);
+            this.pnlCourseView.Controls.Add(this.label6);
+            this.pnlCourseView.Controls.Add(this.cbCourseSemester);
+            this.pnlCourseView.Controls.Add(this.nudCourseYear);
+            this.pnlCourseView.Controls.Add(this.tbCourseCode2);
+            this.pnlCourseView.Controls.Add(this.tbCourseCode1);
+            this.pnlCourseView.Controls.Add(this.tbCourseName);
+            this.pnlCourseView.Controls.Add(this.label5);
+            this.pnlCourseView.Controls.Add(this.label4);
+            this.pnlCourseView.Controls.Add(this.label3);
+            this.pnlCourseView.Controls.Add(this.label2);
+            this.pnlCourseView.Controls.Add(this.label1);
+            this.pnlCourseView.Location = new System.Drawing.Point(234, 3);
+            this.pnlCourseView.Name = "pnlCourseView";
+            this.pnlCourseView.Size = new System.Drawing.Size(635, 573);
+            this.pnlCourseView.TabIndex = 3;
+            // 
+            // btnApplyCourseChanges
+            // 
+            this.btnApplyCourseChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnApplyCourseChanges.Location = new System.Drawing.Point(3, 545);
+            this.btnApplyCourseChanges.Name = "btnApplyCourseChanges";
+            this.btnApplyCourseChanges.Size = new System.Drawing.Size(102, 23);
+            this.btnApplyCourseChanges.TabIndex = 13;
+            this.btnApplyCourseChanges.Text = "Apply Changes";
+            this.btnApplyCourseChanges.UseVisualStyleBackColor = true;
+            this.btnApplyCourseChanges.Click += new System.EventHandler(this.btnApplyCourseChanges_Click);
+            // 
+            // btnImportStudents
+            // 
+            this.btnImportStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImportStudents.Location = new System.Drawing.Point(535, 110);
+            this.btnImportStudents.Name = "btnImportStudents";
+            this.btnImportStudents.Size = new System.Drawing.Size(94, 23);
+            this.btnImportStudents.TabIndex = 12;
+            this.btnImportStudents.Text = "Import Students";
+            this.btnImportStudents.UseVisualStyleBackColor = true;
+            this.btnImportStudents.Click += new System.EventHandler(this.btnImportStudents_Click);
+            // 
+            // dgvCourseStudents
+            // 
+            this.dgvCourseStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvCourseStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCourseStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colUserName,
+            this.colLastName,
+            this.colFirstName,
+            this.colStudentID});
+            this.dgvCourseStudents.Location = new System.Drawing.Point(3, 139);
+            this.dgvCourseStudents.Name = "dgvCourseStudents";
+            this.dgvCourseStudents.Size = new System.Drawing.Size(626, 404);
+            this.dgvCourseStudents.TabIndex = 11;
+            this.dgvCourseStudents.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCourseStudents_CellValueChanged);
+            // 
+            // colUserName
+            // 
+            this.colUserName.HeaderText = "Username";
+            this.colUserName.Name = "colUserName";
+            // 
+            // colLastName
+            // 
+            this.colLastName.HeaderText = "Last Name";
+            this.colLastName.Name = "colLastName";
+            // 
+            // colFirstName
+            // 
+            this.colFirstName.HeaderText = "First Name";
+            this.colFirstName.Name = "colFirstName";
+            // 
+            // colStudentID
+            // 
+            this.colStudentID.HeaderText = "Student ID";
+            this.colStudentID.Name = "colStudentID";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(35, 123);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Students:";
+            // 
+            // cbCourseSemester
+            // 
+            this.cbCourseSemester.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCourseSemester.FormattingEnabled = true;
+            this.cbCourseSemester.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            this.cbCourseSemester.Location = new System.Drawing.Point(222, 66);
+            this.cbCourseSemester.Name = "cbCourseSemester";
+            this.cbCourseSemester.Size = new System.Drawing.Size(39, 21);
+            this.cbCourseSemester.TabIndex = 9;
+            this.cbCourseSemester.SelectedIndexChanged += new System.EventHandler(this.cbCourseSemester_SelectedIndexChanged);
+            // 
+            // nudCourseYear
+            // 
+            this.nudCourseYear.Location = new System.Drawing.Point(93, 67);
+            this.nudCourseYear.Maximum = new decimal(new int[] {
+            3010,
+            0,
+            0,
+            0});
+            this.nudCourseYear.Minimum = new decimal(new int[] {
+            2010,
+            0,
+            0,
+            0});
+            this.nudCourseYear.Name = "nudCourseYear";
+            this.nudCourseYear.Size = new System.Drawing.Size(45, 20);
+            this.nudCourseYear.TabIndex = 8;
+            this.nudCourseYear.Value = new decimal(new int[] {
+            2010,
+            0,
+            0,
+            0});
+            this.nudCourseYear.ValueChanged += new System.EventHandler(this.nudCourseYear_ValueChanged);
+            // 
+            // tbCourseCode2
+            // 
+            this.tbCourseCode2.Location = new System.Drawing.Point(191, 37);
+            this.tbCourseCode2.Name = "tbCourseCode2";
+            this.tbCourseCode2.Size = new System.Drawing.Size(70, 20);
+            this.tbCourseCode2.TabIndex = 7;
+            this.tbCourseCode2.TextChanged += new System.EventHandler(this.tbCourseCode2_TextChanged);
+            this.tbCourseCode2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCourseCode2_KeyPress);
+            // 
+            // tbCourseCode1
+            // 
+            this.tbCourseCode1.Location = new System.Drawing.Point(93, 37);
+            this.tbCourseCode1.Name = "tbCourseCode1";
+            this.tbCourseCode1.Size = new System.Drawing.Size(70, 20);
+            this.tbCourseCode1.TabIndex = 6;
+            this.tbCourseCode1.TextChanged += new System.EventHandler(this.tbCourseCode1_TextChanged);
+            this.tbCourseCode1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCourseCode1_KeyPress);
+            // 
+            // tbCourseName
+            // 
+            this.tbCourseName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbCourseName.Location = new System.Drawing.Point(93, 8);
+            this.tbCourseName.Name = "tbCourseName";
+            this.tbCourseName.Size = new System.Drawing.Size(536, 20);
+            this.tbCourseName.TabIndex = 5;
+            this.tbCourseName.TextChanged += new System.EventHandler(this.tbCourseName_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(169, 32);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 24);
+            this.label5.TabIndex = 4;
+            this.label5.Text = ".";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(162, 69);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Semester:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(55, 69);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Year:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 40);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Course Code:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Course Name:";
+            // 
+            // pnlAssessmentView
+            // 
+            this.pnlAssessmentView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAssessmentView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAssessmentView.Location = new System.Drawing.Point(234, 3);
+            this.pnlAssessmentView.Name = "pnlAssessmentView";
+            this.pnlAssessmentView.Size = new System.Drawing.Size(635, 573);
+            this.pnlAssessmentView.TabIndex = 0;
+            // 
+            // tbCourseSearch
+            // 
+            this.tbCourseSearch.Location = new System.Drawing.Point(3, 3);
+            this.tbCourseSearch.Name = "tbCourseSearch";
+            this.tbCourseSearch.Size = new System.Drawing.Size(225, 20);
+            this.tbCourseSearch.TabIndex = 2;
+            this.tbCourseSearch.TextChanged += new System.EventHandler(this.tbCourseSearch_TextChanged);
+            // 
+            // btnNewCourse
+            // 
+            this.btnNewCourse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnNewCourse.Location = new System.Drawing.Point(59, 553);
+            this.btnNewCourse.Name = "btnNewCourse";
+            this.btnNewCourse.Size = new System.Drawing.Size(112, 23);
+            this.btnNewCourse.TabIndex = 1;
+            this.btnNewCourse.Text = "Create New Course";
+            this.btnNewCourse.UseVisualStyleBackColor = true;
+            this.btnNewCourse.Click += new System.EventHandler(this.btnNewCourse_Click);
+            // 
+            // tvCourses
+            // 
+            this.tvCourses.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tvCourses.Location = new System.Drawing.Point(3, 29);
+            this.tvCourses.Name = "tvCourses";
+            this.tvCourses.Size = new System.Drawing.Size(225, 518);
+            this.tvCourses.TabIndex = 0;
+            this.tvCourses.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvCourses_BeforeSelect);
+            this.tvCourses.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvCourses_AfterSelect);
+            // 
             // tabPageMark
             // 
             this.tabPageMark.Location = new System.Drawing.Point(4, 22);
@@ -1441,246 +1518,184 @@
             this.contextMenuChangeLevelDown.Text = "Change Level Down";
             this.contextMenuChangeLevelDown.Click += new System.EventHandler(this.contextMenuChangeLevelDown_Click);
             // 
-            // tvCourses
+            // cutToolStripButton
             // 
-            this.tvCourses.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tvCourses.Location = new System.Drawing.Point(3, 29);
-            this.tvCourses.Name = "tvCourses";
-            this.tvCourses.Size = new System.Drawing.Size(225, 518);
-            this.tvCourses.TabIndex = 0;
-            this.tvCourses.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvCourses_BeforeSelect);
-            this.tvCourses.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvCourses_AfterSelect);
+            this.cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
+            this.cutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cutToolStripButton.Name = "cutToolStripButton";
+            this.cutToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.cutToolStripButton.Text = "C&ut";
+            this.cutToolStripButton.Click += new System.EventHandler(this.cutToolStripButton_Click);
             // 
-            // btnNewCourse
+            // copyToolStripButton
             // 
-            this.btnNewCourse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnNewCourse.Location = new System.Drawing.Point(59, 553);
-            this.btnNewCourse.Name = "btnNewCourse";
-            this.btnNewCourse.Size = new System.Drawing.Size(112, 23);
-            this.btnNewCourse.TabIndex = 1;
-            this.btnNewCourse.Text = "Create New Course";
-            this.btnNewCourse.UseVisualStyleBackColor = true;
-            this.btnNewCourse.Click += new System.EventHandler(this.btnNewCourse_Click);
+            this.copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
+            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.copyToolStripButton.Name = "copyToolStripButton";
+            this.copyToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.copyToolStripButton.Text = "&Copy";
+            this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
             // 
-            // tbCourseSearch
+            // pasteToolStripButton
             // 
-            this.tbCourseSearch.Location = new System.Drawing.Point(3, 3);
-            this.tbCourseSearch.Name = "tbCourseSearch";
-            this.tbCourseSearch.Size = new System.Drawing.Size(225, 20);
-            this.tbCourseSearch.TabIndex = 2;
-            this.tbCourseSearch.TextChanged += new System.EventHandler(this.tbCourseSearch_TextChanged);
+            this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pasteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
+            this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pasteToolStripButton.Name = "pasteToolStripButton";
+            this.pasteToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.pasteToolStripButton.Text = "&Paste";
+            this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripButton_Click);
             // 
-            // pnlCourseView
+            // toolStripButtonBold
             // 
-            this.pnlCourseView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlCourseView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCourseView.Controls.Add(this.btnApplyCourseChanges);
-            this.pnlCourseView.Controls.Add(this.btnImportStudents);
-            this.pnlCourseView.Controls.Add(this.dgvCourseStudents);
-            this.pnlCourseView.Controls.Add(this.label6);
-            this.pnlCourseView.Controls.Add(this.cbCourseSemester);
-            this.pnlCourseView.Controls.Add(this.nudCourseYear);
-            this.pnlCourseView.Controls.Add(this.tbCourseCode2);
-            this.pnlCourseView.Controls.Add(this.tbCourseCode1);
-            this.pnlCourseView.Controls.Add(this.tbCourseName);
-            this.pnlCourseView.Controls.Add(this.label5);
-            this.pnlCourseView.Controls.Add(this.label4);
-            this.pnlCourseView.Controls.Add(this.label3);
-            this.pnlCourseView.Controls.Add(this.label2);
-            this.pnlCourseView.Controls.Add(this.label1);
-            this.pnlCourseView.Location = new System.Drawing.Point(234, 3);
-            this.pnlCourseView.Name = "pnlCourseView";
-            this.pnlCourseView.Size = new System.Drawing.Size(635, 573);
-            this.pnlCourseView.TabIndex = 3;
+            this.toolStripButtonBold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonBold.Image = global::AssessmentManager.Properties.Resources.FormatBold;
+            this.toolStripButtonBold.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonBold.Name = "toolStripButtonBold";
+            this.toolStripButtonBold.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonBold.Text = "Bold";
+            this.toolStripButtonBold.Click += new System.EventHandler(this.toolStripButtonBold_Click);
             // 
-            // pnlAssessmentView
+            // toolStripButtonItalic
             // 
-            this.pnlAssessmentView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlAssessmentView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlAssessmentView.Location = new System.Drawing.Point(234, 3);
-            this.pnlAssessmentView.Name = "pnlAssessmentView";
-            this.pnlAssessmentView.Size = new System.Drawing.Size(635, 573);
-            this.pnlAssessmentView.TabIndex = 0;
+            this.toolStripButtonItalic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonItalic.Image = global::AssessmentManager.Properties.Resources.FormatItalic;
+            this.toolStripButtonItalic.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonItalic.Name = "toolStripButtonItalic";
+            this.toolStripButtonItalic.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonItalic.Text = "Italic";
+            this.toolStripButtonItalic.Click += new System.EventHandler(this.toolStripButtonItalic_Click);
             // 
-            // label1
+            // toolStripButtonUnderline
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Course Name:";
+            this.toolStripButtonUnderline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonUnderline.Image = global::AssessmentManager.Properties.Resources.FormatUnderline;
+            this.toolStripButtonUnderline.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonUnderline.Name = "toolStripButtonUnderline";
+            this.toolStripButtonUnderline.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonUnderline.Text = "Underline";
+            this.toolStripButtonUnderline.Click += new System.EventHandler(this.toolStripButtonUnderline_Click);
             // 
-            // label2
+            // toolStripButtonAlignLeft
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Course Code:";
+            this.toolStripButtonAlignLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAlignLeft.Image = global::AssessmentManager.Properties.Resources.AlignLeft;
+            this.toolStripButtonAlignLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAlignLeft.Name = "toolStripButtonAlignLeft";
+            this.toolStripButtonAlignLeft.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAlignLeft.Text = "Align Left";
+            this.toolStripButtonAlignLeft.Click += new System.EventHandler(this.toolStripButtonAlignLeft_Click);
             // 
-            // label3
+            // toolStripButtonAlignCentre
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(55, 69);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Year:";
+            this.toolStripButtonAlignCentre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAlignCentre.Image = global::AssessmentManager.Properties.Resources.AlignCentre;
+            this.toolStripButtonAlignCentre.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAlignCentre.Name = "toolStripButtonAlignCentre";
+            this.toolStripButtonAlignCentre.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAlignCentre.Text = "Align Right";
+            this.toolStripButtonAlignCentre.Click += new System.EventHandler(this.toolStripButtonAlignCentre_Click);
             // 
-            // label4
+            // toolStripButtonAlignRight
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(162, 69);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Semester:";
+            this.toolStripButtonAlignRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAlignRight.Image = global::AssessmentManager.Properties.Resources.AlignRight;
+            this.toolStripButtonAlignRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAlignRight.Name = "toolStripButtonAlignRight";
+            this.toolStripButtonAlignRight.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAlignRight.Text = "Align Right";
+            this.toolStripButtonAlignRight.Click += new System.EventHandler(this.toolStripButtonAlignRight_Click);
             // 
-            // label5
+            // toolStripButtonBulletList
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(169, 32);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(16, 24);
-            this.label5.TabIndex = 4;
-            this.label5.Text = ".";
+            this.toolStripButtonBulletList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonBulletList.Image = global::AssessmentManager.Properties.Resources.List_Bullets;
+            this.toolStripButtonBulletList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonBulletList.Name = "toolStripButtonBulletList";
+            this.toolStripButtonBulletList.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonBulletList.Text = "Bullet List";
+            this.toolStripButtonBulletList.Click += new System.EventHandler(this.toolStripButtonBulletList_Click);
             // 
-            // tbCourseName
+            // toolStripButtonColour
             // 
-            this.tbCourseName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCourseName.Location = new System.Drawing.Point(93, 8);
-            this.tbCourseName.Name = "tbCourseName";
-            this.tbCourseName.Size = new System.Drawing.Size(536, 20);
-            this.tbCourseName.TabIndex = 5;
-            this.tbCourseName.TextChanged += new System.EventHandler(this.tbCourseName_TextChanged);
+            this.toolStripButtonColour.BackColor = System.Drawing.Color.Black;
+            this.toolStripButtonColour.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripButtonColour.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonColour.Image")));
+            this.toolStripButtonColour.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonColour.Name = "toolStripButtonColour";
+            this.toolStripButtonColour.Size = new System.Drawing.Size(23, 24);
+            this.toolStripButtonColour.Text = "Font Colour";
+            this.toolStripButtonColour.Click += new System.EventHandler(this.toolStripButtonColour_Click);
             // 
-            // tbCourseCode1
+            // toolStripButtonAddImage
             // 
-            this.tbCourseCode1.Location = new System.Drawing.Point(93, 37);
-            this.tbCourseCode1.Name = "tbCourseCode1";
-            this.tbCourseCode1.Size = new System.Drawing.Size(70, 20);
-            this.tbCourseCode1.TabIndex = 6;
-            this.tbCourseCode1.TextChanged += new System.EventHandler(this.tbCourseCode1_TextChanged);
-            this.tbCourseCode1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCourseCode1_KeyPress);
+            this.toolStripButtonAddImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddImage.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddImage.Image")));
+            this.toolStripButtonAddImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddImage.Name = "toolStripButtonAddImage";
+            this.toolStripButtonAddImage.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAddImage.Text = "Add Image";
+            this.toolStripButtonAddImage.Click += new System.EventHandler(this.toolStripButtonAddImage_Click);
             // 
-            // tbCourseCode2
+            // buttonMoveUp
             // 
-            this.tbCourseCode2.Location = new System.Drawing.Point(191, 37);
-            this.tbCourseCode2.Name = "tbCourseCode2";
-            this.tbCourseCode2.Size = new System.Drawing.Size(70, 20);
-            this.tbCourseCode2.TabIndex = 7;
-            this.tbCourseCode2.TextChanged += new System.EventHandler(this.tbCourseCode2_TextChanged);
-            this.tbCourseCode2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCourseCode2_KeyPress);
+            this.buttonMoveUp.Image = global::AssessmentManager.Properties.Resources.ArrowUp32;
+            this.buttonMoveUp.Location = new System.Drawing.Point(2, 2);
+            this.buttonMoveUp.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonMoveUp.Name = "buttonMoveUp";
+            this.buttonMoveUp.Size = new System.Drawing.Size(35, 35);
+            this.buttonMoveUp.TabIndex = 3;
+            this.buttonToolTip.SetToolTip(this.buttonMoveUp, "Move selected question up");
+            this.buttonMoveUp.UseVisualStyleBackColor = true;
+            this.buttonMoveUp.Click += new System.EventHandler(this.buttonMoveUp_Click);
             // 
-            // nudCourseYear
+            // buttonMoveDown
             // 
-            this.nudCourseYear.Location = new System.Drawing.Point(93, 67);
-            this.nudCourseYear.Maximum = new decimal(new int[] {
-            3010,
-            0,
-            0,
-            0});
-            this.nudCourseYear.Minimum = new decimal(new int[] {
-            2010,
-            0,
-            0,
-            0});
-            this.nudCourseYear.Name = "nudCourseYear";
-            this.nudCourseYear.Size = new System.Drawing.Size(45, 20);
-            this.nudCourseYear.TabIndex = 8;
-            this.nudCourseYear.Value = new decimal(new int[] {
-            2010,
-            0,
-            0,
-            0});
+            this.buttonMoveDown.Image = global::AssessmentManager.Properties.Resources.ArrowDown32;
+            this.buttonMoveDown.Location = new System.Drawing.Point(41, 2);
+            this.buttonMoveDown.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonMoveDown.Name = "buttonMoveDown";
+            this.buttonMoveDown.Size = new System.Drawing.Size(35, 35);
+            this.buttonMoveDown.TabIndex = 2;
+            this.buttonToolTip.SetToolTip(this.buttonMoveDown, "Move selected question down");
+            this.buttonMoveDown.UseVisualStyleBackColor = true;
+            this.buttonMoveDown.Click += new System.EventHandler(this.buttonMoveDown_Click);
             // 
-            // cbCourseSemester
+            // buttonCollapseAll
             // 
-            this.cbCourseSemester.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCourseSemester.FormattingEnabled = true;
-            this.cbCourseSemester.Items.AddRange(new object[] {
-            "1",
-            "2"});
-            this.cbCourseSemester.Location = new System.Drawing.Point(222, 66);
-            this.cbCourseSemester.Name = "cbCourseSemester";
-            this.cbCourseSemester.Size = new System.Drawing.Size(39, 21);
-            this.cbCourseSemester.TabIndex = 9;
+            this.buttonCollapseAll.Image = global::AssessmentManager.Properties.Resources.CollapseAll32;
+            this.buttonCollapseAll.Location = new System.Drawing.Point(122, 2);
+            this.buttonCollapseAll.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCollapseAll.Name = "buttonCollapseAll";
+            this.buttonCollapseAll.Size = new System.Drawing.Size(35, 35);
+            this.buttonCollapseAll.TabIndex = 1;
+            this.buttonToolTip.SetToolTip(this.buttonCollapseAll, "Collapse all nodes");
+            this.buttonCollapseAll.UseVisualStyleBackColor = true;
+            this.buttonCollapseAll.Click += new System.EventHandler(this.buttonCollapseAll_Click);
             // 
-            // label6
+            // buttonExpandAll
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(35, 123);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Students:";
+            this.buttonExpandAll.Image = global::AssessmentManager.Properties.Resources.ExpandAll32;
+            this.buttonExpandAll.Location = new System.Drawing.Point(83, 2);
+            this.buttonExpandAll.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonExpandAll.Name = "buttonExpandAll";
+            this.buttonExpandAll.Size = new System.Drawing.Size(35, 35);
+            this.buttonExpandAll.TabIndex = 0;
+            this.buttonToolTip.SetToolTip(this.buttonExpandAll, "Expand all nodes");
+            this.buttonExpandAll.UseVisualStyleBackColor = true;
+            this.buttonExpandAll.Click += new System.EventHandler(this.buttonExpandAll_Click);
             // 
-            // dgvCourseStudents
+            // btnDiscardCourseChanges
             // 
-            this.dgvCourseStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvCourseStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCourseStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colUserName,
-            this.colLastName,
-            this.colFirstName,
-            this.colStudentID});
-            this.dgvCourseStudents.Location = new System.Drawing.Point(3, 139);
-            this.dgvCourseStudents.Name = "dgvCourseStudents";
-            this.dgvCourseStudents.Size = new System.Drawing.Size(626, 404);
-            this.dgvCourseStudents.TabIndex = 11;
-            // 
-            // colUserName
-            // 
-            this.colUserName.HeaderText = "Username";
-            this.colUserName.Name = "colUserName";
-            // 
-            // colLastName
-            // 
-            this.colLastName.HeaderText = "Last Name";
-            this.colLastName.Name = "colLastName";
-            // 
-            // colFirstName
-            // 
-            this.colFirstName.HeaderText = "First Name";
-            this.colFirstName.Name = "colFirstName";
-            // 
-            // colStudentID
-            // 
-            this.colStudentID.HeaderText = "Student ID";
-            this.colStudentID.Name = "colStudentID";
-            // 
-            // btnImportStudents
-            // 
-            this.btnImportStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImportStudents.Location = new System.Drawing.Point(535, 110);
-            this.btnImportStudents.Name = "btnImportStudents";
-            this.btnImportStudents.Size = new System.Drawing.Size(94, 23);
-            this.btnImportStudents.TabIndex = 12;
-            this.btnImportStudents.Text = "Import Students";
-            this.btnImportStudents.UseVisualStyleBackColor = true;
-            this.btnImportStudents.Click += new System.EventHandler(this.btnImportStudents_Click);
-            // 
-            // btnApplyCourseChanges
-            // 
-            this.btnApplyCourseChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApplyCourseChanges.Location = new System.Drawing.Point(538, 545);
-            this.btnApplyCourseChanges.Name = "btnApplyCourseChanges";
-            this.btnApplyCourseChanges.Size = new System.Drawing.Size(91, 23);
-            this.btnApplyCourseChanges.TabIndex = 13;
-            this.btnApplyCourseChanges.Text = "Apply Changes";
-            this.btnApplyCourseChanges.UseVisualStyleBackColor = true;
-            this.btnApplyCourseChanges.Click += new System.EventHandler(this.btnApplyCourseChanges_Click);
+            this.btnDiscardCourseChanges.Location = new System.Drawing.Point(527, 545);
+            this.btnDiscardCourseChanges.Name = "btnDiscardCourseChanges";
+            this.btnDiscardCourseChanges.Size = new System.Drawing.Size(102, 23);
+            this.btnDiscardCourseChanges.TabIndex = 14;
+            this.btnDiscardCourseChanges.Text = "Discard Changes";
+            this.btnDiscardCourseChanges.UseVisualStyleBackColor = true;
+            this.btnDiscardCourseChanges.Click += new System.EventHandler(this.btnDiscardCourseChanges_Click);
             // 
             // MainForm
             // 
@@ -1738,11 +1753,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMarksAssigner)).EndInit();
             this.tabPageCourses.ResumeLayout(false);
             this.tabPageCourses.PerformLayout();
-            this.contextMenuStripQuestionNode.ResumeLayout(false);
             this.pnlCourseView.ResumeLayout(false);
             this.pnlCourseView.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourseStudents)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).EndInit();
+            this.contextMenuStripQuestionNode.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1892,5 +1907,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colStudentID;
         private System.Windows.Forms.Button btnImportStudents;
         private System.Windows.Forms.Button btnApplyCourseChanges;
+        private System.Windows.Forms.Button btnDiscardCourseChanges;
     }
 }
