@@ -59,13 +59,25 @@
             this.panelQuestion = new System.Windows.Forms.Panel();
             this.richTextBoxQuestion = new System.Windows.Forms.RichTextBox();
             this.toolStripQuestion = new System.Windows.Forms.ToolStrip();
+            this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonBold = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonItalic = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonUnderline = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonAlignLeft = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAlignCentre = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAlignRight = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonBulletList = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBoxFont = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripComboBoxSize = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonColour = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonAddImage = new System.Windows.Forms.ToolStripButton();
             this.panelQuestionNameContainer = new System.Windows.Forms.Panel();
             this.labelQuestion = new System.Windows.Forms.Label();
             this.panelAnswerAreaContainer = new System.Windows.Forms.Panel();
@@ -104,6 +116,10 @@
             this.panelButtons = new System.Windows.Forms.Panel();
             this.buttonAddSubQuestion = new System.Windows.Forms.Button();
             this.buttonAddMajorQuestion = new System.Windows.Forms.Button();
+            this.buttonMoveUp = new System.Windows.Forms.Button();
+            this.buttonMoveDown = new System.Windows.Forms.Button();
+            this.buttonCollapseAll = new System.Windows.Forms.Button();
+            this.buttonExpandAll = new System.Windows.Forms.Button();
             this.panelMarks = new System.Windows.Forms.Panel();
             this.groupBoxMarks = new System.Windows.Forms.GroupBox();
             this.labelMarksSelectedQuestionParentParentNum = new System.Windows.Forms.Label();
@@ -119,6 +135,7 @@
             this.tabPagePublish = new System.Windows.Forms.TabPage();
             this.tabPageCourses = new System.Windows.Forms.TabPage();
             this.pnlCourseView = new System.Windows.Forms.Panel();
+            this.btnDiscardCourseChanges = new System.Windows.Forms.Button();
             this.btnApplyCourseChanges = new System.Windows.Forms.Button();
             this.btnImportStudents = new System.Windows.Forms.Button();
             this.dgvCourseStudents = new System.Windows.Forms.DataGridView();
@@ -156,23 +173,11 @@
             this.contextMenuChangeLevelUp = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuChangeLevelDown = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonBold = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonItalic = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonUnderline = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAlignLeft = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAlignCentre = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAlignRight = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonBulletList = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonColour = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAddImage = new System.Windows.Forms.ToolStripButton();
-            this.buttonMoveUp = new System.Windows.Forms.Button();
-            this.buttonMoveDown = new System.Windows.Forms.Button();
-            this.buttonCollapseAll = new System.Windows.Forms.Button();
-            this.buttonExpandAll = new System.Windows.Forms.Button();
-            this.btnDiscardCourseChanges = new System.Windows.Forms.Button();
+            this.cmsCoursesTree = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiDeleteCourse = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDeleteAssessmentSession = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparatorCourses = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiDuplicateCourse = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -205,6 +210,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourseStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).BeginInit();
             this.contextMenuStripQuestionNode.SuspendLayout();
+            this.cmsCoursesTree.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStripMain
@@ -498,15 +504,115 @@
             this.toolStripQuestion.TabIndex = 0;
             this.toolStripQuestion.Text = "toolStrip1";
             // 
+            // cutToolStripButton
+            // 
+            this.cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
+            this.cutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cutToolStripButton.Name = "cutToolStripButton";
+            this.cutToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.cutToolStripButton.Text = "C&ut";
+            this.cutToolStripButton.Click += new System.EventHandler(this.cutToolStripButton_Click);
+            // 
+            // copyToolStripButton
+            // 
+            this.copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
+            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.copyToolStripButton.Name = "copyToolStripButton";
+            this.copyToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.copyToolStripButton.Text = "&Copy";
+            this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
+            // 
+            // pasteToolStripButton
+            // 
+            this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pasteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
+            this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pasteToolStripButton.Name = "pasteToolStripButton";
+            this.pasteToolStripButton.Size = new System.Drawing.Size(24, 24);
+            this.pasteToolStripButton.Text = "&Paste";
+            this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripButton_Click);
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
             // 
+            // toolStripButtonBold
+            // 
+            this.toolStripButtonBold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonBold.Image = global::AssessmentManager.Properties.Resources.FormatBold;
+            this.toolStripButtonBold.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonBold.Name = "toolStripButtonBold";
+            this.toolStripButtonBold.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonBold.Text = "Bold";
+            this.toolStripButtonBold.Click += new System.EventHandler(this.toolStripButtonBold_Click);
+            // 
+            // toolStripButtonItalic
+            // 
+            this.toolStripButtonItalic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonItalic.Image = global::AssessmentManager.Properties.Resources.FormatItalic;
+            this.toolStripButtonItalic.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonItalic.Name = "toolStripButtonItalic";
+            this.toolStripButtonItalic.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonItalic.Text = "Italic";
+            this.toolStripButtonItalic.Click += new System.EventHandler(this.toolStripButtonItalic_Click);
+            // 
+            // toolStripButtonUnderline
+            // 
+            this.toolStripButtonUnderline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonUnderline.Image = global::AssessmentManager.Properties.Resources.FormatUnderline;
+            this.toolStripButtonUnderline.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonUnderline.Name = "toolStripButtonUnderline";
+            this.toolStripButtonUnderline.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonUnderline.Text = "Underline";
+            this.toolStripButtonUnderline.Click += new System.EventHandler(this.toolStripButtonUnderline_Click);
+            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonAlignLeft
+            // 
+            this.toolStripButtonAlignLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAlignLeft.Image = global::AssessmentManager.Properties.Resources.AlignLeft;
+            this.toolStripButtonAlignLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAlignLeft.Name = "toolStripButtonAlignLeft";
+            this.toolStripButtonAlignLeft.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAlignLeft.Text = "Align Left";
+            this.toolStripButtonAlignLeft.Click += new System.EventHandler(this.toolStripButtonAlignLeft_Click);
+            // 
+            // toolStripButtonAlignCentre
+            // 
+            this.toolStripButtonAlignCentre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAlignCentre.Image = global::AssessmentManager.Properties.Resources.AlignCentre;
+            this.toolStripButtonAlignCentre.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAlignCentre.Name = "toolStripButtonAlignCentre";
+            this.toolStripButtonAlignCentre.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAlignCentre.Text = "Align Right";
+            this.toolStripButtonAlignCentre.Click += new System.EventHandler(this.toolStripButtonAlignCentre_Click);
+            // 
+            // toolStripButtonAlignRight
+            // 
+            this.toolStripButtonAlignRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAlignRight.Image = global::AssessmentManager.Properties.Resources.AlignRight;
+            this.toolStripButtonAlignRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAlignRight.Name = "toolStripButtonAlignRight";
+            this.toolStripButtonAlignRight.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAlignRight.Text = "Align Right";
+            this.toolStripButtonAlignRight.Click += new System.EventHandler(this.toolStripButtonAlignRight_Click);
+            // 
+            // toolStripButtonBulletList
+            // 
+            this.toolStripButtonBulletList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonBulletList.Image = global::AssessmentManager.Properties.Resources.List_Bullets;
+            this.toolStripButtonBulletList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonBulletList.Name = "toolStripButtonBulletList";
+            this.toolStripButtonBulletList.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonBulletList.Text = "Bullet List";
+            this.toolStripButtonBulletList.Click += new System.EventHandler(this.toolStripButtonBulletList_Click);
             // 
             // toolStripSeparator6
             // 
@@ -532,10 +638,31 @@
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(6, 27);
             // 
+            // toolStripButtonColour
+            // 
+            this.toolStripButtonColour.BackColor = System.Drawing.Color.Black;
+            this.toolStripButtonColour.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripButtonColour.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonColour.Image")));
+            this.toolStripButtonColour.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonColour.Name = "toolStripButtonColour";
+            this.toolStripButtonColour.Size = new System.Drawing.Size(23, 24);
+            this.toolStripButtonColour.Text = "Font Colour";
+            this.toolStripButtonColour.Click += new System.EventHandler(this.toolStripButtonColour_Click);
+            // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonAddImage
+            // 
+            this.toolStripButtonAddImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddImage.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddImage.Image")));
+            this.toolStripButtonAddImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddImage.Name = "toolStripButtonAddImage";
+            this.toolStripButtonAddImage.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAddImage.Text = "Add Image";
+            this.toolStripButtonAddImage.Click += new System.EventHandler(this.toolStripButtonAddImage_Click);
             // 
             // panelQuestionNameContainer
             // 
@@ -1010,6 +1137,54 @@
             this.buttonAddMajorQuestion.UseVisualStyleBackColor = true;
             this.buttonAddMajorQuestion.Click += new System.EventHandler(this.buttonAddMajorQuestion_Click);
             // 
+            // buttonMoveUp
+            // 
+            this.buttonMoveUp.Image = global::AssessmentManager.Properties.Resources.ArrowUp32;
+            this.buttonMoveUp.Location = new System.Drawing.Point(2, 2);
+            this.buttonMoveUp.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonMoveUp.Name = "buttonMoveUp";
+            this.buttonMoveUp.Size = new System.Drawing.Size(35, 35);
+            this.buttonMoveUp.TabIndex = 3;
+            this.buttonToolTip.SetToolTip(this.buttonMoveUp, "Move selected question up");
+            this.buttonMoveUp.UseVisualStyleBackColor = true;
+            this.buttonMoveUp.Click += new System.EventHandler(this.buttonMoveUp_Click);
+            // 
+            // buttonMoveDown
+            // 
+            this.buttonMoveDown.Image = global::AssessmentManager.Properties.Resources.ArrowDown32;
+            this.buttonMoveDown.Location = new System.Drawing.Point(41, 2);
+            this.buttonMoveDown.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonMoveDown.Name = "buttonMoveDown";
+            this.buttonMoveDown.Size = new System.Drawing.Size(35, 35);
+            this.buttonMoveDown.TabIndex = 2;
+            this.buttonToolTip.SetToolTip(this.buttonMoveDown, "Move selected question down");
+            this.buttonMoveDown.UseVisualStyleBackColor = true;
+            this.buttonMoveDown.Click += new System.EventHandler(this.buttonMoveDown_Click);
+            // 
+            // buttonCollapseAll
+            // 
+            this.buttonCollapseAll.Image = global::AssessmentManager.Properties.Resources.CollapseAll32;
+            this.buttonCollapseAll.Location = new System.Drawing.Point(122, 2);
+            this.buttonCollapseAll.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCollapseAll.Name = "buttonCollapseAll";
+            this.buttonCollapseAll.Size = new System.Drawing.Size(35, 35);
+            this.buttonCollapseAll.TabIndex = 1;
+            this.buttonToolTip.SetToolTip(this.buttonCollapseAll, "Collapse all nodes");
+            this.buttonCollapseAll.UseVisualStyleBackColor = true;
+            this.buttonCollapseAll.Click += new System.EventHandler(this.buttonCollapseAll_Click);
+            // 
+            // buttonExpandAll
+            // 
+            this.buttonExpandAll.Image = global::AssessmentManager.Properties.Resources.ExpandAll32;
+            this.buttonExpandAll.Location = new System.Drawing.Point(83, 2);
+            this.buttonExpandAll.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonExpandAll.Name = "buttonExpandAll";
+            this.buttonExpandAll.Size = new System.Drawing.Size(35, 35);
+            this.buttonExpandAll.TabIndex = 0;
+            this.buttonToolTip.SetToolTip(this.buttonExpandAll, "Expand all nodes");
+            this.buttonExpandAll.UseVisualStyleBackColor = true;
+            this.buttonExpandAll.Click += new System.EventHandler(this.buttonExpandAll_Click);
+            // 
             // panelMarks
             // 
             this.panelMarks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -1195,6 +1370,16 @@
             this.pnlCourseView.Name = "pnlCourseView";
             this.pnlCourseView.Size = new System.Drawing.Size(635, 573);
             this.pnlCourseView.TabIndex = 3;
+            // 
+            // btnDiscardCourseChanges
+            // 
+            this.btnDiscardCourseChanges.Location = new System.Drawing.Point(527, 545);
+            this.btnDiscardCourseChanges.Name = "btnDiscardCourseChanges";
+            this.btnDiscardCourseChanges.Size = new System.Drawing.Size(102, 23);
+            this.btnDiscardCourseChanges.TabIndex = 14;
+            this.btnDiscardCourseChanges.Text = "Discard Changes";
+            this.btnDiscardCourseChanges.UseVisualStyleBackColor = true;
+            this.btnDiscardCourseChanges.Click += new System.EventHandler(this.btnDiscardCourseChanges_Click);
             // 
             // btnApplyCourseChanges
             // 
@@ -1414,6 +1599,8 @@
             this.tvCourses.TabIndex = 0;
             this.tvCourses.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvCourses_BeforeSelect);
             this.tvCourses.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvCourses_AfterSelect);
+            this.tvCourses.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tvCourses_KeyDown);
+            this.tvCourses.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tvCourses_MouseUp);
             // 
             // tabPageMark
             // 
@@ -1518,184 +1705,43 @@
             this.contextMenuChangeLevelDown.Text = "Change Level Down";
             this.contextMenuChangeLevelDown.Click += new System.EventHandler(this.contextMenuChangeLevelDown_Click);
             // 
-            // cutToolStripButton
+            // cmsCoursesTree
             // 
-            this.cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.cutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
-            this.cutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cutToolStripButton.Name = "cutToolStripButton";
-            this.cutToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.cutToolStripButton.Text = "C&ut";
-            this.cutToolStripButton.Click += new System.EventHandler(this.cutToolStripButton_Click);
+            this.cmsCoursesTree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDuplicateCourse,
+            this.toolStripSeparatorCourses,
+            this.tsmiDeleteCourse,
+            this.tsmiDeleteAssessmentSession});
+            this.cmsCoursesTree.Name = "cmsCoursesTree";
+            this.cmsCoursesTree.Size = new System.Drawing.Size(215, 98);
             // 
-            // copyToolStripButton
+            // tsmiDeleteCourse
             // 
-            this.copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
-            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.copyToolStripButton.Name = "copyToolStripButton";
-            this.copyToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.copyToolStripButton.Text = "&Copy";
-            this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
+            this.tsmiDeleteCourse.Name = "tsmiDeleteCourse";
+            this.tsmiDeleteCourse.Size = new System.Drawing.Size(214, 22);
+            this.tsmiDeleteCourse.Text = "Delete Course";
+            this.tsmiDeleteCourse.Visible = false;
+            this.tsmiDeleteCourse.Click += new System.EventHandler(this.tsmiDeleteCourse_Click);
             // 
-            // pasteToolStripButton
+            // tsmiDeleteAssessmentSession
             // 
-            this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pasteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
-            this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pasteToolStripButton.Name = "pasteToolStripButton";
-            this.pasteToolStripButton.Size = new System.Drawing.Size(24, 24);
-            this.pasteToolStripButton.Text = "&Paste";
-            this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripButton_Click);
+            this.tsmiDeleteAssessmentSession.Name = "tsmiDeleteAssessmentSession";
+            this.tsmiDeleteAssessmentSession.Size = new System.Drawing.Size(214, 22);
+            this.tsmiDeleteAssessmentSession.Text = "Delete Assessment Session";
+            this.tsmiDeleteAssessmentSession.Visible = false;
+            this.tsmiDeleteAssessmentSession.Click += new System.EventHandler(this.tsmiDeleteAssessmentSession_Click);
             // 
-            // toolStripButtonBold
+            // toolStripSeparatorCourses
             // 
-            this.toolStripButtonBold.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonBold.Image = global::AssessmentManager.Properties.Resources.FormatBold;
-            this.toolStripButtonBold.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonBold.Name = "toolStripButtonBold";
-            this.toolStripButtonBold.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonBold.Text = "Bold";
-            this.toolStripButtonBold.Click += new System.EventHandler(this.toolStripButtonBold_Click);
+            this.toolStripSeparatorCourses.Name = "toolStripSeparatorCourses";
+            this.toolStripSeparatorCourses.Size = new System.Drawing.Size(211, 6);
             // 
-            // toolStripButtonItalic
+            // tsmiDuplicateCourse
             // 
-            this.toolStripButtonItalic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonItalic.Image = global::AssessmentManager.Properties.Resources.FormatItalic;
-            this.toolStripButtonItalic.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonItalic.Name = "toolStripButtonItalic";
-            this.toolStripButtonItalic.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonItalic.Text = "Italic";
-            this.toolStripButtonItalic.Click += new System.EventHandler(this.toolStripButtonItalic_Click);
-            // 
-            // toolStripButtonUnderline
-            // 
-            this.toolStripButtonUnderline.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonUnderline.Image = global::AssessmentManager.Properties.Resources.FormatUnderline;
-            this.toolStripButtonUnderline.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonUnderline.Name = "toolStripButtonUnderline";
-            this.toolStripButtonUnderline.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonUnderline.Text = "Underline";
-            this.toolStripButtonUnderline.Click += new System.EventHandler(this.toolStripButtonUnderline_Click);
-            // 
-            // toolStripButtonAlignLeft
-            // 
-            this.toolStripButtonAlignLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAlignLeft.Image = global::AssessmentManager.Properties.Resources.AlignLeft;
-            this.toolStripButtonAlignLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAlignLeft.Name = "toolStripButtonAlignLeft";
-            this.toolStripButtonAlignLeft.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAlignLeft.Text = "Align Left";
-            this.toolStripButtonAlignLeft.Click += new System.EventHandler(this.toolStripButtonAlignLeft_Click);
-            // 
-            // toolStripButtonAlignCentre
-            // 
-            this.toolStripButtonAlignCentre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAlignCentre.Image = global::AssessmentManager.Properties.Resources.AlignCentre;
-            this.toolStripButtonAlignCentre.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAlignCentre.Name = "toolStripButtonAlignCentre";
-            this.toolStripButtonAlignCentre.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAlignCentre.Text = "Align Right";
-            this.toolStripButtonAlignCentre.Click += new System.EventHandler(this.toolStripButtonAlignCentre_Click);
-            // 
-            // toolStripButtonAlignRight
-            // 
-            this.toolStripButtonAlignRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAlignRight.Image = global::AssessmentManager.Properties.Resources.AlignRight;
-            this.toolStripButtonAlignRight.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAlignRight.Name = "toolStripButtonAlignRight";
-            this.toolStripButtonAlignRight.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAlignRight.Text = "Align Right";
-            this.toolStripButtonAlignRight.Click += new System.EventHandler(this.toolStripButtonAlignRight_Click);
-            // 
-            // toolStripButtonBulletList
-            // 
-            this.toolStripButtonBulletList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonBulletList.Image = global::AssessmentManager.Properties.Resources.List_Bullets;
-            this.toolStripButtonBulletList.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonBulletList.Name = "toolStripButtonBulletList";
-            this.toolStripButtonBulletList.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonBulletList.Text = "Bullet List";
-            this.toolStripButtonBulletList.Click += new System.EventHandler(this.toolStripButtonBulletList_Click);
-            // 
-            // toolStripButtonColour
-            // 
-            this.toolStripButtonColour.BackColor = System.Drawing.Color.Black;
-            this.toolStripButtonColour.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
-            this.toolStripButtonColour.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonColour.Image")));
-            this.toolStripButtonColour.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonColour.Name = "toolStripButtonColour";
-            this.toolStripButtonColour.Size = new System.Drawing.Size(23, 24);
-            this.toolStripButtonColour.Text = "Font Colour";
-            this.toolStripButtonColour.Click += new System.EventHandler(this.toolStripButtonColour_Click);
-            // 
-            // toolStripButtonAddImage
-            // 
-            this.toolStripButtonAddImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAddImage.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddImage.Image")));
-            this.toolStripButtonAddImage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAddImage.Name = "toolStripButtonAddImage";
-            this.toolStripButtonAddImage.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAddImage.Text = "Add Image";
-            this.toolStripButtonAddImage.Click += new System.EventHandler(this.toolStripButtonAddImage_Click);
-            // 
-            // buttonMoveUp
-            // 
-            this.buttonMoveUp.Image = global::AssessmentManager.Properties.Resources.ArrowUp32;
-            this.buttonMoveUp.Location = new System.Drawing.Point(2, 2);
-            this.buttonMoveUp.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonMoveUp.Name = "buttonMoveUp";
-            this.buttonMoveUp.Size = new System.Drawing.Size(35, 35);
-            this.buttonMoveUp.TabIndex = 3;
-            this.buttonToolTip.SetToolTip(this.buttonMoveUp, "Move selected question up");
-            this.buttonMoveUp.UseVisualStyleBackColor = true;
-            this.buttonMoveUp.Click += new System.EventHandler(this.buttonMoveUp_Click);
-            // 
-            // buttonMoveDown
-            // 
-            this.buttonMoveDown.Image = global::AssessmentManager.Properties.Resources.ArrowDown32;
-            this.buttonMoveDown.Location = new System.Drawing.Point(41, 2);
-            this.buttonMoveDown.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonMoveDown.Name = "buttonMoveDown";
-            this.buttonMoveDown.Size = new System.Drawing.Size(35, 35);
-            this.buttonMoveDown.TabIndex = 2;
-            this.buttonToolTip.SetToolTip(this.buttonMoveDown, "Move selected question down");
-            this.buttonMoveDown.UseVisualStyleBackColor = true;
-            this.buttonMoveDown.Click += new System.EventHandler(this.buttonMoveDown_Click);
-            // 
-            // buttonCollapseAll
-            // 
-            this.buttonCollapseAll.Image = global::AssessmentManager.Properties.Resources.CollapseAll32;
-            this.buttonCollapseAll.Location = new System.Drawing.Point(122, 2);
-            this.buttonCollapseAll.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonCollapseAll.Name = "buttonCollapseAll";
-            this.buttonCollapseAll.Size = new System.Drawing.Size(35, 35);
-            this.buttonCollapseAll.TabIndex = 1;
-            this.buttonToolTip.SetToolTip(this.buttonCollapseAll, "Collapse all nodes");
-            this.buttonCollapseAll.UseVisualStyleBackColor = true;
-            this.buttonCollapseAll.Click += new System.EventHandler(this.buttonCollapseAll_Click);
-            // 
-            // buttonExpandAll
-            // 
-            this.buttonExpandAll.Image = global::AssessmentManager.Properties.Resources.ExpandAll32;
-            this.buttonExpandAll.Location = new System.Drawing.Point(83, 2);
-            this.buttonExpandAll.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonExpandAll.Name = "buttonExpandAll";
-            this.buttonExpandAll.Size = new System.Drawing.Size(35, 35);
-            this.buttonExpandAll.TabIndex = 0;
-            this.buttonToolTip.SetToolTip(this.buttonExpandAll, "Expand all nodes");
-            this.buttonExpandAll.UseVisualStyleBackColor = true;
-            this.buttonExpandAll.Click += new System.EventHandler(this.buttonExpandAll_Click);
-            // 
-            // btnDiscardCourseChanges
-            // 
-            this.btnDiscardCourseChanges.Location = new System.Drawing.Point(527, 545);
-            this.btnDiscardCourseChanges.Name = "btnDiscardCourseChanges";
-            this.btnDiscardCourseChanges.Size = new System.Drawing.Size(102, 23);
-            this.btnDiscardCourseChanges.TabIndex = 14;
-            this.btnDiscardCourseChanges.Text = "Discard Changes";
-            this.btnDiscardCourseChanges.UseVisualStyleBackColor = true;
-            this.btnDiscardCourseChanges.Click += new System.EventHandler(this.btnDiscardCourseChanges_Click);
+            this.tsmiDuplicateCourse.Name = "tsmiDuplicateCourse";
+            this.tsmiDuplicateCourse.Size = new System.Drawing.Size(214, 22);
+            this.tsmiDuplicateCourse.Text = "Duplicate Course";
+            this.tsmiDuplicateCourse.Click += new System.EventHandler(this.tsmiDuplicateCourse_Click);
             // 
             // MainForm
             // 
@@ -1758,6 +1804,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourseStudents)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).EndInit();
             this.contextMenuStripQuestionNode.ResumeLayout(false);
+            this.cmsCoursesTree.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1908,5 +1955,10 @@
         private System.Windows.Forms.Button btnImportStudents;
         private System.Windows.Forms.Button btnApplyCourseChanges;
         private System.Windows.Forms.Button btnDiscardCourseChanges;
+        private System.Windows.Forms.ContextMenuStrip cmsCoursesTree;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteCourse;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteAssessmentSession;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDuplicateCourse;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorCourses;
     }
 }

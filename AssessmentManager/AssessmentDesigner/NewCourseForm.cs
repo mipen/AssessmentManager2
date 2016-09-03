@@ -92,7 +92,7 @@ namespace AssessmentManager
 
         private void lblInfo_Click(object sender, EventArgs e)
         {
-            //TODO:: Write infomration about student details things
+            //Write infomration about student details things
             const string message = "This is where you fill out the details for each student in the class. These details will be used when publishing and marking any assessments deployed for this course. This list can be edited later on if need be. \n Use the 'Import Students' button to import students from another course.";
             MessageBox.Show(message, "Students list", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

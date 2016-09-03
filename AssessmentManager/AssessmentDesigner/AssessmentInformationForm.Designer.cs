@@ -56,7 +56,7 @@
             this.textBoxAuthor.Location = new System.Drawing.Point(132, 49);
             this.textBoxAuthor.Name = "textBoxAuthor";
             this.textBoxAuthor.Size = new System.Drawing.Size(218, 20);
-            this.textBoxAuthor.TabIndex = 5;
+            this.textBoxAuthor.TabIndex = 2;
             this.toolTip1.SetToolTip(this.textBoxAuthor, "The name of the author");
             // 
             // buttonOK
@@ -64,7 +64,7 @@
             this.buttonOK.Location = new System.Drawing.Point(12, 131);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 6;
+            this.buttonOK.TabIndex = 4;
             this.buttonOK.Text = "&OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -75,7 +75,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(275, 131);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 7;
+            this.buttonCancel.TabIndex = 5;
             this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
@@ -94,7 +94,7 @@
             this.tbAssessmentName.Location = new System.Drawing.Point(132, 20);
             this.tbAssessmentName.Name = "tbAssessmentName";
             this.tbAssessmentName.Size = new System.Drawing.Size(218, 20);
-            this.tbAssessmentName.TabIndex = 4;
+            this.tbAssessmentName.TabIndex = 1;
             this.toolTip1.SetToolTip(this.tbAssessmentName, "The name of the assessment. \\n ExampIe: Test 1 \\n This is required.");
             // 
             // lblAssessmentWeighting
@@ -112,7 +112,7 @@
             this.nudAssessmentWeighting.Location = new System.Drawing.Point(132, 79);
             this.nudAssessmentWeighting.Name = "nudAssessmentWeighting";
             this.nudAssessmentWeighting.Size = new System.Drawing.Size(48, 20);
-            this.nudAssessmentWeighting.TabIndex = 11;
+            this.nudAssessmentWeighting.TabIndex = 3;
             this.toolTip1.SetToolTip(this.nudAssessmentWeighting, "The weighting for the assessment (in %)");
             // 
             // AssessmentInformationForm
@@ -131,6 +131,7 @@
             this.Controls.Add(this.labelAuthor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AssessmentInformationForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Assessment Information";
             ((System.ComponentModel.ISupportInitialize)(this.nudAssessmentWeighting)).EndInit();
             this.ResumeLayout(false);

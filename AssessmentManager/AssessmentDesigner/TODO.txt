@@ -1,4 +1,4 @@
-﻿Feature:
+﻿Feature: HAVE THIS ON COURSEMANAGER ASSESSMENT SESSION AS WELL AS ANYWHERE ELSE ITS NEEDED
 	- Ability to generate information hand out
 	- Print out temp username and password
 	- Include student name
@@ -20,7 +20,6 @@
 
 	- About window: display information for icons; licenses + links and acknowledgement. My information. Acknowledgement of original program.
 
-- Import Students buttons on New Course form and Course tab
 
 - COntext menu for courses tree view
-- Delete key for courses tree view
+	- DO event for delete session node

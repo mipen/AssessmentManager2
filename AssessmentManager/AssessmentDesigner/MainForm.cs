@@ -210,7 +210,7 @@ namespace AssessmentManager
         {
             if (CloseAssessment() == DialogResult.OK)
             {
-                //TODO:: Prompt to do initial save here
+                //Prompt to do initial save here
                 AssessmentInformationForm aif = new AssessmentInformationForm();
                 aif.StartPosition = FormStartPosition.CenterParent;
                 if (aif.ShowDialog() == DialogResult.OK)
@@ -537,7 +537,6 @@ namespace AssessmentManager
 
         private void UpdateMarkAllocations()
         {
-            //TODO:: include this method when opening an existing exam
             QuestionNode node = (QuestionNode)treeViewQuestionList.SelectedNode;
             if (node != null)
             {
@@ -783,7 +782,15 @@ namespace AssessmentManager
                     }
                     else
                         contextMenuChangeLevelUp.Visible = true;
-                    //TODO:: Disable change level down if there is a limit on how many levels there are
+
+                    //Disable change level down if there is a limit on how many levels there are
+                    if (node.Level == 2)
+                    {
+                        contextMenuChangeLevelDown.Visible = false;
+                        levelFlag2 = true;
+                    }
+                    else
+                        contextMenuChangeLevelDown.Visible = true;
 
                     //Disable the separator if both are hidden
                     if (levelFlag1 && levelFlag2)
@@ -815,7 +822,7 @@ namespace AssessmentManager
 
         private void treeViewQuestionList_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Delete)
+            if (treeViewQuestionList.ContainsFocus && e.KeyData == Keys.Delete)
             {
                 QuestionNode node = (QuestionNode)treeViewQuestionList.SelectedNode;
                 if (node != null)
@@ -1417,6 +1424,39 @@ namespace AssessmentManager
             prevNode.Name = prevNode.Text;
         }
 
+        public void DeleteCourseNode(CourseNode node)
+        {
+            //First make sure the user wants to do this.
+            string message = "This will move this course entry and all assessment sessions associated with it to the recycle bin. Are you sure you wish to do this? To undo this, you will have to manually restore it from the recycle bin.";
+            if (MessageBox.Show(message, "Confirm delete course", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                //First delete the course contained in the node. The method returns DialogResult.No if user cancels it
+                if (CourseManager.DeleteCourse(node.Course) == DialogResult.Yes)
+                {
+                    //Remove the node
+                    tvCourses.Nodes.Remove(node);
+                    //Select the first node in the tree if there is one
+                    if (tvCourses.Nodes.Count > 0)
+                    {
+                        tvCourses.SelectedNode = tvCourses.Nodes[0];
+                    }
+                    else
+                    {
+                        //There are no nodes left in the tree, so disable both panels
+                        pnlCourseView.Visible = false;
+                        pnlCourseView.Enabled = false;
+                        pnlAssessmentView.Visible = false;
+                        pnlAssessmentView.Enabled = false;
+                    }
+                }
+            }
+        }
+
+        public void DeleteSessionNode(AssessmentSessionNode node)
+        {
+            //TODO:: handle deleting a session node
+        }
+
         #endregion
 
         #region Events
@@ -1487,14 +1527,19 @@ namespace AssessmentManager
                 //TODO:: Session related stuff here
                 //Show the session panel and hide course panel
             }
+            else
+            {
+                pnlCourseView.Visible = false;
+                pnlCourseView.Enabled = false;
+                pnlAssessmentView.Visible = false;
+                pnlAssessmentView.Enabled = false;
+            }
             CourseEdited = false;
         }
 
         private void tvCourses_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
-            //TODO:: Check for changes made to the current selected course. Propmpt the user to apply or discard changes before changing to new course
-            //if (tvCourses.SelectedNode != null)
-            //    e.Cancel = true;
+            //Check for changes made to the current selected course. Propmpt the user to apply or discard changes before changing to new course
             if (CourseEdited && prevNode != null)
             {
                 string message = "There have been changes made to this course. Changing to a different one now will cause those changes to be discarded. Do you wish to commit your changes before moving to a different course?";
@@ -1595,7 +1640,7 @@ namespace AssessmentManager
 
         private void btnImportStudents_Click(object sender, EventArgs e)
         {
-            //TODO:: Import student data from another course
+            //Import student data from another course
             ImportStudentsForm ipf = new ImportStudentsForm();
             ipf.StartPosition = FormStartPosition.CenterParent;
 
@@ -1652,6 +1697,78 @@ namespace AssessmentManager
                 RevertCourseChanges();
                 tvCourses_AfterSelect(sender, new TreeViewEventArgs(tvCourses.SelectedNode));
             }
+        }
+
+        private void tvCourses_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (tvCourses.ContainsFocus && e.KeyCode == Keys.Delete)
+            {
+                if (tvCourses.SelectedNode is CourseNode)
+                {
+                    CourseNode node = tvCourses.SelectedNode as CourseNode;
+                    DeleteCourseNode(node);
+                    e.Handled = true;
+                }
+                else if (tvCourses.SelectedNode is AssessmentSessionNode)
+                {
+                    AssessmentSessionNode node = tvCourses.SelectedNode as AssessmentSessionNode;
+                    DeleteSessionNode(node);
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void tvCourses_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                Point p = new Point(e.X, e.Y);
+                TreeNode node = tvCourses.GetNodeAt(p);
+                if (node != null)
+                {
+                    tvCourses.SelectedNode = node;
+                    if (node is CourseNode)
+                    {
+                        CourseNode courseNode = node as CourseNode;
+                        tsmiDeleteCourse.Visible = true;
+                        tsmiDeleteCourse.Enabled = true;
+                        tsmiDeleteAssessmentSession.Visible = false;
+                        tsmiDeleteAssessmentSession.Enabled = false;
+
+                        cmsCoursesTree.Show(tvCourses, p);
+                    }
+                    else if (node is AssessmentSessionNode)
+                    {
+                        AssessmentSessionNode sessionNode = node as AssessmentSessionNode;
+                        tsmiDeleteCourse.Visible = false;
+                        tsmiDeleteCourse.Enabled = false;
+                        tsmiDeleteAssessmentSession.Visible = true;
+                        tsmiDeleteAssessmentSession.Enabled = true;
+
+                        cmsCoursesTree.Show(tvCourses, p);
+                    }
+                }
+            }
+        }
+
+        private void tsmiDeleteCourse_Click(object sender, EventArgs e)
+        {
+            TreeNode node = tvCourses.SelectedNode;
+            if (node != null && node is CourseNode)
+            {
+                CourseNode courseNode = node as CourseNode;
+                DeleteCourseNode(courseNode);
+            }
+        }
+
+        private void tsmiDeleteAssessmentSession_Click(object sender, EventArgs e)
+        {
+            //TODO::
+        }
+
+        private void tsmiDuplicateCourse_Click(object sender, EventArgs e)
+        {
+
         }
 
         #endregion

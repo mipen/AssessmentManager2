@@ -39,10 +39,15 @@ namespace AssessmentManager
             id = newID;
         }
 
-        public Course Clone()
+        public Course Clone(bool retainID = true)
         {
             Course c = new Course();
+            if(retainID)
             c.id = id;
+            else
+            {
+                c.id = 
+            }
             c.courseInfo = courseInfo.Clone();
             c.students = CloneStudentList();
             return c;

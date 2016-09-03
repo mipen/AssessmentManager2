@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -156,7 +157,7 @@ namespace AssessmentManager
             tree.Nodes.Clear();
             if (courses.Count > 0)
             {
-                foreach(var c in courses.Where(co => co.CourseTitle.Contains(criteria)))
+                foreach (var c in courses.Where(co => co.CourseTitle.Contains(criteria)))
                 {
                     CourseNode cn = BuildCourseNodeFor(c);
                     tree.Nodes.Add(cn);
@@ -180,6 +181,22 @@ namespace AssessmentManager
                 id = Util.RandomString(6);
             } while (id.NullOrEmpty() && courses.Where(c => c.ID == id).Any());
             return id;
+        }
+
+        public DialogResult DeleteCourse(Course course)
+        {
+            //Delete the course's folder
+            try
+            {
+                FileSystem.DeleteDirectory(course.GetCoursePath(), UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+            }
+            catch (OperationCanceledException)
+            {
+                return DialogResult.No;
+            }
+            //Remove the course from the list
+            courses.Remove(course);
+            return DialogResult.Yes;
         }
 
         #endregion
