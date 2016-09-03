@@ -149,6 +149,7 @@ namespace AssessmentManager
                     CourseNode cn = BuildCourseNodeFor(c);
                     tree.Nodes.Add(cn);
                 }
+                tree.Sort();
             }
         }
 
@@ -162,6 +163,7 @@ namespace AssessmentManager
                     CourseNode cn = BuildCourseNodeFor(c);
                     tree.Nodes.Add(cn);
                 }
+                tree.Sort();
             }
         }
 

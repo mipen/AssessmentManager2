@@ -178,6 +178,8 @@
             this.tsmiDeleteAssessmentSession = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparatorCourses = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDuplicateCourse = new System.Windows.Forms.ToolStripMenuItem();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbCourseID = new System.Windows.Forms.TextBox();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -1351,6 +1353,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCourseView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCourseView.Controls.Add(this.tbCourseID);
+            this.pnlCourseView.Controls.Add(this.label7);
             this.pnlCourseView.Controls.Add(this.btnDiscardCourseChanges);
             this.pnlCourseView.Controls.Add(this.btnApplyCourseChanges);
             this.pnlCourseView.Controls.Add(this.btnImportStudents);
@@ -1713,10 +1717,11 @@
             this.tsmiDeleteCourse,
             this.tsmiDeleteAssessmentSession});
             this.cmsCoursesTree.Name = "cmsCoursesTree";
-            this.cmsCoursesTree.Size = new System.Drawing.Size(215, 98);
+            this.cmsCoursesTree.Size = new System.Drawing.Size(215, 76);
             // 
             // tsmiDeleteCourse
             // 
+            this.tsmiDeleteCourse.Enabled = false;
             this.tsmiDeleteCourse.Name = "tsmiDeleteCourse";
             this.tsmiDeleteCourse.Size = new System.Drawing.Size(214, 22);
             this.tsmiDeleteCourse.Text = "Delete Course";
@@ -1725,6 +1730,7 @@
             // 
             // tsmiDeleteAssessmentSession
             // 
+            this.tsmiDeleteAssessmentSession.Enabled = false;
             this.tsmiDeleteAssessmentSession.Name = "tsmiDeleteAssessmentSession";
             this.tsmiDeleteAssessmentSession.Size = new System.Drawing.Size(214, 22);
             this.tsmiDeleteAssessmentSession.Text = "Delete Assessment Session";
@@ -1735,13 +1741,34 @@
             // 
             this.toolStripSeparatorCourses.Name = "toolStripSeparatorCourses";
             this.toolStripSeparatorCourses.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparatorCourses.Visible = false;
             // 
             // tsmiDuplicateCourse
             // 
+            this.tsmiDuplicateCourse.Enabled = false;
             this.tsmiDuplicateCourse.Name = "tsmiDuplicateCourse";
             this.tsmiDuplicateCourse.Size = new System.Drawing.Size(214, 22);
             this.tsmiDuplicateCourse.Text = "Duplicate Course";
+            this.tsmiDuplicateCourse.Visible = false;
             this.tsmiDuplicateCourse.Click += new System.EventHandler(this.tsmiDuplicateCourse_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(535, 40);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(21, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "ID:";
+            // 
+            // tbCourseID
+            // 
+            this.tbCourseID.Location = new System.Drawing.Point(562, 37);
+            this.tbCourseID.MaxLength = 10;
+            this.tbCourseID.Name = "tbCourseID";
+            this.tbCourseID.ReadOnly = true;
+            this.tbCourseID.Size = new System.Drawing.Size(67, 20);
+            this.tbCourseID.TabIndex = 16;
             // 
             // MainForm
             // 
@@ -1960,5 +1987,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteAssessmentSession;
         private System.Windows.Forms.ToolStripMenuItem tsmiDuplicateCourse;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorCourses;
+        private System.Windows.Forms.TextBox tbCourseID;
+        private System.Windows.Forms.Label label7;
     }
 }

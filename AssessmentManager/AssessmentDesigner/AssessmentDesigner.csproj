@@ -36,7 +36,6 @@
     <ApplicationIcon>designer_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,8 +55,7 @@
     <Compile Include="AssessmentInformationForm.Designer.cs">
       <DependentUpon>AssessmentInformationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CourseManager.cs" />
-    <Compile Include="CoursesExt.cs" />
+    <Compile Include="CourseContextMenuMode.cs" />
     <Compile Include="ImageSelector.cs">
       <SubType>Form</SubType>
     </Compile>

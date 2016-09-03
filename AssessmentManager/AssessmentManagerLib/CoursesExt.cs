@@ -11,7 +11,7 @@ namespace AssessmentManager
 
         public static string GetFilePath(this Course course)
         {
-            return course.GetCoursePath() + "\\" + course.CourseInfo.CourseName + CONSTANTS.COURSE_EXT;
+            return course.GetCoursePath() + "\\" + course.ID + CONSTANTS.COURSE_EXT;
         }
     }
 }

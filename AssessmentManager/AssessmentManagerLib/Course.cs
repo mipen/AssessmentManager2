@@ -46,7 +46,7 @@ namespace AssessmentManager
             c.id = id;
             else
             {
-                c.id = 
+                c.id = CourseManager.Instance.RandomCourseID();
             }
             c.courseInfo = courseInfo.Clone();
             c.students = CloneStudentList();

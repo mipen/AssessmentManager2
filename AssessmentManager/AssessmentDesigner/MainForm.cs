@@ -1295,6 +1295,29 @@ namespace AssessmentManager
                 else if (result == DialogResult.Cancel)
                     e.Cancel = true;
             }
+            if (CourseEdited && tvCourses.SelectedNode != null && tvCourses.SelectedNode is CourseNode)
+            {
+                string message = "There have been changes made to a course. Closing now will cause those changes to be discarded. Do you wish to commit your changes before closing?";
+                DialogResult result = MessageBox.Show(message, "Unsaved changes to course", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    ApplyCourseChanges();
+                }
+                else if (result == DialogResult.No)
+                {
+                    //Revert the changes
+                    CourseNode node = tvCourses.SelectedNode as CourseNode;
+                    node.Course = courseRevertPoint;
+                    CourseEdited = false;
+                    node.Text = node.Course.CourseTitle;
+                    node.Name = node.Text;
+                }
+                else
+                {
+                    //Cancel the change
+                    e.Cancel = true;
+                }
+            }
             Settings.Instance.Save();
         }
 
@@ -1457,6 +1480,31 @@ namespace AssessmentManager
             //TODO:: handle deleting a session node
         }
 
+        private void SetCoursesContextMenu(CourseContextMenuMode mode)
+        {
+            bool course, session;
+            if (mode == CourseContextMenuMode.Course)
+            {
+                course = true;
+                session = false;
+            }
+            else
+            {
+                course = false;
+                session = true;
+            }
+            //Course related things
+            tsmiDuplicateCourse.Enabled = course;
+            tsmiDuplicateCourse.Visible = course;
+            toolStripSeparatorCourses.Visible = course;
+            tsmiDeleteCourse.Visible = course;
+            tsmiDeleteCourse.Enabled = course;
+
+            //Session related things
+            tsmiDeleteAssessmentSession.Visible = session;
+            tsmiDeleteAssessmentSession.Enabled = session;
+        }
+
         #endregion
 
         #region Events
@@ -1507,6 +1555,7 @@ namespace AssessmentManager
                 tbCourseCode2.Text = info.CourseCode2;
                 nudCourseYear.Value = int.Parse(info.Year);
                 cbCourseSemester.SelectedItem = info.Semester;
+                tbCourseID.Text = course.ID;
 
                 //Show all the students
                 dgvCourseStudents.Rows.Clear();
@@ -1730,20 +1779,14 @@ namespace AssessmentManager
                     if (node is CourseNode)
                     {
                         CourseNode courseNode = node as CourseNode;
-                        tsmiDeleteCourse.Visible = true;
-                        tsmiDeleteCourse.Enabled = true;
-                        tsmiDeleteAssessmentSession.Visible = false;
-                        tsmiDeleteAssessmentSession.Enabled = false;
+                        SetCoursesContextMenu(CourseContextMenuMode.Course);
 
                         cmsCoursesTree.Show(tvCourses, p);
                     }
                     else if (node is AssessmentSessionNode)
                     {
                         AssessmentSessionNode sessionNode = node as AssessmentSessionNode;
-                        tsmiDeleteCourse.Visible = false;
-                        tsmiDeleteCourse.Enabled = false;
-                        tsmiDeleteAssessmentSession.Visible = true;
-                        tsmiDeleteAssessmentSession.Enabled = true;
+                        SetCoursesContextMenu(CourseContextMenuMode.AssessmentSession);
 
                         cmsCoursesTree.Show(tvCourses, p);
                     }
@@ -1768,7 +1811,13 @@ namespace AssessmentManager
 
         private void tsmiDuplicateCourse_Click(object sender, EventArgs e)
         {
-
+            TreeNode node = tvCourses.SelectedNode;
+            if (node != null && node is CourseNode)
+            {
+                CourseNode cNode = node as CourseNode;
+                Course newCourse = cNode.Course.Clone(false);
+                CourseManager.RegisterNewCourse(newCourse);
+            }
         }
 
         #endregion
