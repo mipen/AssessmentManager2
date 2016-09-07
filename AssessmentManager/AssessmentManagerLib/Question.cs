@@ -13,6 +13,7 @@ namespace AssessmentManager
         private string name = "Question";
         private int marks = 0;
         private string questionText = "";
+        private string questionTextRaw = "";
         private string modelAnswer;
         private string optionA, optionB, optionC, optionD;
         private MultiChoiceOption correctOption = MultiChoiceOption.A;
@@ -44,6 +45,18 @@ namespace AssessmentManager
             set
             {
                 questionText = value;
+            }
+        }
+
+        public string QuestionTextRaw
+        {
+            get
+            {
+                return questionTextRaw;
+            }
+            set
+            {
+                questionTextRaw = value;
             }
         }
 

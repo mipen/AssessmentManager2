@@ -4,6 +4,7 @@
 	- When publishing an assessment, ask which course to use.
 	- Course class has unique ID property which will be randomly generated string. This will be used when determining which Course an AssessmentSession belongs to.
 	- Course has list of students with information (name, student id, mit username)
+- DONE!
 
 Assessment Session:
 	- AssessmentSession is created when publishing an assessment.

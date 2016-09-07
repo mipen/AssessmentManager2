@@ -135,6 +135,8 @@
             this.tabPagePublish = new System.Windows.Forms.TabPage();
             this.tabPageCourses = new System.Windows.Forms.TabPage();
             this.pnlCourseView = new System.Windows.Forms.Panel();
+            this.tbCourseID = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnDiscardCourseChanges = new System.Windows.Forms.Button();
             this.btnApplyCourseChanges = new System.Windows.Forms.Button();
             this.btnImportStudents = new System.Windows.Forms.Button();
@@ -174,12 +176,10 @@
             this.contextMenuChangeLevelDown = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.cmsCoursesTree = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiDuplicateCourse = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparatorCourses = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteCourse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteAssessmentSession = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparatorCourses = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiDuplicateCourse = new System.Windows.Forms.ToolStripMenuItem();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbCourseID = new System.Windows.Forms.TextBox();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -273,12 +273,14 @@
             this.withAnswersToolStripMenuItem.Name = "withAnswersToolStripMenuItem";
             this.withAnswersToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.withAnswersToolStripMenuItem.Text = "With Answers";
+            this.withAnswersToolStripMenuItem.Click += new System.EventHandler(this.withAnswersToolStripMenuItem_Click);
             // 
             // withoutAnswersToolStripMenuItem
             // 
             this.withoutAnswersToolStripMenuItem.Name = "withoutAnswersToolStripMenuItem";
             this.withoutAnswersToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.withoutAnswersToolStripMenuItem.Text = "Without Answers";
+            this.withoutAnswersToolStripMenuItem.Click += new System.EventHandler(this.withoutAnswersToolStripMenuItem_Click);
             // 
             // assessmentInformationToolStripMenuItem
             // 
@@ -701,8 +703,8 @@
             // 
             // panelAnswersContainer
             // 
-            this.panelAnswersContainer.Controls.Add(this.panelAnswerMultiChoice);
             this.panelAnswersContainer.Controls.Add(this.panelAnswerOpen);
+            this.panelAnswersContainer.Controls.Add(this.panelAnswerMultiChoice);
             this.panelAnswersContainer.Controls.Add(this.panelAnswerSingle);
             this.panelAnswersContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnswersContainer.Location = new System.Drawing.Point(0, 24);
@@ -1375,6 +1377,24 @@
             this.pnlCourseView.Size = new System.Drawing.Size(635, 573);
             this.pnlCourseView.TabIndex = 3;
             // 
+            // tbCourseID
+            // 
+            this.tbCourseID.Location = new System.Drawing.Point(562, 37);
+            this.tbCourseID.MaxLength = 10;
+            this.tbCourseID.Name = "tbCourseID";
+            this.tbCourseID.ReadOnly = true;
+            this.tbCourseID.Size = new System.Drawing.Size(67, 20);
+            this.tbCourseID.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(535, 40);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(21, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "ID:";
+            // 
             // btnDiscardCourseChanges
             // 
             this.btnDiscardCourseChanges.Location = new System.Drawing.Point(527, 545);
@@ -1719,6 +1739,21 @@
             this.cmsCoursesTree.Name = "cmsCoursesTree";
             this.cmsCoursesTree.Size = new System.Drawing.Size(215, 76);
             // 
+            // tsmiDuplicateCourse
+            // 
+            this.tsmiDuplicateCourse.Enabled = false;
+            this.tsmiDuplicateCourse.Name = "tsmiDuplicateCourse";
+            this.tsmiDuplicateCourse.Size = new System.Drawing.Size(214, 22);
+            this.tsmiDuplicateCourse.Text = "Duplicate Course";
+            this.tsmiDuplicateCourse.Visible = false;
+            this.tsmiDuplicateCourse.Click += new System.EventHandler(this.tsmiDuplicateCourse_Click);
+            // 
+            // toolStripSeparatorCourses
+            // 
+            this.toolStripSeparatorCourses.Name = "toolStripSeparatorCourses";
+            this.toolStripSeparatorCourses.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparatorCourses.Visible = false;
+            // 
             // tsmiDeleteCourse
             // 
             this.tsmiDeleteCourse.Enabled = false;
@@ -1736,39 +1771,6 @@
             this.tsmiDeleteAssessmentSession.Text = "Delete Assessment Session";
             this.tsmiDeleteAssessmentSession.Visible = false;
             this.tsmiDeleteAssessmentSession.Click += new System.EventHandler(this.tsmiDeleteAssessmentSession_Click);
-            // 
-            // toolStripSeparatorCourses
-            // 
-            this.toolStripSeparatorCourses.Name = "toolStripSeparatorCourses";
-            this.toolStripSeparatorCourses.Size = new System.Drawing.Size(211, 6);
-            this.toolStripSeparatorCourses.Visible = false;
-            // 
-            // tsmiDuplicateCourse
-            // 
-            this.tsmiDuplicateCourse.Enabled = false;
-            this.tsmiDuplicateCourse.Name = "tsmiDuplicateCourse";
-            this.tsmiDuplicateCourse.Size = new System.Drawing.Size(214, 22);
-            this.tsmiDuplicateCourse.Text = "Duplicate Course";
-            this.tsmiDuplicateCourse.Visible = false;
-            this.tsmiDuplicateCourse.Click += new System.EventHandler(this.tsmiDuplicateCourse_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(535, 40);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(21, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "ID:";
-            // 
-            // tbCourseID
-            // 
-            this.tbCourseID.Location = new System.Drawing.Point(562, 37);
-            this.tbCourseID.MaxLength = 10;
-            this.tbCourseID.Name = "tbCourseID";
-            this.tbCourseID.ReadOnly = true;
-            this.tbCourseID.Size = new System.Drawing.Size(67, 20);
-            this.tbCourseID.TabIndex = 16;
             // 
             // MainForm
             // 

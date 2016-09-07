@@ -319,7 +319,22 @@ namespace AssessmentManager
                 Close();
         }
 
-        #endregion
+         private void withAnswersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO:: Make sure the assessment has some questions before making a pdf
+            //TODO:: Use a save file dialog to get the file path
+            string testPath = "Test.pdf";
+            AssessmentWriter w = new AssessmentWriter(Assessment, testPath);
+            w.MakePDF(false);
+            //TODO:: Prompt to say it was created and ask if want to open it.
+        }
+
+        private void withoutAnswersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO:: Print pdf without answers
+        }
+
+       #endregion
 
         #region TreeViewButtons
         private void buttonAddMajorQuestion_Click(object sender, EventArgs e)
@@ -1160,6 +1175,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.QuestionText = richTextBoxQuestion.Rtf;
+                node.Question.QuestionTextRaw = richTextBoxQuestion.Text;
                 designerChangesMade = true;
             }
         }
