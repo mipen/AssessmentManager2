@@ -23,6 +23,7 @@ namespace AssessmentManager
         private ColorDialog colorDialog = new ColorDialog();
         private SaveFileDialog xmlSaveFileDialog = new SaveFileDialog();
         private SaveFileDialog mainSaveFileDialog = new SaveFileDialog();
+        private SaveFileDialog pdfSaveFileDialog = new SaveFileDialog();
         private OpenFileDialog openFileDialog = new OpenFileDialog();
         private CourseManager CourseManager = new CourseManager();
 
@@ -32,6 +33,8 @@ namespace AssessmentManager
 
         private bool designerChangesMade = false;
         private bool courseEdited = false;
+        private bool reloadCourses = false;
+        private bool publishPrepared = false;
         private Course courseRevertPoint;
         private CourseNode prevNode;
 
@@ -50,6 +53,11 @@ namespace AssessmentManager
             mainSaveFileDialog.Filter = ASSESSMENT_FILTER;
             mainSaveFileDialog.DefaultExt = ASSESSMENT_EXT.Remove(0, 1);
 
+            //Initialise the pdf save file dialog
+            pdfSaveFileDialog.Filter = PDF_FILTER;
+            pdfSaveFileDialog.DefaultExt = PDF_EXT.Remove(0, 1);
+            pdfSaveFileDialog.InitialDirectory = DESKTOP_PATH;
+
             //Initialise open file dialog
             openFileDialog.InitialDirectory = DESKTOP_PATH;
             openFileDialog.Filter = ASSESSMENT_FILTER;
@@ -62,7 +70,10 @@ namespace AssessmentManager
             InitialiseFontComboBoxes();
 
             //Do the initialisation for the course tab
-            InitialiseCourseTab(CourseManager);
+            InitialiseCourseTab();
+
+            //Initialise publishing tab
+            InitialisePublishTab();
         }
 
         public Assessment Assessment
@@ -177,8 +188,7 @@ namespace AssessmentManager
 
         private void toolStripButtonBulletList_Click(object sender, EventArgs e)
         {
-            //TODO:: this
-            MessageBox.Show("Not yet done");
+            richTextBoxQuestion.SelectionBullet = !richTextBoxQuestion.SelectionBullet;
         }
 
         private void toolStripComboBoxFont_SelectedIndexChanged(object sender, EventArgs e)
@@ -319,22 +329,17 @@ namespace AssessmentManager
                 Close();
         }
 
-         private void withAnswersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void withAnswersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO:: Make sure the assessment has some questions before making a pdf
-            //TODO:: Use a save file dialog to get the file path
-            string testPath = "Test.pdf";
-            AssessmentWriter w = new AssessmentWriter(Assessment, testPath);
-            w.MakePDF(false);
-            //TODO:: Prompt to say it was created and ask if want to open it.
+            MakePdf(true);
         }
 
         private void withoutAnswersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO:: Print pdf without answers
+            MakePdf(false);
         }
 
-       #endregion
+        #endregion
 
         #region TreeViewButtons
         private void buttonAddMajorQuestion_Click(object sender, EventArgs e)
@@ -456,6 +461,8 @@ namespace AssessmentManager
             file = null;
             //Reset the form text
             UpdateFormText();
+            //Reset the publish screen
+            ResetPublishTab();
         }
 
         private void NotifyAssessmentOpened()
@@ -485,6 +492,8 @@ namespace AssessmentManager
             if (treeViewQuestionList.Nodes.Count > 0) treeViewQuestionList.SelectedNode = treeViewQuestionList.Nodes[0];
             //No changes will have been made yet
             designerChangesMade = false;
+            //Setup publish tab
+            SetPublishTab();
         }
 
         private void InitialiseFontComboBoxes()
@@ -525,6 +534,7 @@ namespace AssessmentManager
                 else if (result == DialogResult.Cancel)
                     return DialogResult.Cancel;
             }
+            //TODO:: Check if an assessment session has been prepared. Warn user that if they continue the session will be lost.
             Assessment = null;
             treeViewQuestionList.Nodes.Clear();
             NotifyAssessmentClosed();
@@ -736,6 +746,34 @@ namespace AssessmentManager
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 OpenFromFile(openFileDialog.FileName);
+            }
+        }
+
+        public void MakePdf(bool withAnswers)
+        {
+            //TODO:: Make sure the assessment has some questions before making a pdf
+            //TODO:: Use a save file dialog to get the file path
+            //TODO:: Prompt to say it was created and ask if want to open it.
+            if (Assessment == null)
+            {
+                MessageBox.Show("Unable to make pdf: Assessment is null", "Error");
+                return;
+            }
+            if (Assessment.Questions.Count == 0)
+            {
+                MessageBox.Show("Unable to make pdf: Assessment has no questions", "Error");
+                return;
+            }
+            if (pdfSaveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                AssessmentWriter w = new AssessmentWriter(Assessment, pdfSaveFileDialog.FileName);
+                if (w.MakePdf(withAnswers))
+                {
+                    if (MessageBox.Show("PDF successfully created. Would you like to view it now?", "PDF created", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        Process.Start(pdfSaveFileDialog.FileName);
+                    }
+                }
             }
         }
         #endregion
@@ -1406,6 +1444,10 @@ namespace AssessmentManager
                 courseEdited = value;
                 btnApplyCourseChanges.Enabled = value;
                 btnDiscardCourseChanges.Enabled = value;
+                if(value)
+                {
+                    reloadCourses = true;
+                }
             }
         }
 
@@ -1413,7 +1455,7 @@ namespace AssessmentManager
 
         #region Methods
 
-        private void InitialiseCourseTab(CourseManager courseManager)
+        private void InitialiseCourseTab()
         {
             //course and assessment session panels initially disabled and cannot be viewed
             pnlAssessmentView.Visible = false;
@@ -1422,7 +1464,6 @@ namespace AssessmentManager
             pnlCourseView.Enabled = false;
             //Initialise the course manager
             CourseManager.Initialise(tvCourses, CourseManager);
-
         }
 
         public void ApplyCourseChanges()
@@ -1532,6 +1573,7 @@ namespace AssessmentManager
             if (ncf.ShowDialog() == DialogResult.OK)
             {
                 CourseManager.RegisterNewCourse(ncf.Course);
+                reloadCourses = true;
             }
         }
 
@@ -1833,6 +1875,164 @@ namespace AssessmentManager
                 CourseNode cNode = node as CourseNode;
                 Course newCourse = cNode.Course.Clone(false);
                 CourseManager.RegisterNewCourse(newCourse);
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Publisher
+
+        #region Properties
+
+        private bool HasCourseSelected
+        {
+            get
+            {
+                return cbPublishCourseSelector.SelectedItem != null;
+            }
+        }
+
+        private bool PublishPrepared
+        {
+            get
+            {
+                return publishPrepared;
+            }
+            set
+            {
+                publishPrepared = value;
+            }
+        }
+
+        private Course SelectedCourse
+        {
+            get
+            {
+                return cbPublishCourseSelector.SelectedItem as Course;
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void InitialisePublishTab()
+        {
+            //Set the date time picker to current date
+            dtpPublishDate.Value = DateTime.Now;
+
+            //Populate the course selector.
+            cbPublishCourseSelector.Items.Clear();
+            cbPublishCourseSelector.Items.AddRange(CourseManager.Courses.ToArray());
+        }
+
+        private void ResetPublishTab()
+        {
+            //Method called when an assessment is closed
+
+            //Reset the values in the publish tab
+            DateTime d = DateTime.Now;
+            dtpPublishDate.Value = d;
+            dtpPublishTime.Value = new DateTime(2016, 1, 1, 12, 0, 0, 0);
+            lbPublishAdditionalFiles.Items.Clear();
+            nudPublishAssessmentLength.Value = 60;
+            nudPublishReadingTime.Value = 0;
+            chkbxTimeLocked.Checked = true;
+            lblPublishFileName.Text = "";
+            lblPublishLastDeployed.Text = "";
+            tbPublishResetPassword.Text = "";
+            btnPublishDeploy.Enabled = false;
+            cbPublishCourseSelector.SelectedItem = null;
+            PublishPrepared = false;
+
+            //Disable the publish screen
+            tlpPublishContainer.Enabled = false;
+            //Disable student editor
+            dgvPublishStudents.Enabled = false;
+            //Clear the students
+            dgvCourseStudents.Rows.Clear();
+
+        }
+
+        private void SetPublishTab()
+        {
+            //Method called when an assessment is opened.
+
+            //TODO:: Set any values relevant to the assessment, ie file name, last time deployed
+            lblPublishFileName.Text = file.FullName;
+            //TODO:: Show when assessment was last published.
+
+            //Generate new password
+            tbPublishResetPassword.Text = Util.RandomString(6);
+
+            //Enable the publish screen
+            tlpPublishContainer.Enabled = true;
+
+            //Disable student editor
+            dgvPublishStudents.Enabled = false;
+        }
+
+        #endregion
+        #region Events
+
+        private void btnPublishDeploy_Click(object sender, EventArgs e)
+        {
+            //TODO:: If publish is successful, offer to create a pdf containing all the information handout forms for the students. Let user know that this can be done by selecting assessment
+            // in course manager tab.
+
+            //TODO:: This button creates an AssessmentSession which holds all the information. This is added to the selected course's list. All files are copied to the different accounts and backups are
+            //made in the course's folder.
+            
+        }
+
+        private void btnPublishPrepare_Click(object sender, EventArgs e)
+        {
+            //TODO:: Prepare the students. If has already been pressed, confirm to make changes.
+            if(HasCourseSelected)
+            {
+                if(PublishPrepared)
+                {
+                    string message = "This action will overrite the current list of students. Are you sure you wish to continue?";
+                    if (MessageBox.Show(message, "Confirm changes", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        dgvPublishStudents.Rows.Clear();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                PublishPrepared = true;
+
+                //Fill out the students grid.
+                dgvPublishStudents.Rows.Clear();
+                List<DataGridViewRow> rows = new List<DataGridViewRow>();
+                foreach(var student in SelectedCourse.Students)
+                {
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dgvPublishStudents);
+                }
+
+            }
+            else
+            {
+                //If no course selected, tell must select one.
+                MessageBox.Show("Please select a course!");
+            }
+        }
+
+        private void tabControlMain_Selected(object sender, TabControlEventArgs e)
+        {
+            //MessageBox.Show(e.TabPage.Name);
+            //TODO:: Reload the courses in the combo box if reloadCourses == true; Reset reloadCourses to false.
+            if(e.TabPage.Name == "tabPagePublish" && reloadCourses)
+            {
+                reloadCourses = false;
+                //TODO:: If there is a course selected, save the id for that course then reload the courses list.
+                //TODO:: If the course id is no longer present, let the user know, otherwise select the course with the same id.
             }
         }
 

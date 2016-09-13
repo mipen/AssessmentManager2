@@ -53,7 +53,8 @@ namespace AssessmentManager
                 string erroredCourses = "";
                 foreach (var e in errors)
                     erroredCourses += e + "\n";
-                MessageBox.Show($"Unable to load course information from the following folder(s): \n\n {erroredCourses}", "Error loading some courses");
+                string end = errors.Count == 1 ? "a course" : "some courses";
+                MessageBox.Show($"Unable to load course information from the following folder(s): \n\n {erroredCourses}", $"Error loading {end}");
             }
 
             //Fill the tree view.
@@ -62,6 +63,7 @@ namespace AssessmentManager
 
         private List<string> LoadAllCourses(string coursesPath)
         {
+            //TODO:: Load all assessments from course dir
             List<string> errors = new List<string>();
             string[] dirs = Directory.GetDirectories(coursesPath);
             if (dirs.Count() > 0)
@@ -181,7 +183,7 @@ namespace AssessmentManager
             do
             {
                 id = Util.RandomString(6);
-            } while (id.NullOrEmpty() && courses.Where(c => c.ID == id).Any());
+            } while (id.NullOrEmpty() || courses.Where(c => c.ID == id).Any());
             return id;
         }
 
@@ -195,6 +197,10 @@ namespace AssessmentManager
             catch (OperationCanceledException)
             {
                 return DialogResult.No;
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Error removing course with ID: " + course.ID + "\n\n" + e.Message, "Error");
             }
             //Remove the course from the list
             courses.Remove(course);

@@ -13,11 +13,13 @@ namespace AssessmentManager
         public static readonly string ASSESSMENT_SCRIPT_EXT = ".exms";
         public static readonly string XML_EXT = ".xml";
         public static readonly string COURSE_EXT = ".crse";
+        public static readonly string PDF_EXT = ".pdf";
 
         public static readonly string ASSESSMENT_FILTER = $"Assessment Files (*{ASSESSMENT_EXT}) | *{ASSESSMENT_EXT}";
         public static readonly string ASSESSMENT_SCRIPT_FILTER = $"Assessment Script Files (*{ASSESSMENT_SCRIPT_EXT}) | *{ASSESSMENT_SCRIPT_EXT}";
         public static readonly string COMBINED_FILTER = $"Assessment Files (*{ASSESSMENT_EXT}; *{ASSESSMENT_SCRIPT_EXT}) | *{ASSESSMENT_EXT}; *{ASSESSMENT_SCRIPT_EXT}";
-        public static readonly string XML_FILTER = $"XML Document (*{XML_EXT}) | *{XML_EXT}";
+        public static readonly string XML_FILTER = $"XML Files (*{XML_EXT}) | *{XML_EXT}";
+        public static readonly string PDF_FILTER = $"PDF Files (*{PDF_EXT}) | *{PDF_EXT}";
 
         public static string DESKTOP_PATH = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         public static string DOCUMENTS_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

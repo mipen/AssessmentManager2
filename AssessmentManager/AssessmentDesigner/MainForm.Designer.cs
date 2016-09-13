@@ -82,6 +82,12 @@
             this.labelQuestion = new System.Windows.Forms.Label();
             this.panelAnswerAreaContainer = new System.Windows.Forms.Panel();
             this.panelAnswersContainer = new System.Windows.Forms.Panel();
+            this.panelAnswerSingle = new System.Windows.Forms.TableLayoutPanel();
+            this.panelAnswerSingleAcceptableContainer = new System.Windows.Forms.Panel();
+            this.richTextBoxAnswerSingleAcceptable = new System.Windows.Forms.RichTextBox();
+            this.labelAnswerSingleAcceptable = new System.Windows.Forms.Label();
+            this.panelAnswerOpen = new System.Windows.Forms.Panel();
+            this.richTextBoxAnswerOpen = new System.Windows.Forms.RichTextBox();
             this.panelAnswerMultiChoice = new System.Windows.Forms.Panel();
             this.tableLayoutPanelAnswerMultiChoiceContainer = new System.Windows.Forms.TableLayoutPanel();
             this.panelMultiChoiceOptionsContainer = new System.Windows.Forms.Panel();
@@ -100,12 +106,6 @@
             this.tableLayoutPanelMultiChoiceA = new System.Windows.Forms.TableLayoutPanel();
             this.labelA = new System.Windows.Forms.Label();
             this.textBoxMultiChoiceA = new System.Windows.Forms.TextBox();
-            this.panelAnswerOpen = new System.Windows.Forms.Panel();
-            this.richTextBoxAnswerOpen = new System.Windows.Forms.RichTextBox();
-            this.panelAnswerSingle = new System.Windows.Forms.TableLayoutPanel();
-            this.panelAnswerSingleAcceptableContainer = new System.Windows.Forms.Panel();
-            this.richTextBoxAnswerSingleAcceptable = new System.Windows.Forms.RichTextBox();
-            this.labelAnswerSingleAcceptable = new System.Windows.Forms.Label();
             this.panelAnswerTools = new System.Windows.Forms.Panel();
             this.labelAnswerType = new System.Windows.Forms.Label();
             this.comboBoxAnswerType = new System.Windows.Forms.ComboBox();
@@ -133,6 +133,34 @@
             this.numericUpDownMarksAssigner = new System.Windows.Forms.NumericUpDown();
             this.labelMarksForQuestion = new System.Windows.Forms.Label();
             this.tabPagePublish = new System.Windows.Forms.TabPage();
+            this.tlpPublishContainer = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvPublishStudents = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tbPublishResetPassword = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnPublishDeploy = new System.Windows.Forms.Button();
+            this.btnPublishPrepare = new System.Windows.Forms.Button();
+            this.lblPublishLastDeployed = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lblPublishFileName = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.gbAdditionalFiles = new System.Windows.Forms.GroupBox();
+            this.btnPublishAdditionalFilesDelAll = new System.Windows.Forms.Button();
+            this.btnPublishAdditionalFilesDelSel = new System.Windows.Forms.Button();
+            this.btnPublishAdditonalFilesAdd = new System.Windows.Forms.Button();
+            this.lbPublishAdditionalFiles = new System.Windows.Forms.ListBox();
+            this.gbPublishTimeSettings = new System.Windows.Forms.GroupBox();
+            this.chkbxTimeLocked = new System.Windows.Forms.CheckBox();
+            this.dtpPublishTime = new System.Windows.Forms.DateTimePicker();
+            this.nudPublishReadingTime = new System.Windows.Forms.NumericUpDown();
+            this.nudPublishAssessmentLength = new System.Windows.Forms.NumericUpDown();
+            this.dtpPublishDate = new System.Windows.Forms.DateTimePicker();
+            this.cbPublishCourseSelector = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabPageCourses = new System.Windows.Forms.TabPage();
             this.pnlCourseView = new System.Windows.Forms.Panel();
             this.tbCourseID = new System.Windows.Forms.TextBox();
@@ -180,6 +208,15 @@
             this.toolStripSeparatorCourses = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteCourse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteAssessmentSession = new System.Windows.Forms.ToolStripMenuItem();
+            this.colPublishUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPublishLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPublishFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPublishStudentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPublishStartTime = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colPublishAssessmentLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPublishReadingTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPublishAccountName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPublishAccountPassword = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -190,6 +227,9 @@
             this.panelQuestionNameContainer.SuspendLayout();
             this.panelAnswerAreaContainer.SuspendLayout();
             this.panelAnswersContainer.SuspendLayout();
+            this.panelAnswerSingle.SuspendLayout();
+            this.panelAnswerSingleAcceptableContainer.SuspendLayout();
+            this.panelAnswerOpen.SuspendLayout();
             this.panelAnswerMultiChoice.SuspendLayout();
             this.tableLayoutPanelAnswerMultiChoiceContainer.SuspendLayout();
             this.panelMultiChoiceOptionsContainer.SuspendLayout();
@@ -198,15 +238,20 @@
             this.tableLayoutPanelMultiChoiceC.SuspendLayout();
             this.tableLayoutPanelMultiChoiceB.SuspendLayout();
             this.tableLayoutPanelMultiChoiceA.SuspendLayout();
-            this.panelAnswerOpen.SuspendLayout();
-            this.panelAnswerSingle.SuspendLayout();
-            this.panelAnswerSingleAcceptableContainer.SuspendLayout();
             this.panelAnswerTools.SuspendLayout();
             this.contextMenuStripQuestionList.SuspendLayout();
             this.panelButtons.SuspendLayout();
             this.panelMarks.SuspendLayout();
             this.groupBoxMarks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMarksAssigner)).BeginInit();
+            this.tabPagePublish.SuspendLayout();
+            this.tlpPublishContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPublishStudents)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.gbAdditionalFiles.SuspendLayout();
+            this.gbPublishTimeSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPublishReadingTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPublishAssessmentLength)).BeginInit();
             this.tabPageCourses.SuspendLayout();
             this.pnlCourseView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourseStudents)).BeginInit();
@@ -406,6 +451,7 @@
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(880, 610);
             this.tabControlMain.TabIndex = 1;
+            this.tabControlMain.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlMain_Selected);
             // 
             // tabPageDesigner
             // 
@@ -703,15 +749,89 @@
             // 
             // panelAnswersContainer
             // 
+            this.panelAnswersContainer.Controls.Add(this.panelAnswerSingle);
             this.panelAnswersContainer.Controls.Add(this.panelAnswerOpen);
             this.panelAnswersContainer.Controls.Add(this.panelAnswerMultiChoice);
-            this.panelAnswersContainer.Controls.Add(this.panelAnswerSingle);
             this.panelAnswersContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnswersContainer.Location = new System.Drawing.Point(0, 24);
             this.panelAnswersContainer.Margin = new System.Windows.Forms.Padding(2);
             this.panelAnswersContainer.Name = "panelAnswersContainer";
             this.panelAnswersContainer.Size = new System.Drawing.Size(689, 209);
             this.panelAnswersContainer.TabIndex = 2;
+            // 
+            // panelAnswerSingle
+            // 
+            this.panelAnswerSingle.ColumnCount = 1;
+            this.panelAnswerSingle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.panelAnswerSingle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.panelAnswerSingle.Controls.Add(this.panelAnswerSingleAcceptableContainer, 0, 0);
+            this.panelAnswerSingle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnswerSingle.Location = new System.Drawing.Point(0, 0);
+            this.panelAnswerSingle.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAnswerSingle.Name = "panelAnswerSingle";
+            this.panelAnswerSingle.RowCount = 1;
+            this.panelAnswerSingle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.panelAnswerSingle.Size = new System.Drawing.Size(689, 209);
+            this.panelAnswerSingle.TabIndex = 1;
+            // 
+            // panelAnswerSingleAcceptableContainer
+            // 
+            this.panelAnswerSingleAcceptableContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelAnswerSingleAcceptableContainer.Controls.Add(this.richTextBoxAnswerSingleAcceptable);
+            this.panelAnswerSingleAcceptableContainer.Controls.Add(this.labelAnswerSingleAcceptable);
+            this.panelAnswerSingleAcceptableContainer.Location = new System.Drawing.Point(2, 2);
+            this.panelAnswerSingleAcceptableContainer.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAnswerSingleAcceptableContainer.Name = "panelAnswerSingleAcceptableContainer";
+            this.panelAnswerSingleAcceptableContainer.Size = new System.Drawing.Size(685, 205);
+            this.panelAnswerSingleAcceptableContainer.TabIndex = 0;
+            // 
+            // richTextBoxAnswerSingleAcceptable
+            // 
+            this.richTextBoxAnswerSingleAcceptable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxAnswerSingleAcceptable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBoxAnswerSingleAcceptable.Location = new System.Drawing.Point(111, 0);
+            this.richTextBoxAnswerSingleAcceptable.Margin = new System.Windows.Forms.Padding(0);
+            this.richTextBoxAnswerSingleAcceptable.Name = "richTextBoxAnswerSingleAcceptable";
+            this.richTextBoxAnswerSingleAcceptable.Size = new System.Drawing.Size(575, 206);
+            this.richTextBoxAnswerSingleAcceptable.TabIndex = 1;
+            this.richTextBoxAnswerSingleAcceptable.Text = "";
+            this.richTextBoxAnswerSingleAcceptable.TextChanged += new System.EventHandler(this.richTextBoxAnswerSingleAcceptable_TextChanged);
+            // 
+            // labelAnswerSingleAcceptable
+            // 
+            this.labelAnswerSingleAcceptable.AutoSize = true;
+            this.labelAnswerSingleAcceptable.Location = new System.Drawing.Point(2, 0);
+            this.labelAnswerSingleAcceptable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelAnswerSingleAcceptable.Name = "labelAnswerSingleAcceptable";
+            this.labelAnswerSingleAcceptable.Size = new System.Drawing.Size(107, 13);
+            this.labelAnswerSingleAcceptable.TabIndex = 0;
+            this.labelAnswerSingleAcceptable.Text = "Acceptable Answers:";
+            // 
+            // panelAnswerOpen
+            // 
+            this.panelAnswerOpen.Controls.Add(this.richTextBoxAnswerOpen);
+            this.panelAnswerOpen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAnswerOpen.Location = new System.Drawing.Point(0, 0);
+            this.panelAnswerOpen.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAnswerOpen.Name = "panelAnswerOpen";
+            this.panelAnswerOpen.Size = new System.Drawing.Size(689, 209);
+            this.panelAnswerOpen.TabIndex = 0;
+            // 
+            // richTextBoxAnswerOpen
+            // 
+            this.richTextBoxAnswerOpen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBoxAnswerOpen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxAnswerOpen.Location = new System.Drawing.Point(0, 0);
+            this.richTextBoxAnswerOpen.Margin = new System.Windows.Forms.Padding(2);
+            this.richTextBoxAnswerOpen.Name = "richTextBoxAnswerOpen";
+            this.richTextBoxAnswerOpen.Size = new System.Drawing.Size(689, 209);
+            this.richTextBoxAnswerOpen.TabIndex = 0;
+            this.richTextBoxAnswerOpen.Text = "";
+            this.richTextBoxAnswerOpen.TextChanged += new System.EventHandler(this.richTextBoxAnswerOpen_TextChanged);
             // 
             // panelAnswerMultiChoice
             // 
@@ -948,80 +1068,6 @@
             this.textBoxMultiChoiceA.Size = new System.Drawing.Size(312, 20);
             this.textBoxMultiChoiceA.TabIndex = 1;
             this.textBoxMultiChoiceA.TextChanged += new System.EventHandler(this.textBoxMultiChoiceA_TextChanged);
-            // 
-            // panelAnswerOpen
-            // 
-            this.panelAnswerOpen.Controls.Add(this.richTextBoxAnswerOpen);
-            this.panelAnswerOpen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAnswerOpen.Location = new System.Drawing.Point(0, 0);
-            this.panelAnswerOpen.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAnswerOpen.Name = "panelAnswerOpen";
-            this.panelAnswerOpen.Size = new System.Drawing.Size(689, 209);
-            this.panelAnswerOpen.TabIndex = 0;
-            // 
-            // richTextBoxAnswerOpen
-            // 
-            this.richTextBoxAnswerOpen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBoxAnswerOpen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxAnswerOpen.Location = new System.Drawing.Point(0, 0);
-            this.richTextBoxAnswerOpen.Margin = new System.Windows.Forms.Padding(2);
-            this.richTextBoxAnswerOpen.Name = "richTextBoxAnswerOpen";
-            this.richTextBoxAnswerOpen.Size = new System.Drawing.Size(689, 209);
-            this.richTextBoxAnswerOpen.TabIndex = 0;
-            this.richTextBoxAnswerOpen.Text = "";
-            this.richTextBoxAnswerOpen.TextChanged += new System.EventHandler(this.richTextBoxAnswerOpen_TextChanged);
-            // 
-            // panelAnswerSingle
-            // 
-            this.panelAnswerSingle.ColumnCount = 1;
-            this.panelAnswerSingle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.panelAnswerSingle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.panelAnswerSingle.Controls.Add(this.panelAnswerSingleAcceptableContainer, 0, 0);
-            this.panelAnswerSingle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAnswerSingle.Location = new System.Drawing.Point(0, 0);
-            this.panelAnswerSingle.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAnswerSingle.Name = "panelAnswerSingle";
-            this.panelAnswerSingle.RowCount = 1;
-            this.panelAnswerSingle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.panelAnswerSingle.Size = new System.Drawing.Size(689, 209);
-            this.panelAnswerSingle.TabIndex = 1;
-            // 
-            // panelAnswerSingleAcceptableContainer
-            // 
-            this.panelAnswerSingleAcceptableContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelAnswerSingleAcceptableContainer.Controls.Add(this.richTextBoxAnswerSingleAcceptable);
-            this.panelAnswerSingleAcceptableContainer.Controls.Add(this.labelAnswerSingleAcceptable);
-            this.panelAnswerSingleAcceptableContainer.Location = new System.Drawing.Point(2, 2);
-            this.panelAnswerSingleAcceptableContainer.Margin = new System.Windows.Forms.Padding(2);
-            this.panelAnswerSingleAcceptableContainer.Name = "panelAnswerSingleAcceptableContainer";
-            this.panelAnswerSingleAcceptableContainer.Size = new System.Drawing.Size(685, 205);
-            this.panelAnswerSingleAcceptableContainer.TabIndex = 0;
-            // 
-            // richTextBoxAnswerSingleAcceptable
-            // 
-            this.richTextBoxAnswerSingleAcceptable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxAnswerSingleAcceptable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBoxAnswerSingleAcceptable.Location = new System.Drawing.Point(111, 0);
-            this.richTextBoxAnswerSingleAcceptable.Margin = new System.Windows.Forms.Padding(0);
-            this.richTextBoxAnswerSingleAcceptable.Name = "richTextBoxAnswerSingleAcceptable";
-            this.richTextBoxAnswerSingleAcceptable.Size = new System.Drawing.Size(575, 206);
-            this.richTextBoxAnswerSingleAcceptable.TabIndex = 1;
-            this.richTextBoxAnswerSingleAcceptable.Text = "";
-            this.richTextBoxAnswerSingleAcceptable.TextChanged += new System.EventHandler(this.richTextBoxAnswerSingleAcceptable_TextChanged);
-            // 
-            // labelAnswerSingleAcceptable
-            // 
-            this.labelAnswerSingleAcceptable.AutoSize = true;
-            this.labelAnswerSingleAcceptable.Location = new System.Drawing.Point(2, 0);
-            this.labelAnswerSingleAcceptable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelAnswerSingleAcceptable.Name = "labelAnswerSingleAcceptable";
-            this.labelAnswerSingleAcceptable.Size = new System.Drawing.Size(107, 13);
-            this.labelAnswerSingleAcceptable.TabIndex = 0;
-            this.labelAnswerSingleAcceptable.Text = "Acceptable Answers:";
             // 
             // panelAnswerTools
             // 
@@ -1328,12 +1374,325 @@
             // 
             // tabPagePublish
             // 
+            this.tabPagePublish.Controls.Add(this.tlpPublishContainer);
             this.tabPagePublish.Location = new System.Drawing.Point(4, 22);
             this.tabPagePublish.Name = "tabPagePublish";
             this.tabPagePublish.Size = new System.Drawing.Size(872, 584);
             this.tabPagePublish.TabIndex = 1;
             this.tabPagePublish.Text = "Publish";
             this.tabPagePublish.UseVisualStyleBackColor = true;
+            // 
+            // tlpPublishContainer
+            // 
+            this.tlpPublishContainer.ColumnCount = 1;
+            this.tlpPublishContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpPublishContainer.Controls.Add(this.dgvPublishStudents, 0, 1);
+            this.tlpPublishContainer.Controls.Add(this.panel1, 0, 0);
+            this.tlpPublishContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpPublishContainer.Location = new System.Drawing.Point(0, 0);
+            this.tlpPublishContainer.Name = "tlpPublishContainer";
+            this.tlpPublishContainer.RowCount = 2;
+            this.tlpPublishContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.tlpPublishContainer.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpPublishContainer.Size = new System.Drawing.Size(872, 584);
+            this.tlpPublishContainer.TabIndex = 0;
+            // 
+            // dgvPublishStudents
+            // 
+            this.dgvPublishStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPublishStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colPublishUsername,
+            this.colPublishLastName,
+            this.colPublishFirstName,
+            this.colPublishStudentID,
+            this.colPublishStartTime,
+            this.colPublishAssessmentLength,
+            this.colPublishReadingTime,
+            this.colPublishAccountName,
+            this.colPublishAccountPassword});
+            this.dgvPublishStudents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPublishStudents.Enabled = false;
+            this.dgvPublishStudents.Location = new System.Drawing.Point(3, 303);
+            this.dgvPublishStudents.Name = "dgvPublishStudents";
+            this.dgvPublishStudents.Size = new System.Drawing.Size(866, 278);
+            this.dgvPublishStudents.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tbPublishResetPassword);
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.btnPublishDeploy);
+            this.panel1.Controls.Add(this.btnPublishPrepare);
+            this.panel1.Controls.Add(this.lblPublishLastDeployed);
+            this.panel1.Controls.Add(this.label15);
+            this.panel1.Controls.Add(this.lblPublishFileName);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.gbAdditionalFiles);
+            this.panel1.Controls.Add(this.gbPublishTimeSettings);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(866, 294);
+            this.panel1.TabIndex = 1;
+            // 
+            // tbPublishResetPassword
+            // 
+            this.tbPublishResetPassword.Location = new System.Drawing.Point(514, 71);
+            this.tbPublishResetPassword.Name = "tbPublishResetPassword";
+            this.tbPublishResetPassword.Size = new System.Drawing.Size(100, 20);
+            this.tbPublishResetPassword.TabIndex = 9;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(419, 74);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(86, 13);
+            this.label14.TabIndex = 8;
+            this.label14.Text = "Reset password:";
+            // 
+            // btnPublishDeploy
+            // 
+            this.btnPublishDeploy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPublishDeploy.Enabled = false;
+            this.btnPublishDeploy.Location = new System.Drawing.Point(786, 264);
+            this.btnPublishDeploy.Name = "btnPublishDeploy";
+            this.btnPublishDeploy.Size = new System.Drawing.Size(75, 23);
+            this.btnPublishDeploy.TabIndex = 7;
+            this.btnPublishDeploy.Text = "Deploy";
+            this.btnPublishDeploy.UseVisualStyleBackColor = true;
+            this.btnPublishDeploy.Click += new System.EventHandler(this.btnPublishDeploy_Click);
+            // 
+            // btnPublishPrepare
+            // 
+            this.btnPublishPrepare.Location = new System.Drawing.Point(392, 264);
+            this.btnPublishPrepare.Name = "btnPublishPrepare";
+            this.btnPublishPrepare.Size = new System.Drawing.Size(75, 23);
+            this.btnPublishPrepare.TabIndex = 6;
+            this.btnPublishPrepare.Text = "Prepare";
+            this.btnPublishPrepare.UseVisualStyleBackColor = true;
+            this.btnPublishPrepare.Click += new System.EventHandler(this.btnPublishPrepare_Click);
+            // 
+            // lblPublishLastDeployed
+            // 
+            this.lblPublishLastDeployed.AutoSize = true;
+            this.lblPublishLastDeployed.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPublishLastDeployed.Location = new System.Drawing.Point(511, 45);
+            this.lblPublishLastDeployed.Name = "lblPublishLastDeployed";
+            this.lblPublishLastDeployed.Size = new System.Drawing.Size(41, 13);
+            this.lblPublishLastDeployed.TabIndex = 5;
+            this.lblPublishLastDeployed.Text = "Never";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(429, 45);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(76, 13);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "Last deployed:";
+            // 
+            // lblPublishFileName
+            // 
+            this.lblPublishFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPublishFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPublishFileName.Location = new System.Drawing.Point(511, 16);
+            this.lblPublishFileName.Name = "lblPublishFileName";
+            this.lblPublishFileName.Size = new System.Drawing.Size(350, 29);
+            this.lblPublishFileName.TabIndex = 3;
+            this.lblPublishFileName.Text = "file name.exm";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(389, 16);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(116, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Assessment File Name:";
+            // 
+            // gbAdditionalFiles
+            // 
+            this.gbAdditionalFiles.Controls.Add(this.btnPublishAdditionalFilesDelAll);
+            this.gbAdditionalFiles.Controls.Add(this.btnPublishAdditionalFilesDelSel);
+            this.gbAdditionalFiles.Controls.Add(this.btnPublishAdditonalFilesAdd);
+            this.gbAdditionalFiles.Controls.Add(this.lbPublishAdditionalFiles);
+            this.gbAdditionalFiles.Location = new System.Drawing.Point(0, 150);
+            this.gbAdditionalFiles.Name = "gbAdditionalFiles";
+            this.gbAdditionalFiles.Size = new System.Drawing.Size(383, 141);
+            this.gbAdditionalFiles.TabIndex = 1;
+            this.gbAdditionalFiles.TabStop = false;
+            this.gbAdditionalFiles.Text = "Additional Files";
+            // 
+            // btnPublishAdditionalFilesDelAll
+            // 
+            this.btnPublishAdditionalFilesDelAll.Location = new System.Drawing.Point(286, 99);
+            this.btnPublishAdditionalFilesDelAll.Name = "btnPublishAdditionalFilesDelAll";
+            this.btnPublishAdditionalFilesDelAll.Size = new System.Drawing.Size(91, 23);
+            this.btnPublishAdditionalFilesDelAll.TabIndex = 3;
+            this.btnPublishAdditionalFilesDelAll.Text = "Delete all";
+            this.btnPublishAdditionalFilesDelAll.UseVisualStyleBackColor = true;
+            // 
+            // btnPublishAdditionalFilesDelSel
+            // 
+            this.btnPublishAdditionalFilesDelSel.Location = new System.Drawing.Point(286, 62);
+            this.btnPublishAdditionalFilesDelSel.Name = "btnPublishAdditionalFilesDelSel";
+            this.btnPublishAdditionalFilesDelSel.Size = new System.Drawing.Size(91, 23);
+            this.btnPublishAdditionalFilesDelSel.TabIndex = 2;
+            this.btnPublishAdditionalFilesDelSel.Text = "Delete selected";
+            this.btnPublishAdditionalFilesDelSel.UseVisualStyleBackColor = true;
+            // 
+            // btnPublishAdditonalFilesAdd
+            // 
+            this.btnPublishAdditonalFilesAdd.Location = new System.Drawing.Point(286, 25);
+            this.btnPublishAdditonalFilesAdd.Name = "btnPublishAdditonalFilesAdd";
+            this.btnPublishAdditonalFilesAdd.Size = new System.Drawing.Size(91, 23);
+            this.btnPublishAdditonalFilesAdd.TabIndex = 1;
+            this.btnPublishAdditonalFilesAdd.Text = "Add files";
+            this.btnPublishAdditonalFilesAdd.UseVisualStyleBackColor = true;
+            // 
+            // lbPublishAdditionalFiles
+            // 
+            this.lbPublishAdditionalFiles.FormattingEnabled = true;
+            this.lbPublishAdditionalFiles.Location = new System.Drawing.Point(7, 19);
+            this.lbPublishAdditionalFiles.Name = "lbPublishAdditionalFiles";
+            this.lbPublishAdditionalFiles.Size = new System.Drawing.Size(273, 108);
+            this.lbPublishAdditionalFiles.TabIndex = 0;
+            // 
+            // gbPublishTimeSettings
+            // 
+            this.gbPublishTimeSettings.Controls.Add(this.chkbxTimeLocked);
+            this.gbPublishTimeSettings.Controls.Add(this.dtpPublishTime);
+            this.gbPublishTimeSettings.Controls.Add(this.nudPublishReadingTime);
+            this.gbPublishTimeSettings.Controls.Add(this.nudPublishAssessmentLength);
+            this.gbPublishTimeSettings.Controls.Add(this.dtpPublishDate);
+            this.gbPublishTimeSettings.Controls.Add(this.cbPublishCourseSelector);
+            this.gbPublishTimeSettings.Controls.Add(this.label12);
+            this.gbPublishTimeSettings.Controls.Add(this.label11);
+            this.gbPublishTimeSettings.Controls.Add(this.label10);
+            this.gbPublishTimeSettings.Controls.Add(this.label9);
+            this.gbPublishTimeSettings.Controls.Add(this.label8);
+            this.gbPublishTimeSettings.Location = new System.Drawing.Point(0, 0);
+            this.gbPublishTimeSettings.Name = "gbPublishTimeSettings";
+            this.gbPublishTimeSettings.Size = new System.Drawing.Size(383, 149);
+            this.gbPublishTimeSettings.TabIndex = 0;
+            this.gbPublishTimeSettings.TabStop = false;
+            this.gbPublishTimeSettings.Text = "Time Settings";
+            // 
+            // chkbxTimeLocked
+            // 
+            this.chkbxTimeLocked.AutoSize = true;
+            this.chkbxTimeLocked.Checked = true;
+            this.chkbxTimeLocked.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkbxTimeLocked.Location = new System.Drawing.Point(297, 127);
+            this.chkbxTimeLocked.Name = "chkbxTimeLocked";
+            this.chkbxTimeLocked.Size = new System.Drawing.Size(84, 17);
+            this.chkbxTimeLocked.TabIndex = 10;
+            this.chkbxTimeLocked.Text = "Time locked";
+            this.chkbxTimeLocked.UseVisualStyleBackColor = true;
+            // 
+            // dtpPublishTime
+            // 
+            this.dtpPublishTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpPublishTime.Location = new System.Drawing.Point(153, 68);
+            this.dtpPublishTime.Name = "dtpPublishTime";
+            this.dtpPublishTime.ShowUpDown = true;
+            this.dtpPublishTime.Size = new System.Drawing.Size(224, 20);
+            this.dtpPublishTime.TabIndex = 9;
+            this.dtpPublishTime.Value = new System.DateTime(2016, 9, 9, 12, 0, 0, 0);
+            // 
+            // nudPublishReadingTime
+            // 
+            this.nudPublishReadingTime.Location = new System.Drawing.Point(327, 101);
+            this.nudPublishReadingTime.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudPublishReadingTime.Name = "nudPublishReadingTime";
+            this.nudPublishReadingTime.Size = new System.Drawing.Size(50, 20);
+            this.nudPublishReadingTime.TabIndex = 8;
+            // 
+            // nudPublishAssessmentLength
+            // 
+            this.nudPublishAssessmentLength.Location = new System.Drawing.Point(153, 101);
+            this.nudPublishAssessmentLength.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudPublishAssessmentLength.Name = "nudPublishAssessmentLength";
+            this.nudPublishAssessmentLength.Size = new System.Drawing.Size(50, 20);
+            this.nudPublishAssessmentLength.TabIndex = 7;
+            this.nudPublishAssessmentLength.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            // 
+            // dtpPublishDate
+            // 
+            this.dtpPublishDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpPublishDate.Location = new System.Drawing.Point(153, 39);
+            this.dtpPublishDate.Name = "dtpPublishDate";
+            this.dtpPublishDate.Size = new System.Drawing.Size(224, 20);
+            this.dtpPublishDate.TabIndex = 6;
+            this.dtpPublishDate.Value = new System.DateTime(2016, 1, 1, 12, 0, 0, 0);
+            // 
+            // cbPublishCourseSelector
+            // 
+            this.cbPublishCourseSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPublishCourseSelector.FormattingEnabled = true;
+            this.cbPublishCourseSelector.Location = new System.Drawing.Point(153, 13);
+            this.cbPublishCourseSelector.Name = "cbPublishCourseSelector";
+            this.cbPublishCourseSelector.Size = new System.Drawing.Size(224, 21);
+            this.cbPublishCourseSelector.TabIndex = 5;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(205, 103);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(117, 13);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Reading time (minutes):";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(4, 103);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(143, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Assessment length (minutes):";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(93, 74);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(54, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Start time:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(43, 45);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(104, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Date of Assessment:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(104, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(43, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Course:";
             // 
             // tabPageCourses
             // 
@@ -1379,6 +1738,7 @@
             // 
             // tbCourseID
             // 
+            this.tbCourseID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tbCourseID.Location = new System.Drawing.Point(562, 37);
             this.tbCourseID.MaxLength = 10;
             this.tbCourseID.Name = "tbCourseID";
@@ -1388,6 +1748,7 @@
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(535, 40);
             this.label7.Name = "label7";
@@ -1397,6 +1758,7 @@
             // 
             // btnDiscardCourseChanges
             // 
+            this.btnDiscardCourseChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDiscardCourseChanges.Location = new System.Drawing.Point(527, 545);
             this.btnDiscardCourseChanges.Name = "btnDiscardCourseChanges";
             this.btnDiscardCourseChanges.Size = new System.Drawing.Size(102, 23);
@@ -1407,7 +1769,7 @@
             // 
             // btnApplyCourseChanges
             // 
-            this.btnApplyCourseChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnApplyCourseChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnApplyCourseChanges.Location = new System.Drawing.Point(3, 545);
             this.btnApplyCourseChanges.Name = "btnApplyCourseChanges";
             this.btnApplyCourseChanges.Size = new System.Drawing.Size(102, 23);
@@ -1772,6 +2134,51 @@
             this.tsmiDeleteAssessmentSession.Visible = false;
             this.tsmiDeleteAssessmentSession.Click += new System.EventHandler(this.tsmiDeleteAssessmentSession_Click);
             // 
+            // colPublishUsername
+            // 
+            this.colPublishUsername.HeaderText = "Username";
+            this.colPublishUsername.Name = "colPublishUsername";
+            // 
+            // colPublishLastName
+            // 
+            this.colPublishLastName.HeaderText = "Last Name";
+            this.colPublishLastName.Name = "colPublishLastName";
+            // 
+            // colPublishFirstName
+            // 
+            this.colPublishFirstName.HeaderText = "First Name";
+            this.colPublishFirstName.Name = "colPublishFirstName";
+            // 
+            // colPublishStudentID
+            // 
+            this.colPublishStudentID.HeaderText = "Student ID";
+            this.colPublishStudentID.Name = "colPublishStudentID";
+            // 
+            // colPublishStartTime
+            // 
+            this.colPublishStartTime.HeaderText = "Start Time";
+            this.colPublishStartTime.Name = "colPublishStartTime";
+            // 
+            // colPublishAssessmentLength
+            // 
+            this.colPublishAssessmentLength.HeaderText = "Assessment Length (mins)";
+            this.colPublishAssessmentLength.Name = "colPublishAssessmentLength";
+            // 
+            // colPublishReadingTime
+            // 
+            this.colPublishReadingTime.HeaderText = "Reading Time (mins)";
+            this.colPublishReadingTime.Name = "colPublishReadingTime";
+            // 
+            // colPublishAccountName
+            // 
+            this.colPublishAccountName.HeaderText = "Account Name";
+            this.colPublishAccountName.Name = "colPublishAccountName";
+            // 
+            // colPublishAccountPassword
+            // 
+            this.colPublishAccountPassword.HeaderText = "Account Password";
+            this.colPublishAccountPassword.Name = "colPublishAccountPassword";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1783,7 +2190,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStripMain;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(754, 576);
+            this.MinimumSize = new System.Drawing.Size(896, 673);
             this.Name = "MainForm";
             this.Text = "Assessment Designer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -1801,6 +2208,10 @@
             this.panelQuestionNameContainer.ResumeLayout(false);
             this.panelAnswerAreaContainer.ResumeLayout(false);
             this.panelAnswersContainer.ResumeLayout(false);
+            this.panelAnswerSingle.ResumeLayout(false);
+            this.panelAnswerSingleAcceptableContainer.ResumeLayout(false);
+            this.panelAnswerSingleAcceptableContainer.PerformLayout();
+            this.panelAnswerOpen.ResumeLayout(false);
             this.panelAnswerMultiChoice.ResumeLayout(false);
             this.tableLayoutPanelAnswerMultiChoiceContainer.ResumeLayout(false);
             this.panelMultiChoiceOptionsContainer.ResumeLayout(false);
@@ -1814,10 +2225,6 @@
             this.tableLayoutPanelMultiChoiceB.PerformLayout();
             this.tableLayoutPanelMultiChoiceA.ResumeLayout(false);
             this.tableLayoutPanelMultiChoiceA.PerformLayout();
-            this.panelAnswerOpen.ResumeLayout(false);
-            this.panelAnswerSingle.ResumeLayout(false);
-            this.panelAnswerSingleAcceptableContainer.ResumeLayout(false);
-            this.panelAnswerSingleAcceptableContainer.PerformLayout();
             this.panelAnswerTools.ResumeLayout(false);
             this.contextMenuStripQuestionList.ResumeLayout(false);
             this.panelButtons.ResumeLayout(false);
@@ -1826,6 +2233,16 @@
             this.groupBoxMarks.ResumeLayout(false);
             this.groupBoxMarks.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMarksAssigner)).EndInit();
+            this.tabPagePublish.ResumeLayout(false);
+            this.tlpPublishContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPublishStudents)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.gbAdditionalFiles.ResumeLayout(false);
+            this.gbPublishTimeSettings.ResumeLayout(false);
+            this.gbPublishTimeSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPublishReadingTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPublishAssessmentLength)).EndInit();
             this.tabPageCourses.ResumeLayout(false);
             this.tabPageCourses.PerformLayout();
             this.pnlCourseView.ResumeLayout(false);
@@ -1991,5 +2408,43 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorCourses;
         private System.Windows.Forms.TextBox tbCourseID;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TableLayoutPanel tlpPublishContainer;
+        private System.Windows.Forms.DataGridView dgvPublishStudents;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishUsername;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishLastName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishFirstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishStudentID;
+        private System.Windows.Forms.DataGridViewButtonColumn colPublishStartTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishReadingTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAssessmentTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAccountName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAccountPassword;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox gbPublishTimeSettings;
+        private System.Windows.Forms.DateTimePicker dtpPublishTime;
+        private System.Windows.Forms.NumericUpDown nudPublishReadingTime;
+        private System.Windows.Forms.NumericUpDown nudPublishAssessmentLength;
+        private System.Windows.Forms.DateTimePicker dtpPublishDate;
+        private System.Windows.Forms.ComboBox cbPublishCourseSelector;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox gbAdditionalFiles;
+        private System.Windows.Forms.Label lblPublishFileName;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblPublishLastDeployed;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button btnPublishAdditionalFilesDelAll;
+        private System.Windows.Forms.Button btnPublishAdditionalFilesDelSel;
+        private System.Windows.Forms.Button btnPublishAdditonalFilesAdd;
+        private System.Windows.Forms.ListBox lbPublishAdditionalFiles;
+        private System.Windows.Forms.Button btnPublishDeploy;
+        private System.Windows.Forms.Button btnPublishPrepare;
+        private System.Windows.Forms.CheckBox chkbxTimeLocked;
+        private System.Windows.Forms.TextBox tbPublishResetPassword;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAssessmentLength;
     }
 }

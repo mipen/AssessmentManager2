@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AssessmentManager
 {
+    [Serializable]
     public class AssessmentSession
     {
+        private string assessmentName = "";
+        private string assessmentFileName = "";
+        private string assessmentID = "";
     }
 }

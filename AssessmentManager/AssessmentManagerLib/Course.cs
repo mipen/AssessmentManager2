@@ -12,6 +12,8 @@ namespace AssessmentManager
         private CourseInformation courseInfo = new CourseInformation();
         private string id = "";
         private List<Student> students = new List<Student>();
+        [NonSerialized]
+        private List<AssessmentSession> assessments = new List<AssessmentSession>();
         public string ID => id;
         public CourseInformation CourseInfo => courseInfo;
         public List<Student> Students
@@ -23,6 +25,13 @@ namespace AssessmentManager
             set
             {
                 students = value;
+            }
+        }
+        public List<AssessmentSession> Assessments
+        {
+            get
+            {
+                return assessments;
             }
         }
         public string CourseTitle
