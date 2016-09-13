@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForQuestionsWithoutMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -212,7 +213,7 @@
             this.colPublishLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishStudentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPublishStartTime = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.colPublishStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishAssessmentLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishReadingTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishAccountName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1416,6 +1417,8 @@
             this.dgvPublishStudents.Name = "dgvPublishStudents";
             this.dgvPublishStudents.Size = new System.Drawing.Size(866, 278);
             this.dgvPublishStudents.TabIndex = 0;
+            this.dgvPublishStudents.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvPublishStudents_CellBeginEdit);
+            this.dgvPublishStudents.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPublishStudents_CellEndEdit);
             // 
             // panel1
             // 
@@ -1441,6 +1444,8 @@
             this.tbPublishResetPassword.Name = "tbPublishResetPassword";
             this.tbPublishResetPassword.Size = new System.Drawing.Size(100, 20);
             this.tbPublishResetPassword.TabIndex = 9;
+            this.buttonToolTip.SetToolTip(this.tbPublishResetPassword, "The password that students will have to enter if they wish to continue the assess" +
+        "ment after having submitted it (if they still have time remaining)");
             // 
             // label14
             // 
@@ -1450,6 +1455,8 @@
             this.label14.Size = new System.Drawing.Size(86, 13);
             this.label14.TabIndex = 8;
             this.label14.Text = "Reset password:";
+            this.buttonToolTip.SetToolTip(this.label14, "The password that students will have to enter if they wish to continue the assess" +
+        "ment after having submitted it (if they still have time remaining)");
             // 
             // btnPublishDeploy
             // 
@@ -1460,6 +1467,8 @@
             this.btnPublishDeploy.Size = new System.Drawing.Size(75, 23);
             this.btnPublishDeploy.TabIndex = 7;
             this.btnPublishDeploy.Text = "Deploy";
+            this.buttonToolTip.SetToolTip(this.btnPublishDeploy, "Deploy the assessment to all exam accounts and make archive copies within the sel" +
+        "ected courses\' folder.");
             this.btnPublishDeploy.UseVisualStyleBackColor = true;
             this.btnPublishDeploy.Click += new System.EventHandler(this.btnPublishDeploy_Click);
             // 
@@ -1470,6 +1479,8 @@
             this.btnPublishPrepare.Size = new System.Drawing.Size(75, 23);
             this.btnPublishPrepare.TabIndex = 6;
             this.btnPublishPrepare.Text = "Prepare";
+            this.buttonToolTip.SetToolTip(this.btnPublishPrepare, "Prepares the list of students who will participate in the assessment. These are p" +
+        "ulled from the selected course");
             this.btnPublishPrepare.UseVisualStyleBackColor = true;
             this.btnPublishPrepare.Click += new System.EventHandler(this.btnPublishPrepare_Click);
             // 
@@ -1482,6 +1493,7 @@
             this.lblPublishLastDeployed.Size = new System.Drawing.Size(41, 13);
             this.lblPublishLastDeployed.TabIndex = 5;
             this.lblPublishLastDeployed.Text = "Never";
+            this.buttonToolTip.SetToolTip(this.lblPublishLastDeployed, "When, if ever, the assessment was last deployed");
             // 
             // label15
             // 
@@ -1491,6 +1503,7 @@
             this.label15.Size = new System.Drawing.Size(76, 13);
             this.label15.TabIndex = 4;
             this.label15.Text = "Last deployed:";
+            this.buttonToolTip.SetToolTip(this.label15, "When, if ever, the assessment was last deployed");
             // 
             // lblPublishFileName
             // 
@@ -1502,6 +1515,7 @@
             this.lblPublishFileName.Size = new System.Drawing.Size(350, 29);
             this.lblPublishFileName.TabIndex = 3;
             this.lblPublishFileName.Text = "file name.exm";
+            this.buttonToolTip.SetToolTip(this.lblPublishFileName, "The assessment file path");
             // 
             // label13
             // 
@@ -1511,6 +1525,7 @@
             this.label13.Size = new System.Drawing.Size(116, 13);
             this.label13.TabIndex = 2;
             this.label13.Text = "Assessment File Name:";
+            this.buttonToolTip.SetToolTip(this.label13, "The assessment file path");
             // 
             // gbAdditionalFiles
             // 
@@ -1532,7 +1547,9 @@
             this.btnPublishAdditionalFilesDelAll.Size = new System.Drawing.Size(91, 23);
             this.btnPublishAdditionalFilesDelAll.TabIndex = 3;
             this.btnPublishAdditionalFilesDelAll.Text = "Delete all";
+            this.buttonToolTip.SetToolTip(this.btnPublishAdditionalFilesDelAll, "Delete all files (this only clears the list)");
             this.btnPublishAdditionalFilesDelAll.UseVisualStyleBackColor = true;
+            this.btnPublishAdditionalFilesDelAll.Click += new System.EventHandler(this.btnPublishAdditionalFilesDelAll_Click);
             // 
             // btnPublishAdditionalFilesDelSel
             // 
@@ -1541,7 +1558,9 @@
             this.btnPublishAdditionalFilesDelSel.Size = new System.Drawing.Size(91, 23);
             this.btnPublishAdditionalFilesDelSel.TabIndex = 2;
             this.btnPublishAdditionalFilesDelSel.Text = "Delete selected";
+            this.buttonToolTip.SetToolTip(this.btnPublishAdditionalFilesDelSel, "Delete the selected file (this only removes it from this list)");
             this.btnPublishAdditionalFilesDelSel.UseVisualStyleBackColor = true;
+            this.btnPublishAdditionalFilesDelSel.Click += new System.EventHandler(this.btnPublishAdditionalFilesDelSel_Click);
             // 
             // btnPublishAdditonalFilesAdd
             // 
@@ -1550,13 +1569,16 @@
             this.btnPublishAdditonalFilesAdd.Size = new System.Drawing.Size(91, 23);
             this.btnPublishAdditonalFilesAdd.TabIndex = 1;
             this.btnPublishAdditonalFilesAdd.Text = "Add files";
+            this.buttonToolTip.SetToolTip(this.btnPublishAdditonalFilesAdd, "Add additional files to be deployed with the assessment");
             this.btnPublishAdditonalFilesAdd.UseVisualStyleBackColor = true;
+            this.btnPublishAdditonalFilesAdd.Click += new System.EventHandler(this.btnPublishAdditonalFilesAdd_Click);
             // 
             // lbPublishAdditionalFiles
             // 
             this.lbPublishAdditionalFiles.FormattingEnabled = true;
             this.lbPublishAdditionalFiles.Location = new System.Drawing.Point(7, 19);
             this.lbPublishAdditionalFiles.Name = "lbPublishAdditionalFiles";
+            this.lbPublishAdditionalFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbPublishAdditionalFiles.Size = new System.Drawing.Size(273, 108);
             this.lbPublishAdditionalFiles.TabIndex = 0;
             // 
@@ -1590,6 +1612,8 @@
             this.chkbxTimeLocked.Size = new System.Drawing.Size(84, 17);
             this.chkbxTimeLocked.TabIndex = 10;
             this.chkbxTimeLocked.Text = "Time locked";
+            this.buttonToolTip.SetToolTip(this.chkbxTimeLocked, "Whether the students will be able to configure the time limit before the assessme" +
+        "nt starts (locked by default)");
             this.chkbxTimeLocked.UseVisualStyleBackColor = true;
             // 
             // dtpPublishTime
@@ -1600,6 +1624,7 @@
             this.dtpPublishTime.ShowUpDown = true;
             this.dtpPublishTime.Size = new System.Drawing.Size(224, 20);
             this.dtpPublishTime.TabIndex = 9;
+            this.buttonToolTip.SetToolTip(this.dtpPublishTime, "The time the assessment is scheduled for");
             this.dtpPublishTime.Value = new System.DateTime(2016, 9, 9, 12, 0, 0, 0);
             // 
             // nudPublishReadingTime
@@ -1613,6 +1638,7 @@
             this.nudPublishReadingTime.Name = "nudPublishReadingTime";
             this.nudPublishReadingTime.Size = new System.Drawing.Size(50, 20);
             this.nudPublishReadingTime.TabIndex = 8;
+            this.buttonToolTip.SetToolTip(this.nudPublishReadingTime, "The amount of reading time students get");
             // 
             // nudPublishAssessmentLength
             // 
@@ -1625,6 +1651,7 @@
             this.nudPublishAssessmentLength.Name = "nudPublishAssessmentLength";
             this.nudPublishAssessmentLength.Size = new System.Drawing.Size(50, 20);
             this.nudPublishAssessmentLength.TabIndex = 7;
+            this.buttonToolTip.SetToolTip(this.nudPublishAssessmentLength, "The length of the assessment (in minutes)");
             this.nudPublishAssessmentLength.Value = new decimal(new int[] {
             60,
             0,
@@ -1638,6 +1665,7 @@
             this.dtpPublishDate.Name = "dtpPublishDate";
             this.dtpPublishDate.Size = new System.Drawing.Size(224, 20);
             this.dtpPublishDate.TabIndex = 6;
+            this.buttonToolTip.SetToolTip(this.dtpPublishDate, "The day the assessment is scheduled for");
             this.dtpPublishDate.Value = new System.DateTime(2016, 1, 1, 12, 0, 0, 0);
             // 
             // cbPublishCourseSelector
@@ -1648,6 +1676,7 @@
             this.cbPublishCourseSelector.Name = "cbPublishCourseSelector";
             this.cbPublishCourseSelector.Size = new System.Drawing.Size(224, 21);
             this.cbPublishCourseSelector.TabIndex = 5;
+            this.buttonToolTip.SetToolTip(this.cbPublishCourseSelector, "This is the course the assessment will be published for.");
             // 
             // label12
             // 
@@ -1657,6 +1686,7 @@
             this.label12.Size = new System.Drawing.Size(117, 13);
             this.label12.TabIndex = 4;
             this.label12.Text = "Reading time (minutes):";
+            this.buttonToolTip.SetToolTip(this.label12, "The amount of reading time students get");
             // 
             // label11
             // 
@@ -1666,6 +1696,7 @@
             this.label11.Size = new System.Drawing.Size(143, 13);
             this.label11.TabIndex = 3;
             this.label11.Text = "Assessment length (minutes):";
+            this.buttonToolTip.SetToolTip(this.label11, "The length of the assessment (in minutes)");
             // 
             // label10
             // 
@@ -1675,6 +1706,7 @@
             this.label10.Size = new System.Drawing.Size(54, 13);
             this.label10.TabIndex = 2;
             this.label10.Text = "Start time:";
+            this.buttonToolTip.SetToolTip(this.label10, "The time the assessment is scheduled for");
             // 
             // label9
             // 
@@ -1684,6 +1716,7 @@
             this.label9.Size = new System.Drawing.Size(104, 13);
             this.label9.TabIndex = 1;
             this.label9.Text = "Date of Assessment:";
+            this.buttonToolTip.SetToolTip(this.label9, "The day the assessment is scheduled for");
             // 
             // label8
             // 
@@ -1693,6 +1726,7 @@
             this.label8.Size = new System.Drawing.Size(43, 13);
             this.label8.TabIndex = 0;
             this.label8.Text = "Course:";
+            this.buttonToolTip.SetToolTip(this.label8, "This is the course the assessment will be published for.");
             // 
             // tabPageCourses
             // 
@@ -2156,8 +2190,12 @@
             // 
             // colPublishStartTime
             // 
+            dataGridViewCellStyle10.Format = "HH:mm:ss tt";
+            this.colPublishStartTime.DefaultCellStyle = dataGridViewCellStyle10;
             this.colPublishStartTime.HeaderText = "Start Time";
             this.colPublishStartTime.Name = "colPublishStartTime";
+            this.colPublishStartTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colPublishStartTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colPublishAssessmentLength
             // 
@@ -2192,8 +2230,10 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(896, 673);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Assessment Designer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.menuStripMain.ResumeLayout(false);
             this.menuStripMain.PerformLayout();
@@ -2410,15 +2450,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TableLayoutPanel tlpPublishContainer;
         private System.Windows.Forms.DataGridView dgvPublishStudents;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishUsername;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishLastName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishFirstName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishStudentID;
-        private System.Windows.Forms.DataGridViewButtonColumn colPublishStartTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishReadingTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAssessmentTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAccountName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAccountPassword;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox gbPublishTimeSettings;
         private System.Windows.Forms.DateTimePicker dtpPublishTime;
@@ -2445,6 +2477,14 @@
         private System.Windows.Forms.CheckBox chkbxTimeLocked;
         private System.Windows.Forms.TextBox tbPublishResetPassword;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishUsername;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishLastName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishFirstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishStudentID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishStartTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAssessmentLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishReadingTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAccountName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAccountPassword;
     }
 }

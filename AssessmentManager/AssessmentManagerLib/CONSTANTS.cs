@@ -20,6 +20,7 @@ namespace AssessmentManager
         public static readonly string COMBINED_FILTER = $"Assessment Files (*{ASSESSMENT_EXT}; *{ASSESSMENT_SCRIPT_EXT}) | *{ASSESSMENT_EXT}; *{ASSESSMENT_SCRIPT_EXT}";
         public static readonly string XML_FILTER = $"XML Files (*{XML_EXT}) | *{XML_EXT}";
         public static readonly string PDF_FILTER = $"PDF Files (*{PDF_EXT}) | *{PDF_EXT}";
+        public static readonly string ALL_FILTER = "All Files (*.*) | *.*";
 
         public static string DESKTOP_PATH = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         public static string DOCUMENTS_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

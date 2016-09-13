@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -25,6 +26,7 @@ namespace AssessmentManager
         private SaveFileDialog mainSaveFileDialog = new SaveFileDialog();
         private SaveFileDialog pdfSaveFileDialog = new SaveFileDialog();
         private OpenFileDialog openFileDialog = new OpenFileDialog();
+        private OpenFileDialog addFilesDialog = new OpenFileDialog();
         private CourseManager CourseManager = new CourseManager();
 
         private string DefaultPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -37,6 +39,9 @@ namespace AssessmentManager
         private bool publishPrepared = false;
         private Course courseRevertPoint;
         private CourseNode prevNode;
+
+        private DateTimePicker dtpPublishTimeStudent;
+        private NumericUpDown nudAssessmentTimeStudent;
 
         public MainForm()
         {
@@ -74,6 +79,23 @@ namespace AssessmentManager
 
             //Initialise publishing tab
             InitialisePublishTab();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            dtpPublishTimeStudent = new DateTimePicker();
+            dtpPublishTimeStudent.Format = DateTimePickerFormat.Time;
+            dtpPublishTimeStudent.Visible = false;
+            dtpPublishTimeStudent.ShowUpDown = true;
+            dtpPublishTimeStudent.ValueChanged += dtpPublishTimeStudent_ValueChanged;
+            dgvPublishStudents.Controls.Add(dtpPublishTimeStudent);
+
+            nudAssessmentTimeStudent = new NumericUpDown();
+            nudAssessmentTimeStudent.Minimum = 0;
+            nudAssessmentTimeStudent.Maximum = 1000;
+            nudAssessmentTimeStudent.Visible = false;
+            nudAssessmentTimeStudent.ValueChanged += nudAssessmentTimeStudent_ValueChanged;
+            dgvPublishStudents.Controls.Add(nudAssessmentTimeStudent);
         }
 
         public Assessment Assessment
@@ -233,7 +255,7 @@ namespace AssessmentManager
                     if (SaveToFile() == DialogResult.OK)
                     {
                         NotifyAssessmentOpened();
-                        designerChangesMade = true;
+                        DesignerChangesMade = true;
                     }
                     else
                     {
@@ -347,7 +369,7 @@ namespace AssessmentManager
             QuestionNode node = new QuestionNode(new Question("unnamed"));
             treeViewQuestionList.Nodes.Add(node);
             Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
-            designerChangesMade = true;
+            DesignerChangesMade = true;
             treeViewQuestionList.SelectedNode = node;
             treeViewQuestionList.Focus();
         }
@@ -370,7 +392,7 @@ namespace AssessmentManager
                 node.Nodes.Add(new QuestionNode(subQ));
                 node.Expand();
                 Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
-                designerChangesMade = true;
+                DesignerChangesMade = true;
             }
             treeViewQuestionList.Focus();
         }
@@ -401,7 +423,7 @@ namespace AssessmentManager
                     collection.Insert(indexToInsertTo, node);
                     Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
                     treeViewQuestionList.SelectedNode = node;
-                    designerChangesMade = true;
+                    DesignerChangesMade = true;
                 }
                 catch { }
             }
@@ -421,7 +443,7 @@ namespace AssessmentManager
                     collection.Insert(indexToInsertTo, node);
                     Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
                     treeViewQuestionList.SelectedNode = node;
-                    designerChangesMade = true;
+                    DesignerChangesMade = true;
                 }
                 catch { }
             }
@@ -491,7 +513,7 @@ namespace AssessmentManager
             Util.PopulateTreeView(treeViewQuestionList, Assessment);
             if (treeViewQuestionList.Nodes.Count > 0) treeViewQuestionList.SelectedNode = treeViewQuestionList.Nodes[0];
             //No changes will have been made yet
-            designerChangesMade = false;
+            DesignerChangesMade = false;
             //Setup publish tab
             SetPublishTab();
         }
@@ -678,7 +700,7 @@ namespace AssessmentManager
                         formatter.Serialize(s, Assessment);
                     }
                     file = new FileInfo(path);
-                    designerChangesMade = false;
+                    DesignerChangesMade = false;
                     UpdateFormText();
                     Settings.Instance.AddRecentFile(path);
                     UpdateRecentFiles();
@@ -1167,7 +1189,7 @@ namespace AssessmentManager
                                 break;
                             }
                     }
-                    designerChangesMade = true;
+                    DesignerChangesMade = true;
                 }
             }
             switch (comboBoxAnswerType.Text)
@@ -1214,7 +1236,7 @@ namespace AssessmentManager
             {
                 node.Question.QuestionText = richTextBoxQuestion.Rtf;
                 node.Question.QuestionTextRaw = richTextBoxQuestion.Text;
-                designerChangesMade = true;
+                DesignerChangesMade = true;
             }
         }
 
@@ -1232,7 +1254,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.ModelAnswer = richTextBoxAnswerOpen.Text;
-                designerChangesMade = true;
+                DesignerChangesMade = true;
             }
         }
 
@@ -1242,7 +1264,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.ModelAnswer = richTextBoxAnswerSingleAcceptable.Text;
-                designerChangesMade = true;
+                DesignerChangesMade = true;
             }
         }
 
@@ -1252,7 +1274,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionA = textBoxMultiChoiceA.Text;
-                designerChangesMade = true;
+                DesignerChangesMade = true;
             }
         }
 
@@ -1262,7 +1284,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionB = textBoxMultiChoiceB.Text;
-                designerChangesMade = true;
+                DesignerChangesMade = true;
             }
         }
 
@@ -1272,7 +1294,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionC = textBoxMultiChoiceC.Text;
-                designerChangesMade = true;
+                DesignerChangesMade = true;
             }
         }
 
@@ -1282,7 +1304,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.OptionD = textBoxMultiChoiceD.Text;
-                designerChangesMade = true;
+                DesignerChangesMade = true;
             }
         }
 
@@ -1314,7 +1336,7 @@ namespace AssessmentManager
                             break;
                         }
                 }
-                designerChangesMade = true;
+                DesignerChangesMade = true;
             }
         }
 
@@ -1324,7 +1346,7 @@ namespace AssessmentManager
             if (node != null)
             {
                 node.Question.Marks = (int)numericUpDownMarksAssigner.Value;
-                designerChangesMade = true;
+                DesignerChangesMade = true;
                 UpdateMarkAllocations();
             }
         }
@@ -1444,7 +1466,7 @@ namespace AssessmentManager
                 courseEdited = value;
                 btnApplyCourseChanges.Enabled = value;
                 btnDiscardCourseChanges.Enabled = value;
-                if(value)
+                if (value)
                 {
                     reloadCourses = true;
                 }
@@ -1619,12 +1641,13 @@ namespace AssessmentManager
                 dgvCourseStudents.Rows.Clear();
                 foreach (Student s in course.Students)
                 {
+                    //DGVEDIT::
                     DataGridViewRow row = new DataGridViewRow();
                     row.CreateCells(dgvCourseStudents);
                     row.Cells[0].Value = s.UserName;
                     row.Cells[1].Value = s.LastName;
                     row.Cells[2].Value = s.FirstName;
-                    row.Cells[3].Value = s.StudentNumber;
+                    row.Cells[3].Value = s.StudentID;
                     dgvCourseStudents.Rows.Add(row);
                 }
             }
@@ -1759,12 +1782,13 @@ namespace AssessmentManager
                     dgvCourseStudents.Rows.Clear();
                     foreach (Student s in ipf.Students)
                     {
+                        //DGVEDIT::
                         DataGridViewRow row = new DataGridViewRow();
                         row.CreateCells(dgvCourseStudents);
                         row.Cells[0].Value = s.UserName;
                         row.Cells[1].Value = s.LastName;
                         row.Cells[2].Value = s.FirstName;
-                        row.Cells[3].Value = s.StudentNumber;
+                        row.Cells[3].Value = s.StudentID;
                         dgvCourseStudents.Rows.Add(row);
                     }
                     CourseEdited = true;
@@ -1872,6 +1896,7 @@ namespace AssessmentManager
             TreeNode node = tvCourses.SelectedNode;
             if (node != null && node is CourseNode)
             {
+                //TODO:: Don't copy assessment sessions here
                 CourseNode cNode = node as CourseNode;
                 Course newCourse = cNode.Course.Clone(false);
                 CourseManager.RegisterNewCourse(newCourse);
@@ -1882,7 +1907,7 @@ namespace AssessmentManager
 
         #endregion
 
-        #region Publisher
+        #region Publisher Tab
 
         #region Properties
 
@@ -1926,6 +1951,10 @@ namespace AssessmentManager
             //Populate the course selector.
             cbPublishCourseSelector.Items.Clear();
             cbPublishCourseSelector.Items.AddRange(CourseManager.Courses.ToArray());
+
+            //Set up the add files dialog
+            addFilesDialog.InitialDirectory = DESKTOP_PATH;
+            addFilesDialog.Multiselect = true;
         }
 
         private void ResetPublishTab()
@@ -1946,6 +1975,7 @@ namespace AssessmentManager
             btnPublishDeploy.Enabled = false;
             cbPublishCourseSelector.SelectedItem = null;
             PublishPrepared = false;
+            btnPublishDeploy.Enabled = false;
 
             //Disable the publish screen
             tlpPublishContainer.Enabled = false;
@@ -1984,15 +2014,35 @@ namespace AssessmentManager
 
             //TODO:: This button creates an AssessmentSession which holds all the information. This is added to the selected course's list. All files are copied to the different accounts and backups are
             //made in the course's folder.
-            
+            //TODO:: Make sure there are enough accounts for the list of students
+            //TODO:: Make sure that each students info is complete
+
+            //TODO:: STEPS:
+            /*
+
+            Check each student has valid info in all relevant cells.
+            Check there are enough account folders in the chosen directory for each student. if there are too many or too little, tell the user.
+            Check each additional file is still there (load them into memory, maybe?)
+            Create AssessmentSession object - record the information from the publish screen. Record assessment file name and course ID
+            Serialise the assessment into each account found in the directory. Keep a record of which ones a deployed to.
+            Send the additional files (if any) to each account at the same time.
+            As each deployment is done, add a record of the account and all files to the AssessmentSession object. Do this for each account.
+            Create the assessment directory in the courses' folder
+            Save the assessment and any additional files in this folder
+            Serialise AssessmentSession to this folder.
+            Reload the course
+            Rebuild course manager tree view
+
+            */
+
         }
 
         private void btnPublishPrepare_Click(object sender, EventArgs e)
         {
             //TODO:: Prepare the students. If has already been pressed, confirm to make changes.
-            if(HasCourseSelected)
+            if (HasCourseSelected)
             {
-                if(PublishPrepared)
+                if (PublishPrepared)
                 {
                     string message = "This action will overrite the current list of students. Are you sure you wish to continue?";
                     if (MessageBox.Show(message, "Confirm changes", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -2006,16 +2056,27 @@ namespace AssessmentManager
                 }
 
                 PublishPrepared = true;
+                dgvPublishStudents.Enabled = true;
+                btnPublishDeploy.Enabled = true;
 
-                //Fill out the students grid.
+                //DGVEDIT:: Fill out the students grid.
                 dgvPublishStudents.Rows.Clear();
-                List<DataGridViewRow> rows = new List<DataGridViewRow>();
-                foreach(var student in SelectedCourse.Students)
+                foreach (var student in SelectedCourse.Students)
                 {
                     DataGridViewRow row = new DataGridViewRow();
                     row.CreateCells(dgvPublishStudents);
-                }
 
+                    row.Cells[0].Value = student.UserName;
+                    row.Cells[1].Value = student.LastName;
+                    row.Cells[2].Value = student.FirstName;
+                    row.Cells[3].Value = student.StudentID;
+                    row.Cells[4].Value = dtpPublishTime.Value;
+                    row.Cells[5].Value = nudPublishAssessmentLength.Value;
+                    row.Cells[6].Value = nudPublishReadingTime.Value;
+                    //TODO:: Assign account username and password to each student
+
+                    dgvPublishStudents.Rows.Add(row);
+                }
             }
             else
             {
@@ -2028,7 +2089,7 @@ namespace AssessmentManager
         {
             //MessageBox.Show(e.TabPage.Name);
             //TODO:: Reload the courses in the combo box if reloadCourses == true; Reset reloadCourses to false.
-            if(e.TabPage.Name == "tabPagePublish" && reloadCourses)
+            if (e.TabPage.Name == "tabPagePublish" && reloadCourses)
             {
                 reloadCourses = false;
                 //TODO:: If there is a course selected, save the id for that course then reload the courses list.
@@ -2036,9 +2097,137 @@ namespace AssessmentManager
             }
         }
 
-        #endregion
+        private void dgvPublishStudents_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            try
+            {
+                //DateTime
+                if (dgvPublishStudents.Focused && dgvPublishStudents.CurrentCell.ColumnIndex == 4)
+                {
+                    dtpPublishTimeStudent.Location = dgvPublishStudents.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Location;
+                    dtpPublishTimeStudent.Visible = true;
+                    dtpPublishTimeStudent.Width = dgvPublishStudents.CurrentCell.OwningColumn.Width;
+                    dtpPublishTimeStudent.Height = dgvPublishStudents.CurrentCell.OwningRow.Height;
+                    if (dgvPublishStudents.CurrentCell.Value != null)
+                    {
+                        dtpPublishTimeStudent.Value = (DateTime)dgvPublishStudents.CurrentCell.Value;
+                    }
+                    else
+                    {
+                        dtpPublishTimeStudent.Value = DateTime.Today;
+                    }
+                }
+                else
+                    dtpPublishTimeStudent.Visible = false;
+
+                //Column index 5 is assessment length, 6 is reading time
+                if (dgvPublishStudents.Focused && (dgvPublishStudents.CurrentCell.ColumnIndex == 5 || dgvPublishStudents.CurrentCell.ColumnIndex == 6))
+                {
+                    nudAssessmentTimeStudent.Location = dgvPublishStudents.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Location;
+                    nudAssessmentTimeStudent.Visible = true;
+                    nudAssessmentTimeStudent.Width = dgvPublishStudents.CurrentCell.OwningColumn.Width;
+                    nudAssessmentTimeStudent.Height = dgvPublishStudents.CurrentCell.OwningRow.Height;
+                    if (dgvPublishStudents.CurrentCell.Value != null)
+                    {
+                        nudAssessmentTimeStudent.Value = (decimal)dgvPublishStudents.CurrentCell.Value;
+                    }
+                    else
+                    {
+                        if (dgvPublishStudents.CurrentCell.ColumnIndex == 5)
+                            nudAssessmentTimeStudent.Value = nudPublishAssessmentLength.Value;
+                        else
+                            nudAssessmentTimeStudent.Value = nudPublishReadingTime.Value;
+                    }
+                }
+                else
+                    nudAssessmentTimeStudent.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dgvPublishStudents_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                //DateTime
+                if (dgvPublishStudents.Focused && dgvPublishStudents.CurrentCell.ColumnIndex == 4)
+                {
+                    dgvPublishStudents.CurrentCell.Value = dtpPublishTimeStudent.Value;
+                }
+                dtpPublishTimeStudent.Visible = false;
+
+                //length and reading time
+                if (dgvPublishStudents.Focused && dgvPublishStudents.CurrentCell.ColumnIndex == 5)
+                {
+                    dgvPublishStudents.CurrentCell.Value = nudAssessmentTimeStudent.Value;
+                }
+                else if (dgvPublishStudents.Focused && dgvPublishStudents.CurrentCell.ColumnIndex == 6)
+                {
+                    dgvPublishStudents.CurrentCell.Value = nudAssessmentTimeStudent.Value;
+                }
+                nudAssessmentTimeStudent.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dtpPublishTimeStudent_ValueChanged(object sender, EventArgs e)
+        {
+            dgvPublishStudents.CurrentCell.Value = dtpPublishTimeStudent.Value;
+        }
+
+        private void nudAssessmentTimeStudent_ValueChanged(object sender, EventArgs e)
+        {
+            dgvPublishStudents.CurrentCell.Value = nudAssessmentTimeStudent.Value;
+        }
+
+        private void btnPublishAdditonalFilesAdd_Click(object sender, EventArgs e)
+        {
+            if (addFilesDialog.ShowDialog() == DialogResult.OK)
+            {
+                foreach (var fp in addFilesDialog.FileNames)
+                {
+                    lbPublishAdditionalFiles.Items.Add(new FileListItem(fp));
+                }
+            }
+        }
+
+        private void btnPublishAdditionalFilesDelSel_Click(object sender, EventArgs e)
+        {
+            if (lbPublishAdditionalFiles.SelectedItems.Count > 0)
+            {
+                string message = "Are you sure you wish to remove the selected item(s) from the list?";
+                if (MessageBox.Show(message, "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    List<object> objs = new List<object>();
+                    foreach (var o in lbPublishAdditionalFiles.SelectedItems)
+                    {
+                        objs.Add(o);
+                    }
+                    foreach (var o in objs)
+                    {
+                        lbPublishAdditionalFiles.Items.Remove(o);
+                    }
+                }
+            }
+        }
+
+        private void btnPublishAdditionalFilesDelAll_Click(object sender, EventArgs e)
+        {
+            string m = "Are you sure you wish to clear all items from the list?";
+            if (MessageBox.Show(m, "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                lbPublishAdditionalFiles.Items.Clear();
+            }
+        }
 
         #endregion
 
+        #endregion
     }
 }

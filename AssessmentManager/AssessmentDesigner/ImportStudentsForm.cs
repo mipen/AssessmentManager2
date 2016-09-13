@@ -30,7 +30,7 @@ namespace AssessmentManager
                     {
                         if (row.Cells[0].Value == null && row.Cells[1].Value == null && row.Cells[2].Value == null && row.Cells[3].Value == null)
                             continue;
-
+                        //DGVEDIT::
                         string userName = row.Cells[0].Value?.ToString();
                         string lastName = row.Cells[1].Value?.ToString();
                         string firstName = row.Cells[2].Value?.ToString();
@@ -60,12 +60,13 @@ namespace AssessmentManager
             {
                 foreach (var s in course.Students)
                 {
+                    //DGVEDIT::
                     DataGridViewRow row = new DataGridViewRow();
                     row.CreateCells(dgv);
                     row.Cells[0].Value = s.UserName;
                     row.Cells[1].Value = s.LastName;
                     row.Cells[2].Value = s.FirstName;
-                    row.Cells[3].Value = s.StudentNumber;
+                    row.Cells[3].Value = s.StudentID;
                     dgv.Rows.Add(row);
                 }
             }

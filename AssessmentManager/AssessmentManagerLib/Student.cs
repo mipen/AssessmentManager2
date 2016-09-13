@@ -29,7 +29,7 @@ namespace AssessmentManager
 
         #region Properties
 
-        public string StudentNumber
+        public string StudentID
         {
             get
             {

@@ -56,6 +56,7 @@ namespace AssessmentManager
                 {
                     foreach (DataGridViewRow row in dgvStudents.Rows)
                     {
+                        //DGVEDIT::
                         if (row.Cells[0].Value == null && row.Cells[1].Value == null && row.Cells[2].Value == null && row.Cells[3].Value == null)
                             continue;
 
@@ -156,12 +157,13 @@ namespace AssessmentManager
                 {
                     foreach (var s in ipf.Students)
                     {
+                        //DGVEDIT::
                         DataGridViewRow row = new DataGridViewRow();
                         row.CreateCells(dgvStudents);
                         row.Cells[0].Value = s.UserName;
                         row.Cells[1].Value = s.LastName;
                         row.Cells[2].Value = s.FirstName;
-                        row.Cells[3].Value = s.StudentNumber;
+                        row.Cells[3].Value = s.StudentID;
                         dgvStudents.Rows.Add(row);
                     }
                 }
