@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForQuestionsWithoutMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -209,6 +209,9 @@
             this.toolStripSeparatorCourses = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteCourse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteAssessmentSession = new System.Windows.Forms.ToolStripMenuItem();
+            this.label16 = new System.Windows.Forms.Label();
+            this.lblDeploymentTarget = new System.Windows.Forms.Label();
+            this.btnDeploymentTarget = new System.Windows.Forms.Button();
             this.colPublishUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1400,6 +1403,7 @@
             // 
             // dgvPublishStudents
             // 
+            this.dgvPublishStudents.AllowUserToAddRows = false;
             this.dgvPublishStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPublishStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colPublishUsername,
@@ -1422,6 +1426,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnDeploymentTarget);
+            this.panel1.Controls.Add(this.lblDeploymentTarget);
+            this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.tbPublishResetPassword);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.btnPublishDeploy);
@@ -1839,6 +1846,7 @@
             this.dgvCourseStudents.Size = new System.Drawing.Size(626, 404);
             this.dgvCourseStudents.TabIndex = 11;
             this.dgvCourseStudents.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCourseStudents_CellValueChanged);
+            this.dgvCourseStudents.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvCourseStudents_RowsRemoved);
             // 
             // colUserName
             // 
@@ -2168,6 +2176,35 @@
             this.tsmiDeleteAssessmentSession.Visible = false;
             this.tsmiDeleteAssessmentSession.Click += new System.EventHandler(this.tsmiDeleteAssessmentSession_Click);
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(405, 131);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(100, 13);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "Deployment Target:";
+            // 
+            // lblDeploymentTarget
+            // 
+            this.lblDeploymentTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDeploymentTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDeploymentTarget.Location = new System.Drawing.Point(511, 131);
+            this.lblDeploymentTarget.Name = "lblDeploymentTarget";
+            this.lblDeploymentTarget.Size = new System.Drawing.Size(350, 39);
+            this.lblDeploymentTarget.TabIndex = 11;
+            // 
+            // btnDeploymentTarget
+            // 
+            this.btnDeploymentTarget.Location = new System.Drawing.Point(422, 169);
+            this.btnDeploymentTarget.Name = "btnDeploymentTarget";
+            this.btnDeploymentTarget.Size = new System.Drawing.Size(75, 23);
+            this.btnDeploymentTarget.TabIndex = 12;
+            this.btnDeploymentTarget.Text = "Set target";
+            this.btnDeploymentTarget.UseVisualStyleBackColor = true;
+            this.btnDeploymentTarget.Click += new System.EventHandler(this.btnDeploymentTarget_Click);
+            // 
             // colPublishUsername
             // 
             this.colPublishUsername.HeaderText = "Username";
@@ -2190,8 +2227,8 @@
             // 
             // colPublishStartTime
             // 
-            dataGridViewCellStyle10.Format = "HH:mm:ss tt";
-            this.colPublishStartTime.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Format = "HH:mm:ss tt";
+            this.colPublishStartTime.DefaultCellStyle = dataGridViewCellStyle2;
             this.colPublishStartTime.HeaderText = "Start Time";
             this.colPublishStartTime.Name = "colPublishStartTime";
             this.colPublishStartTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -2211,11 +2248,13 @@
             // 
             this.colPublishAccountName.HeaderText = "Account Name";
             this.colPublishAccountName.Name = "colPublishAccountName";
+            this.colPublishAccountName.ReadOnly = true;
             // 
             // colPublishAccountPassword
             // 
             this.colPublishAccountPassword.HeaderText = "Account Password";
             this.colPublishAccountPassword.Name = "colPublishAccountPassword";
+            this.colPublishAccountPassword.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -2477,6 +2516,9 @@
         private System.Windows.Forms.CheckBox chkbxTimeLocked;
         private System.Windows.Forms.TextBox tbPublishResetPassword;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblDeploymentTarget;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button btnDeploymentTarget;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishUsername;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishLastName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishFirstName;

@@ -63,6 +63,7 @@
     <Compile Include="CourseManager.cs" />
     <Compile Include="CourseNode.cs" />
     <Compile Include="CoursesExt.cs" />
+    <Compile Include="FileCellItem.cs" />
     <Compile Include="FileItem.cs" />
     <Compile Include="MultiChoiceOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

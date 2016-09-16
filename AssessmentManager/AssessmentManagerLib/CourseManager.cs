@@ -17,6 +17,7 @@ namespace AssessmentManager
         private List<Course> courses = new List<Course>();
         private TreeView tree;
         private static CourseManager instance;
+        private static string coursesDir = "";
 
         public CourseManager()
         {
@@ -43,6 +44,7 @@ namespace AssessmentManager
             {
                 Directory.CreateDirectory(p);
             }
+            coursesDir = p;
 
             //Read all courses and load them into the list. Method returns any errors.
             List<string> errors = LoadAllCourses(p);
@@ -123,6 +125,40 @@ namespace AssessmentManager
             }
         }
 
+        public bool SerialiseSession(AssessmentSession session, string filePath)
+        {
+            try
+            {
+                using (FileStream s = File.Open(@filePath, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    bf.Serialize(s, session);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to save assessment session: \n\n" + ex.Message);
+                return false;
+            }
+
+            return true;
+        }
+
+        public string CreateAssessmentDir(AssessmentSession session, string coursePath)
+        {
+            try
+            {
+                string dirName = Path.Combine(@coursePath, RandomAssessmentID(session, @coursePath));
+                if (!Directory.Exists(dirName))
+                    Directory.CreateDirectory(dirName);
+                return dirName;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public Course LoadCourse(string path)
         {
             Course c = null;
@@ -187,6 +223,31 @@ namespace AssessmentManager
             return id;
         }
 
+        public string RandomAssessmentID(AssessmentSession session, string coursePath)
+        {
+            if (Directory.Exists(@coursePath))
+            {
+                string[] dirs = Directory.GetDirectories(@coursePath);
+                if (dirs.Count() > 0)
+                {
+                    string id = "";
+                    do
+                    {
+                        id = Util.RandomString(6);
+                    } while (id == "" || dirs.Where(c => c.EndsWith(id)).Any());
+
+                    return session.AssessmentName + " - " + id;
+                }
+                else
+                {
+                    string id = Util.RandomString(6);
+                    return session.AssessmentName + " - " + id;
+                }
+            }
+            else
+                throw new ArgumentException("Cannot find specified path: \n\n" + coursePath, "coursePath");
+        }
+
         public DialogResult DeleteCourse(Course course)
         {
             //Delete the course's folder
@@ -198,13 +259,25 @@ namespace AssessmentManager
             {
                 return DialogResult.No;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show("Error removing course with ID: " + course.ID + "\n\n" + e.Message, "Error");
             }
             //Remove the course from the list
             courses.Remove(course);
             return DialogResult.Yes;
+        }
+
+        public string PathForCourse(string ID)
+        {
+            if (!Courses.Where(c => c.ID == ID).Any())
+                throw new ArgumentException($"No course with ID: {ID} registered", "ID");
+
+            string path = Path.Combine(coursesDir, ID);
+            if (Directory.Exists(path))
+                return path;
+            else
+                throw new ArgumentException($"Cannot find directory for course with ID: {ID}", "ID");
         }
 
         #endregion

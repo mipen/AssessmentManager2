@@ -11,6 +11,7 @@ namespace AssessmentManager
     {
         public static readonly string ASSESSMENT_EXT = ".exm";
         public static readonly string ASSESSMENT_SCRIPT_EXT = ".exms";
+        public static readonly string ASSESSMENT_SESSION_EXT = ".as";
         public static readonly string XML_EXT = ".xml";
         public static readonly string COURSE_EXT = ".crse";
         public static readonly string PDF_EXT = ".pdf";
@@ -25,9 +26,14 @@ namespace AssessmentManager
         public static string DESKTOP_PATH = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         public static string DOCUMENTS_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
+        public static readonly string EXAMDRIVE_ROOT = @"X:\";
+        public static readonly string C_ROOT = @"C:\";
+
+        public static readonly string STUDENT_STAGE = "STUDENTS_CHECK";
+
         public static readonly string COURSES_FOLDER_NAME = "Courses";
 
-        public static readonly DateTime UNPLANNED = new DateTime(1975, 1, 1, 1, 1, 1, 1);
+        public static readonly DateTime INVALID_DATE = new DateTime(1975, 1, 1, 1, 1, 1, 1);
 
         public static string AUTOSAVE_FOLDER_NAME(string assessmentName)
         {

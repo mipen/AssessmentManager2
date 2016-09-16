@@ -23,3 +23,5 @@
 
 - COntext menu for courses tree view
 	- DO event for delete session node
+
+- make reloading course tab threaded?

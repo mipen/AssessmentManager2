@@ -20,13 +20,14 @@ namespace AssessmentManager
     public partial class MainForm : Form
     {
         private Assessment assessment;
-        private FileInfo file;
+        private FileInfo assessmentFile;
         private ColorDialog colorDialog = new ColorDialog();
         private SaveFileDialog xmlSaveFileDialog = new SaveFileDialog();
         private SaveFileDialog mainSaveFileDialog = new SaveFileDialog();
         private SaveFileDialog pdfSaveFileDialog = new SaveFileDialog();
         private OpenFileDialog openFileDialog = new OpenFileDialog();
         private OpenFileDialog addFilesDialog = new OpenFileDialog();
+        private FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
         private CourseManager CourseManager = new CourseManager();
 
         private string DefaultPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -286,14 +287,14 @@ namespace AssessmentManager
         {
             if (HasAssessmentOpen)
             {
-                if (file == null)
+                if (assessmentFile == null)
                 {
                     mainSaveFileDialog.InitialDirectory = DefaultPath;
                     SaveToFile();
                 }
                 else
                 {
-                    SaveToFile(file.FullName);
+                    SaveToFile(assessmentFile.FullName);
                 }
             }
         }
@@ -480,7 +481,7 @@ namespace AssessmentManager
             saveasToolStripMenuItem.Enabled = false;
             closeToolStripMenuItem.Enabled = false;
             //Reset the fileinfo
-            file = null;
+            assessmentFile = null;
             //Reset the form text
             UpdateFormText();
             //Reset the publish screen
@@ -543,14 +544,14 @@ namespace AssessmentManager
                 DialogResult result = MessageBox.Show("Changes have been made to this Assessment. Closing it now will cause those changes to be lost. Would you like to save before closing?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes)
                 {
-                    if (file == null)
+                    if (assessmentFile == null)
                     {
                         if (SaveToFile() == DialogResult.Cancel)
                             return DialogResult.Cancel;
                     }
                     else
                     {
-                        SaveToFile(file.FullName);
+                        SaveToFile(assessmentFile.FullName);
                     }
                 }
                 else if (result == DialogResult.Cancel)
@@ -646,7 +647,7 @@ namespace AssessmentManager
 
         private void UpdateFormText()
         {
-            Text = file == null ? "Assessment Designer" : "Assessment Designer - " + file.Name;
+            Text = assessmentFile == null ? "Assessment Designer" : "Assessment Designer - " + assessmentFile.Name;
         }
 
         private void UpdateRecentFiles()
@@ -665,13 +666,13 @@ namespace AssessmentManager
                         DialogResult result = MessageBox.Show("There are unsaved changes. Do you wish to save before opening a new file?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
                         if (result == DialogResult.Yes)
                         {
-                            if (file == null)
+                            if (assessmentFile == null)
                             {
                                 if (SaveToFile() == DialogResult.Cancel)
                                     return;
                             }
                             else
-                                SaveToFile(file.FullName);
+                                SaveToFile(assessmentFile.FullName);
                         }
                         else if (result == DialogResult.Cancel)
                             return;
@@ -695,11 +696,10 @@ namespace AssessmentManager
                 {
                     using (FileStream s = File.Open(path, FileMode.Create, FileAccess.Write))
                     {
-                        Assessment.Published = false;
                         BinaryFormatter formatter = new BinaryFormatter();
                         formatter.Serialize(s, Assessment);
                     }
-                    file = new FileInfo(path);
+                    assessmentFile = new FileInfo(path);
                     DesignerChangesMade = false;
                     UpdateFormText();
                     Settings.Instance.AddRecentFile(path);
@@ -744,7 +744,7 @@ namespace AssessmentManager
                         BinaryFormatter formatter = new BinaryFormatter();
                         Assessment = (Assessment)formatter.Deserialize(s);
                     }
-                    file = new FileInfo(path);
+                    assessmentFile = new FileInfo(path);
                     NotifyAssessmentOpened();
                     Settings.Instance.AddRecentFile(path);
                     UpdateRecentFiles();
@@ -1360,13 +1360,13 @@ namespace AssessmentManager
                 DialogResult result = MessageBox.Show("Changes have been made to this Assessment. Closing it now will cause those changes to be lost. Would you like to save before closing?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Yes)
                 {
-                    if (file == null)
+                    if (assessmentFile == null)
                     {
                         if (SaveToFile() == DialogResult.Cancel)
                             e.Cancel = true;
                     }
                     else
-                        SaveToFile(file.FullName);
+                        SaveToFile(assessmentFile.FullName);
                 }
                 else if (result == DialogResult.Cancel)
                     e.Cancel = true;
@@ -1768,6 +1768,11 @@ namespace AssessmentManager
             CourseEdited = true;
         }
 
+        private void dgvCourseStudents_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            CourseEdited = true;
+        }
+
         private void btnImportStudents_Click(object sender, EventArgs e)
         {
             //Import student data from another course
@@ -1955,6 +1960,10 @@ namespace AssessmentManager
             //Set up the add files dialog
             addFilesDialog.InitialDirectory = DESKTOP_PATH;
             addFilesDialog.Multiselect = true;
+
+            //Set up folder browser dialog
+            folderBrowser.ShowNewFolderButton = false;
+            folderBrowser.RootFolder = Environment.SpecialFolder.MyComputer;
         }
 
         private void ResetPublishTab()
@@ -1976,6 +1985,7 @@ namespace AssessmentManager
             cbPublishCourseSelector.SelectedItem = null;
             PublishPrepared = false;
             btnPublishDeploy.Enabled = false;
+            lblDeploymentTarget.Text = "";
 
             //Disable the publish screen
             tlpPublishContainer.Enabled = false;
@@ -1991,7 +2001,7 @@ namespace AssessmentManager
             //Method called when an assessment is opened.
 
             //TODO:: Set any values relevant to the assessment, ie file name, last time deployed
-            lblPublishFileName.Text = file.FullName;
+            lblPublishFileName.Text = assessmentFile.FullName;
             //TODO:: Show when assessment was last published.
 
             //Generate new password
@@ -2002,6 +2012,193 @@ namespace AssessmentManager
 
             //Disable student editor
             dgvPublishStudents.Enabled = false;
+        }
+
+        private bool TryDeployAssessment()
+        {
+            const string title = "Unable to deploy - ";
+            List<StudentData> students = new List<StudentData>();
+            //Check deployment target exists
+            if (lblDeploymentTarget.Text.NullOrEmpty())
+            {
+                MessageBox.Show("Please select a deployment target", title + "No deployment target specified");
+                return false;
+            }
+            else if (!Directory.Exists(@lblDeploymentTarget.Text))
+            {
+                MessageBox.Show("The specified deployment path is unreachable or does not exist", title + "Cannot reach deployment target");
+                return false;
+            }
+            #region Student Check
+            //Check the data for each student is good:
+            if (!(dgvCourseStudents.Rows.Count > 0))
+            {
+                MessageBox.Show("There are no students for the assessment!", title + "No students");
+                return false;
+            }
+            bool flag = false;
+            Dictionary<string, List<Student.ErrorType>> errors = new Dictionary<string, List<Student.ErrorType>>();
+            try
+            {
+                //TODO:: Make sure it doesn't do the last row, which is always blank
+                for (int i = 0; i < dgvPublishStudents.Rows.Count; i++)
+                {
+                    DataGridViewRow row = dgvPublishStudents.Rows[i];
+                    //DGVEDIT::
+                    string userName = row.Cells[0].Value == null ? "" : row.Cells[0].Value.ToString();
+                    string lastName = row.Cells[1].Value == null ? "" : row.Cells[1].Value.ToString();
+                    string firstName = row.Cells[2].Value == null ? "" : row.Cells[2].Value.ToString();
+                    string studentID = row.Cells[3].Value == null ? "" : row.Cells[3].Value.ToString();
+                    DateTime startTime;
+                    if (row.Cells[4].Value == null)
+                    {
+                        startTime = INVALID_DATE;
+                    }
+                    else
+                    {
+                        startTime = (DateTime)row.Cells[4].Value;
+                    }
+
+                    int assessmentLength;
+                    if (row.Cells[5].Value == null)
+                    {
+                        assessmentLength = -1;
+                    }
+                    else
+                    {
+                        decimal al = (decimal)row.Cells[5].Value;
+                        assessmentLength = (int)al;
+                    }
+
+                    int readingTime;
+                    if (row.Cells[6].Value == null)
+                    {
+                        readingTime = -1;
+                    }
+                    else
+                    {
+                        decimal rt = (decimal)row.Cells[6].Value;
+                        readingTime = (int)rt;
+                    }
+                    string accountName = row.Cells[7].Value == null ? "" : row.Cells[7].Value.ToString();
+                    string accountPassword = row.Cells[8].Value == null ? "" : row.Cells[8].Value.ToString();
+
+                    StudentData sd = new StudentData(userName, lastName, firstName, studentID, startTime, assessmentLength, readingTime, accountName, accountPassword);
+                    if (!sd.ResolveErrors())
+                    {
+                        flag = true;
+                        string id = sd.AnyIdentifiableTag();
+                        if (errors.Keys.Contains(id))
+                        {
+                            int num = 1;
+                            do
+                            {
+                                id = id + " " + num.ToString();
+                            } while (errors.Keys.Contains(id));
+                        }
+                        errors.Add(id, sd.GetErrors());
+                    }
+                    else
+                        students.Add(sd);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            if (flag)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("The following student(s) have errors:");
+                foreach (var kvp in errors)
+                {
+                    sb.AppendLine();
+                    sb.AppendLine("Student " + kvp.Key + ":");
+                    foreach (var e in kvp.Value)
+                    {
+                        //if(e == Student.ErrorType.AccountName && !)
+                        sb.AppendLine("     " + e.ToString());
+                    }
+                }
+                MessageBox.Show(sb.ToString(), title + "Students errored");
+                return false;
+            }
+            #endregion
+
+            #region Additional Files
+            List<string> missingFiles = new List<string>();
+            List<string> additionalFiles = new List<string>();
+            if (lbPublishAdditionalFiles.Items.Count > 0)
+            {
+                foreach (var o in lbPublishAdditionalFiles.Items)
+                {
+                    FileListItem fi = (FileListItem)o;
+                    if (!File.Exists(@fi.Path))
+                        missingFiles.Add(@fi.Path);
+                    additionalFiles.Add(@fi.Path);
+                }
+            }
+            if (missingFiles.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("The following file(s) are missing: ");
+                foreach (var p in missingFiles)
+                {
+                    sb.AppendLine("     " + p);
+                    sb.AppendLine();
+                }
+                MessageBox.Show(sb.ToString(), title + "Missing files");
+                return false;
+            }
+            #endregion
+
+            #region Build AssessmentSession
+
+            DateTime date = dtpPublishDate.Value;
+            DateTime time = dtpPublishTime.Value;
+            DateTime startTime2 = new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
+            bool timeLocked = chkbxTimeLocked.Checked;
+            AssessmentSession session = new AssessmentSession(SelectedCourse.ID, lblDeploymentTarget.Text, Assessment.AssessmentInfo.AssessmentName, assessmentFile.Name, startTime2, (int)nudPublishAssessmentLength.Value, (int)nudPublishReadingTime.Value, timeLocked, students, additionalFiles);
+
+            #endregion
+
+            #region Deploy all files
+
+            string coursePath;
+            try
+            {
+                coursePath = CourseManager.PathForCourse(session.CourseID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            //Backup the files
+            string sessionPath = CourseManager.CreateAssessmentDir(session, coursePath);
+            string sessionFilePath = Path.Combine(@sessionPath, session.AssessmentName + ASSESSMENT_SESSION_EXT);
+            CourseManager.SerialiseSession(session, @sessionFilePath);
+            if(additionalFiles.Count>0)
+            {
+                foreach(var p in additionalFiles)
+                {
+                    string dest = Path.Combine(@sessionPath, Path.GetFileName(@p));
+                    File.Copy(@p, @dest, true);
+                }
+            }
+
+            //Deploy to the student accounts
+            foreach (var sd in session.StudentData)
+            {
+
+            }
+
+            #endregion
+
+            //Success!
+            return true;
         }
 
         #endregion
@@ -2015,7 +2212,7 @@ namespace AssessmentManager
             //TODO:: This button creates an AssessmentSession which holds all the information. This is added to the selected course's list. All files are copied to the different accounts and backups are
             //made in the course's folder.
             //TODO:: Make sure there are enough accounts for the list of students
-            //TODO:: Make sure that each students info is complete
+            //TODO:: Make sure that each student's info is complete
 
             //TODO:: STEPS:
             /*
@@ -2034,6 +2231,7 @@ namespace AssessmentManager
             Rebuild course manager tree view
 
             */
+            TryDeployAssessment();
 
         }
 
@@ -2054,6 +2252,20 @@ namespace AssessmentManager
                         return;
                     }
                 }
+                if (lblDeploymentTarget.Text.NullOrEmpty() || !Directory.Exists(@lblDeploymentTarget.Text))
+                {
+                    string message = "Please select a valid deployment target.";
+                    MessageBox.Show(message, "Invalid deployment target");
+                    return;
+                }
+
+                List<string> paths = Directory.GetDirectories(@lblDeploymentTarget.Text).ToList();
+                if (paths.Count < SelectedCourse.Students.Count)
+                {
+                    string m = "There are too many students in this course and not enough exam account folders. Please make sure that there are enough for the number of students.";
+                    MessageBox.Show(m, "Too many students");
+                    return;
+                }
 
                 PublishPrepared = true;
                 dgvPublishStudents.Enabled = true;
@@ -2061,6 +2273,10 @@ namespace AssessmentManager
 
                 //DGVEDIT:: Fill out the students grid.
                 dgvPublishStudents.Rows.Clear();
+                DateTime date = dtpPublishDate.Value;
+                DateTime time = dtpPublishTime.Value;
+                DateTime d = new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second, time.Millisecond);
+                int pathNum = 0;
                 foreach (var student in SelectedCourse.Students)
                 {
                     DataGridViewRow row = new DataGridViewRow();
@@ -2070,11 +2286,18 @@ namespace AssessmentManager
                     row.Cells[1].Value = student.LastName;
                     row.Cells[2].Value = student.FirstName;
                     row.Cells[3].Value = student.StudentID;
-                    row.Cells[4].Value = dtpPublishTime.Value;
+                    row.Cells[4].Value = d;
                     row.Cells[5].Value = nudPublishAssessmentLength.Value;
                     row.Cells[6].Value = nudPublishReadingTime.Value;
-                    //TODO:: Assign account username and password to each student
-
+                    //TODO:: Assign account username and password to each student properly
+                    //TODO:: Will read values from a given spreadsheet. Must check to make sure that each directory exists
+                    try
+                    {
+                        row.Cells[7].Value = new DirectoryInfo(paths[pathNum]).Name;
+                        row.Cells[8].Value = "password";
+                    }
+                    catch { }
+                    pathNum++;
                     dgvPublishStudents.Rows.Add(row);
                 }
             }
@@ -2114,7 +2337,9 @@ namespace AssessmentManager
                     }
                     else
                     {
-                        dtpPublishTimeStudent.Value = DateTime.Today;
+                        DateTime date = dtpPublishDate.Value;
+                        DateTime time = dtpPublishTime.Value;
+                        dtpPublishTimeStudent.Value = new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
                     }
                 }
                 else
@@ -2226,8 +2451,17 @@ namespace AssessmentManager
             }
         }
 
+        private void btnDeploymentTarget_Click(object sender, EventArgs e)
+        {
+            if (folderBrowser.ShowDialog() == DialogResult.OK)
+            {
+                lblDeploymentTarget.Text = folderBrowser.SelectedPath;
+            }
+        }
+
         #endregion
 
         #endregion
+
     }
 }

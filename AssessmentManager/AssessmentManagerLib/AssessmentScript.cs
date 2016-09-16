@@ -16,7 +16,7 @@ namespace AssessmentManager
         private TimeData timeData = null;
         private StudentData studentData = null;
         public bool Started = false;
-        public bool Published = false;
+        private bool published = false;
 
         public AssessmentScript()
         {
@@ -42,6 +42,14 @@ namespace AssessmentManager
             }
         }
 
+        public bool Published
+        {
+            get
+            {
+                return published;
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -50,7 +58,7 @@ namespace AssessmentManager
         {
             AssessmentScript script = new AssessmentScript();
             script.questions = assessment.Questions;
-            script.Published = assessment.Published;
+            script.published = false;
             //Populate answers dictionary with answer objects for each question
             foreach (var q in script.Questions)
             {
@@ -61,17 +69,19 @@ namespace AssessmentManager
             else
                 script.timeData = new TimeData()
                 {
-                    DateIsPlanned = false,
-                    MinutesArePlanned = false,
+                    TimeLocked = false,
                     Minutes = 60
                 };
 
-            if (assessment.StudentData != null)
-                script.studentData = assessment.StudentData;
             if (assessment.CourseInformation != null)
                 script.CourseInformation = assessment.CourseInformation;
 
             return script;
+        }
+
+        public static AssessmentScript BuildFromSession(Assessment assessment, AssessmentSession session)
+        {
+            AssessmentScript script = BuildFromAssessment(assessment);
         }
 
         #endregion

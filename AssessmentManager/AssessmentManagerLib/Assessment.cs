@@ -15,9 +15,6 @@ namespace AssessmentManager
         private AssessmentInformation assessmentInfo = new AssessmentInformation();
 
         public TimeData TimeData = null;
-        public StudentData StudentData = null;
-
-        private bool published = false;
 
         public Assessment()
         {
@@ -34,19 +31,6 @@ namespace AssessmentManager
                     num += q.TotalMarks;
                 }
                 return num;
-            }
-        }
-
-        //TODO:: Set this to true when publishing assessment
-        public bool Published
-        {
-            get
-            {
-                return published;
-            }
-            set
-            {
-                published = value;
             }
         }
 
