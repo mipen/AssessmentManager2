@@ -17,10 +17,13 @@ namespace AssessmentManager
         private int assessmentLength = 0;
         private int readingTime = 0;
         private bool timeLocked = true;
+        private string restartPassword;
         private List<StudentData> studentData = new List<StudentData>();
         private List<string> additionalFiles = new List<string>();
 
-        public AssessmentSession(string courseID, string deploymentTarget, string assessmentName, string assessmentFileName, DateTime startTime, int assessmentLength, int readingTime, bool timeLocked, List<StudentData> studentData, List<string> additionalFiles)
+        public string FolderPath = "";
+
+        public AssessmentSession(string courseID, string deploymentTarget, string assessmentName, string assessmentFileName, DateTime startTime, int assessmentLength, int readingTime, bool timeLocked, string restartPassword, List<StudentData> studentData, List<string> additionalFiles)
         {
             this.assessmentName = assessmentName;
             this.assessmentFileName = assessmentFileName;
@@ -30,6 +33,9 @@ namespace AssessmentManager
             this.assessmentLength = assessmentLength;
             this.readingTime = readingTime;
             this.timeLocked = timeLocked;
+            this.restartPassword = restartPassword;
+            this.studentData = studentData;
+            this.additionalFiles = additionalFiles;
         }
 
         public string CourseID
@@ -96,6 +102,14 @@ namespace AssessmentManager
             }
         }
 
+        public string RestartPassword
+        {
+            get
+            {
+                return restartPassword;
+            }
+        }
+
         public List<StudentData> StudentData
         {
             get
@@ -104,6 +118,9 @@ namespace AssessmentManager
             }
         }
 
+        /// <summary>
+        /// Holds the names of the addtional files deployed with the assessment. Does not hold a file path, only name and extension.
+        /// </summary>
         public List<string> AdditionalFiles
         {
             get

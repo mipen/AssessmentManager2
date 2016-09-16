@@ -16,8 +16,6 @@
 		- Multi choice answers missing answers
 		- Questions missing answers
 
-	- Bullet list feature for questions.
-
 	- About window: display information for icons; licenses + links and acknowledgement. My information. Acknowledgement of original program. Acknowledge use of PdfSharp
 
 

@@ -11,10 +11,7 @@ namespace AssessmentManager
     public class Assessment
     {
         private List<Question> questions = new List<Question>();
-        private CourseInformation courseInformation = null;
         private AssessmentInformation assessmentInfo = new AssessmentInformation();
-
-        public TimeData TimeData = null;
 
         public Assessment()
         {
@@ -35,18 +32,6 @@ namespace AssessmentManager
         }
 
         public List<Question> Questions => questions;
-
-        public CourseInformation CourseInformation
-        {
-            get
-            {
-               return courseInformation;
-            }
-            set
-            {
-                courseInformation = value;
-            }
-        }
 
         public AssessmentInformation AssessmentInfo
         {

@@ -30,7 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForQuestionsWithoutMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -137,6 +138,9 @@
             this.tlpPublishContainer = new System.Windows.Forms.TableLayoutPanel();
             this.dgvPublishStudents = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDeploymentTarget = new System.Windows.Forms.Button();
+            this.lblDeploymentTarget = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.tbPublishResetPassword = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.btnPublishDeploy = new System.Windows.Forms.Button();
@@ -209,9 +213,43 @@
             this.toolStripSeparatorCourses = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteCourse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteAssessmentSession = new System.Windows.Forms.ToolStripMenuItem();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lblDeploymentTarget = new System.Windows.Forms.Label();
-            this.btnDeploymentTarget = new System.Windows.Forms.Button();
+            this.dgvPublishedAssessmentStudents = new System.Windows.Forms.DataGridView();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbSessionName = new System.Windows.Forms.TextBox();
+            this.tbSessionFileName = new System.Windows.Forms.TextBox();
+            this.tbSessionTarget = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tbSessionDate = new System.Windows.Forms.TextBox();
+            this.tbSessionStartTime = new System.Windows.Forms.TextBox();
+            this.tbSessionFinishTime = new System.Windows.Forms.TextBox();
+            this.tbSessionLength = new System.Windows.Forms.TextBox();
+            this.tbSessionReadingTime = new System.Windows.Forms.TextBox();
+            this.lbSessionAdditionalFiles = new System.Windows.Forms.ListBox();
+            this.tbSessionRestartPassword = new System.Windows.Forms.TextBox();
+            this.tbSessionCourseID = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.btnSessionOpenLocation = new System.Windows.Forms.Button();
+            this.btnCourseOpenFolder = new System.Windows.Forms.Button();
+            this.colSessionUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionStudentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionStartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionAssessmentLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionReadingTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionAccountName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSessionAccountPassword = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -221,6 +259,8 @@
             this.colPublishReadingTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishAccountName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPublishAccountPassword = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCourseExpand = new System.Windows.Forms.Button();
+            this.btnCollapse = new System.Windows.Forms.Button();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -260,8 +300,12 @@
             this.pnlCourseView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourseStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).BeginInit();
+            this.pnlAssessmentView.SuspendLayout();
             this.contextMenuStripQuestionNode.SuspendLayout();
             this.cmsCoursesTree.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPublishedAssessmentStudents)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStripMain
@@ -1445,6 +1489,35 @@
             this.panel1.Size = new System.Drawing.Size(866, 294);
             this.panel1.TabIndex = 1;
             // 
+            // btnDeploymentTarget
+            // 
+            this.btnDeploymentTarget.Location = new System.Drawing.Point(422, 169);
+            this.btnDeploymentTarget.Name = "btnDeploymentTarget";
+            this.btnDeploymentTarget.Size = new System.Drawing.Size(75, 23);
+            this.btnDeploymentTarget.TabIndex = 12;
+            this.btnDeploymentTarget.Text = "Set target";
+            this.btnDeploymentTarget.UseVisualStyleBackColor = true;
+            this.btnDeploymentTarget.Click += new System.EventHandler(this.btnDeploymentTarget_Click);
+            // 
+            // lblDeploymentTarget
+            // 
+            this.lblDeploymentTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDeploymentTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDeploymentTarget.Location = new System.Drawing.Point(511, 131);
+            this.lblDeploymentTarget.Name = "lblDeploymentTarget";
+            this.lblDeploymentTarget.Size = new System.Drawing.Size(350, 39);
+            this.lblDeploymentTarget.TabIndex = 11;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(405, 131);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(100, 13);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "Deployment Target:";
+            // 
             // tbPublishResetPassword
             // 
             this.tbPublishResetPassword.Location = new System.Drawing.Point(514, 71);
@@ -1737,6 +1810,8 @@
             // 
             // tabPageCourses
             // 
+            this.tabPageCourses.Controls.Add(this.btnCollapse);
+            this.tabPageCourses.Controls.Add(this.btnCourseExpand);
             this.tabPageCourses.Controls.Add(this.pnlCourseView);
             this.tabPageCourses.Controls.Add(this.pnlAssessmentView);
             this.tabPageCourses.Controls.Add(this.tbCourseSearch);
@@ -1755,6 +1830,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCourseView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCourseView.Controls.Add(this.btnCourseOpenFolder);
             this.pnlCourseView.Controls.Add(this.tbCourseID);
             this.pnlCourseView.Controls.Add(this.label7);
             this.pnlCourseView.Controls.Add(this.btnDiscardCourseChanges);
@@ -1993,6 +2069,17 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlAssessmentView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAssessmentView.Controls.Add(this.btnSessionOpenLocation);
+            this.pnlAssessmentView.Controls.Add(this.label28);
+            this.pnlAssessmentView.Controls.Add(this.tbSessionCourseID);
+            this.pnlAssessmentView.Controls.Add(this.tbSessionRestartPassword);
+            this.pnlAssessmentView.Controls.Add(this.lbSessionAdditionalFiles);
+            this.pnlAssessmentView.Controls.Add(this.groupBox2);
+            this.pnlAssessmentView.Controls.Add(this.groupBox1);
+            this.pnlAssessmentView.Controls.Add(this.label25);
+            this.pnlAssessmentView.Controls.Add(this.label24);
+            this.pnlAssessmentView.Controls.Add(this.label18);
+            this.pnlAssessmentView.Controls.Add(this.dgvPublishedAssessmentStudents);
             this.pnlAssessmentView.Location = new System.Drawing.Point(234, 3);
             this.pnlAssessmentView.Name = "pnlAssessmentView";
             this.pnlAssessmentView.Size = new System.Drawing.Size(635, 573);
@@ -2009,7 +2096,7 @@
             // btnNewCourse
             // 
             this.btnNewCourse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnNewCourse.Location = new System.Drawing.Point(59, 553);
+            this.btnNewCourse.Location = new System.Drawing.Point(58, 549);
             this.btnNewCourse.Name = "btnNewCourse";
             this.btnNewCourse.Size = new System.Drawing.Size(112, 23);
             this.btnNewCourse.TabIndex = 1;
@@ -2023,7 +2110,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tvCourses.Location = new System.Drawing.Point(3, 29);
             this.tvCourses.Name = "tvCourses";
-            this.tvCourses.Size = new System.Drawing.Size(225, 518);
+            this.tvCourses.Size = new System.Drawing.Size(225, 508);
             this.tvCourses.TabIndex = 0;
             this.tvCourses.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.tvCourses_BeforeSelect);
             this.tvCourses.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvCourses_AfterSelect);
@@ -2176,34 +2263,350 @@
             this.tsmiDeleteAssessmentSession.Visible = false;
             this.tsmiDeleteAssessmentSession.Click += new System.EventHandler(this.tsmiDeleteAssessmentSession_Click);
             // 
-            // label16
+            // dgvPublishedAssessmentStudents
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(405, 131);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(100, 13);
-            this.label16.TabIndex = 10;
-            this.label16.Text = "Deployment Target:";
-            // 
-            // lblDeploymentTarget
-            // 
-            this.lblDeploymentTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvPublishedAssessmentStudents.AllowUserToAddRows = false;
+            this.dgvPublishedAssessmentStudents.AllowUserToDeleteRows = false;
+            this.dgvPublishedAssessmentStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDeploymentTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeploymentTarget.Location = new System.Drawing.Point(511, 131);
-            this.lblDeploymentTarget.Name = "lblDeploymentTarget";
-            this.lblDeploymentTarget.Size = new System.Drawing.Size(350, 39);
-            this.lblDeploymentTarget.TabIndex = 11;
+            this.dgvPublishedAssessmentStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPublishedAssessmentStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSessionUserName,
+            this.colSessionLastName,
+            this.colSessionFirstName,
+            this.colSessionStudentID,
+            this.colSessionStartTime,
+            this.colSessionAssessmentLength,
+            this.colSessionReadingTime,
+            this.colSessionAccountName,
+            this.colSessionAccountPassword});
+            this.dgvPublishedAssessmentStudents.Location = new System.Drawing.Point(-1, 279);
+            this.dgvPublishedAssessmentStudents.Name = "dgvPublishedAssessmentStudents";
+            this.dgvPublishedAssessmentStudents.ReadOnly = true;
+            this.dgvPublishedAssessmentStudents.Size = new System.Drawing.Size(635, 293);
+            this.dgvPublishedAssessmentStudents.TabIndex = 0;
             // 
-            // btnDeploymentTarget
+            // label17
             // 
-            this.btnDeploymentTarget.Location = new System.Drawing.Point(422, 169);
-            this.btnDeploymentTarget.Name = "btnDeploymentTarget";
-            this.btnDeploymentTarget.Size = new System.Drawing.Size(75, 23);
-            this.btnDeploymentTarget.TabIndex = 12;
-            this.btnDeploymentTarget.Text = "Set target";
-            this.btnDeploymentTarget.UseVisualStyleBackColor = true;
-            this.btnDeploymentTarget.Click += new System.EventHandler(this.btnDeploymentTarget_Click);
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(26, 19);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(97, 13);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Assessment Name:";
+            // 
+            // label18
+            // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(423, 115);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(57, 13);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Course ID:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(23, 77);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(100, 13);
+            this.label19.TabIndex = 3;
+            this.label19.Text = "Deployment Target:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(65, 43);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(58, 13);
+            this.label20.TabIndex = 4;
+            this.label20.Text = "Start Time:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(60, 72);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(63, 13);
+            this.label21.TabIndex = 5;
+            this.label21.Text = "Finish Time:";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(35, 101);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(88, 13);
+            this.label22.TabIndex = 6;
+            this.label22.Text = "Length (minutes):";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(2, 130);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(121, 13);
+            this.label23.TabIndex = 7;
+            this.label23.Text = "Reading Time (minutes):";
+            // 
+            // label24
+            // 
+            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(387, 139);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(93, 13);
+            this.label24.TabIndex = 8;
+            this.label24.Text = "Restart Password:";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(248, 115);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(80, 13);
+            this.label25.TabIndex = 9;
+            this.label25.Text = "Additional Files:";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(7, 48);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(116, 13);
+            this.label26.TabIndex = 10;
+            this.label26.Text = "Assessment File Name:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tbSessionReadingTime);
+            this.groupBox1.Controls.Add(this.tbSessionLength);
+            this.groupBox1.Controls.Add(this.tbSessionFinishTime);
+            this.groupBox1.Controls.Add(this.tbSessionStartTime);
+            this.groupBox1.Controls.Add(this.tbSessionDate);
+            this.groupBox1.Controls.Add(this.label27);
+            this.groupBox1.Controls.Add(this.label22);
+            this.groupBox1.Controls.Add(this.label20);
+            this.groupBox1.Controls.Add(this.label21);
+            this.groupBox1.Controls.Add(this.label23);
+            this.groupBox1.Location = new System.Drawing.Point(3, 107);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(239, 153);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Timing Details";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.tbSessionTarget);
+            this.groupBox2.Controls.Add(this.tbSessionFileName);
+            this.groupBox2.Controls.Add(this.tbSessionName);
+            this.groupBox2.Controls.Add(this.label26);
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.label19);
+            this.groupBox2.Location = new System.Drawing.Point(3, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(627, 101);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Assessment Details";
+            // 
+            // tbSessionName
+            // 
+            this.tbSessionName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSessionName.Location = new System.Drawing.Point(129, 16);
+            this.tbSessionName.Name = "tbSessionName";
+            this.tbSessionName.ReadOnly = true;
+            this.tbSessionName.Size = new System.Drawing.Size(492, 20);
+            this.tbSessionName.TabIndex = 11;
+            // 
+            // tbSessionFileName
+            // 
+            this.tbSessionFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSessionFileName.Location = new System.Drawing.Point(129, 45);
+            this.tbSessionFileName.Name = "tbSessionFileName";
+            this.tbSessionFileName.ReadOnly = true;
+            this.tbSessionFileName.Size = new System.Drawing.Size(492, 20);
+            this.tbSessionFileName.TabIndex = 12;
+            // 
+            // tbSessionTarget
+            // 
+            this.tbSessionTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSessionTarget.Location = new System.Drawing.Point(129, 74);
+            this.tbSessionTarget.Name = "tbSessionTarget";
+            this.tbSessionTarget.ReadOnly = true;
+            this.tbSessionTarget.Size = new System.Drawing.Size(492, 20);
+            this.tbSessionTarget.TabIndex = 13;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(90, 14);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(33, 13);
+            this.label27.TabIndex = 8;
+            this.label27.Text = "Date:";
+            // 
+            // tbSessionDate
+            // 
+            this.tbSessionDate.Location = new System.Drawing.Point(129, 11);
+            this.tbSessionDate.Name = "tbSessionDate";
+            this.tbSessionDate.ReadOnly = true;
+            this.tbSessionDate.Size = new System.Drawing.Size(100, 20);
+            this.tbSessionDate.TabIndex = 9;
+            // 
+            // tbSessionStartTime
+            // 
+            this.tbSessionStartTime.Location = new System.Drawing.Point(129, 40);
+            this.tbSessionStartTime.Name = "tbSessionStartTime";
+            this.tbSessionStartTime.ReadOnly = true;
+            this.tbSessionStartTime.Size = new System.Drawing.Size(100, 20);
+            this.tbSessionStartTime.TabIndex = 10;
+            // 
+            // tbSessionFinishTime
+            // 
+            this.tbSessionFinishTime.Location = new System.Drawing.Point(129, 69);
+            this.tbSessionFinishTime.Name = "tbSessionFinishTime";
+            this.tbSessionFinishTime.ReadOnly = true;
+            this.tbSessionFinishTime.Size = new System.Drawing.Size(100, 20);
+            this.tbSessionFinishTime.TabIndex = 11;
+            // 
+            // tbSessionLength
+            // 
+            this.tbSessionLength.Location = new System.Drawing.Point(129, 98);
+            this.tbSessionLength.Name = "tbSessionLength";
+            this.tbSessionLength.ReadOnly = true;
+            this.tbSessionLength.Size = new System.Drawing.Size(100, 20);
+            this.tbSessionLength.TabIndex = 12;
+            // 
+            // tbSessionReadingTime
+            // 
+            this.tbSessionReadingTime.Location = new System.Drawing.Point(129, 127);
+            this.tbSessionReadingTime.Name = "tbSessionReadingTime";
+            this.tbSessionReadingTime.ReadOnly = true;
+            this.tbSessionReadingTime.Size = new System.Drawing.Size(100, 20);
+            this.tbSessionReadingTime.TabIndex = 13;
+            // 
+            // lbSessionAdditionalFiles
+            // 
+            this.lbSessionAdditionalFiles.FormattingEnabled = true;
+            this.lbSessionAdditionalFiles.Location = new System.Drawing.Point(248, 131);
+            this.lbSessionAdditionalFiles.Name = "lbSessionAdditionalFiles";
+            this.lbSessionAdditionalFiles.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.lbSessionAdditionalFiles.Size = new System.Drawing.Size(133, 121);
+            this.lbSessionAdditionalFiles.TabIndex = 13;
+            // 
+            // tbSessionRestartPassword
+            // 
+            this.tbSessionRestartPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSessionRestartPassword.Location = new System.Drawing.Point(486, 136);
+            this.tbSessionRestartPassword.Name = "tbSessionRestartPassword";
+            this.tbSessionRestartPassword.ReadOnly = true;
+            this.tbSessionRestartPassword.Size = new System.Drawing.Size(138, 20);
+            this.tbSessionRestartPassword.TabIndex = 14;
+            // 
+            // tbSessionCourseID
+            // 
+            this.tbSessionCourseID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSessionCourseID.Location = new System.Drawing.Point(486, 112);
+            this.tbSessionCourseID.Name = "tbSessionCourseID";
+            this.tbSessionCourseID.ReadOnly = true;
+            this.tbSessionCourseID.Size = new System.Drawing.Size(138, 20);
+            this.tbSessionCourseID.TabIndex = 15;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(3, 263);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(52, 13);
+            this.label28.TabIndex = 16;
+            this.label28.Text = "Students:";
+            // 
+            // btnSessionOpenLocation
+            // 
+            this.btnSessionOpenLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSessionOpenLocation.Location = new System.Drawing.Point(512, 237);
+            this.btnSessionOpenLocation.Name = "btnSessionOpenLocation";
+            this.btnSessionOpenLocation.Size = new System.Drawing.Size(118, 23);
+            this.btnSessionOpenLocation.TabIndex = 17;
+            this.btnSessionOpenLocation.Text = "Open Folder Location";
+            this.btnSessionOpenLocation.UseVisualStyleBackColor = true;
+            this.btnSessionOpenLocation.Click += new System.EventHandler(this.btnSessionOpenLocation_Click);
+            // 
+            // btnCourseOpenFolder
+            // 
+            this.btnCourseOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCourseOpenFolder.Location = new System.Drawing.Point(409, 110);
+            this.btnCourseOpenFolder.Name = "btnCourseOpenFolder";
+            this.btnCourseOpenFolder.Size = new System.Drawing.Size(120, 23);
+            this.btnCourseOpenFolder.TabIndex = 17;
+            this.btnCourseOpenFolder.Text = "Open Folder Location";
+            this.btnCourseOpenFolder.UseVisualStyleBackColor = true;
+            this.btnCourseOpenFolder.Click += new System.EventHandler(this.btnCourseOpenFolder_Click);
+            // 
+            // colSessionUserName
+            // 
+            this.colSessionUserName.HeaderText = "Username";
+            this.colSessionUserName.Name = "colSessionUserName";
+            this.colSessionUserName.ReadOnly = true;
+            // 
+            // colSessionLastName
+            // 
+            this.colSessionLastName.HeaderText = "Last Name";
+            this.colSessionLastName.Name = "colSessionLastName";
+            this.colSessionLastName.ReadOnly = true;
+            // 
+            // colSessionFirstName
+            // 
+            this.colSessionFirstName.HeaderText = "First Name";
+            this.colSessionFirstName.Name = "colSessionFirstName";
+            this.colSessionFirstName.ReadOnly = true;
+            // 
+            // colSessionStudentID
+            // 
+            this.colSessionStudentID.HeaderText = "Student ID";
+            this.colSessionStudentID.Name = "colSessionStudentID";
+            this.colSessionStudentID.ReadOnly = true;
+            // 
+            // colSessionStartTime
+            // 
+            dataGridViewCellStyle5.Format = "hh:mm:ss tt";
+            this.colSessionStartTime.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colSessionStartTime.HeaderText = "Start Time";
+            this.colSessionStartTime.Name = "colSessionStartTime";
+            this.colSessionStartTime.ReadOnly = true;
+            // 
+            // colSessionAssessmentLength
+            // 
+            this.colSessionAssessmentLength.HeaderText = "Assessment Length (mins)";
+            this.colSessionAssessmentLength.Name = "colSessionAssessmentLength";
+            this.colSessionAssessmentLength.ReadOnly = true;
+            // 
+            // colSessionReadingTime
+            // 
+            this.colSessionReadingTime.HeaderText = "Reading Time (mins)";
+            this.colSessionReadingTime.Name = "colSessionReadingTime";
+            this.colSessionReadingTime.ReadOnly = true;
+            // 
+            // colSessionAccountName
+            // 
+            this.colSessionAccountName.HeaderText = "Account Name";
+            this.colSessionAccountName.Name = "colSessionAccountName";
+            this.colSessionAccountName.ReadOnly = true;
+            // 
+            // colSessionAccountPassword
+            // 
+            this.colSessionAccountPassword.HeaderText = "Account Password";
+            this.colSessionAccountPassword.Name = "colSessionAccountPassword";
+            this.colSessionAccountPassword.ReadOnly = true;
             // 
             // colPublishUsername
             // 
@@ -2227,8 +2630,8 @@
             // 
             // colPublishStartTime
             // 
-            dataGridViewCellStyle2.Format = "HH:mm:ss tt";
-            this.colPublishStartTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "hh:mm:ss tt";
+            this.colPublishStartTime.DefaultCellStyle = dataGridViewCellStyle6;
             this.colPublishStartTime.HeaderText = "Start Time";
             this.colPublishStartTime.Name = "colPublishStartTime";
             this.colPublishStartTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -2255,6 +2658,28 @@
             this.colPublishAccountPassword.HeaderText = "Account Password";
             this.colPublishAccountPassword.Name = "colPublishAccountPassword";
             this.colPublishAccountPassword.ReadOnly = true;
+            // 
+            // btnCourseExpand
+            // 
+            this.btnCourseExpand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCourseExpand.Image = global::AssessmentManager.Properties.Resources.ExpandAll32;
+            this.btnCourseExpand.Location = new System.Drawing.Point(3, 543);
+            this.btnCourseExpand.Name = "btnCourseExpand";
+            this.btnCourseExpand.Size = new System.Drawing.Size(35, 35);
+            this.btnCourseExpand.TabIndex = 4;
+            this.btnCourseExpand.UseVisualStyleBackColor = true;
+            this.btnCourseExpand.Click += new System.EventHandler(this.btnCourseExpand_Click);
+            // 
+            // btnCollapse
+            // 
+            this.btnCollapse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCollapse.Image = global::AssessmentManager.Properties.Resources.CollapseAll32;
+            this.btnCollapse.Location = new System.Drawing.Point(193, 543);
+            this.btnCollapse.Name = "btnCollapse";
+            this.btnCollapse.Size = new System.Drawing.Size(35, 35);
+            this.btnCollapse.TabIndex = 5;
+            this.btnCollapse.UseVisualStyleBackColor = true;
+            this.btnCollapse.Click += new System.EventHandler(this.btnCollapse_Click);
             // 
             // MainForm
             // 
@@ -2328,8 +2753,15 @@
             this.pnlCourseView.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCourseStudents)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).EndInit();
+            this.pnlAssessmentView.ResumeLayout(false);
+            this.pnlAssessmentView.PerformLayout();
             this.contextMenuStripQuestionNode.ResumeLayout(false);
             this.cmsCoursesTree.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPublishedAssessmentStudents)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2519,6 +2951,43 @@
         private System.Windows.Forms.Label lblDeploymentTarget;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button btnDeploymentTarget;
+        private System.Windows.Forms.DataGridView dgvPublishedAssessmentStudents;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox tbSessionTarget;
+        private System.Windows.Forms.TextBox tbSessionFileName;
+        private System.Windows.Forms.TextBox tbSessionName;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox tbSessionReadingTime;
+        private System.Windows.Forms.TextBox tbSessionLength;
+        private System.Windows.Forms.TextBox tbSessionFinishTime;
+        private System.Windows.Forms.TextBox tbSessionStartTime;
+        private System.Windows.Forms.TextBox tbSessionDate;
+        private System.Windows.Forms.TextBox tbSessionCourseID;
+        private System.Windows.Forms.TextBox tbSessionRestartPassword;
+        private System.Windows.Forms.ListBox lbSessionAdditionalFiles;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Button btnSessionOpenLocation;
+        private System.Windows.Forms.Button btnCourseOpenFolder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionLastName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionFirstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionStudentID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionStartTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionAssessmentLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionReadingTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionAccountName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSessionAccountPassword;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishUsername;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishLastName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishFirstName;
@@ -2528,5 +2997,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishReadingTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAccountName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPublishAccountPassword;
+        private System.Windows.Forms.Button btnCollapse;
+        private System.Windows.Forms.Button btnCourseExpand;
     }
 }

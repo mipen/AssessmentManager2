@@ -64,24 +64,22 @@ namespace AssessmentManager
             {
                 q.AddToAnswerDict(script.Answers);
             }
-            if (assessment.TimeData != null)
-                script.timeData = assessment.TimeData;
-            else
-                script.timeData = new TimeData()
-                {
-                    TimeLocked = false,
-                    Minutes = 60
-                };
-
-            if (assessment.CourseInformation != null)
-                script.CourseInformation = assessment.CourseInformation;
+            script.timeData = new TimeData()
+            {
+                TimeLocked = false,
+                Minutes = 60
+            };
 
             return script;
         }
 
-        public static AssessmentScript BuildFromSession(Assessment assessment, AssessmentSession session)
+        public static AssessmentScript BuildForPublishing(Assessment assessment, StudentData data)
         {
             AssessmentScript script = BuildFromAssessment(assessment);
+            //Set the data
+            script.studentData = data;
+            script.timeData = data.GenerateTimeData();
+            return script;
         }
 
         #endregion

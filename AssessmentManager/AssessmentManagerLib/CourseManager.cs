@@ -46,33 +46,24 @@ namespace AssessmentManager
             }
             coursesDir = p;
 
-            //Read all courses and load them into the list. Method returns any errors.
-            List<string> errors = LoadAllCourses(p);
-
-            //Report any errors
-            if (errors.Count > 0)
-            {
-                string erroredCourses = "";
-                foreach (var e in errors)
-                    erroredCourses += e + "\n";
-                string end = errors.Count == 1 ? "a course" : "some courses";
-                MessageBox.Show($"Unable to load course information from the following folder(s): \n\n {erroredCourses}", $"Error loading {end}");
-            }
+            //Read all courses and load them into the list.
+            LoadAllCourses(p);
+            courses.Sort((Course c1, Course c2) => c1.CourseTitle.CompareTo(c2.CourseTitle));
 
             //Fill the tree view.
             RebuildTreeView();
         }
 
-        private List<string> LoadAllCourses(string coursesPath)
+        private void LoadAllCourses(string coursesPath)
         {
             //TODO:: Load all assessments from course dir
-            List<string> errors = new List<string>();
-            string[] dirs = Directory.GetDirectories(coursesPath);
-            if (dirs.Count() > 0)
+            string[] courseDirs = Directory.GetDirectories(coursesPath);
+            if (courseDirs.Count() > 0)
             {
-                for (int i = 0; i < dirs.Count(); i++)
+                for (int i = 0; i < courseDirs.Count(); i++)
                 {
-                    string[] files = Directory.GetFiles(dirs[i]);
+                    //Get all the files in the course dir
+                    string[] files = Directory.GetFiles(courseDirs[i]);
                     string path = null;
                     try
                     {
@@ -86,13 +77,38 @@ namespace AssessmentManager
 
                         Course c = LoadCourse(path);
                         if (c != null)
+                        {
+                            c.ResetAssessments();
                             courses.Add(c);
-                        else
-                            errors.Add(path);
+                            //Load the assessments for this course
+                            string[] assessmentDirs = Directory.GetDirectories(courseDirs[i]);
+                            if (assessmentDirs.Count() > 0)
+                            {
+                                foreach (string a in assessmentDirs)
+                                {
+                                    string assessmentPath = null;
+                                    try
+                                    {
+                                        assessmentPath = (from t in Directory.GetFiles(a)
+                                                          where Path.GetExtension(t) == ASSESSMENT_SESSION_EXT
+                                                          select t).First();
+                                    }
+                                    catch { }
+                                    if (!assessmentPath.NullOrEmpty())
+                                    {
+                                        AssessmentSession session = LoadSession(assessmentPath);
+                                        if (session != null)
+                                        {
+                                            c.Assessments.Add(session);
+                                            session.FolderPath = a;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
-            return errors;
         }
 
         public void RegisterNewCourse(Course course)
@@ -142,6 +158,24 @@ namespace AssessmentManager
             }
 
             return true;
+        }
+
+        public AssessmentSession LoadSession(string path)
+        {
+            AssessmentSession s = null;
+            try
+            {
+                using (FileStream fs = File.Open(@path, FileMode.Open))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    s = (AssessmentSession)bf.Deserialize(fs);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load assessment session: \n\n" + ex.Message);
+            }
+            return s;
         }
 
         public string CreateAssessmentDir(AssessmentSession session, string coursePath)
@@ -196,7 +230,7 @@ namespace AssessmentManager
             tree.Nodes.Clear();
             if (courses.Count > 0)
             {
-                foreach (var c in courses.Where(co => co.CourseTitle.Contains(criteria)))
+                foreach (var c in courses.Where(co => (co.CourseTitle.Contains(criteria)) || (co.ID.Contains(criteria))))
                 {
                     CourseNode cn = BuildCourseNodeFor(c);
                     tree.Nodes.Add(cn);
@@ -208,8 +242,27 @@ namespace AssessmentManager
         public CourseNode BuildCourseNodeFor(Course course)
         {
             CourseNode node = new CourseNode(course);
-            //TODO:: Fill the children nodes with any assessments deployed under this course.
+            if (course.Assessments.Count > 0)
+            {
+                foreach (var s in course.Assessments)
+                {
+                    node.Nodes.Add(new AssessmentSessionNode(s)
+                    {
+                        Name = s.AssessmentName,
+                        Text = s.AssessmentName
+                    });
+                }
+            }
             return node;
+        }
+
+        public void AddAssessmentSession(AssessmentSession session)
+        {
+            Course c = (from t in Courses
+                        where t.ID == session.CourseID
+                        select t).First();
+            if (c != null)
+                c.Assessments.Add(session);
         }
 
         public string RandomCourseID()
@@ -268,6 +321,83 @@ namespace AssessmentManager
             return DialogResult.Yes;
         }
 
+        public void DeleteSession(AssessmentSession session)
+        {
+            try
+            {
+                //Delete session backup files
+                if (Directory.Exists(session.FolderPath))
+                    FileSystem.DeleteDirectory(session.FolderPath, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error removing session backup files: \n\n" + e.Message);
+            }
+            //Delete any deployed files
+            if (Directory.Exists(session.DeploymentTarget))
+            {
+                string[] accountDirs = Directory.GetDirectories(session.DeploymentTarget);
+                if (accountDirs.Count() > 0)
+                {
+                    foreach (var dir in accountDirs)
+                    {
+                        //Delete the files
+                        string[] files = Directory.GetFiles(dir);
+                        if (files.Count() > 0)
+                        {
+                            foreach (var file in files)
+                            {
+                                try
+                                {
+                                    string fileName = Path.GetFileName(file);
+                                    string scriptName = session.AssessmentName + ASSESSMENT_SCRIPT_EXT;
+                                    if (fileName == scriptName)
+                                    {
+                                        FileSystem.DeleteFile(file);
+                                        continue;
+                                    }
+                                    else if (session.AdditionalFiles.Count > 0 && session.AdditionalFiles.Contains(fileName))
+                                    {
+                                        FileSystem.DeleteFile(file);
+                                        continue;
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    MessageBox.Show("Error removing session files: \n\n" + e.Message);
+                                }
+                            }
+                        }
+                        string[] subDirs = Directory.GetDirectories(dir);
+                        if (subDirs.Count() > 0)
+                        {
+                            //Delete the autosaves folder
+                            try
+                            {
+                                string autosavesDir = (from t in subDirs
+                                                       where t == AUTOSAVE_FOLDER_NAME(session.AssessmentName)
+                                                       select t).First();
+                                if (!autosavesDir.NullOrEmpty())
+                                {
+                                    if (Directory.Exists(autosavesDir))
+                                        FileSystem.DeleteDirectory(autosavesDir, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show("Error removing autosaves directory: \n\n " + e.Message);
+                            }
+                        }
+                    }
+                }
+            }
+            Course c = FindCourseByID(session.CourseID);
+            if (c != null)
+            {
+                c.Assessments.Remove(session);
+            }
+        }
+
         public string PathForCourse(string ID)
         {
             if (!Courses.Where(c => c.ID == ID).Any())
@@ -278,6 +408,18 @@ namespace AssessmentManager
                 return path;
             else
                 throw new ArgumentException($"Cannot find directory for course with ID: {ID}", "ID");
+        }
+
+        public Course FindCourseByID(string ID)
+        {
+            try
+            {
+                return Courses.Where(c => c.ID == ID).First();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         #endregion

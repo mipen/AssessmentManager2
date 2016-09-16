@@ -5,17 +5,14 @@ namespace AssessmentManager
     [Serializable]
     public class TimeData
     {
-        //The number of minutes for the assessment
-        private int minutes = 60;
-        private int readingMinutes = 0;
+        public DateTime PlannedStartTime;
+        public DateTime PlannedFinishTime;
+        public DateTime TimeStarted;
+        public DateTime TimeFinished;
+        public int minutes = 0;
+        public int readingMinutes = 0;
         private bool timeLocked = false;
         private bool hasReadingTime = false;
-
-        //The time that the user started the assessment
-        public DateTime StartTime;
-        //Time that the assessment will finish
-        public DateTime FinishTime;
-        //Time that reading time will finish
         public DateTime ReadingFinishTime;
 
         public TimeData()
@@ -77,7 +74,7 @@ namespace AssessmentManager
         {
             get
             {
-                return DateTime.Now >= FinishTime;
+                return DateTime.Now >= PlannedFinishTime;
             }
         }
 
@@ -85,7 +82,7 @@ namespace AssessmentManager
         {
             get
             {
-                return FinishTime - DateTime.Now;
+                return PlannedFinishTime - DateTime.Now;
             }
         }
 

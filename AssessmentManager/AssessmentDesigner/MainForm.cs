@@ -121,6 +121,13 @@ namespace AssessmentManager
             set
             {
                 designerChangesMade = value;
+                if (DesignerChangesMade)
+                {
+                    if (!Text.Contains("*"))
+                        this.Text = this.Text + "*";
+                }
+                else
+                    this.Text = this.Text.Replace("*", "");
             }
         }
 
@@ -508,13 +515,13 @@ namespace AssessmentManager
             saveToolStripMenuItem.Enabled = true;
             saveasToolStripMenuItem.Enabled = true;
             closeToolStripMenuItem.Enabled = true;
-            //Change form text
-            UpdateFormText();
             //Populate the treeview with the questions from the assessment
             Util.PopulateTreeView(treeViewQuestionList, Assessment);
             if (treeViewQuestionList.Nodes.Count > 0) treeViewQuestionList.SelectedNode = treeViewQuestionList.Nodes[0];
             //No changes will have been made yet
             DesignerChangesMade = false;
+            //Change form text
+            UpdateFormText();
             //Setup publish tab
             SetPublishTab();
         }
@@ -912,6 +919,7 @@ namespace AssessmentManager
             QuestionNode node = (QuestionNode)e.Node;
             if (node != null)
             {
+                bool flag = designerChangesMade;
                 //Display the question's name
                 labelQuestion.Text = node.Question.Name;
                 //Display the question's text
@@ -978,6 +986,7 @@ namespace AssessmentManager
                     buttonAddSubQuestion.Enabled = false;
                 else
                     buttonAddSubQuestion.Enabled = true;
+                DesignerChangesMade = flag;
             }
         }
         #endregion
@@ -1431,7 +1440,8 @@ namespace AssessmentManager
                     QuestionNode node = treeViewQuestionList.SelectedNode as QuestionNode;
                     if (node != null)
                     {
-                        treeViewQuestionList.SelectedNode = node.PrevVisibleNode;
+                        if (node.PrevVisibleNode != null)
+                            treeViewQuestionList.SelectedNode = node.PrevVisibleNode;
                     }
                     treeViewQuestionList.Focus();
                     e.Handled = true;
@@ -1441,7 +1451,8 @@ namespace AssessmentManager
                     QuestionNode node = treeViewQuestionList.SelectedNode as QuestionNode;
                     if (node != null)
                     {
-                        treeViewQuestionList.SelectedNode = node.PrevVisibleNode;
+                        if (node.NextVisibleNode != null)
+                            treeViewQuestionList.SelectedNode = node.NextVisibleNode;
                     }
                     treeViewQuestionList.Focus();
                     e.Handled = true;
@@ -1529,14 +1540,26 @@ namespace AssessmentManager
         public void DeleteCourseNode(CourseNode node)
         {
             //First make sure the user wants to do this.
-            string message = "This will move this course entry and all assessment sessions associated with it to the recycle bin. Are you sure you wish to do this? To undo this, you will have to manually restore it from the recycle bin.";
-            if (MessageBox.Show(message, "Confirm delete course", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            string message = "This will delete this course entry and all assessment sessions associated with it and will remove any files deployed to exam accounts. Are you sure you wish to do this? This cannot be undone.";
+            if (MessageBox.Show(message, "Confirm delete course", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 //First delete the course contained in the node. The method returns DialogResult.No if user cancels it
                 if (CourseManager.DeleteCourse(node.Course) == DialogResult.Yes)
                 {
                     //Remove the node
                     tvCourses.Nodes.Remove(node);
+                    //Remove any sessions attached to this course.
+                    if (node.Nodes.Count > 0)
+                    {
+                        foreach (AssessmentSessionNode asn in node.Nodes.Cast<AssessmentSessionNode>())
+                        {
+                            try
+                            {
+                                DeleteSessionNode(asn, true);
+                            }
+                            catch { }
+                        }
+                    }
                     //Select the first node in the tree if there is one
                     if (tvCourses.Nodes.Count > 0)
                     {
@@ -1554,9 +1577,28 @@ namespace AssessmentManager
             }
         }
 
-        public void DeleteSessionNode(AssessmentSessionNode node)
+        public void DeleteSessionNode(AssessmentSessionNode node, bool parentBeingRemoved)
         {
-            //TODO:: handle deleting a session node
+            //Ask if the user really wants to do this
+            string message = "This will delete all records of this assessment session, including any files deployed to the assessment accounts. Are you sure you wish to do this? This cannot be undone.";
+            if (parentBeingRemoved || MessageBox.Show(message, "Delete assessment session", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                CourseManager.DeleteSession(node.Session);
+                TreeNode parent = node.Parent;
+                node.Remove();
+                if (!parentBeingRemoved)
+                {
+                    if (parent != null)
+                        tvCourses.SelectedNode = node.Parent;
+                    else
+                    {
+                        pnlCourseView.Visible = false;
+                        pnlCourseView.Enabled = false;
+                        pnlAssessmentView.Visible = false;
+                        pnlAssessmentView.Enabled = false;
+                    }
+                }
+            }
         }
 
         private void SetCoursesContextMenu(CourseContextMenuMode mode)
@@ -1611,7 +1653,6 @@ namespace AssessmentManager
 
         private void tvCourses_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
             if (e.Node is CourseNode)
             {
                 CourseNode node = e.Node as CourseNode;
@@ -1654,8 +1695,59 @@ namespace AssessmentManager
             else if (e.Node is AssessmentSessionNode)
             {
                 AssessmentSessionNode node = e.Node as AssessmentSessionNode;
-                //TODO:: Session related stuff here
+                AssessmentSession s = node.Session;
                 //Show the session panel and hide course panel
+                pnlCourseView.Visible = false;
+                pnlCourseView.Enabled = false;
+                pnlAssessmentView.Visible = true;
+                pnlAssessmentView.Enabled = true;
+
+                //Show the assessment details
+                tbSessionName.Text = s.AssessmentName;
+                tbSessionFileName.Text = s.AssessmentFileName;
+                tbSessionTarget.Text = s.DeploymentTarget;
+
+                //Show the timing details
+                tbSessionDate.Text = s.StartTime.Date.ToString("dd/MM/yyyy");
+                tbSessionStartTime.Text = s.StartTime.ToString("hh:mm:ss tt");
+                tbSessionFinishTime.Text = s.StartTime.AddMinutes(s.AssessmentLength + s.ReadingTime).ToString("hh:mm:ss tt");
+                tbSessionLength.Text = s.AssessmentLength.ToString();
+                tbSessionReadingTime.Text = s.ReadingTime.ToString();
+
+                //Show course id and password
+                tbSessionCourseID.Text = s.CourseID;
+                tbSessionRestartPassword.Text = s.RestartPassword;
+
+                //Show additional files
+                lbSessionAdditionalFiles.Items.Clear();
+                if (s.AdditionalFiles.Count > 0)
+                {
+                    foreach (var f in s.AdditionalFiles)
+                    {
+                        lbSessionAdditionalFiles.Items.Add(f);
+                    }
+                }
+
+                //Show the students
+                dgvPublishedAssessmentStudents.Rows.Clear();
+                foreach (var sd in s.StudentData)
+                {
+                    //DGVEDIT:: 
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dgvPublishedAssessmentStudents);
+
+                    row.Cells[0].Value = sd.UserName;
+                    row.Cells[1].Value = sd.LastName;
+                    row.Cells[2].Value = sd.FirstName;
+                    row.Cells[3].Value = sd.StudentID;
+                    row.Cells[4].Value = sd.StartTime;
+                    row.Cells[5].Value = sd.AssessmentLength;
+                    row.Cells[6].Value = sd.ReadingTime;
+                    row.Cells[7].Value = sd.AccountName;
+                    row.Cells[8].Value = sd.AccountPassword;
+
+                    dgvPublishedAssessmentStudents.Rows.Add(row);
+                }
             }
             else
             {
@@ -1848,7 +1940,7 @@ namespace AssessmentManager
                 else if (tvCourses.SelectedNode is AssessmentSessionNode)
                 {
                     AssessmentSessionNode node = tvCourses.SelectedNode as AssessmentSessionNode;
-                    DeleteSessionNode(node);
+                    DeleteSessionNode(node, false);
                     e.Handled = true;
                 }
             }
@@ -1893,7 +1985,8 @@ namespace AssessmentManager
 
         private void tsmiDeleteAssessmentSession_Click(object sender, EventArgs e)
         {
-            //TODO::
+            AssessmentSessionNode node = tvCourses.SelectedNode as AssessmentSessionNode;
+            DeleteSessionNode(node, false);
         }
 
         private void tsmiDuplicateCourse_Click(object sender, EventArgs e)
@@ -1906,6 +1999,40 @@ namespace AssessmentManager
                 Course newCourse = cNode.Course.Clone(false);
                 CourseManager.RegisterNewCourse(newCourse);
             }
+        }
+
+        private void btnSessionOpenLocation_Click(object sender, EventArgs e)
+        {
+            if (tvCourses.SelectedNode != null && tvCourses.SelectedNode is AssessmentSessionNode)
+            {
+                AssessmentSessionNode node = tvCourses.SelectedNode as AssessmentSessionNode;
+                if (Directory.Exists(node.Session.FolderPath))
+                {
+                    Process.Start("explorer.exe", node.Session.FolderPath);
+                }
+            }
+        }
+
+        private void btnCourseOpenFolder_Click(object sender, EventArgs e)
+        {
+            if (tvCourses.SelectedNode != null && tvCourses.SelectedNode is CourseNode)
+            {
+                CourseNode node = tvCourses.SelectedNode as CourseNode;
+                if (Directory.Exists(node.Course.GetCoursePath()))
+                {
+                    Process.Start("explorer.exe", node.Course.GetCoursePath());
+                }
+            }
+        }
+
+        private void btnCourseExpand_Click(object sender, EventArgs e)
+        {
+            tvCourses.ExpandAll();
+        }
+
+        private void btnCollapse_Click(object sender, EventArgs e)
+        {
+            tvCourses.CollapseAll();
         }
 
         #endregion
@@ -1954,8 +2081,7 @@ namespace AssessmentManager
             dtpPublishDate.Value = DateTime.Now;
 
             //Populate the course selector.
-            cbPublishCourseSelector.Items.Clear();
-            cbPublishCourseSelector.Items.AddRange(CourseManager.Courses.ToArray());
+            PopulateCoursePicker();
 
             //Set up the add files dialog
             addFilesDialog.InitialDirectory = DESKTOP_PATH;
@@ -2014,8 +2140,23 @@ namespace AssessmentManager
             dgvPublishStudents.Enabled = false;
         }
 
-        private bool TryDeployAssessment()
+        private void PopulateCoursePicker()
         {
+            //Record the chosen item
+            Course chosenCourse = null;
+            if (cbPublishCourseSelector.SelectedItem != null)
+                chosenCourse = (Course)cbPublishCourseSelector.SelectedItem;
+
+            cbPublishCourseSelector.Items.Clear();
+            cbPublishCourseSelector.Items.AddRange(CourseManager.Courses.ToArray());
+
+            if (chosenCourse != null && cbPublishCourseSelector.Items.Contains(chosenCourse))
+                cbPublishCourseSelector.SelectedItem = chosenCourse;
+        }
+
+        private bool TryDeployAssessment(out AssessmentSession assessmentSession)
+        {
+            assessmentSession = null;
             const string title = "Unable to deploy - ";
             List<StudentData> students = new List<StudentData>();
             //Check deployment target exists
@@ -2083,7 +2224,7 @@ namespace AssessmentManager
                     string accountName = row.Cells[7].Value == null ? "" : row.Cells[7].Value.ToString();
                     string accountPassword = row.Cells[8].Value == null ? "" : row.Cells[8].Value.ToString();
 
-                    StudentData sd = new StudentData(userName, lastName, firstName, studentID, startTime, assessmentLength, readingTime, accountName, accountPassword);
+                    StudentData sd = new StudentData(userName, lastName, firstName, studentID, startTime, assessmentLength, readingTime, accountName, accountPassword, chkbxTimeLocked.Checked, tbPublishResetPassword.Text);
                     if (!sd.ResolveErrors())
                     {
                         flag = true;
@@ -2117,7 +2258,6 @@ namespace AssessmentManager
                     sb.AppendLine("Student " + kvp.Key + ":");
                     foreach (var e in kvp.Value)
                     {
-                        //if(e == Student.ErrorType.AccountName && !)
                         sb.AppendLine("     " + e.ToString());
                     }
                 }
@@ -2129,6 +2269,7 @@ namespace AssessmentManager
             #region Additional Files
             List<string> missingFiles = new List<string>();
             List<string> additionalFiles = new List<string>();
+            List<string> additionalFilesNames = new List<string>();
             if (lbPublishAdditionalFiles.Items.Count > 0)
             {
                 foreach (var o in lbPublishAdditionalFiles.Items)
@@ -2137,6 +2278,7 @@ namespace AssessmentManager
                     if (!File.Exists(@fi.Path))
                         missingFiles.Add(@fi.Path);
                     additionalFiles.Add(@fi.Path);
+                    additionalFilesNames.Add(fi.ToString());
                 }
             }
             if (missingFiles.Count > 0)
@@ -2159,8 +2301,8 @@ namespace AssessmentManager
             DateTime time = dtpPublishTime.Value;
             DateTime startTime2 = new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
             bool timeLocked = chkbxTimeLocked.Checked;
-            AssessmentSession session = new AssessmentSession(SelectedCourse.ID, lblDeploymentTarget.Text, Assessment.AssessmentInfo.AssessmentName, assessmentFile.Name, startTime2, (int)nudPublishAssessmentLength.Value, (int)nudPublishReadingTime.Value, timeLocked, students, additionalFiles);
-
+            AssessmentSession session = new AssessmentSession(SelectedCourse.ID, lblDeploymentTarget.Text, Assessment.AssessmentInfo.AssessmentName, assessmentFile.Name, startTime2, (int)nudPublishAssessmentLength.Value, (int)nudPublishReadingTime.Value, timeLocked, tbPublishResetPassword.Text, students, additionalFilesNames);
+            assessmentSession = session;
             #endregion
 
             #region Deploy all files
@@ -2179,60 +2321,145 @@ namespace AssessmentManager
             //Backup the files
             string sessionPath = CourseManager.CreateAssessmentDir(session, coursePath);
             string sessionFilePath = Path.Combine(@sessionPath, session.AssessmentName + ASSESSMENT_SESSION_EXT);
+            session.FolderPath = sessionPath;
             CourseManager.SerialiseSession(session, @sessionFilePath);
-            if(additionalFiles.Count>0)
+            string assessmentPath = Path.Combine(@sessionPath, assessmentFile.Name);
+            SaveToFile(@assessmentPath);
+            if (additionalFiles.Count > 0)
             {
-                foreach(var p in additionalFiles)
+                try
                 {
-                    string dest = Path.Combine(@sessionPath, Path.GetFileName(@p));
-                    File.Copy(@p, @dest, true);
+                    foreach (var p in additionalFiles)
+                    {
+                        string dest = Path.Combine(@sessionPath, Path.GetFileName(@p));
+                        File.Copy(@p, @dest, true);
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error copying files: \n\n" + e.Message);
+                    return false;
                 }
             }
 
             //Deploy to the student accounts
             foreach (var sd in session.StudentData)
             {
-
+                //TODO:: Make sure that the target exists (When loading account names from spreadsheet)
+                string destPath = Path.Combine(@lblDeploymentTarget.Text, sd.AccountName);
+                try
+                {
+                    AssessmentScript script = AssessmentScript.BuildForPublishing(Assessment, sd);
+                    string scriptPath = Path.Combine(@destPath, session.AssessmentName + ASSESSMENT_SCRIPT_EXT);
+                    using (FileStream s = File.Open(scriptPath, FileMode.OpenOrCreate, FileAccess.Write))
+                    {
+                        BinaryFormatter bf = new BinaryFormatter();
+                        bf.Serialize(s, script);
+                    }
+                    if (additionalFiles.Count > 0)
+                    {
+                        foreach (var p in additionalFiles)
+                        {
+                            string d = Path.Combine(@destPath, Path.GetFileName(p));
+                            File.Copy(@p, @d, true);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to publish files for student: {sd.AnyIdentifiableTag()} \n\n" + ex.Message);
+                    return false;
+                }
             }
 
             #endregion
 
+            //Rebuild course manager tree!
+            CourseManager.AddAssessmentSession(session);
+            CourseManager.RebuildTreeView(tbCourseSearch.Text);
             //Success!
             return true;
         }
 
+        private void AbortDeployment(AssessmentSession session)
+        {
+            if (session != null)
+            {
+                //Delete the backup folder
+                if (!session.FolderPath.NullOrEmpty() && Directory.Exists(session.FolderPath))
+                {
+                    try
+                    {
+                        Util.DeleteDirectory(session.FolderPath);
+                    }
+                    catch { }
+                }
+                //Try delete any files that were deployed
+                if (!session.DeploymentTarget.NullOrEmpty() && Directory.Exists(session.DeploymentTarget))
+                {
+                    string[] accountDirs = Directory.GetDirectories(session.DeploymentTarget);
+                    if (accountDirs.Count() > 0)
+                    {
+                        foreach (var account in accountDirs)
+                        {
+                            string[] files = Directory.GetFiles(account);
+                            if (files.Count() > 0)
+                            {
+                                foreach (var filePath in files)
+                                {
+                                    try
+                                    {
+                                        //Delete the script file
+                                        string fileName = Path.GetFileName(filePath);
+                                        string scriptName = session.AssessmentName + ASSESSMENT_SCRIPT_EXT;
+                                        if (fileName == scriptName)
+                                        {
+                                            Util.DeleteFile(filePath);
+                                            continue;
+                                        }
+
+                                        //Delete the additional files
+                                        if (session.AdditionalFiles.Count > 0)
+                                        {
+                                            if (session.AdditionalFiles.Contains(fileName))
+                                                Util.DeleteFile(filePath);
+                                        }
+                                    }
+                                    catch { }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
-        #region Events
+
+            #region Events
 
         private void btnPublishDeploy_Click(object sender, EventArgs e)
         {
-            //TODO:: If publish is successful, offer to create a pdf containing all the information handout forms for the students. Let user know that this can be done by selecting assessment
-            // in course manager tab.
-
-            //TODO:: This button creates an AssessmentSession which holds all the information. This is added to the selected course's list. All files are copied to the different accounts and backups are
-            //made in the course's folder.
-            //TODO:: Make sure there are enough accounts for the list of students
-            //TODO:: Make sure that each student's info is complete
-
-            //TODO:: STEPS:
-            /*
-
-            Check each student has valid info in all relevant cells.
-            Check there are enough account folders in the chosen directory for each student. if there are too many or too little, tell the user.
-            Check each additional file is still there (load them into memory, maybe?)
-            Create AssessmentSession object - record the information from the publish screen. Record assessment file name and course ID
-            Serialise the assessment into each account found in the directory. Keep a record of which ones a deployed to.
-            Send the additional files (if any) to each account at the same time.
-            As each deployment is done, add a record of the account and all files to the AssessmentSession object. Do this for each account.
-            Create the assessment directory in the courses' folder
-            Save the assessment and any additional files in this folder
-            Serialise AssessmentSession to this folder.
-            Reload the course
-            Rebuild course manager tree view
-
-            */
-            TryDeployAssessment();
-
+            //Tell user that this is final, cannot be changed and ask for them to check that everything is correct
+            string m = "Are you sure that all information is correct? Once the assessment is deployed, it cannot be changed. Clicking 'Yes' will commence the deployment process.";
+            AssessmentSession session;
+            if (MessageBox.Show(m, "Deploy assessment?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (TryDeployAssessment(out session))
+                {
+                    //If publish is successful, offer to create a pdf containing all the information handout forms for the students. Let user know that this can be done by selecting assessment
+                    // in course manager tab.
+                    string message = "Assessment successfully published! Would you like to generate handout forms for each student in this assessment? This can be done later in the CourseManager tab by selecting the assessment.";
+                    if (MessageBox.Show(message, "Create handout pdf?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        //TODO:: this
+                    }
+                }
+                else
+                {
+                    AbortDeployment(session);
+                }
+            }
         }
 
         private void btnPublishPrepare_Click(object sender, EventArgs e)
@@ -2310,13 +2537,10 @@ namespace AssessmentManager
 
         private void tabControlMain_Selected(object sender, TabControlEventArgs e)
         {
-            //MessageBox.Show(e.TabPage.Name);
-            //TODO:: Reload the courses in the combo box if reloadCourses == true; Reset reloadCourses to false.
             if (e.TabPage.Name == "tabPagePublish" && reloadCourses)
             {
                 reloadCourses = false;
-                //TODO:: If there is a course selected, save the id for that course then reload the courses list.
-                //TODO:: If the course id is no longer present, let the user know, otherwise select the course with the same id.
+                PopulateCoursePicker();
             }
         }
 

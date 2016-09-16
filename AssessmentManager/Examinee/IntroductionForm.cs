@@ -140,7 +140,7 @@ namespace AssessmentManager
             DisplayInformation(script);
 
             //Determine if the assessment can be continued
-            if (DateTime.Now < script.TimeData.FinishTime)
+            if (DateTime.Now < script.TimeData.PlannedFinishTime)
             {
                 //Assessment can be continued
 

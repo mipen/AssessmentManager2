@@ -37,7 +37,7 @@ namespace AssessmentManager
 
         public static string AUTOSAVE_FOLDER_NAME(string assessmentName)
         {
-            return $"{assessmentName}_autosaves";
+            return $"{assessmentName.Replace(" ","")}_autosaves";
         }
     }
 }

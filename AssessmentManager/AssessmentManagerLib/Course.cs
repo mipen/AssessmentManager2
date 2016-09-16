@@ -75,6 +75,11 @@ namespace AssessmentManager
             return list;
         }
 
+        public void ResetAssessments()
+        {
+            assessments = new List<AssessmentSession>();
+        }
+
         public override string ToString()
         {
             return CourseTitle;
