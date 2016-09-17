@@ -9,11 +9,12 @@ namespace AssessmentManager
     [Serializable]
     public class AssessmentSession
     {
-        private string assessmentName = "";
+        private AssessmentInformation assessmentInfo = new AssessmentInformation();
         private string assessmentFileName = "";
         private string courseID = "";
         private string deploymentTarget = "";
         private DateTime startTime;
+        private DateTime deploymentTime;
         private int assessmentLength = 0;
         private int readingTime = 0;
         private string restartPassword;
@@ -22,9 +23,9 @@ namespace AssessmentManager
 
         public string FolderPath = "";
 
-        public AssessmentSession(string courseID, string deploymentTarget, string assessmentName, string assessmentFileName, DateTime startTime, int assessmentLength, int readingTime, string restartPassword, List<StudentData> studentData, List<string> additionalFiles)
+        public AssessmentSession(string courseID, string deploymentTarget, AssessmentInformation assessmentInfo, string assessmentFileName, DateTime startTime, int assessmentLength, int readingTime, string restartPassword, List<StudentData> studentData, List<string> additionalFiles, DateTime deploymentTime)
         {
-            this.assessmentName = assessmentName;
+            this.assessmentInfo = assessmentInfo;
             this.assessmentFileName = assessmentFileName;
             this.courseID = courseID;
             this.deploymentTarget = deploymentTarget;
@@ -34,6 +35,7 @@ namespace AssessmentManager
             this.restartPassword = restartPassword;
             this.studentData = studentData;
             this.additionalFiles = additionalFiles;
+            this.deploymentTime = deploymentTime;
         }
 
         public string CourseID
@@ -44,11 +46,11 @@ namespace AssessmentManager
             }
         }
 
-        public string AssessmentName
+        public AssessmentInformation AssessmentInfo
         {
             get
             {
-                return assessmentName;
+                return assessmentInfo;
             }
         }
 
@@ -73,6 +75,14 @@ namespace AssessmentManager
             get
             {
                 return startTime;
+            }
+        }
+
+        public DateTime DeploymentTime
+        {
+            get
+            {
+                return deploymentTime;
             }
         }
 

@@ -251,24 +251,18 @@ namespace AssessmentManager
             if (CloseAssessment() == DialogResult.OK)
             {
                 //Prompt to do initial save here
-                AssessmentInformationForm aif = new AssessmentInformationForm();
-                aif.StartPosition = FormStartPosition.CenterParent;
-                if (aif.ShowDialog() == DialogResult.OK)
+                Assessment = new Assessment();
+                Assessment.AddQuestion("Question 1");
+                //Prompt the user to do an initial save here. This is to set up the path and allow for autosaving
+                MessageBox.Show("Please do an initial save. This will allow the program to perform autosaves.", "Initial save");
+                if (SaveToFile() == DialogResult.OK)
                 {
-                    Assessment = new Assessment();
-                    Assessment.AddQuestion("Question 1");
-                    AssessmentInformationForm.PopulateAssessmentInformation(Assessment, aif);
-                    //Prompt the user to do an initial save here. This is to set up the path and allow for autosaving
-                    MessageBox.Show("Please do an initial save. This will allow the program to perform autosaves.", "Initial save");
-                    if (SaveToFile() == DialogResult.OK)
-                    {
-                        NotifyAssessmentOpened();
-                        DesignerChangesMade = true;
-                    }
-                    else
-                    {
-                        Assessment = null;
-                    }
+                    NotifyAssessmentOpened();
+                    DesignerChangesMade = true;
+                }
+                else
+                {
+                    Assessment = null;
                 }
             }
         }
@@ -336,19 +330,6 @@ namespace AssessmentManager
                         questions += q.Name + "\n";
 
                     MessageBox.Show("These questions do not have any marks assigned: \n\n" + questions, "Unassigned marks");
-                }
-            }
-        }
-
-        private void assessmentInformationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (HasAssessmentOpen)
-            {
-                AssessmentInformationForm aif = AssessmentInformationForm.FromAssessment(Assessment);
-                if (aif.ShowDialog() == DialogResult.OK)
-                {
-                    AssessmentInformationForm.PopulateAssessmentInformation(Assessment, aif);
-                    DesignerChangesMade = true;
                 }
             }
         }
@@ -482,7 +463,6 @@ namespace AssessmentManager
             //Disable menustrip buttons
             checkForQuestionsWithoutMarksToolStripMenuItem.Enabled = false;
             makePdfOfExamToolStripMenuItem.Enabled = false;
-            assessmentInformationToolStripMenuItem.Enabled = false;
             exportToXMLToolStripMenuItem.Enabled = false;
             saveToolStripMenuItem.Enabled = false;
             saveasToolStripMenuItem.Enabled = false;
@@ -510,7 +490,6 @@ namespace AssessmentManager
             //Enable menustrip buttons
             checkForQuestionsWithoutMarksToolStripMenuItem.Enabled = true;
             makePdfOfExamToolStripMenuItem.Enabled = true;
-            assessmentInformationToolStripMenuItem.Enabled = true;
             exportToXMLToolStripMenuItem.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
             saveasToolStripMenuItem.Enabled = true;
@@ -564,7 +543,6 @@ namespace AssessmentManager
                 else if (result == DialogResult.Cancel)
                     return DialogResult.Cancel;
             }
-            //TODO:: Check if an assessment session has been prepared. Warn user that if they continue the session will be lost.
             Assessment = null;
             treeViewQuestionList.Nodes.Clear();
             NotifyAssessmentClosed();
@@ -780,9 +758,6 @@ namespace AssessmentManager
 
         public void MakePdf(bool withAnswers)
         {
-            //TODO:: Make sure the assessment has some questions before making a pdf
-            //TODO:: Use a save file dialog to get the file path
-            //TODO:: Prompt to say it was created and ask if want to open it.
             if (Assessment == null)
             {
                 MessageBox.Show("Unable to make pdf: Assessment is null", "Error");
@@ -795,12 +770,16 @@ namespace AssessmentManager
             }
             if (pdfSaveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                AssessmentWriter w = new AssessmentWriter(Assessment, pdfSaveFileDialog.FileName);
-                if (w.MakePdf(withAnswers))
+                AssessmentInformationForm aif = new AssessmentInformationForm();
+                if (aif.ShowDialog() == DialogResult.OK)
                 {
-                    if (MessageBox.Show("PDF successfully created. Would you like to view it now?", "PDF created", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    AssessmentWriter w = new AssessmentWriter(Assessment, aif.AssessmentInformation, pdfSaveFileDialog.FileName);
+                    if (w.MakePdf(withAnswers))
                     {
-                        Process.Start(pdfSaveFileDialog.FileName);
+                        if (MessageBox.Show("PDF successfully created. Would you like to view it now?", "PDF created", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            Process.Start(pdfSaveFileDialog.FileName);
+                        }
                     }
                 }
             }
@@ -1451,7 +1430,7 @@ namespace AssessmentManager
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //TODO:: Check for changes made to a course and prompt to save them. If cancled then dont close!
+            //Check for changes made to a course and prompt to save them. If cancled then dont close!
             if (DesignerChangesMade)
             {
                 DialogResult result = MessageBox.Show("Changes have been made to this Assessment. Closing it now will cause those changes to be lost. Would you like to save before closing?", "Unsaved changes", MessageBoxButtons.YesNoCancel);
@@ -1613,6 +1592,8 @@ namespace AssessmentManager
 
                 CourseManager.SerialiseCourse(cn.Course);
                 CourseEdited = false;
+                //Update the revert point
+                courseRevertPoint = c.Clone();
             }
         }
 
@@ -1674,6 +1655,7 @@ namespace AssessmentManager
                 CourseManager.DeleteSession(node.Session);
                 TreeNode parent = node.Parent;
                 node.Remove();
+                UpdateLastDeploymentTime();
                 if (!parentBeingRemoved)
                 {
                     if (parent != null)
@@ -1796,7 +1778,7 @@ namespace AssessmentManager
                 pnlAssessmentView.Enabled = true;
 
                 //Show the assessment details
-                tbSessionName.Text = s.AssessmentName;
+                tbSessionName.Text = s.AssessmentInfo.AssessmentName;
                 tbSessionFileName.Text = s.AssessmentFileName;
                 tbSessionTarget.Text = s.DeploymentTarget;
 
@@ -2087,7 +2069,7 @@ namespace AssessmentManager
             TreeNode node = tvCourses.SelectedNode;
             if (node != null && node is CourseNode)
             {
-                //TODO:: Don't copy assessment sessions here
+                //Don't copy assessment sessions here
                 CourseNode cNode = node as CourseNode;
                 Course newCourse = cNode.Course.Clone(false);
                 CourseManager.RegisterNewCourse(newCourse);
@@ -2133,6 +2115,16 @@ namespace AssessmentManager
             AssessmentSessionNode node = tvCourses.SelectedNode as AssessmentSessionNode;
             if (node != null)
                 GenerateHandout(node.Session);
+        }
+
+        private void btnCourseClearStudents_Click(object sender, EventArgs e)
+        {
+            string m = "Are you sure you wish to clear all students?";
+            if(MessageBox.Show(m,"Confirm",MessageBoxButtons.YesNo)==DialogResult.Yes)
+            {
+                dgvCourseStudents.Rows.Clear();
+                CourseEdited = true;
+            }
         }
 
         #endregion
@@ -2225,9 +2217,8 @@ namespace AssessmentManager
         {
             //Method called when an assessment is opened.
 
-            //TODO:: Set any values relevant to the assessment, ie file name, last time deployed
+            //Set any values relevant to the assessment, ie file name, last time deployed
             lblPublishFileName.Text = assessmentFile.FullName;
-            //TODO:: Show when assessment was last published.
 
             //Generate new password
             tbPublishResetPassword.Text = Util.RandomString(6);
@@ -2237,6 +2228,9 @@ namespace AssessmentManager
 
             //Disable student editor
             dgvPublishStudents.Enabled = false;
+
+            //Show when assessment was last published.
+            UpdateLastDeploymentTime();
         }
 
         private void PopulateCoursePicker()
@@ -2251,6 +2245,29 @@ namespace AssessmentManager
 
             if (chosenCourse != null && cbPublishCourseSelector.Items.Contains(chosenCourse))
                 cbPublishCourseSelector.SelectedItem = chosenCourse;
+        }
+
+        private void UpdateLastDeploymentTime()
+        {
+            DateTime date = INVALID_DATE;
+            foreach (var course in CourseManager.Courses)
+            {
+                if (course.Assessments.Count > 0)
+                {
+                    foreach (var session in course.Assessments)
+                    {
+                        if (Path.GetFileName(session.AssessmentFileName) == assessmentFile.Name)
+                        {
+                            if (date == INVALID_DATE || session.DeploymentTime > date)
+                                date = session.DeploymentTime;
+                        }
+                    }
+                }
+            }
+            if (date != INVALID_DATE)
+                lblPublishLastDeployed.Text = date.ToShortDateString() + " " + date.ToShortTimeString();
+            else
+                lblPublishLastDeployed.Text = "Never";
         }
 
         private bool TryDeployAssessment(out AssessmentSession assessmentSession)
@@ -2269,6 +2286,19 @@ namespace AssessmentManager
                 MessageBox.Show("The specified deployment path is unreachable or does not exist", title + "Cannot reach deployment target");
                 return false;
             }
+            //Check that a name has been entered
+            if (tbPublishAssessmentName.Text.NullOrEmpty())
+            {
+                MessageBox.Show("Please enter a valid assessment name", title + "Invalid assessment name");
+                return false;
+            }
+            AssessmentInformation info = new AssessmentInformation()
+            {
+                AssessmentName = tbPublishAssessmentName.Text,
+                Author = tbPublishAuthor.Text,
+                AssessmentWeighting = (int)nudPublishWeigthing.Value
+            };
+
             #region Student Check
             //Check the data for each student is good:
             if (!(dgvCourseStudents.Rows.Count > 0))
@@ -2280,7 +2310,6 @@ namespace AssessmentManager
             Dictionary<string, List<Student.ErrorType>> errors = new Dictionary<string, List<Student.ErrorType>>();
             try
             {
-                //TODO:: Make sure it doesn't do the last row, which is always blank
                 for (int i = 0; i < dgvPublishStudents.Rows.Count; i++)
                 {
                     DataGridViewRow row = dgvPublishStudents.Rows[i];
@@ -2399,7 +2428,7 @@ namespace AssessmentManager
             DateTime date = dtpPublishDate.Value;
             DateTime time = dtpPublishTime.Value;
             DateTime startTime2 = new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
-            AssessmentSession session = new AssessmentSession(SelectedCourse.ID, lblDeploymentTarget.Text, Assessment.AssessmentInfo.AssessmentName, assessmentFile.Name, startTime2, (int)nudPublishAssessmentLength.Value, (int)nudPublishReadingTime.Value, tbPublishResetPassword.Text, students, additionalFilesNames);
+            AssessmentSession session = new AssessmentSession(SelectedCourse.ID, lblDeploymentTarget.Text, info, assessmentFile.Name, startTime2, (int)nudPublishAssessmentLength.Value, (int)nudPublishReadingTime.Value, tbPublishResetPassword.Text, students, additionalFilesNames, DateTime.Now);
             assessmentSession = session;
             #endregion
 
@@ -2418,7 +2447,7 @@ namespace AssessmentManager
 
             //Backup the files
             string sessionPath = CourseManager.CreateAssessmentDir(session, coursePath);
-            string sessionFilePath = Path.Combine(@sessionPath, session.AssessmentName + ASSESSMENT_SESSION_EXT);
+            string sessionFilePath = Path.Combine(@sessionPath, session.AssessmentInfo.AssessmentName + ASSESSMENT_SESSION_EXT);
             session.FolderPath = sessionPath;
             CourseManager.SerialiseSession(session, @sessionFilePath);
             string assessmentPath = Path.Combine(@sessionPath, assessmentFile.Name);
@@ -2447,9 +2476,9 @@ namespace AssessmentManager
                 string destPath = Path.Combine(@lblDeploymentTarget.Text, sd.AccountName);
                 try
                 {
-                    AssessmentScript script = AssessmentScript.BuildForPublishing(Assessment, sd);
+                    AssessmentScript script = AssessmentScript.BuildForPublishing(Assessment, sd, info);
                     script.CourseInformation = CourseManager.FindCourseByID(session.CourseID)?.CourseInfo.Clone();
-                    string scriptPath = Path.Combine(@destPath, session.AssessmentName + ASSESSMENT_SCRIPT_EXT);
+                    string scriptPath = Path.Combine(@destPath, session.AssessmentInfo.AssessmentName + ASSESSMENT_SCRIPT_EXT);
                     using (FileStream s = File.Open(@scriptPath, FileMode.OpenOrCreate, FileAccess.Write))
                     {
                         BinaryFormatter bf = new BinaryFormatter();
@@ -2473,9 +2502,12 @@ namespace AssessmentManager
 
             #endregion
 
-            //Rebuild course manager tree!
+            //Rebuild course manager tree
             CourseManager.AddAssessmentSession(session);
             CourseManager.RebuildTreeView(tbCourseSearch.Text);
+            //Set the last deployed time
+            DateTime lastDeployed = DateTime.Now;
+            lblPublishLastDeployed.Text = lastDeployed.ToShortDateString() + " " + lastDeployed.ToShortTimeString();
             //Success!
             return true;
         }
@@ -2510,7 +2542,7 @@ namespace AssessmentManager
                                     {
                                         //Delete the script file
                                         string fileName = Path.GetFileName(filePath);
-                                        string scriptName = session.AssessmentName + ASSESSMENT_SCRIPT_EXT;
+                                        string scriptName = session.AssessmentInfo.AssessmentName + ASSESSMENT_SCRIPT_EXT;
                                         if (fileName == scriptName)
                                         {
                                             Util.DeleteFile(filePath);
@@ -2563,7 +2595,7 @@ namespace AssessmentManager
 
         private void btnPublishPrepare_Click(object sender, EventArgs e)
         {
-            //TODO:: Prepare the students. If has already been pressed, confirm to make changes.
+            //Prepare the students. If has already been pressed, confirm to make changes.
             if (HasCourseSelected)
             {
                 if (PublishPrepared)

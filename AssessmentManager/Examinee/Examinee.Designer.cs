@@ -577,8 +577,8 @@
             // panelAnswerContainer
             // 
             this.panelAnswerContainer.Controls.Add(this.labelAnswerText);
-            this.panelAnswerContainer.Controls.Add(this.panelAnswerLongContainer);
             this.panelAnswerContainer.Controls.Add(this.tlpMultiAnswerContainer);
+            this.panelAnswerContainer.Controls.Add(this.panelAnswerLongContainer);
             this.panelAnswerContainer.Controls.Add(this.panelAnswerShortContainer);
             this.panelAnswerContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelAnswerContainer.Location = new System.Drawing.Point(3, 172);
@@ -618,8 +618,7 @@
             // 
             // tlpMultiAnswerContainer
             // 
-            this.tlpMultiAnswerContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tlpMultiAnswerContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpMultiAnswerContainer.ColumnCount = 2;
             this.tlpMultiAnswerContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -634,7 +633,7 @@
             this.tlpMultiAnswerContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMultiAnswerContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpMultiAnswerContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMultiAnswerContainer.Size = new System.Drawing.Size(555, 78);
+            this.tlpMultiAnswerContainer.Size = new System.Drawing.Size(555, 144);
             this.tlpMultiAnswerContainer.TabIndex = 2;
             // 
             // tlpOptionD
@@ -645,18 +644,18 @@
             this.tlpOptionD.Controls.Add(this.labelOptionD, 0, 0);
             this.tlpOptionD.Controls.Add(this.rbOptionD, 0, 0);
             this.tlpOptionD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpOptionD.Location = new System.Drawing.Point(280, 42);
+            this.tlpOptionD.Location = new System.Drawing.Point(280, 75);
             this.tlpOptionD.Name = "tlpOptionD";
             this.tlpOptionD.RowCount = 1;
             this.tlpOptionD.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpOptionD.Size = new System.Drawing.Size(272, 33);
+            this.tlpOptionD.Size = new System.Drawing.Size(272, 66);
             this.tlpOptionD.TabIndex = 3;
             // 
             // labelOptionD
             // 
             this.labelOptionD.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelOptionD.AutoSize = true;
-            this.labelOptionD.Location = new System.Drawing.Point(23, 10);
+            this.labelOptionD.Location = new System.Drawing.Point(23, 26);
             this.labelOptionD.Name = "labelOptionD";
             this.labelOptionD.Size = new System.Drawing.Size(35, 13);
             this.labelOptionD.TabIndex = 2;
@@ -666,7 +665,7 @@
             // 
             this.rbOptionD.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rbOptionD.AutoSize = true;
-            this.rbOptionD.Location = new System.Drawing.Point(3, 8);
+            this.rbOptionD.Location = new System.Drawing.Point(3, 24);
             this.rbOptionD.Name = "rbOptionD";
             this.rbOptionD.Size = new System.Drawing.Size(14, 17);
             this.rbOptionD.TabIndex = 1;
@@ -683,18 +682,18 @@
             this.tlpOptionC.Controls.Add(this.labelOptionC, 0, 0);
             this.tlpOptionC.Controls.Add(this.rbOptionC, 0, 0);
             this.tlpOptionC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpOptionC.Location = new System.Drawing.Point(3, 42);
+            this.tlpOptionC.Location = new System.Drawing.Point(3, 75);
             this.tlpOptionC.Name = "tlpOptionC";
             this.tlpOptionC.RowCount = 1;
             this.tlpOptionC.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpOptionC.Size = new System.Drawing.Size(271, 33);
+            this.tlpOptionC.Size = new System.Drawing.Size(271, 66);
             this.tlpOptionC.TabIndex = 2;
             // 
             // labelOptionC
             // 
             this.labelOptionC.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelOptionC.AutoSize = true;
-            this.labelOptionC.Location = new System.Drawing.Point(23, 10);
+            this.labelOptionC.Location = new System.Drawing.Point(23, 26);
             this.labelOptionC.Name = "labelOptionC";
             this.labelOptionC.Size = new System.Drawing.Size(35, 13);
             this.labelOptionC.TabIndex = 2;
@@ -704,7 +703,7 @@
             // 
             this.rbOptionC.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rbOptionC.AutoSize = true;
-            this.rbOptionC.Location = new System.Drawing.Point(3, 8);
+            this.rbOptionC.Location = new System.Drawing.Point(3, 24);
             this.rbOptionC.Name = "rbOptionC";
             this.rbOptionC.Size = new System.Drawing.Size(14, 17);
             this.rbOptionC.TabIndex = 1;
@@ -725,14 +724,14 @@
             this.tlpOptionB.Name = "tlpOptionB";
             this.tlpOptionB.RowCount = 1;
             this.tlpOptionB.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpOptionB.Size = new System.Drawing.Size(272, 33);
+            this.tlpOptionB.Size = new System.Drawing.Size(272, 66);
             this.tlpOptionB.TabIndex = 1;
             // 
             // labelOptionB
             // 
             this.labelOptionB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelOptionB.AutoSize = true;
-            this.labelOptionB.Location = new System.Drawing.Point(23, 10);
+            this.labelOptionB.Location = new System.Drawing.Point(23, 26);
             this.labelOptionB.Name = "labelOptionB";
             this.labelOptionB.Size = new System.Drawing.Size(35, 13);
             this.labelOptionB.TabIndex = 2;
@@ -742,7 +741,7 @@
             // 
             this.rbOptionB.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rbOptionB.AutoSize = true;
-            this.rbOptionB.Location = new System.Drawing.Point(3, 8);
+            this.rbOptionB.Location = new System.Drawing.Point(3, 24);
             this.rbOptionB.Name = "rbOptionB";
             this.rbOptionB.Size = new System.Drawing.Size(14, 17);
             this.rbOptionB.TabIndex = 1;
@@ -763,14 +762,14 @@
             this.tlpOptionA.Name = "tlpOptionA";
             this.tlpOptionA.RowCount = 1;
             this.tlpOptionA.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpOptionA.Size = new System.Drawing.Size(271, 33);
+            this.tlpOptionA.Size = new System.Drawing.Size(271, 66);
             this.tlpOptionA.TabIndex = 0;
             // 
             // rbOptionA
             // 
             this.rbOptionA.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rbOptionA.AutoSize = true;
-            this.rbOptionA.Location = new System.Drawing.Point(3, 8);
+            this.rbOptionA.Location = new System.Drawing.Point(3, 24);
             this.rbOptionA.Name = "rbOptionA";
             this.rbOptionA.Size = new System.Drawing.Size(14, 17);
             this.rbOptionA.TabIndex = 0;
@@ -783,7 +782,7 @@
             // 
             this.labelOptionA.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelOptionA.AutoSize = true;
-            this.labelOptionA.Location = new System.Drawing.Point(23, 10);
+            this.labelOptionA.Location = new System.Drawing.Point(23, 26);
             this.labelOptionA.Name = "labelOptionA";
             this.labelOptionA.Size = new System.Drawing.Size(35, 13);
             this.labelOptionA.TabIndex = 1;

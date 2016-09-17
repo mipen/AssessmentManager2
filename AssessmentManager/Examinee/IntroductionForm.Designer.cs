@@ -110,7 +110,7 @@
             // lblAssessmentName
             // 
             this.lblAssessmentName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAssessmentName.Location = new System.Drawing.Point(3, 26);
+            this.lblAssessmentName.Location = new System.Drawing.Point(3, 35);
             this.lblAssessmentName.Name = "lblAssessmentName";
             this.lblAssessmentName.Size = new System.Drawing.Size(663, 29);
             this.lblAssessmentName.TabIndex = 4;
@@ -120,7 +120,7 @@
             // lblWeighting
             // 
             this.lblWeighting.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWeighting.Location = new System.Drawing.Point(284, 69);
+            this.lblWeighting.Location = new System.Drawing.Point(284, 77);
             this.lblWeighting.Name = "lblWeighting";
             this.lblWeighting.Size = new System.Drawing.Size(100, 23);
             this.lblWeighting.TabIndex = 5;

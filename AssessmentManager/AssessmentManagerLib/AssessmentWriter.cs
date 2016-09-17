@@ -14,11 +14,13 @@ namespace AssessmentManager
     public class AssessmentWriter
     {
         private Assessment a;
+        private AssessmentInformation info;
         private string filePath = "";
 
-        public AssessmentWriter(Assessment assessment, string filePath)
+        public AssessmentWriter(Assessment assessment, AssessmentInformation info, string filePath)
         {
             a = assessment;
+            this.info = info;
             this.filePath = filePath;
         }
 
@@ -63,16 +65,16 @@ namespace AssessmentManager
                 doc.Open();
 
                 //Do author
-                if (!a.AssessmentInfo.Author.NullOrEmpty())
+                if (!info.Author.NullOrEmpty())
                 {
-                    string authorText = $"Author: {a.AssessmentInfo.Author}";
+                    string authorText = $"Author: {info.Author}";
                     Paragraph authorPara = new Paragraph(authorText, AuthorFont);
                     authorPara.SetAlignment("Left");
                     doc.Add(authorPara);
                 }
 
                 //Do title
-                Paragraph titlePara = new Paragraph(a.AssessmentInfo.AssessmentName, TitleFont);
+                Paragraph titlePara = new Paragraph(info.AssessmentName, TitleFont);
                 titlePara.SetAlignment(Center);
                 titlePara.SpacingAfter = 5f;
                 doc.Add(titlePara);
@@ -80,7 +82,7 @@ namespace AssessmentManager
                 //Do weighting
                 if (!withAnswers)
                 {
-                    Paragraph weightingPara = new Paragraph($"{a.AssessmentInfo.AssessmentWeighting}%", WeightingFont);
+                    Paragraph weightingPara = new Paragraph($"{info.AssessmentWeighting}%", WeightingFont);
                     weightingPara.SetAlignment(Center);
                     weightingPara.SpacingAfter = 5f;
                     doc.Add(weightingPara);
@@ -90,7 +92,7 @@ namespace AssessmentManager
                     PdfPTable table = new PdfPTable(3);
                     table.WidthPercentage = 100f;
                     table.AddCell(GetCell("Includes model answers", ModelAnswerHeaderFont, PdfPCell.ALIGN_LEFT));
-                    table.AddCell(GetCell($"{a.AssessmentInfo.AssessmentWeighting}%", WeightingFont, PdfPCell.ALIGN_CENTER));
+                    table.AddCell(GetCell($"{info.AssessmentWeighting}%", WeightingFont, PdfPCell.ALIGN_CENTER));
                     table.AddCell(GetCell("", AuthorFont, PdfPCell.ALIGN_RIGHT));
                     doc.Add(table);
                 }

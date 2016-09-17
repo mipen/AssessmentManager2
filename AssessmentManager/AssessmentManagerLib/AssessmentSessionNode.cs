@@ -14,7 +14,8 @@ namespace AssessmentManager
         public AssessmentSessionNode(AssessmentSession session)
         {
             this.session = session;
-            //TODO:: Record session name in Text property
+            Text = session.AssessmentInfo.AssessmentName;
+            Name = Text;
         }
 
         public AssessmentSession Session

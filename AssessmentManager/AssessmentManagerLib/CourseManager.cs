@@ -56,7 +56,6 @@ namespace AssessmentManager
 
         private void LoadAllCourses(string coursesPath)
         {
-            //TODO:: Load all assessments from course dir
             string[] courseDirs = Directory.GetDirectories(coursesPath);
             if (courseDirs.Count() > 0)
             {
@@ -246,11 +245,7 @@ namespace AssessmentManager
             {
                 foreach (var s in course.Assessments)
                 {
-                    node.Nodes.Add(new AssessmentSessionNode(s)
-                    {
-                        Name = s.AssessmentName,
-                        Text = s.AssessmentName
-                    });
+                    node.Nodes.Add(new AssessmentSessionNode(s));
                 }
             }
             return node;
@@ -289,12 +284,12 @@ namespace AssessmentManager
                         id = Util.RandomString(6);
                     } while (id == "" || dirs.Where(c => c.EndsWith(id)).Any());
 
-                    return session.AssessmentName + " - " + id;
+                    return session.AssessmentInfo.AssessmentName + " - " + id;
                 }
                 else
                 {
                     string id = Util.RandomString(6);
-                    return session.AssessmentName + " - " + id;
+                    return session.AssessmentInfo.AssessmentName + " - " + id;
                 }
             }
             else
@@ -339,10 +334,10 @@ namespace AssessmentManager
                 string[] accountDirs = Directory.GetDirectories(session.DeploymentTarget);
                 if (accountDirs.Count() > 0)
                 {
-                    foreach (var dir in accountDirs)
+                    foreach (var accountDir in accountDirs)
                     {
                         //Delete the files
-                        string[] files = Directory.GetFiles(dir);
+                        string[] files = Directory.GetFiles(accountDir);
                         if (files.Count() > 0)
                         {
                             foreach (var file in files)
@@ -350,7 +345,7 @@ namespace AssessmentManager
                                 try
                                 {
                                     string fileName = Path.GetFileName(file);
-                                    string scriptName = session.AssessmentName + ASSESSMENT_SCRIPT_EXT;
+                                    string scriptName = session.AssessmentInfo.AssessmentName + ASSESSMENT_SCRIPT_EXT;
                                     if (fileName == scriptName)
                                     {
                                         FileSystem.DeleteFile(file);
@@ -368,14 +363,14 @@ namespace AssessmentManager
                                 }
                             }
                         }
-                        string[] subDirs = Directory.GetDirectories(dir);
+                        string[] subDirs = Directory.GetDirectories(accountDir);
                         if (subDirs.Count() > 0)
                         {
                             //Delete the autosaves folder
                             try
                             {
                                 string autosavesDir = (from t in subDirs
-                                                       where t == AUTOSAVE_FOLDER_NAME(session.AssessmentName)
+                                                       where new DirectoryInfo(t).Name == AUTOSAVE_FOLDER_NAME(session.AssessmentInfo.AssessmentName)
                                                        select t).First();
                                 if (!autosavesDir.NullOrEmpty())
                                 {

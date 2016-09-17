@@ -51,8 +51,8 @@ namespace AssessmentManager
         public Course Clone(bool retainID = true)
         {
             Course c = new Course();
-            if(retainID)
-            c.id = id;
+            if (retainID)
+                c.id = id;
             else
             {
                 c.id = CourseManager.Instance.RandomCourseID();
@@ -65,9 +65,9 @@ namespace AssessmentManager
         private List<Student> CloneStudentList()
         {
             List<Student> list = new List<Student>();
-            if(students.Count>0)
+            if (students.Count > 0)
             {
-                foreach(var s in students)
+                foreach (var s in students)
                 {
                     list.Add(s.Clone());
                 }

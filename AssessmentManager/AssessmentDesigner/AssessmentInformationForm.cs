@@ -36,17 +36,31 @@ namespace AssessmentManager
             }
         }
 
-        public decimal AssessmentWeighting
+        public int AssessmentWeighting
         {
             get
             {
-                return nudAssessmentWeighting.Value;
+                return (int)nudAssessmentWeighting.Value;
             }
             set
             {
-                nudAssessmentWeighting.Value = value;
+                nudAssessmentWeighting.Value = (decimal)value;
             }
         }
+
+        public AssessmentInformation AssessmentInformation
+        {
+            get
+            {
+                return new AssessmentInformation()
+                {
+                    AssessmentName = this.AssessmentName,
+                    Author = this.Author,
+                    AssessmentWeighting = this.AssessmentWeighting
+                };
+            }
+        }
+
 
         #endregion
 
@@ -68,21 +82,20 @@ namespace AssessmentManager
 
         #region Methods
 
-        public static AssessmentInformationForm FromAssessment(Assessment assessment)
+        public static AssessmentInformationForm FromAssessmentInfo(AssessmentInformation assessmentInfo)
         {
             AssessmentInformationForm aif = new AssessmentInformationForm();
-            if (assessment.AssessmentInfo == null) assessment.AssessmentInfo = new AssessmentInformation();
-            aif.AssessmentName = assessment.AssessmentInfo.AssessmentName;
-            aif.Author = assessment.AssessmentInfo.Author;
-            aif.AssessmentWeighting = assessment.AssessmentInfo.AssessmentWeighting;
+            aif.AssessmentName = assessmentInfo.AssessmentName;
+            aif.Author = assessmentInfo.Author;
+            aif.AssessmentWeighting = assessmentInfo.AssessmentWeighting;
             return aif;
         }
 
-        public static void PopulateAssessmentInformation(Assessment assessment, AssessmentInformationForm aif)
+        public static void PopulateAssessmentInformation(AssessmentInformation assessmentInfo, AssessmentInformationForm aif)
         {
-            assessment.AssessmentInfo.AssessmentName = aif.AssessmentName;
-            assessment.AssessmentInfo.Author = aif.Author;
-            assessment.AssessmentInfo.AssessmentWeighting = (int)aif.AssessmentWeighting;
+            assessmentInfo.AssessmentName = aif.AssessmentName;
+            assessmentInfo.Author = aif.Author;
+            assessmentInfo.AssessmentWeighting = (int)aif.AssessmentWeighting;
         }
 
         #endregion

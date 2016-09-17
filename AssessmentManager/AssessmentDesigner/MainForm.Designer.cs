@@ -30,15 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForQuestionsWithoutMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makePdfOfExamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.withAnswersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.withoutAnswersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.assessmentInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -266,6 +265,14 @@
             this.toolStripSeparatorCourses = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiDeleteCourse = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteAssessmentSession = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.tbPublishAssessmentName = new System.Windows.Forms.TextBox();
+            this.tbPublishAuthor = new System.Windows.Forms.TextBox();
+            this.nudPublishWeigthing = new System.Windows.Forms.NumericUpDown();
+            this.btnCourseClearStudents = new System.Windows.Forms.Button();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageDesigner.SuspendLayout();
@@ -311,6 +318,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).BeginInit();
             this.contextMenuStripQuestionNode.SuspendLayout();
             this.cmsCoursesTree.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPublishWeigthing)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStripMain
@@ -333,7 +342,6 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.checkForQuestionsWithoutMarksToolStripMenuItem,
             this.makePdfOfExamToolStripMenuItem,
-            this.assessmentInformationToolStripMenuItem,
             this.toolStripSeparator1,
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
@@ -379,14 +387,6 @@
             this.withoutAnswersToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.withoutAnswersToolStripMenuItem.Text = "Without Answers";
             this.withoutAnswersToolStripMenuItem.Click += new System.EventHandler(this.withoutAnswersToolStripMenuItem_Click);
-            // 
-            // assessmentInformationToolStripMenuItem
-            // 
-            this.assessmentInformationToolStripMenuItem.Name = "assessmentInformationToolStripMenuItem";
-            this.assessmentInformationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.assessmentInformationToolStripMenuItem.Size = new System.Drawing.Size(303, 22);
-            this.assessmentInformationToolStripMenuItem.Text = "Assessment &Information";
-            this.assessmentInformationToolStripMenuItem.Click += new System.EventHandler(this.assessmentInformationToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -1484,7 +1484,7 @@
             this.dgvPublishStudents.Location = new System.Drawing.Point(3, 303);
             this.dgvPublishStudents.Name = "dgvPublishStudents";
             this.dgvPublishStudents.Size = new System.Drawing.Size(866, 278);
-            this.dgvPublishStudents.TabIndex = 0;
+            this.dgvPublishStudents.TabIndex = 15;
             this.dgvPublishStudents.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvPublishStudents_CellBeginEdit);
             this.dgvPublishStudents.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPublishStudents_CellEndEdit);
             // 
@@ -1510,8 +1510,8 @@
             // 
             // colPublishStartTime
             // 
-            dataGridViewCellStyle1.Format = "hh:mm:ss tt";
-            this.colPublishStartTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Format = "hh:mm:ss tt";
+            this.colPublishStartTime.DefaultCellStyle = dataGridViewCellStyle7;
             this.colPublishStartTime.HeaderText = "Start Time";
             this.colPublishStartTime.Name = "colPublishStartTime";
             this.colPublishStartTime.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -1541,6 +1541,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.btnDeploymentTarget);
             this.panel1.Controls.Add(this.lblDeploymentTarget);
             this.panel1.Controls.Add(this.label16);
@@ -1562,7 +1563,7 @@
             // 
             // btnDeploymentTarget
             // 
-            this.btnDeploymentTarget.Location = new System.Drawing.Point(422, 169);
+            this.btnDeploymentTarget.Location = new System.Drawing.Point(392, 225);
             this.btnDeploymentTarget.Name = "btnDeploymentTarget";
             this.btnDeploymentTarget.Size = new System.Drawing.Size(75, 23);
             this.btnDeploymentTarget.TabIndex = 12;
@@ -1575,7 +1576,7 @@
             this.lblDeploymentTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDeploymentTarget.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeploymentTarget.Location = new System.Drawing.Point(511, 131);
+            this.lblDeploymentTarget.Location = new System.Drawing.Point(511, 197);
             this.lblDeploymentTarget.Name = "lblDeploymentTarget";
             this.lblDeploymentTarget.Size = new System.Drawing.Size(350, 39);
             this.lblDeploymentTarget.TabIndex = 11;
@@ -1583,7 +1584,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(405, 131);
+            this.label16.Location = new System.Drawing.Point(405, 197);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(100, 13);
             this.label16.TabIndex = 10;
@@ -1591,17 +1592,17 @@
             // 
             // tbPublishResetPassword
             // 
-            this.tbPublishResetPassword.Location = new System.Drawing.Point(514, 71);
+            this.tbPublishResetPassword.Location = new System.Drawing.Point(514, 158);
             this.tbPublishResetPassword.Name = "tbPublishResetPassword";
             this.tbPublishResetPassword.Size = new System.Drawing.Size(100, 20);
-            this.tbPublishResetPassword.TabIndex = 9;
+            this.tbPublishResetPassword.TabIndex = 11;
             this.buttonToolTip.SetToolTip(this.tbPublishResetPassword, "The password that students will have to enter if they wish to continue the assess" +
         "ment after having submitted it (if they still have time remaining)");
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(419, 74);
+            this.label14.Location = new System.Drawing.Point(419, 161);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(86, 13);
             this.label14.TabIndex = 8;
@@ -1616,7 +1617,7 @@
             this.btnPublishDeploy.Location = new System.Drawing.Point(786, 264);
             this.btnPublishDeploy.Name = "btnPublishDeploy";
             this.btnPublishDeploy.Size = new System.Drawing.Size(75, 23);
-            this.btnPublishDeploy.TabIndex = 7;
+            this.btnPublishDeploy.TabIndex = 14;
             this.btnPublishDeploy.Text = "Deploy";
             this.buttonToolTip.SetToolTip(this.btnPublishDeploy, "Deploy the assessment to all exam accounts and make archive copies within the sel" +
         "ected courses\' folder.");
@@ -1628,7 +1629,7 @@
             this.btnPublishPrepare.Location = new System.Drawing.Point(392, 264);
             this.btnPublishPrepare.Name = "btnPublishPrepare";
             this.btnPublishPrepare.Size = new System.Drawing.Size(75, 23);
-            this.btnPublishPrepare.TabIndex = 6;
+            this.btnPublishPrepare.TabIndex = 13;
             this.btnPublishPrepare.Text = "Prepare";
             this.buttonToolTip.SetToolTip(this.btnPublishPrepare, "Prepares the list of students who will participate in the assessment. These are p" +
         "ulled from the selected course");
@@ -1639,7 +1640,7 @@
             // 
             this.lblPublishLastDeployed.AutoSize = true;
             this.lblPublishLastDeployed.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPublishLastDeployed.Location = new System.Drawing.Point(511, 45);
+            this.lblPublishLastDeployed.Location = new System.Drawing.Point(511, 132);
             this.lblPublishLastDeployed.Name = "lblPublishLastDeployed";
             this.lblPublishLastDeployed.Size = new System.Drawing.Size(41, 13);
             this.lblPublishLastDeployed.TabIndex = 5;
@@ -1649,7 +1650,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(429, 45);
+            this.label15.Location = new System.Drawing.Point(429, 132);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(76, 13);
             this.label15.TabIndex = 4;
@@ -1661,7 +1662,7 @@
             this.lblPublishFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPublishFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPublishFileName.Location = new System.Drawing.Point(511, 16);
+            this.lblPublishFileName.Location = new System.Drawing.Point(511, 103);
             this.lblPublishFileName.Name = "lblPublishFileName";
             this.lblPublishFileName.Size = new System.Drawing.Size(350, 29);
             this.lblPublishFileName.TabIndex = 3;
@@ -1671,7 +1672,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(389, 16);
+            this.label13.Location = new System.Drawing.Point(389, 103);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(116, 13);
             this.label13.TabIndex = 2;
@@ -1696,7 +1697,7 @@
             this.btnPublishAdditionalFilesDelAll.Location = new System.Drawing.Point(286, 99);
             this.btnPublishAdditionalFilesDelAll.Name = "btnPublishAdditionalFilesDelAll";
             this.btnPublishAdditionalFilesDelAll.Size = new System.Drawing.Size(91, 23);
-            this.btnPublishAdditionalFilesDelAll.TabIndex = 3;
+            this.btnPublishAdditionalFilesDelAll.TabIndex = 10;
             this.btnPublishAdditionalFilesDelAll.Text = "Delete all";
             this.buttonToolTip.SetToolTip(this.btnPublishAdditionalFilesDelAll, "Delete all files (this only clears the list)");
             this.btnPublishAdditionalFilesDelAll.UseVisualStyleBackColor = true;
@@ -1707,7 +1708,7 @@
             this.btnPublishAdditionalFilesDelSel.Location = new System.Drawing.Point(286, 62);
             this.btnPublishAdditionalFilesDelSel.Name = "btnPublishAdditionalFilesDelSel";
             this.btnPublishAdditionalFilesDelSel.Size = new System.Drawing.Size(91, 23);
-            this.btnPublishAdditionalFilesDelSel.TabIndex = 2;
+            this.btnPublishAdditionalFilesDelSel.TabIndex = 9;
             this.btnPublishAdditionalFilesDelSel.Text = "Delete selected";
             this.buttonToolTip.SetToolTip(this.btnPublishAdditionalFilesDelSel, "Delete the selected file (this only removes it from this list)");
             this.btnPublishAdditionalFilesDelSel.UseVisualStyleBackColor = true;
@@ -1718,7 +1719,7 @@
             this.btnPublishAdditonalFilesAdd.Location = new System.Drawing.Point(286, 25);
             this.btnPublishAdditonalFilesAdd.Name = "btnPublishAdditonalFilesAdd";
             this.btnPublishAdditonalFilesAdd.Size = new System.Drawing.Size(91, 23);
-            this.btnPublishAdditonalFilesAdd.TabIndex = 1;
+            this.btnPublishAdditonalFilesAdd.TabIndex = 8;
             this.btnPublishAdditonalFilesAdd.Text = "Add files";
             this.buttonToolTip.SetToolTip(this.btnPublishAdditonalFilesAdd, "Add additional files to be deployed with the assessment");
             this.btnPublishAdditonalFilesAdd.UseVisualStyleBackColor = true;
@@ -1759,7 +1760,7 @@
             this.dtpPublishTime.Name = "dtpPublishTime";
             this.dtpPublishTime.ShowUpDown = true;
             this.dtpPublishTime.Size = new System.Drawing.Size(224, 20);
-            this.dtpPublishTime.TabIndex = 9;
+            this.dtpPublishTime.TabIndex = 2;
             this.buttonToolTip.SetToolTip(this.dtpPublishTime, "The time the assessment is scheduled for");
             this.dtpPublishTime.Value = new System.DateTime(2016, 9, 9, 12, 0, 0, 0);
             // 
@@ -1773,7 +1774,7 @@
             0});
             this.nudPublishReadingTime.Name = "nudPublishReadingTime";
             this.nudPublishReadingTime.Size = new System.Drawing.Size(50, 20);
-            this.nudPublishReadingTime.TabIndex = 8;
+            this.nudPublishReadingTime.TabIndex = 4;
             this.buttonToolTip.SetToolTip(this.nudPublishReadingTime, "The amount of reading time students get");
             // 
             // nudPublishAssessmentLength
@@ -1786,7 +1787,7 @@
             0});
             this.nudPublishAssessmentLength.Name = "nudPublishAssessmentLength";
             this.nudPublishAssessmentLength.Size = new System.Drawing.Size(50, 20);
-            this.nudPublishAssessmentLength.TabIndex = 7;
+            this.nudPublishAssessmentLength.TabIndex = 3;
             this.buttonToolTip.SetToolTip(this.nudPublishAssessmentLength, "The length of the assessment (in minutes)");
             this.nudPublishAssessmentLength.Value = new decimal(new int[] {
             60,
@@ -1800,7 +1801,7 @@
             this.dtpPublishDate.Location = new System.Drawing.Point(153, 39);
             this.dtpPublishDate.Name = "dtpPublishDate";
             this.dtpPublishDate.Size = new System.Drawing.Size(224, 20);
-            this.dtpPublishDate.TabIndex = 6;
+            this.dtpPublishDate.TabIndex = 1;
             this.buttonToolTip.SetToolTip(this.dtpPublishDate, "The day the assessment is scheduled for");
             this.dtpPublishDate.Value = new System.DateTime(2016, 1, 1, 12, 0, 0, 0);
             // 
@@ -1811,7 +1812,7 @@
             this.cbPublishCourseSelector.Location = new System.Drawing.Point(153, 13);
             this.cbPublishCourseSelector.Name = "cbPublishCourseSelector";
             this.cbPublishCourseSelector.Size = new System.Drawing.Size(224, 21);
-            this.cbPublishCourseSelector.TabIndex = 5;
+            this.cbPublishCourseSelector.TabIndex = 0;
             this.buttonToolTip.SetToolTip(this.cbPublishCourseSelector, "This is the course the assessment will be published for.");
             // 
             // label12
@@ -1868,8 +1869,8 @@
             // 
             this.tabPageCourses.Controls.Add(this.btnCollapse);
             this.tabPageCourses.Controls.Add(this.btnCourseExpand);
-            this.tabPageCourses.Controls.Add(this.pnlAssessmentView);
             this.tabPageCourses.Controls.Add(this.pnlCourseView);
+            this.tabPageCourses.Controls.Add(this.pnlAssessmentView);
             this.tabPageCourses.Controls.Add(this.tbCourseSearch);
             this.tabPageCourses.Controls.Add(this.btnNewCourse);
             this.tabPageCourses.Controls.Add(this.tvCourses);
@@ -1928,10 +1929,10 @@
             // btnSessionGenHandout
             // 
             this.btnSessionGenHandout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSessionGenHandout.Location = new System.Drawing.Point(512, 208);
+            this.btnSessionGenHandout.Location = new System.Drawing.Point(513, 189);
             this.btnSessionGenHandout.Name = "btnSessionGenHandout";
-            this.btnSessionGenHandout.Size = new System.Drawing.Size(117, 23);
-            this.btnSessionGenHandout.TabIndex = 18;
+            this.btnSessionGenHandout.Size = new System.Drawing.Size(118, 23);
+            this.btnSessionGenHandout.TabIndex = 11;
             this.btnSessionGenHandout.Text = "Generate Handout";
             this.btnSessionGenHandout.UseVisualStyleBackColor = true;
             this.btnSessionGenHandout.Click += new System.EventHandler(this.btnSessionGenHandout_Click);
@@ -1939,10 +1940,10 @@
             // btnSessionOpenLocation
             // 
             this.btnSessionOpenLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSessionOpenLocation.Location = new System.Drawing.Point(512, 237);
+            this.btnSessionOpenLocation.Location = new System.Drawing.Point(513, 218);
             this.btnSessionOpenLocation.Name = "btnSessionOpenLocation";
             this.btnSessionOpenLocation.Size = new System.Drawing.Size(118, 23);
-            this.btnSessionOpenLocation.TabIndex = 17;
+            this.btnSessionOpenLocation.TabIndex = 12;
             this.btnSessionOpenLocation.Text = "Open Folder Location";
             this.btnSessionOpenLocation.UseVisualStyleBackColor = true;
             this.btnSessionOpenLocation.Click += new System.EventHandler(this.btnSessionOpenLocation_Click);
@@ -1963,7 +1964,7 @@
             this.tbSessionCourseID.Name = "tbSessionCourseID";
             this.tbSessionCourseID.ReadOnly = true;
             this.tbSessionCourseID.Size = new System.Drawing.Size(138, 20);
-            this.tbSessionCourseID.TabIndex = 15;
+            this.tbSessionCourseID.TabIndex = 9;
             // 
             // tbSessionRestartPassword
             // 
@@ -1972,7 +1973,7 @@
             this.tbSessionRestartPassword.Name = "tbSessionRestartPassword";
             this.tbSessionRestartPassword.ReadOnly = true;
             this.tbSessionRestartPassword.Size = new System.Drawing.Size(138, 20);
-            this.tbSessionRestartPassword.TabIndex = 14;
+            this.tbSessionRestartPassword.TabIndex = 10;
             // 
             // lbSessionAdditionalFiles
             // 
@@ -2008,7 +2009,7 @@
             this.tbSessionTarget.Name = "tbSessionTarget";
             this.tbSessionTarget.ReadOnly = true;
             this.tbSessionTarget.Size = new System.Drawing.Size(492, 20);
-            this.tbSessionTarget.TabIndex = 13;
+            this.tbSessionTarget.TabIndex = 3;
             // 
             // tbSessionFileName
             // 
@@ -2018,7 +2019,7 @@
             this.tbSessionFileName.Name = "tbSessionFileName";
             this.tbSessionFileName.ReadOnly = true;
             this.tbSessionFileName.Size = new System.Drawing.Size(492, 20);
-            this.tbSessionFileName.TabIndex = 12;
+            this.tbSessionFileName.TabIndex = 2;
             // 
             // tbSessionName
             // 
@@ -2028,7 +2029,7 @@
             this.tbSessionName.Name = "tbSessionName";
             this.tbSessionName.ReadOnly = true;
             this.tbSessionName.Size = new System.Drawing.Size(492, 20);
-            this.tbSessionName.TabIndex = 11;
+            this.tbSessionName.TabIndex = 1;
             // 
             // label26
             // 
@@ -2082,7 +2083,7 @@
             this.tbSessionReadingTime.Name = "tbSessionReadingTime";
             this.tbSessionReadingTime.ReadOnly = true;
             this.tbSessionReadingTime.Size = new System.Drawing.Size(100, 20);
-            this.tbSessionReadingTime.TabIndex = 13;
+            this.tbSessionReadingTime.TabIndex = 8;
             // 
             // tbSessionLength
             // 
@@ -2090,7 +2091,7 @@
             this.tbSessionLength.Name = "tbSessionLength";
             this.tbSessionLength.ReadOnly = true;
             this.tbSessionLength.Size = new System.Drawing.Size(100, 20);
-            this.tbSessionLength.TabIndex = 12;
+            this.tbSessionLength.TabIndex = 7;
             // 
             // tbSessionFinishTime
             // 
@@ -2098,7 +2099,7 @@
             this.tbSessionFinishTime.Name = "tbSessionFinishTime";
             this.tbSessionFinishTime.ReadOnly = true;
             this.tbSessionFinishTime.Size = new System.Drawing.Size(100, 20);
-            this.tbSessionFinishTime.TabIndex = 11;
+            this.tbSessionFinishTime.TabIndex = 6;
             // 
             // tbSessionStartTime
             // 
@@ -2106,7 +2107,7 @@
             this.tbSessionStartTime.Name = "tbSessionStartTime";
             this.tbSessionStartTime.ReadOnly = true;
             this.tbSessionStartTime.Size = new System.Drawing.Size(100, 20);
-            this.tbSessionStartTime.TabIndex = 10;
+            this.tbSessionStartTime.TabIndex = 5;
             // 
             // tbSessionDate
             // 
@@ -2114,7 +2115,7 @@
             this.tbSessionDate.Name = "tbSessionDate";
             this.tbSessionDate.ReadOnly = true;
             this.tbSessionDate.Size = new System.Drawing.Size(100, 20);
-            this.tbSessionDate.TabIndex = 9;
+            this.tbSessionDate.TabIndex = 4;
             // 
             // label27
             // 
@@ -2212,7 +2213,7 @@
             this.dgvPublishedAssessmentStudents.Name = "dgvPublishedAssessmentStudents";
             this.dgvPublishedAssessmentStudents.ReadOnly = true;
             this.dgvPublishedAssessmentStudents.Size = new System.Drawing.Size(635, 293);
-            this.dgvPublishedAssessmentStudents.TabIndex = 0;
+            this.dgvPublishedAssessmentStudents.TabIndex = 14;
             // 
             // colSessionUserName
             // 
@@ -2240,8 +2241,8 @@
             // 
             // colSessionStartTime
             // 
-            dataGridViewCellStyle2.Format = "hh:mm:ss tt";
-            this.colSessionStartTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Format = "hh:mm:ss tt";
+            this.colSessionStartTime.DefaultCellStyle = dataGridViewCellStyle8;
             this.colSessionStartTime.HeaderText = "Start Time";
             this.colSessionStartTime.Name = "colSessionStartTime";
             this.colSessionStartTime.ReadOnly = true;
@@ -2276,6 +2277,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlCourseView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCourseView.Controls.Add(this.btnCourseClearStudents);
             this.pnlCourseView.Controls.Add(this.btnCourseOpenFolder);
             this.pnlCourseView.Controls.Add(this.tbCourseID);
             this.pnlCourseView.Controls.Add(this.label7);
@@ -2305,7 +2307,7 @@
             this.btnCourseOpenFolder.Location = new System.Drawing.Point(409, 110);
             this.btnCourseOpenFolder.Name = "btnCourseOpenFolder";
             this.btnCourseOpenFolder.Size = new System.Drawing.Size(120, 23);
-            this.btnCourseOpenFolder.TabIndex = 17;
+            this.btnCourseOpenFolder.TabIndex = 6;
             this.btnCourseOpenFolder.Text = "Open Folder Location";
             this.btnCourseOpenFolder.UseVisualStyleBackColor = true;
             this.btnCourseOpenFolder.Click += new System.EventHandler(this.btnCourseOpenFolder_Click);
@@ -2318,7 +2320,7 @@
             this.tbCourseID.Name = "tbCourseID";
             this.tbCourseID.ReadOnly = true;
             this.tbCourseID.Size = new System.Drawing.Size(67, 20);
-            this.tbCourseID.TabIndex = 16;
+            this.tbCourseID.TabIndex = 100;
             // 
             // label7
             // 
@@ -2336,7 +2338,7 @@
             this.btnDiscardCourseChanges.Location = new System.Drawing.Point(527, 545);
             this.btnDiscardCourseChanges.Name = "btnDiscardCourseChanges";
             this.btnDiscardCourseChanges.Size = new System.Drawing.Size(102, 23);
-            this.btnDiscardCourseChanges.TabIndex = 14;
+            this.btnDiscardCourseChanges.TabIndex = 10;
             this.btnDiscardCourseChanges.Text = "Discard Changes";
             this.btnDiscardCourseChanges.UseVisualStyleBackColor = true;
             this.btnDiscardCourseChanges.Click += new System.EventHandler(this.btnDiscardCourseChanges_Click);
@@ -2347,7 +2349,7 @@
             this.btnApplyCourseChanges.Location = new System.Drawing.Point(3, 545);
             this.btnApplyCourseChanges.Name = "btnApplyCourseChanges";
             this.btnApplyCourseChanges.Size = new System.Drawing.Size(102, 23);
-            this.btnApplyCourseChanges.TabIndex = 13;
+            this.btnApplyCourseChanges.TabIndex = 9;
             this.btnApplyCourseChanges.Text = "Apply Changes";
             this.btnApplyCourseChanges.UseVisualStyleBackColor = true;
             this.btnApplyCourseChanges.Click += new System.EventHandler(this.btnApplyCourseChanges_Click);
@@ -2358,7 +2360,7 @@
             this.btnImportStudents.Location = new System.Drawing.Point(535, 110);
             this.btnImportStudents.Name = "btnImportStudents";
             this.btnImportStudents.Size = new System.Drawing.Size(94, 23);
-            this.btnImportStudents.TabIndex = 12;
+            this.btnImportStudents.TabIndex = 7;
             this.btnImportStudents.Text = "Import Students";
             this.btnImportStudents.UseVisualStyleBackColor = true;
             this.btnImportStudents.Click += new System.EventHandler(this.btnImportStudents_Click);
@@ -2377,7 +2379,7 @@
             this.dgvCourseStudents.Location = new System.Drawing.Point(3, 139);
             this.dgvCourseStudents.Name = "dgvCourseStudents";
             this.dgvCourseStudents.Size = new System.Drawing.Size(626, 404);
-            this.dgvCourseStudents.TabIndex = 11;
+            this.dgvCourseStudents.TabIndex = 5;
             this.dgvCourseStudents.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCourseStudents_CellValueChanged);
             this.dgvCourseStudents.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvCourseStudents_RowsRemoved);
             // 
@@ -2404,7 +2406,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(35, 123);
+            this.label6.Location = new System.Drawing.Point(111, 123);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 10;
@@ -2420,7 +2422,7 @@
             this.cbCourseSemester.Location = new System.Drawing.Point(222, 66);
             this.cbCourseSemester.Name = "cbCourseSemester";
             this.cbCourseSemester.Size = new System.Drawing.Size(39, 21);
-            this.cbCourseSemester.TabIndex = 9;
+            this.cbCourseSemester.TabIndex = 4;
             this.cbCourseSemester.SelectedIndexChanged += new System.EventHandler(this.cbCourseSemester_SelectedIndexChanged);
             // 
             // nudCourseYear
@@ -2438,7 +2440,7 @@
             0});
             this.nudCourseYear.Name = "nudCourseYear";
             this.nudCourseYear.Size = new System.Drawing.Size(45, 20);
-            this.nudCourseYear.TabIndex = 8;
+            this.nudCourseYear.TabIndex = 3;
             this.nudCourseYear.Value = new decimal(new int[] {
             2010,
             0,
@@ -2451,7 +2453,7 @@
             this.tbCourseCode2.Location = new System.Drawing.Point(191, 37);
             this.tbCourseCode2.Name = "tbCourseCode2";
             this.tbCourseCode2.Size = new System.Drawing.Size(70, 20);
-            this.tbCourseCode2.TabIndex = 7;
+            this.tbCourseCode2.TabIndex = 2;
             this.tbCourseCode2.TextChanged += new System.EventHandler(this.tbCourseCode2_TextChanged);
             this.tbCourseCode2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCourseCode2_KeyPress);
             // 
@@ -2460,7 +2462,7 @@
             this.tbCourseCode1.Location = new System.Drawing.Point(93, 37);
             this.tbCourseCode1.Name = "tbCourseCode1";
             this.tbCourseCode1.Size = new System.Drawing.Size(70, 20);
-            this.tbCourseCode1.TabIndex = 6;
+            this.tbCourseCode1.TabIndex = 1;
             this.tbCourseCode1.TextChanged += new System.EventHandler(this.tbCourseCode1_TextChanged);
             this.tbCourseCode1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCourseCode1_KeyPress);
             // 
@@ -2471,7 +2473,7 @@
             this.tbCourseName.Location = new System.Drawing.Point(93, 8);
             this.tbCourseName.Name = "tbCourseName";
             this.tbCourseName.Size = new System.Drawing.Size(536, 20);
-            this.tbCourseName.TabIndex = 5;
+            this.tbCourseName.TabIndex = 0;
             this.tbCourseName.TextChanged += new System.EventHandler(this.tbCourseName_TextChanged);
             // 
             // label5
@@ -2720,6 +2722,91 @@
             this.tsmiDeleteAssessmentSession.Visible = false;
             this.tsmiDeleteAssessmentSession.Click += new System.EventHandler(this.tsmiDeleteAssessmentSession_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.nudPublishWeigthing);
+            this.groupBox3.Controls.Add(this.tbPublishAuthor);
+            this.groupBox3.Controls.Add(this.tbPublishAssessmentName);
+            this.groupBox3.Controls.Add(this.label31);
+            this.groupBox3.Controls.Add(this.label30);
+            this.groupBox3.Controls.Add(this.label29);
+            this.groupBox3.Location = new System.Drawing.Point(389, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(474, 99);
+            this.groupBox3.TabIndex = 13;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Assessment Details";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(21, 16);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(95, 13);
+            this.label29.TabIndex = 0;
+            this.label29.Text = "Assessment name:";
+            this.buttonToolTip.SetToolTip(this.label29, "The name of the assessment");
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(75, 45);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(41, 13);
+            this.label30.TabIndex = 1;
+            this.label30.Text = "Author:";
+            this.buttonToolTip.SetToolTip(this.label30, "The name of the Author. This is optional");
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(58, 74);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(58, 13);
+            this.label31.TabIndex = 2;
+            this.label31.Text = "Weighting:";
+            this.buttonToolTip.SetToolTip(this.label31, "The weighting of the assessment");
+            // 
+            // tbPublishAssessmentName
+            // 
+            this.tbPublishAssessmentName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPublishAssessmentName.Location = new System.Drawing.Point(122, 13);
+            this.tbPublishAssessmentName.Name = "tbPublishAssessmentName";
+            this.tbPublishAssessmentName.Size = new System.Drawing.Size(346, 20);
+            this.tbPublishAssessmentName.TabIndex = 5;
+            this.buttonToolTip.SetToolTip(this.tbPublishAssessmentName, "The name of the assessment");
+            // 
+            // tbPublishAuthor
+            // 
+            this.tbPublishAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPublishAuthor.Location = new System.Drawing.Point(122, 42);
+            this.tbPublishAuthor.Name = "tbPublishAuthor";
+            this.tbPublishAuthor.Size = new System.Drawing.Size(346, 20);
+            this.tbPublishAuthor.TabIndex = 6;
+            this.buttonToolTip.SetToolTip(this.tbPublishAuthor, "The name of the Author. This is optional");
+            // 
+            // nudPublishWeigthing
+            // 
+            this.nudPublishWeigthing.Location = new System.Drawing.Point(122, 72);
+            this.nudPublishWeigthing.Name = "nudPublishWeigthing";
+            this.nudPublishWeigthing.Size = new System.Drawing.Size(103, 20);
+            this.nudPublishWeigthing.TabIndex = 7;
+            this.buttonToolTip.SetToolTip(this.nudPublishWeigthing, "The weighting of the assessment");
+            // 
+            // btnCourseClearStudents
+            // 
+            this.btnCourseClearStudents.Location = new System.Drawing.Point(3, 110);
+            this.btnCourseClearStudents.Name = "btnCourseClearStudents";
+            this.btnCourseClearStudents.Size = new System.Drawing.Size(94, 23);
+            this.btnCourseClearStudents.TabIndex = 8;
+            this.btnCourseClearStudents.Text = "Clear Students";
+            this.btnCourseClearStudents.UseVisualStyleBackColor = true;
+            this.btnCourseClearStudents.Click += new System.EventHandler(this.btnCourseClearStudents_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2801,6 +2888,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudCourseYear)).EndInit();
             this.contextMenuStripQuestionNode.ResumeLayout(false);
             this.cmsCoursesTree.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPublishWeigthing)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2818,7 +2908,6 @@
         private System.Windows.Forms.ToolStripMenuItem makePdfOfExamToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem withAnswersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem withoutAnswersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem assessmentInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -3043,5 +3132,13 @@
         private System.Windows.Forms.ToolStripMenuItem contextMenuQuestionListPaste;
         private System.Windows.Forms.ToolStripMenuItem contextMenuNodePaste;
         private System.Windows.Forms.Button btnSessionGenHandout;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.NumericUpDown nudPublishWeigthing;
+        private System.Windows.Forms.TextBox tbPublishAuthor;
+        private System.Windows.Forms.TextBox tbPublishAssessmentName;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Button btnCourseClearStudents;
     }
 }

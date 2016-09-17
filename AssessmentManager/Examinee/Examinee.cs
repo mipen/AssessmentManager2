@@ -374,7 +374,6 @@ namespace AssessmentManager
                 else
                 {
                     //Otherwise, save it as the final
-                    //TODO:: Name it properly here
                     path = Path.GetDirectoryName(filePath) + "\\" + Path.GetFileNameWithoutExtension(filePath) + ASSESSMENT_SCRIPT_EXT;
                     fileMode = FileMode.OpenOrCreate;
                 }
@@ -531,7 +530,8 @@ namespace AssessmentManager
             QuestionNode node = SelectedNode;
             if (node != null)
             {
-                treeViewQuestionDisplay.SelectedNode = node.PrevVisibleNode;
+                if (node.PrevVisibleNode != null)
+                    treeViewQuestionDisplay.SelectedNode = node.PrevVisibleNode;
             }
             treeViewQuestionDisplay.Focus();
         }
@@ -541,7 +541,8 @@ namespace AssessmentManager
             QuestionNode node = SelectedNode;
             if (node != null)
             {
-                treeViewQuestionDisplay.SelectedNode = node.NextVisibleNode;
+                if (node.NextVisibleNode != null)
+                    treeViewQuestionDisplay.SelectedNode = node.NextVisibleNode;
             }
             treeViewQuestionDisplay.Focus();
         }
@@ -612,7 +613,7 @@ namespace AssessmentManager
                 submitButtonPushed = true;
                 Close();
             }
-            else if (CurMode == Mode.Practice && res == DialogResult.No)
+            else if (CurMode == Mode.Practice && (res == DialogResult.No || res == DialogResult.Yes))
             {
                 submitButtonPushed = true;
                 Close();

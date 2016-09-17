@@ -11,7 +11,6 @@ namespace AssessmentManager
     public class Assessment
     {
         private List<Question> questions = new List<Question>();
-        private AssessmentInformation assessmentInfo = new AssessmentInformation();
 
         public Assessment()
         {
@@ -32,18 +31,6 @@ namespace AssessmentManager
         }
 
         public List<Question> Questions => questions;
-
-        public AssessmentInformation AssessmentInfo
-        {
-            get
-            {
-                return assessmentInfo;
-            }
-            set
-            {
-                assessmentInfo = value;
-            }
-        }
 
         #region Add Question Methods
         /// <summary>

@@ -68,15 +68,22 @@ namespace AssessmentManager
             {
                 Minutes = 60
             };
+            script.AssessmentInfo = new AssessmentInformation()
+            {
+                AssessmentName = "Assessment",
+                Author = "",
+                AssessmentWeighting = 0
+            };
 
             return script;
         }
 
-        public static AssessmentScript BuildForPublishing(Assessment assessment, StudentData data)
+        public static AssessmentScript BuildForPublishing(Assessment assessment, StudentData data, AssessmentInformation info)
         {
             AssessmentScript script = BuildFromAssessment(assessment);
             //Set the data
             script.studentData = data;
+            script.AssessmentInfo = info;
             script.timeData = data.GenerateTimeData();
             script.published = true;
             return script;

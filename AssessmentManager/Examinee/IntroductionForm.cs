@@ -335,7 +335,6 @@ namespace AssessmentManager
             }
 
             //Show the course info. This will only be present if the assessment has been published.
-            //TODO:: Test this once publishing has been completed.
             if (a.CourseInformation != null)
             {
                 CourseInformation c = a.CourseInformation;
@@ -403,6 +402,8 @@ namespace AssessmentManager
             //If assessment has begun, change the display
             if (script.TimeData.IsAvailable)
                 SetPublishedInformation(true);
+            if (script.TimeData.Finished)
+                ChangeView(View.Finished);
         }
 
         #endregion
@@ -453,11 +454,32 @@ namespace AssessmentManager
 
         private void btnContinueYes_Click(object sender, EventArgs e)
         {
-            //TODO:: If assessment is published, ask for password before opening
-            Examinee ex = new Examinee(script, filePath);
-            ex.Show();
-            timer.Enabled = false;
-            Hide();
+            //If assessment is published, ask for password before opening
+            if (script.Published)
+            {
+                RestartPasswordForm rpf = new RestartPasswordForm();
+                if(rpf.ShowDialog()==DialogResult.OK)
+                {
+                    if(rpf.EnteredPassword == script.StudentData.RestartPassword)
+                    {
+                        Examinee ex = new Examinee(script, filePath);
+                        ex.Show();
+                        timer.Enabled = false;
+                        Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect password", "Incorrect password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+            else
+            {
+                Examinee ex = new Examinee(script, filePath);
+                ex.Show();
+                timer.Enabled = false;
+                Hide();
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
