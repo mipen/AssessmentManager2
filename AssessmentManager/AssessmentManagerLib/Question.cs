@@ -13,6 +13,7 @@ namespace AssessmentManager
         private string name = "Question";
         private int marks = 0;
         private string questionText = "";
+        private string questionTextRaw = "";
         private string modelAnswer;
         private string optionA, optionB, optionC, optionD;
         private MultiChoiceOption correctOption = MultiChoiceOption.A;
@@ -44,6 +45,18 @@ namespace AssessmentManager
             set
             {
                 questionText = value;
+            }
+        }
+
+        public string QuestionTextRaw
+        {
+            get
+            {
+                return questionTextRaw;
+            }
+            set
+            {
+                questionTextRaw = value;
             }
         }
 
@@ -244,6 +257,32 @@ namespace AssessmentManager
                     q.AddToAnswerDict(dict);
                 }
             }
+        }
+
+        public Question Clone(bool includeSubQuestions = false)
+        {
+            Question q = new Question("unnamed");
+
+            q.Marks = marks;
+            q.QuestionText = QuestionText;
+            q.QuestionTextRaw = QuestionTextRaw;
+            q.ModelAnswer = ModelAnswer;
+            q.OptionA = OptionA;
+            q.OptionB = OptionB;
+            q.OptionC = OptionC;
+            q.OptionD = OptionD;
+            q.CorrectOption = CorrectOption;
+            q.AnswerType = AnswerType;
+            q.Image = Image;
+            if(includeSubQuestions && HasSubQuestions)
+            {
+                foreach(var sq in SubQuestions)
+                {
+                    q.SubQuestions.Add(sq.Clone(includeSubQuestions));
+                }
+            }
+
+            return q;
         }
     }
 }

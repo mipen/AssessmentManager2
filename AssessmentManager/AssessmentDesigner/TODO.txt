@@ -1,10 +1,8 @@
-﻿Feature:
+﻿Feature: HAVE THIS ON COURSEMANAGER ASSESSMENT SESSION AS WELL AS ANYWHERE ELSE ITS NEEDED
 	- Ability to generate information hand out
 	- Print out temp username and password
 	- Include student name
 	- Have the rules and so on
-
-- Hotkeys F4 and F5 move to previous/next question
 
 	- Autosave feature
 		- Will save to separate file
@@ -16,8 +14,5 @@
 		- Multi choice answers missing answers
 		- Questions missing answers
 
-	- Bullet list feature for questions.
+	- About window: display information for icons; licenses + links and acknowledgement. My information. Acknowledgement of original program. Acknowledge use of PdfSharp
 
-	- When a question has no answer type and has sub questions, display the total amount of marks.
-
-	- About window: display information for icons; licenses + links and acknowledgement. My information. Acknowledgement of original program.

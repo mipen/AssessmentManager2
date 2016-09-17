@@ -9,13 +9,14 @@ namespace AssessmentManager
     [Serializable]
     public class AssessmentScript
     {
-        public Course CourseInformation = null;
+        public CourseInformation CourseInformation = null;
+        public AssessmentInformation AssessmentInfo = null;
         private List<Question> questions = new List<Question>();
         private Dictionary<string, Answer> answers = new Dictionary<string, Answer>();
         private TimeData timeData = null;
         private StudentData studentData = null;
         public bool Started = false;
-        public bool Published = false;
+        private bool published = false;
 
         public AssessmentScript()
         {
@@ -41,6 +42,14 @@ namespace AssessmentManager
             }
         }
 
+        public bool Published
+        {
+            get
+            {
+                return published;
+            }
+        }
+
         #endregion
 
         #region Methods
@@ -49,27 +58,34 @@ namespace AssessmentManager
         {
             AssessmentScript script = new AssessmentScript();
             script.questions = assessment.Questions;
-            script.Published = assessment.Published;
+            script.published = false;
             //Populate answers dictionary with answer objects for each question
             foreach (var q in script.Questions)
             {
                 q.AddToAnswerDict(script.Answers);
             }
-            if (assessment.TimeData != null)
-                script.timeData = assessment.TimeData;
-            else
-                script.timeData = new TimeData()
-                {
-                    DateIsPlanned = false,
-                    MinutesArePlanned = false,
-                    Minutes = 60
-                };
+            script.timeData = new TimeData()
+            {
+                Minutes = 60
+            };
+            script.AssessmentInfo = new AssessmentInformation()
+            {
+                AssessmentName = "Assessment",
+                Author = "",
+                AssessmentWeighting = 0
+            };
 
-            if (assessment.StudentData != null)
-                script.studentData = assessment.StudentData;
-            if (assessment.CourseInformation != null)
-                script.CourseInformation = assessment.CourseInformation;
+            return script;
+        }
 
+        public static AssessmentScript BuildForPublishing(Assessment assessment, StudentData data, AssessmentInformation info)
+        {
+            AssessmentScript script = BuildFromAssessment(assessment);
+            //Set the data
+            script.studentData = data;
+            script.AssessmentInfo = info;
+            script.timeData = data.GenerateTimeData();
+            script.published = true;
             return script;
         }
 

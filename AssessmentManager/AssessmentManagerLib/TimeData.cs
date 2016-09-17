@@ -5,19 +5,13 @@ namespace AssessmentManager
     [Serializable]
     public class TimeData
     {
-        private bool dateIsPlanned = false;
-
-        //The number of minutes for the assessment
-        private int minutes = 0;
-        private int readingMinutes = 0;
-        private bool minutesArePlanned = false;
+        public DateTime PlannedStartTime = CONSTANTS.INVALID_DATE;
+        public DateTime PlannedFinishTime;
+        public DateTime TimeStarted;
+        public DateTime TimeFinished;
+        public int minutes = 0;
+        public int readingMinutes = 0;
         private bool hasReadingTime = false;
-
-        //The time that the user started the assessment
-        public DateTime StartTime;
-        //Time that the assessment will finish
-        public DateTime FinishTime;
-        //Time that reading time will finish
         public DateTime ReadingFinishTime;
 
         public TimeData()
@@ -26,18 +20,6 @@ namespace AssessmentManager
         }
 
         #region Properties
-
-        public bool MinutesArePlanned
-        {
-            get
-            {
-                return minutesArePlanned;
-            }
-            set
-            {
-                minutesArePlanned = value;
-            }
-        }
 
         public int Minutes
         {
@@ -67,18 +49,6 @@ namespace AssessmentManager
             }
         }
 
-        public bool DateIsPlanned
-        {
-            get
-            {
-                return dateIsPlanned;
-            }
-            set
-            {
-                dateIsPlanned = value;
-            }
-        }
-
         public bool HasReadingTime
         {
             get
@@ -91,7 +61,7 @@ namespace AssessmentManager
         {
             get
             {
-                return DateTime.Now >= FinishTime;
+                return DateTime.Now >= PlannedFinishTime;
             }
         }
 
@@ -99,9 +69,29 @@ namespace AssessmentManager
         {
             get
             {
-                return FinishTime - DateTime.Now;
+                return PlannedFinishTime - DateTime.Now;
             }
         }
+
+        public TimeSpan TimeUntilBegin
+        {
+            get
+            {
+                if (PlannedStartTime == CONSTANTS.INVALID_DATE || DateTime.Now >= PlannedStartTime)
+                    return new TimeSpan(0, 0, 0, 0, 0);
+
+                return PlannedStartTime - DateTime.Now;
+            }
+        }
+
+        public bool IsAvailable
+        {
+            get
+            {
+                return PlannedStartTime == CONSTANTS.INVALID_DATE || DateTime.Now >= PlannedStartTime;
+            }
+        }
+
 
         #endregion
 

@@ -11,6 +11,7 @@ namespace AssessmentManager
         Continue,
         Open,
         Practice,
+        Assessment,
         Finished
     }
 }

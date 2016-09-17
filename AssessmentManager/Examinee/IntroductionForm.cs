@@ -16,9 +16,9 @@ namespace AssessmentManager
     public partial class IntroductionForm : Form
     {
 
-        private Assessment assessment = null;
         private AssessmentScript script = null;
         private string filePath = null;
+        private View CurView = View.Open;
 
         public IntroductionForm(string[] args)
         {
@@ -44,6 +44,12 @@ namespace AssessmentManager
             //Update the current time and date.
             DateTime dt = DateTime.Now;
             lblDateTimeDisp.Text = dt.ToLongDateString() + " " + dt.ToLongTimeString();
+
+            if (CurView == View.Continue)
+                CheckTimeRemainingForContinue();
+            if (CurView == View.Assessment)
+                AssessmentTimerAction();
+
         }
 
         #endregion
@@ -54,7 +60,7 @@ namespace AssessmentManager
         {
             OpenFileDialog o = new OpenFileDialog();
             o.Filter = COMBINED_FILTER;
-            o.DefaultExt = ASSESSMENT_EXT;
+            o.DefaultExt = ASSESSMENT_SCRIPT_EXT;
             o.InitialDirectory = DESKTOP_PATH;
 
             if (o.ShowDialog() == DialogResult.OK)
@@ -75,8 +81,10 @@ namespace AssessmentManager
                         using (FileStream s = File.Open(path, FileMode.Open))
                         {
                             BinaryFormatter f = new BinaryFormatter();
-                            assessment = (Assessment)f.Deserialize(s);
-                            NotifyAssessmentOpened(path);
+                            Assessment assessment = (Assessment)f.Deserialize(s);
+                            script = AssessmentScript.BuildFromAssessment(assessment);
+                            string scriptPath = Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path) + ASSESSMENT_SCRIPT_EXT);
+                            NotifyAssessmentScriptOpened(scriptPath);
                         }
                     }
                     catch (Exception ex)
@@ -107,30 +115,6 @@ namespace AssessmentManager
             }
         }
 
-        private void NotifyAssessmentOpened(string path)
-        {
-            //Record the file path
-            filePath = path;
-
-            //Build the assessment script
-            script = AssessmentScript.BuildFromAssessment(assessment);
-            //Use 'script' variable from now on in this method
-
-            //Show the assessment information
-            DisplayInformation(script);
-
-            //Determine if the assessment is published or not and show the correct window
-            if (script.Published)
-            {
-                //TODO:: do published stuff
-            }
-            else
-            {
-                //Use the assessment for practice
-                ChangeView(View.Practice);
-            }
-        }
-
         private void NotifyAssessmentScriptOpened(string path)
         {
             //Record the path
@@ -139,21 +123,32 @@ namespace AssessmentManager
             //Show the assessment information
             DisplayInformation(script);
 
-            //Determine if the assessment can be continued
-            if (DateTime.Now < script.TimeData.FinishTime)
+            //Determine the view to show for the script
+            if (script.Published)
             {
-                //Assessment can be continued
-
-                ChangeView(View.Continue);
-
+                if (script.Started)
+                {
+                    if (script.TimeData.Finished)
+                        ChangeView(View.Finished);
+                    else
+                        ChangeView(View.Continue);
+                }
+                else
+                    ChangeView(View.Assessment);
             }
             else
             {
-                //Assessment has finished
-
-                ChangeView(View.Finished);
+                //Practice mode
+                if (script.Started)
+                {
+                    if (script.TimeData.Finished)
+                        ChangeView(View.Finished);
+                    else
+                        ChangeView(View.Continue);
+                }
+                else
+                    ChangeView(View.Practice);
             }
-
         }
 
         private void NotifyNothingOpened()
@@ -167,6 +162,7 @@ namespace AssessmentManager
             {
                 case View.Open:
                     {
+                        CurView = View.Open;
                         //continue panel
                         pnlContinueAssessment.Enabled = false;
                         pnlContinueAssessment.Visible = false;
@@ -183,10 +179,15 @@ namespace AssessmentManager
                         pnlAssessmentFinished.Enabled = false;
                         pnlAssessmentFinished.Visible = false;
 
+                        //Published panel
+                        pnlPublished.Visible = false;
+                        pnlPublished.Enabled = false;
+
                         break;
                     }
                 case View.Practice:
                     {
+                        CurView = View.Practice;
                         //continue panel
                         pnlContinueAssessment.Enabled = false;
                         pnlContinueAssessment.Visible = false;
@@ -203,10 +204,15 @@ namespace AssessmentManager
                         pnlAssessmentFinished.Enabled = false;
                         pnlAssessmentFinished.Visible = false;
 
+                        //Published panel
+                        pnlPublished.Visible = false;
+                        pnlPublished.Enabled = false;
+
                         break;
                     }
                 case View.Continue:
                     {
+                        CurView = View.Continue;
                         //continue panel
                         pnlContinueAssessment.Enabled = true;
                         pnlContinueAssessment.Visible = true;
@@ -223,19 +229,62 @@ namespace AssessmentManager
                         pnlAssessmentFinished.Enabled = false;
                         pnlAssessmentFinished.Visible = false;
 
-                        //Add check for remaining time to timer tick
-                        timer.Tick += CheckTimeRemainingForContinue;
+                        //Published panel
+                        pnlPublished.Visible = false;
+                        pnlPublished.Enabled = false;
 
-                        //Show start and finish times
-                        lblTimeStarted.Text = "Start: " + script.TimeData.StartTime.ToShortDateString() + " " + script.TimeData.StartTime.ToLongTimeString();
-                        lblFinishingTime.Text = "Finish: " + script.TimeData.FinishTime.ToShortDateString() + " " + script.TimeData.StartTime.ToLongTimeString();
+                        //Show the message
+                        if (script.Published)
+                        {
+                            lblContinueDescription.Text = IntroductionConstants.PublishedContinueMessage;
+                            //Show start and finish times
+                            lblTimeStarted.Text = "Start: " + script.TimeData.PlannedStartTime.ToShortDateString() + " " + script.TimeData.PlannedStartTime.ToLongTimeString();
+                            lblFinishingTime.Text = "Finish: " + script.TimeData.PlannedFinishTime.ToShortDateString() + " " + script.TimeData.PlannedFinishTime.ToLongTimeString();
+                        }
+                        else
+                        {
+                            lblContinueDescription.Text = IntroductionConstants.PracticeContinueMessage;
+                            //Show start and finish times
+                            lblTimeStarted.Text = "Start: " + script.TimeData.TimeStarted.ToShortDateString() + " " + script.TimeData.TimeStarted.ToLongTimeString();
+                            lblFinishingTime.Text = "Finish: " + script.TimeData.PlannedFinishTime.ToShortDateString() + " " + script.TimeData.PlannedFinishTime.ToLongTimeString();
+                        }
+
                         TimeSpan ts = script.TimeData.TimeRemaining;
                         lblTimeRemaining.Text = $"Time remaining: {ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
 
                         break;
                     }
+                case View.Assessment:
+                    {
+                        CurView = View.Assessment;
+                        //continue panel
+                        pnlContinueAssessment.Enabled = false;
+                        pnlContinueAssessment.Visible = false;
+
+                        //practice panel
+                        pnlPractise.Enabled = false;
+                        pnlPractise.Visible = false;
+
+                        //open assessment panel
+                        pnlOpenAssessment.Enabled = false;
+                        pnlOpenAssessment.Visible = false;
+
+                        //finished panel
+                        pnlAssessmentFinished.Enabled = false;
+                        pnlAssessmentFinished.Visible = false;
+
+                        //Published panel
+                        pnlPublished.Visible = true;
+                        pnlPublished.Enabled = true;
+
+                        //Set the information
+                        SetPublishedInformation(script.TimeData.IsAvailable);
+
+                        break;
+                    }
                 case View.Finished:
                     {
+                        CurView = View.Finished;
                         //continue panel
                         pnlContinueAssessment.Enabled = false;
                         pnlContinueAssessment.Visible = false;
@@ -252,9 +301,13 @@ namespace AssessmentManager
                         pnlAssessmentFinished.Enabled = true;
                         pnlAssessmentFinished.Visible = true;
 
+                        //Published panel
+                        pnlPublished.Visible = false;
+                        pnlPublished.Enabled = false;
+
                         //Show start and finish times
-                        lblFinishedTimeStarted.Text = "Started: " + script.TimeData.StartTime.ToString("F");
-                        lblFinishedTimeFinished.Text = "Finished: " + script.TimeData.FinishTime.ToString("F");
+                        lblFinishedTimeStarted.Text = "Started: " + script.TimeData.PlannedStartTime.ToString("F");
+                        lblFinishedTimeFinished.Text = "Finished: " + script.TimeData.PlannedFinishTime.ToString("F");
 
                         break;
                     }
@@ -263,11 +316,30 @@ namespace AssessmentManager
 
         private void DisplayInformation(AssessmentScript a)
         {
+            //Show the assessment info. This will always be present
+            if (a.AssessmentInfo != null)
+            {
+                AssessmentInformation ai = a.AssessmentInfo;
+
+                if (!ai.AssessmentName.NullOrEmpty())
+                    lblAssessmentName.Text = ai.AssessmentName;
+                else
+                    lblAssessmentName.Text = "Assessment";
+
+                if (!ai.Author.NullOrEmpty())
+                    lblAuthor.Text = $"Author: {ai.Author}";
+                else
+                    lblAuthor.Text = "";
+
+                lblWeighting.Text = ai.AssessmentWeighting < 0 ? $"{ai.AssessmentWeighting}%" : "";
+            }
+
+            //Show the course info. This will only be present if the assessment has been published.
             if (a.CourseInformation != null)
             {
-                Course c = a.CourseInformation;
-                if (!c.CourseCode.NullOrEmpty())
-                    lblCourseCode.Text = c.CourseCode;
+                CourseInformation c = a.CourseInformation;
+                if (!c.CourseCodeFull.NullOrEmpty())
+                    lblCourseCode.Text = c.CourseCodeFull;
                 else
                     lblCourseCode.Text = "";
 
@@ -275,35 +347,63 @@ namespace AssessmentManager
                     lblCourseName.Text = c.CourseName;
                 else
                     lblCourseName.Text = "Unkown course";
-
-                if (!c.AssessmentName.NullOrEmpty())
-                    lblAssessmentName.Text = c.AssessmentName;
-                else
-                    lblAssessmentName.Text = "Assessment";
-
-                if (!c.Author.NullOrEmpty())
-                    lblAuthor.Text = $"Author: {c.Author}";
-                else
-                    lblAuthor.Text = "";
-
-                lblWeighting.Text = $"{c.AssessmentWeighting}%";
             }
             //Enable the information panel
             pnlInformation.Enabled = true;
             pnlInformation.Visible = true;
         }
 
-        private void CheckTimeRemainingForContinue(object sender, EventArgs e)
+        private void SetPublishedInformation(bool available)
+        {
+            if (available)
+            {
+                lblStartTime.Text = "Time Started:";
+                lblTimeUntilStart.Text = "Time remaining:";
+                TimeSpan ts = script.TimeData.TimeRemaining;
+                lblTimeUntilStartInt.Text = $"{ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
+                lblPublishedMessage.Text = "Assessment has begun";
+                lblPublishedMessage.ForeColor = Color.Green;
+                btnPublished.Text = "Start";
+            }
+            else
+            {
+                lblStartTime.Text = "Start Time:";
+                lblTimeUntilStart.Text = "Time until start:";
+                TimeSpan ts = script.TimeData.TimeUntilBegin;
+                lblTimeUntilStartInt.Text = $"{ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
+                lblPublishedMessage.Text = "Assessment has not yet begun";
+                lblPublishedMessage.ForeColor = Color.Blue;
+                btnPublished.Text = "OK";
+            }
+            lblStartTimeInt.Text = script.TimeData.PlannedStartTime.ToString("hh:mm:ss tt");
+            lblFinishTimeInt.Text = script.TimeData.PlannedFinishTime.ToString("hh:mm:ss tt");
+        }
+
+        private void CheckTimeRemainingForContinue()
         {
             TimeSpan ts = script.TimeData.TimeRemaining;
             lblTimeRemaining.Text = $"Time remaining: {ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
-            if (script.TimeData.Finished)
+            if (script.TimeData.Finished && CurView == View.Continue)
             {
-                //Remove check method from timer
-                timer.Tick -= CheckTimeRemainingForContinue;
-
                 ChangeView(View.Finished);
             }
+        }
+
+        private void AssessmentTimerAction()
+        {
+            //Refresh timer
+            TimeSpan ts;
+            if (script.TimeData.IsAvailable)
+                ts = script.TimeData.TimeRemaining;
+            else
+                ts = script.TimeData.TimeUntilBegin;
+            lblTimeUntilStartInt.Text = $"{ts.Hours.ToString("00")}:{ts.Minutes.ToString("00")}:{ts.Seconds.ToString("00")}";
+
+            //If assessment has begun, change the display
+            if (script.TimeData.IsAvailable)
+                SetPublishedInformation(true);
+            if (script.TimeData.Finished)
+                ChangeView(View.Finished);
         }
 
         #endregion
@@ -329,11 +429,12 @@ namespace AssessmentManager
             }
 
             //Set the start time
-            script.TimeData.StartTime = DateTime.Now;
+            script.TimeData.PlannedStartTime = DateTime.Now;
+            script.TimeData.TimeStarted = DateTime.Now;
             //Set the finish time
-            script.TimeData.FinishTime = script.TimeData.StartTime.AddMinutes(script.TimeData.Minutes + script.TimeData.ReadingMinutes);
+            script.TimeData.PlannedFinishTime = script.TimeData.TimeStarted.AddMinutes(script.TimeData.Minutes + script.TimeData.ReadingMinutes);
             //Set reading finish time
-            script.TimeData.ReadingFinishTime = script.TimeData.StartTime.AddMinutes(script.TimeData.ReadingMinutes);
+            script.TimeData.ReadingFinishTime = script.TimeData.TimeStarted.AddMinutes(script.TimeData.ReadingMinutes);
 
             Examinee ex = new Examinee(script, filePath);
             ex.Show();
@@ -353,11 +454,32 @@ namespace AssessmentManager
 
         private void btnContinueYes_Click(object sender, EventArgs e)
         {
-            //TODO:: If assessment is published, ask for password before opening
-            Examinee ex = new Examinee(script, filePath);
-            ex.Show();
-            timer.Enabled = false;
-            Hide();
+            //If assessment is published, ask for password before opening
+            if (script.Published)
+            {
+                RestartPasswordForm rpf = new RestartPasswordForm();
+                if(rpf.ShowDialog()==DialogResult.OK)
+                {
+                    if(rpf.EnteredPassword == script.StudentData.RestartPassword)
+                    {
+                        Examinee ex = new Examinee(script, filePath);
+                        ex.Show();
+                        timer.Enabled = false;
+                        Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect password", "Incorrect password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+            else
+            {
+                Examinee ex = new Examinee(script, filePath);
+                ex.Show();
+                timer.Enabled = false;
+                Hide();
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -365,6 +487,22 @@ namespace AssessmentManager
             Close();
         }
 
+        private void btnPublished_Click(object sender, EventArgs e)
+        {
+            if (script.TimeData.IsAvailable)
+            {
+                Examinee ex = new Examinee(script, filePath);
+                ex.Show();
+                timer.Enabled = false;
+                Hide();
+            }
+            else
+            {
+                Close();
+            }
+        }
+
         #endregion
+
     }
 }

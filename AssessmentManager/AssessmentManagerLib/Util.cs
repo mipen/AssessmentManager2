@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -107,5 +109,25 @@ namespace AssessmentManager
 
             return str;
         }
+
+        public static string RandomString(int length)
+        {
+            Random r = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[r.Next(s.Length)]).ToArray());
+        }
+
+        public static void DeleteDirectory(string path)
+        {
+            if (Directory.Exists(path))
+                FileSystem.DeleteDirectory(path, UIOption.OnlyErrorDialogs, RecycleOption.DeletePermanently);
+        }
+
+        public static void DeleteFile(string path)
+        {
+            if (File.Exists(path))
+                FileSystem.DeleteFile(path);
+        }
+
     }
 }

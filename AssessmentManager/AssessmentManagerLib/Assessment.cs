@@ -11,12 +11,6 @@ namespace AssessmentManager
     public class Assessment
     {
         private List<Question> questions = new List<Question>();
-        private Course courseInformation = new Course("TODO::");
-
-        public TimeData TimeData = null;
-        public StudentData StudentData = null;
-
-        private bool published = false;
 
         public Assessment()
         {
@@ -36,32 +30,7 @@ namespace AssessmentManager
             }
         }
 
-        //TODO:: Set this to true when publishing assessment
-        public bool Published
-        {
-            get
-            {
-                return published;
-            }
-            set
-            {
-                published = value;
-            }
-        }
-
         public List<Question> Questions => questions;
-
-        public Course CourseInformation
-        {
-            get
-            {
-               return courseInformation;
-            }
-            set
-            {
-                courseInformation = value;
-            }
-        }
 
         #region Add Question Methods
         /// <summary>

@@ -92,7 +92,7 @@ namespace AssessmentManager
             }
             set
             {
-                string assessmentName = (Script.CourseInformation != null && !Script.CourseInformation.AssessmentName.NullOrEmpty()) ? Script.CourseInformation.AssessmentName : Path.GetFileNameWithoutExtension(filePath);
+                string assessmentName = (Script.AssessmentInfo != null && !Script.AssessmentInfo.AssessmentName.NullOrEmpty()) ? Script.AssessmentInfo.AssessmentName : Path.GetFileNameWithoutExtension(filePath);
                 switch (value)
                 {
                     case Mode.Assessment:
@@ -190,7 +190,7 @@ namespace AssessmentManager
                 //Handle an already started assessment
                 if (Script.TimeData.HasReadingTime && DateTime.Now < Script.TimeData.ReadingFinishTime)
                     CurStage = Stage.Reading;
-                else if (DateTime.Now < Script.TimeData.FinishTime)
+                else if (DateTime.Now < Script.TimeData.PlannedFinishTime)
                     CurStage = Stage.Running;
                 else
                     CurStage = Stage.Completed;
@@ -199,6 +199,7 @@ namespace AssessmentManager
             {
                 //AssessmentScript has not been started yet:
                 Script.Started = true;
+                Script.TimeData.TimeStarted = DateTime.Now;
                 if (Script.TimeData.HasReadingTime)
                     CurStage = Stage.Reading;
                 else
@@ -293,8 +294,8 @@ namespace AssessmentManager
             //Show the start and end times
             if (initial)
             {
-                lblTimeBegan.Text = Script.TimeData.StartTime.ToString("hh:mm:ss");
-                lblFinishTime.Text = Script.TimeData.FinishTime.ToString("hh:mm:ss");
+                lblTimeBegan.Text = Script.TimeData.TimeStarted.ToString("hh:mm:ss");
+                lblFinishTime.Text = Script.TimeData.PlannedFinishTime.ToString("hh:mm:ss");
             }
 
             switch (CurStage)
@@ -313,7 +314,7 @@ namespace AssessmentManager
                     }
                 case Stage.Running:
                     {
-                        TimeSpan ts = Script.TimeData.FinishTime - DateTime.Now;
+                        TimeSpan ts = Script.TimeData.TimeRemaining;
                         if (ts.Hours <= 0 && ts.Minutes <= 0 && ts.Seconds <= 0)
                         {
                             CurStage = Stage.Completed;
@@ -373,7 +374,6 @@ namespace AssessmentManager
                 else
                 {
                     //Otherwise, save it as the final
-                    //TODO:: Name it properly here
                     path = Path.GetDirectoryName(filePath) + "\\" + Path.GetFileNameWithoutExtension(filePath) + ASSESSMENT_SCRIPT_EXT;
                     fileMode = FileMode.OpenOrCreate;
                 }
@@ -417,19 +417,22 @@ namespace AssessmentManager
         {
             string message;
             string title;
+            MessageBoxButtons buttons;
             if (CurMode == Mode.Assessment)
             {
                 message = "You are about to submit your assessment. Once you have done so, you will not be able to open it again without talking to your supervisor. Once you have submitted it, the assessment is over and the application will close. Would you like to continue?";
                 title = "Submit assessment";
+                buttons = MessageBoxButtons.YesNo;
             }
             else
             {
                 message = $"Would you like to save this assessment? This will allow you to open it later and review your answers. This will close the application, but if there is time remaining you will be able to continue the practice assessment by opening the created {ASSESSMENT_SCRIPT_EXT} file.";
                 title = "Save assessment";
+                buttons = MessageBoxButtons.YesNoCancel;
             }
 
-            DialogResult res = MessageBox.Show(message, title, MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (res == DialogResult.OK)
+            DialogResult res = MessageBox.Show(message, title, buttons, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (res == DialogResult.Yes)
             {
                 //User wants to submit assessment
                 if (CurMode == Mode.Assessment)
@@ -441,6 +444,7 @@ namespace AssessmentManager
                 {
                     //Practice mode
                     MessageBox.Show($"Thank you for using Examinee. \n\n Your practice assessment has been saved as {Path.GetDirectoryName(filePath)}\\{Path.GetFileNameWithoutExtension(filePath)}{ASSESSMENT_SCRIPT_EXT} \n\n The application will now close.", "Assessment saved");
+                    Script.TimeData.TimeFinished = DateTime.Now;
                     SaveToFile();
                 }
             }
@@ -526,7 +530,8 @@ namespace AssessmentManager
             QuestionNode node = SelectedNode;
             if (node != null)
             {
-                treeViewQuestionDisplay.SelectedNode = node.PrevVisibleNode;
+                if (node.PrevVisibleNode != null)
+                    treeViewQuestionDisplay.SelectedNode = node.PrevVisibleNode;
             }
             treeViewQuestionDisplay.Focus();
         }
@@ -536,7 +541,8 @@ namespace AssessmentManager
             QuestionNode node = SelectedNode;
             if (node != null)
             {
-                treeViewQuestionDisplay.SelectedNode = node.NextVisibleNode;
+                if (node.NextVisibleNode != null)
+                    treeViewQuestionDisplay.SelectedNode = node.NextVisibleNode;
             }
             treeViewQuestionDisplay.Focus();
         }
@@ -601,11 +607,18 @@ namespace AssessmentManager
 
         private void buttonSubmitAssessment_Click(object sender, EventArgs e)
         {
-            if (DoSubmit() == DialogResult.OK)
+            DialogResult res = DoSubmit();
+            if (CurMode == Mode.Assessment && res == DialogResult.Yes)
             {
                 submitButtonPushed = true;
                 Close();
             }
+            else if (CurMode == Mode.Practice && (res == DialogResult.No || res == DialogResult.Yes))
+            {
+                submitButtonPushed = true;
+                Close();
+            }
+            submitButtonPushed = false;
         }
 
         private void treeViewQuestionDisplay_AfterSelect(object sender, TreeViewEventArgs e)
@@ -776,8 +789,16 @@ namespace AssessmentManager
 
         private void Examinee_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!submitButtonPushed && DoSubmit() == DialogResult.Cancel)
-                e.Cancel = true;
+            if (CurMode == Mode.Assessment)
+            {
+                if (!submitButtonPushed && DoSubmit() == DialogResult.No)
+                    e.Cancel = true;
+            }
+            else
+            {
+                if (!submitButtonPushed && DoSubmit() == DialogResult.Cancel)
+                    e.Cancel = true;
+            }
         }
 
         private void Examinee_FormClosed(object sender, FormClosedEventArgs e)
@@ -793,7 +814,8 @@ namespace AssessmentManager
                 QuestionNode node = SelectedNode;
                 if (node != null)
                 {
-                    treeViewQuestionDisplay.SelectedNode = node.PrevVisibleNode;
+                    if (node.PrevVisibleNode != null)
+                        treeViewQuestionDisplay.SelectedNode = node.PrevVisibleNode;
                 }
                 treeViewQuestionDisplay.Focus();
                 e.Handled = true;
@@ -803,7 +825,8 @@ namespace AssessmentManager
                 QuestionNode node = SelectedNode;
                 if (node != null)
                 {
-                    treeViewQuestionDisplay.SelectedNode = node.NextVisibleNode;
+                    if (node.NextVisibleNode != null)
+                        treeViewQuestionDisplay.SelectedNode = node.NextVisibleNode;
                 }
                 treeViewQuestionDisplay.Focus();
                 e.Handled = true;
