@@ -14,17 +14,15 @@ namespace AssessmentManager
         private DateTime startTime;
         private int assessmentLength = 0;
         private int readingTime = 0;
-        private bool timeLocked = false;
         private string restartPassword = "";
 
-        public StudentData(string userName, string lastName, string firstName, string studentID, DateTime startTime, int assessmentLength, int readingTime, string accountName, string accountPassword, bool timeLocked, string restartPassword):base(userName,lastName,firstName,studentID)
+        public StudentData(string userName, string lastName, string firstName, string studentID, DateTime startTime, int assessmentLength, int readingTime, string accountName, string accountPassword, string restartPassword):base(userName,lastName,firstName,studentID)
         {
             this.accountName = accountName;
             this.accountPassword = accountPassword;
             this.startTime = startTime;
             this.assessmentLength = assessmentLength;
             this.readingTime = readingTime;
-            this.timeLocked = timeLocked;
             this.restartPassword = restartPassword;
         }
 
@@ -95,14 +93,6 @@ namespace AssessmentManager
             }
         }
 
-        public bool TimeLocked
-        {
-            get
-            {
-                return timeLocked;
-            }
-        }
-
         public string RestartPassword
         {
             get
@@ -145,7 +135,6 @@ namespace AssessmentManager
             //Set the length and reading time
             td.Minutes = AssessmentLength;
             td.ReadingMinutes = ReadingTime;
-            td.TimeLocked = TimeLocked;
             //Set the planned start time
             td.PlannedStartTime = StartTime;
             //Calculate the finish time

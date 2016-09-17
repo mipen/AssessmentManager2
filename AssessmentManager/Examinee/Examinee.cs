@@ -445,6 +445,7 @@ namespace AssessmentManager
                 {
                     //Practice mode
                     MessageBox.Show($"Thank you for using Examinee. \n\n Your practice assessment has been saved as {Path.GetDirectoryName(filePath)}\\{Path.GetFileNameWithoutExtension(filePath)}{ASSESSMENT_SCRIPT_EXT} \n\n The application will now close.", "Assessment saved");
+                    Script.TimeData.TimeFinished = DateTime.Now;
                     SaveToFile();
                 }
             }

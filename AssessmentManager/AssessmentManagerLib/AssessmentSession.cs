@@ -16,14 +16,13 @@ namespace AssessmentManager
         private DateTime startTime;
         private int assessmentLength = 0;
         private int readingTime = 0;
-        private bool timeLocked = true;
         private string restartPassword;
         private List<StudentData> studentData = new List<StudentData>();
         private List<string> additionalFiles = new List<string>();
 
         public string FolderPath = "";
 
-        public AssessmentSession(string courseID, string deploymentTarget, string assessmentName, string assessmentFileName, DateTime startTime, int assessmentLength, int readingTime, bool timeLocked, string restartPassword, List<StudentData> studentData, List<string> additionalFiles)
+        public AssessmentSession(string courseID, string deploymentTarget, string assessmentName, string assessmentFileName, DateTime startTime, int assessmentLength, int readingTime, string restartPassword, List<StudentData> studentData, List<string> additionalFiles)
         {
             this.assessmentName = assessmentName;
             this.assessmentFileName = assessmentFileName;
@@ -32,7 +31,6 @@ namespace AssessmentManager
             this.startTime = startTime;
             this.assessmentLength = assessmentLength;
             this.readingTime = readingTime;
-            this.timeLocked = timeLocked;
             this.restartPassword = restartPassword;
             this.studentData = studentData;
             this.additionalFiles = additionalFiles;
@@ -91,14 +89,6 @@ namespace AssessmentManager
             get
             {
                 return readingTime;
-            }
-        }
-
-        public bool TimeLocked
-        {
-            get
-            {
-                return timeLocked;
             }
         }
 

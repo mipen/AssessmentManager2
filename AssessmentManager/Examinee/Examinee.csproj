@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntroductionConstants.cs" />
     <Compile Include="Mode.cs" />
     <Compile Include="Stage.cs" />
     <Compile Include="TimeConfig.cs">

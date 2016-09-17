@@ -5,13 +5,12 @@ namespace AssessmentManager
     [Serializable]
     public class TimeData
     {
-        public DateTime PlannedStartTime;
+        public DateTime PlannedStartTime = CONSTANTS.INVALID_DATE;
         public DateTime PlannedFinishTime;
         public DateTime TimeStarted;
         public DateTime TimeFinished;
         public int minutes = 0;
         public int readingMinutes = 0;
-        private bool timeLocked = false;
         private bool hasReadingTime = false;
         public DateTime ReadingFinishTime;
 
@@ -21,18 +20,6 @@ namespace AssessmentManager
         }
 
         #region Properties
-
-        public bool TimeLocked
-        {
-            get
-            {
-                return timeLocked;
-            }
-            set
-            {
-                timeLocked = value;
-            }
-        }
 
         public int Minutes
         {
@@ -85,6 +72,26 @@ namespace AssessmentManager
                 return PlannedFinishTime - DateTime.Now;
             }
         }
+
+        public TimeSpan TimeUntilBegin
+        {
+            get
+            {
+                if (PlannedStartTime == CONSTANTS.INVALID_DATE || DateTime.Now >= PlannedStartTime)
+                    return new TimeSpan(0, 0, 0, 0, 0);
+
+                return PlannedStartTime - DateTime.Now;
+            }
+        }
+
+        public bool IsAvailable
+        {
+            get
+            {
+                return PlannedStartTime == CONSTANTS.INVALID_DATE || DateTime.Now >= PlannedStartTime;
+            }
+        }
+
 
         #endregion
 

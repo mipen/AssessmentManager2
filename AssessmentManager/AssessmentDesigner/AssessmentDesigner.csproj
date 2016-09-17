@@ -152,7 +152,6 @@
   <ItemGroup>
     <Content Include="designer_icon.ico" />
     <Content Include="Notes.txt" />
-    <Content Include="Publishing.txt" />
     <Content Include="Resources\designer_icon.ico" />
     <Content Include="TODO.txt" />
     <None Include="Resources\expand-all32.png" />

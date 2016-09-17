@@ -2203,7 +2203,6 @@ namespace AssessmentManager
             lbPublishAdditionalFiles.Items.Clear();
             nudPublishAssessmentLength.Value = 60;
             nudPublishReadingTime.Value = 0;
-            chkbxTimeLocked.Checked = true;
             lblPublishFileName.Text = "";
             lblPublishLastDeployed.Text = "";
             tbPublishResetPassword.Text = "";
@@ -2324,7 +2323,7 @@ namespace AssessmentManager
                     string accountName = row.Cells[7].Value == null ? "" : row.Cells[7].Value.ToString();
                     string accountPassword = row.Cells[8].Value == null ? "" : row.Cells[8].Value.ToString();
 
-                    StudentData sd = new StudentData(userName, lastName, firstName, studentID, startTime, assessmentLength, readingTime, accountName, accountPassword, chkbxTimeLocked.Checked, tbPublishResetPassword.Text);
+                    StudentData sd = new StudentData(userName, lastName, firstName, studentID, startTime, assessmentLength, readingTime, accountName, accountPassword, tbPublishResetPassword.Text);
                     if (!sd.ResolveErrors())
                     {
                         flag = true;
@@ -2400,8 +2399,7 @@ namespace AssessmentManager
             DateTime date = dtpPublishDate.Value;
             DateTime time = dtpPublishTime.Value;
             DateTime startTime2 = new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
-            bool timeLocked = chkbxTimeLocked.Checked;
-            AssessmentSession session = new AssessmentSession(SelectedCourse.ID, lblDeploymentTarget.Text, Assessment.AssessmentInfo.AssessmentName, assessmentFile.Name, startTime2, (int)nudPublishAssessmentLength.Value, (int)nudPublishReadingTime.Value, timeLocked, tbPublishResetPassword.Text, students, additionalFilesNames);
+            AssessmentSession session = new AssessmentSession(SelectedCourse.ID, lblDeploymentTarget.Text, Assessment.AssessmentInfo.AssessmentName, assessmentFile.Name, startTime2, (int)nudPublishAssessmentLength.Value, (int)nudPublishReadingTime.Value, tbPublishResetPassword.Text, students, additionalFilesNames);
             assessmentSession = session;
             #endregion
 
@@ -2450,8 +2448,9 @@ namespace AssessmentManager
                 try
                 {
                     AssessmentScript script = AssessmentScript.BuildForPublishing(Assessment, sd);
+                    script.CourseInformation = CourseManager.FindCourseByID(session.CourseID)?.CourseInfo.Clone();
                     string scriptPath = Path.Combine(@destPath, session.AssessmentName + ASSESSMENT_SCRIPT_EXT);
-                    using (FileStream s = File.Open(scriptPath, FileMode.OpenOrCreate, FileAccess.Write))
+                    using (FileStream s = File.Open(@scriptPath, FileMode.OpenOrCreate, FileAccess.Write))
                     {
                         BinaryFormatter bf = new BinaryFormatter();
                         bf.Serialize(s, script);

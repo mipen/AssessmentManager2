@@ -66,7 +66,6 @@ namespace AssessmentManager
             }
             script.timeData = new TimeData()
             {
-                TimeLocked = false,
                 Minutes = 60
             };
 
@@ -79,6 +78,7 @@ namespace AssessmentManager
             //Set the data
             script.studentData = data;
             script.timeData = data.GenerateTimeData();
+            script.published = true;
             return script;
         }
 
