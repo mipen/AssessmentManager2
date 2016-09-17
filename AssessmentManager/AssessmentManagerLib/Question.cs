@@ -258,5 +258,31 @@ namespace AssessmentManager
                 }
             }
         }
+
+        public Question Clone(bool includeSubQuestions = false)
+        {
+            Question q = new Question("unnamed");
+
+            q.Marks = marks;
+            q.QuestionText = QuestionText;
+            q.QuestionTextRaw = QuestionTextRaw;
+            q.ModelAnswer = ModelAnswer;
+            q.OptionA = OptionA;
+            q.OptionB = OptionB;
+            q.OptionC = OptionC;
+            q.OptionD = OptionD;
+            q.CorrectOption = CorrectOption;
+            q.AnswerType = AnswerType;
+            q.Image = Image;
+            if(includeSubQuestions && HasSubQuestions)
+            {
+                foreach(var sq in SubQuestions)
+                {
+                    q.SubQuestions.Add(sq.Clone(includeSubQuestions));
+                }
+            }
+
+            return q;
+        }
     }
 }

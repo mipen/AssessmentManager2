@@ -35,6 +35,8 @@ namespace AssessmentManager
 
         public static readonly DateTime INVALID_DATE = new DateTime(1975, 1, 1, 1, 1, 1, 1);
 
+        public static readonly string QUESTION_FORMAT_STRING = DataFormats.GetFormat(typeof(Question).FullName).Name;
+
         public static string AUTOSAVE_FOLDER_NAME(string assessmentName)
         {
             return $"{assessmentName.Replace(" ","")}_autosaves";

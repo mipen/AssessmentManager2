@@ -24,7 +24,7 @@ namespace AssessmentManager
             {
                 return question;
             }
-            private set
+            set
             {
                 question = value;
             }

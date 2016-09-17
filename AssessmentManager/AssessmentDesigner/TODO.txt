@@ -4,8 +4,6 @@
 	- Include student name
 	- Have the rules and so on
 
-- Hotkeys F4 and F5 move to previous/next question
-
 	- Autosave feature
 		- Will save to separate file
 		- When manually saved, delete autosave file
@@ -18,8 +16,3 @@
 
 	- About window: display information for icons; licenses + links and acknowledgement. My information. Acknowledgement of original program. Acknowledge use of PdfSharp
 
-
-- COntext menu for courses tree view
-	- DO event for delete session node
-
-- make reloading course tab threaded?

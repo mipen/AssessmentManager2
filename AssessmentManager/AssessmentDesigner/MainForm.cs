@@ -825,6 +825,20 @@ namespace AssessmentManager
 
                     //Configure the context menu for the given node
 
+                    //Disable the paste option if there is nothing to paste
+                    IDataObject data = Clipboard.GetDataObject();
+                    if (data.GetDataPresent(QUESTION_FORMAT_STRING))
+                    {
+                        contextMenuNodePaste.Visible = true;
+                        contextMenuNodePaste.Enabled = true;
+                    }
+                    else
+                    {
+                        contextMenuNodePaste.Visible = false;
+                        contextMenuNodePaste.Enabled = false;
+                    }
+
+
                     //Disable the move up if it is at the top
                     bool flag1 = false, flag2 = false;
                     if (!node.CanMoveUp)
@@ -866,7 +880,7 @@ namespace AssessmentManager
                         contextMenuChangeLevelUp.Visible = true;
 
                     //Disable change level down if there is a limit on how many levels there are
-                    if (node.Level == 2)
+                    if (node.Level == MaxNumSubQuestionLevels - 1)
                     {
                         contextMenuChangeLevelDown.Visible = false;
                         levelFlag2 = true;
@@ -1131,6 +1145,80 @@ namespace AssessmentManager
                 }
                 treeViewQuestionList.SelectedNode = node;
             }
+        }
+
+        private void contextMenuCopyQuestion_Click(object sender, EventArgs e)
+        {
+            if (treeViewQuestionList.SelectedNode != null)
+            {
+                QuestionNode node = treeViewQuestionList.SelectedNode as QuestionNode;
+                if (node != null)
+                {
+                    IDataObject dataObj = new DataObject();
+                    dataObj.SetData(QUESTION_FORMAT_STRING, false, node.Question);
+
+                    Clipboard.SetDataObject(dataObj, false);
+                }
+            }
+        }
+
+        private void contextMenuStripQuestionList_Opening(object sender, CancelEventArgs e)
+        {
+            //If there is paste data present, show the paste option
+            IDataObject data = Clipboard.GetDataObject();
+            if (data.GetDataPresent(QUESTION_FORMAT_STRING))
+            {
+                contextMenuQuestionListPaste.Visible = true;
+                contextMenuQuestionListPaste.Enabled = true;
+                contextMenuQuestionListPasteSeparator.Visible = true;
+            }
+            else
+            {
+                contextMenuQuestionListPaste.Enabled = false;
+                contextMenuQuestionListPaste.Visible = false;
+                contextMenuQuestionListPasteSeparator.Visible = false;
+            }
+        }
+
+        private void contextMenuQuestionListPaste_Click(object sender, EventArgs e)
+        {
+            IDataObject data = Clipboard.GetDataObject();
+            if (data.GetDataPresent(QUESTION_FORMAT_STRING))
+            {
+                Question copiedQuestion = data.GetData(QUESTION_FORMAT_STRING) as Question;
+                if (copiedQuestion != null)
+                {
+                    QuestionNode newNode = new QuestionNode(copiedQuestion.Clone());
+                    treeViewQuestionList.Nodes.Add(newNode);
+                    Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
+                    DesignerChangesMade = true;
+                    treeViewQuestionList.SelectedNode = newNode;
+                    treeViewQuestionList.Focus();
+                }
+            }
+        }
+
+        private void contextMenuNodePaste_Click(object sender, EventArgs e)
+        {
+            IDataObject data = Clipboard.GetDataObject();
+            if (data.GetDataPresent(QUESTION_FORMAT_STRING))
+            {
+                Question copiedQuestion = data.GetData(QUESTION_FORMAT_STRING) as Question;
+                if (copiedQuestion != null)
+                {
+                    QuestionNode node = treeViewQuestionList.SelectedNode as QuestionNode;
+                    if (node != null)
+                    {
+                        node.Question = copiedQuestion.Clone();
+                        Util.RebuildAssessmentQuestionList(Assessment, treeViewQuestionList);
+                        DesignerChangesMade = true;
+                        treeViewQuestionList.SelectedNode = null;
+                        treeViewQuestionList.SelectedNode = node;
+                        treeViewQuestionList.Focus();
+                    }
+                }
+            }
+
         }
         #endregion
 
@@ -1626,6 +1714,11 @@ namespace AssessmentManager
             tsmiDeleteAssessmentSession.Enabled = session;
         }
 
+        private void GenerateHandout(AssessmentSession session)
+        {
+            //TODO:: THIS, get info from snjezana
+        }
+
         #endregion
 
         #region Events
@@ -2035,6 +2128,13 @@ namespace AssessmentManager
             tvCourses.CollapseAll();
         }
 
+        private void btnSessionGenHandout_Click(object sender, EventArgs e)
+        {
+            AssessmentSessionNode node = tvCourses.SelectedNode as AssessmentSessionNode;
+            if (node != null)
+                GenerateHandout(node.Session);
+        }
+
         #endregion
 
         #endregion
@@ -2436,7 +2536,7 @@ namespace AssessmentManager
 
         #endregion
 
-            #region Events
+        #region Events
 
         private void btnPublishDeploy_Click(object sender, EventArgs e)
         {
@@ -2452,7 +2552,7 @@ namespace AssessmentManager
                     string message = "Assessment successfully published! Would you like to generate handout forms for each student in this assessment? This can be done later in the CourseManager tab by selecting the assessment.";
                     if (MessageBox.Show(message, "Create handout pdf?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        //TODO:: this
+                        GenerateHandout(session);
                     }
                 }
                 else
